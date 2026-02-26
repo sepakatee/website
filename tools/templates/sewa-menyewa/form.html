@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <title>Buat Perjanjian Sewa Menyewa Tempat | Sepakatee</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../style.css?v=14" />
+    <!-- CSP: Allow scripts from same origin and inline scripts (for development) -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;"
+    />
+    <meta
+      name="description"
+      content="Isi form untuk membuat Perjanjian Sewa Menyewa Tempat secara instan. Download dokumen Word siap pakai."
+    />
+  </head>
+  <body>
+    <header class="new-header">
+      <div class="new-header__container">
+        <div class="new-header__left">
+          <a href="landing.html" class="back-button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </a>
+          <a href="/" class="logo">
+            <span class="logo__text">Sepakatee</span>
+          </a>
+        </div>
+        <div class="new-header__right">
+          <div class="autosave-badge" id="autosaveBadge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Tersimpan otomatis</span>
+          </div>
+          <a href="#" class="bantuan-link">Bantuan</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- Form View -->
+      <section class="form-section-new">
+        <div class="wizard-layout">
+          <!-- Left Panel: Form -->
+          <div class="form-panel-new">
+            <div class="wizard-header">
+              <h1 class="wizard-title">Buat Perjanjian Sewa Menyewa</h1>
+              <p class="wizard-subtitle">Lengkapi formulir untuk membuat dokumen profesional</p>
+              
+              <!-- Progress Steps -->
+              <div class="progress-steps-new">
+                <div class="step-new active" data-step="1">
+                  <div class="step-circle-new">✓</div>
+                  <div class="step-label-new">Jenis</div>
+                </div>
+                <div class="step-connector-new"></div>
+                <div class="step-new active" data-step="2">
+                  <div class="step-circle-new">2</div>
+                  <div class="step-label-new">Penyewa</div>
+                </div>
+                <div class="step-connector-new"></div>
+                <div class="step-new" data-step="3">
+                  <div class="step-circle-new">3</div>
+                  <div class="step-label-new">Properti</div>
+                </div>
+                <div class="step-connector-new"></div>
+                <div class="step-new" data-step="4">
+                  <div class="step-circle-new">4</div>
+                  <div class="step-label-new">Review</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="wizard-form">
+              <form id="documentForm" class="document-form">
+                  <!-- Informasi Umum -->
+                  <div class="form-group form-group--collapsible is-expanded" data-group="informasi-umum">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">01</span>
+                        Informasi Umum
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <div class="form-field">
+                      <label for="tempat_penandatanganan">Tempat Penandatanganan</label>
+                      <input type="text" id="tempat_penandatanganan" name="tempat_penandatanganan" placeholder="Contoh: Jakarta" />
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label for="hari">Hari</label>
+                        <input type="text" id="hari" name="hari" placeholder="Contoh: Senin" />
+                      </div>
+                      <div class="form-field">
+                        <label for="tanggal">Tanggal</label>
+                        <input type="number" id="tanggal" name="tanggal" placeholder="1-31" min="1" max="31" />
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label for="bulan">Bulan</label>
+                        <input type="text" id="bulan" name="bulan" placeholder="Contoh: Januari" />
+                      </div>
+                      <div class="form-field">
+                        <label for="tahun">Tahun</label>
+                        <input type="number" id="tahun" name="tahun" placeholder="Contoh: 2024" />
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Pemberi Sewa -->
+                  <div class="form-group form-group--collapsible" data-group="pemberi-sewa">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">02</span>
+                        Pemberi Sewa (Pihak Pertama)
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <div class="form-field">
+                      <label for="nama_pemberi_sewa">Nama Lengkap</label>
+                      <input type="text" id="nama_pemberi_sewa" name="nama_pemberi_sewa" placeholder="Nama lengkap pemberi sewa" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="ktp_pemberi_sewa">Nomor KTP</label>
+                      <input type="text" id="ktp_pemberi_sewa" name="ktp_pemberi_sewa" placeholder="16 digit nomor KTP" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="alamat_pemberi_sewa">Alamat Tinggal</label>
+                      <textarea id="alamat_pemberi_sewa" name="alamat_pemberi_sewa" rows="3" placeholder="Alamat lengkap pemberi sewa"></textarea>
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Penyewa -->
+                  <div class="form-group form-group--collapsible" data-group="penyewa">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">03</span>
+                        Penyewa (Pihak Kedua)
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <div class="form-field">
+                      <label for="nama_penyewa">Nama Lengkap</label>
+                      <input type="text" id="nama_penyewa" name="nama_penyewa" placeholder="Nama lengkap penyewa" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="ktp_penyewa">Nomor KTP</label>
+                      <input type="text" id="ktp_penyewa" name="ktp_penyewa" placeholder="16 digit nomor KTP" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="alamat_penyewa">Alamat Tinggal</label>
+                      <textarea id="alamat_penyewa" name="alamat_penyewa" rows="3" placeholder="Alamat lengkap penyewa"></textarea>
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Informasi Tempat -->
+                  <div class="form-group form-group--collapsible" data-group="informasi-tempat">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">04</span>
+                        Informasi Tempat
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <div class="form-field">
+                      <label for="nomor_shm">Nomor Sertifikat Hak Milik (SHM)</label>
+                      <input type="text" id="nomor_shm" name="nomor_shm" placeholder="Nomor SHM" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="nama_pemilik_shm">Nama Pemilik SHM</label>
+                      <input type="text" id="nama_pemilik_shm" name="nama_pemilik_shm" placeholder="Nama pemilik sertifikat" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="alamat_lengkap_tempat">Alamat Lengkap Tempat</label>
+                      <textarea id="alamat_lengkap_tempat" name="alamat_lengkap_tempat" rows="3" placeholder="Jalan, No, RT/RW, Kelurahan, Kecamatan, Kabupaten/Kota, Provinsi, Kode Pos"></textarea>
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Ketentuan Sewa -->
+                  <div class="form-group form-group--collapsible" data-group="ketentuan-sewa">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">05</span>
+                        Ketentuan Sewa
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <div class="form-field">
+                      <label for="harga_sewa_angka">Harga Sewa (Angka)</label>
+                      <input type="number" id="harga_sewa_angka" name="harga_sewa_angka" placeholder="Contoh: 5000000" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="harga_sewa_huruf">Harga Sewa (Huruf)</label>
+                      <input type="text" id="harga_sewa_huruf" name="harga_sewa_huruf" placeholder="Contoh: Lima Juta Rupiah" />
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label for="durasi_sewa">Durasi Sewa</label>
+                        <input type="text" id="durasi_sewa" name="durasi_sewa" placeholder="Contoh: 12 bulan" />
+                      </div>
+                      <div class="form-field">
+                        <label for="tanggal_mulai">Tanggal Mulai</label>
+                        <input type="date" id="tanggal_mulai" name="tanggal_mulai" />
+                      </div>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="tanggal_akhir">Tanggal Akhir</label>
+                      <input type="date" id="tanggal_akhir" name="tanggal_akhir" />
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Informasi Pembayaran -->
+                  <div class="form-group form-group--collapsible" data-group="informasi-pembayaran">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">06</span>
+                        Informasi Pembayaran
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <div class="form-field">
+                      <label for="nama_pemilik_rekening">Nama Pemilik Rekening</label>
+                      <input type="text" id="nama_pemilik_rekening" name="nama_pemilik_rekening" placeholder="Nama pemilik rekening bank" />
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label for="nama_bank">Nama Bank</label>
+                        <input type="text" id="nama_bank" name="nama_bank" placeholder="Contoh: BCA" />
+                      </div>
+                      <div class="form-field">
+                        <label for="nomor_rekening">Nomor Rekening</label>
+                        <input type="text" id="nomor_rekening" name="nomor_rekening" placeholder="Nomor rekening" />
+                      </div>
+                    </div>
+
+                    <div class="form-field">
+                      <label class="checkbox-label">
+                        <input type="checkbox" id="pembayaran_bertahap" name="pembayaran_bertahap" />
+                        <span>Pembayaran Secara Bertahap</span>
+                      </label>
+                    </div>
+
+                    <div id="pembayaran_bertahap_fields" style="display: none;">
+                      <div class="form-field">
+                        <label for="nominal_deposit">Nominal Deposit (Angka)</label>
+                        <input type="number" id="nominal_deposit" name="nominal_deposit" placeholder="Contoh: 2000000" />
+                      </div>
+
+                      <div class="form-field">
+                        <label for="nominal_deposit_huruf">Nominal Deposit (Huruf)</label>
+                        <input type="text" id="nominal_deposit_huruf" name="nominal_deposit_huruf" placeholder="Contoh: Dua Juta Rupiah" />
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-field">
+                          <label for="jumlah_cicilan">Jumlah Cicilan</label>
+                          <input type="number" id="jumlah_cicilan" name="jumlah_cicilan" placeholder="Contoh: 6" />
+                        </div>
+                        <div class="form-field">
+                          <label for="nominal_cicilan">Nominal Cicilan (Angka)</label>
+                          <input type="number" id="nominal_cicilan" name="nominal_cicilan" placeholder="Contoh: 500000" />
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-field">
+                          <label for="tanggal_pembayaran">Tanggal Pembayaran Setiap Bulan</label>
+                          <input type="number" id="tanggal_pembayaran" name="tanggal_pembayaran" placeholder="1-31" min="1" max="31" />
+                        </div>
+                        <div class="form-field">
+                          <label for="batas_akhir_pelunasan">Batas Akhir Pelunasan</label>
+                          <input type="date" id="batas_akhir_pelunasan" name="batas_akhir_pelunasan" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="persentase_denda">Persentase Denda Keterlambatan (%)</label>
+                      <input type="number" id="persentase_denda" name="persentase_denda" placeholder="Contoh: 0.5" step="0.1" />
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Ketentuan Lainnya -->
+                  <div class="form-group form-group--collapsible" data-group="ketentuan-lainnya">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">07</span>
+                        Ketentuan Lainnya
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label for="jumlah_hari_pemberitahuan">Jumlah Hari Pemberitahuan (Pemutusan oleh Penyewa)</label>
+                        <input type="number" id="jumlah_hari_pemberitahuan" name="jumlah_hari_pemberitahuan" placeholder="Contoh: 30" />
+                      </div>
+                      <div class="form-field">
+                        <label for="huruf_hari_pemberitahuan">Huruf (Hari Pemberitahuan)</label>
+                        <input type="text" id="huruf_hari_pemberitahuan" name="huruf_hari_pemberitahuan" placeholder="Contoh: Tiga Puluh" />
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label for="jumlah_hari_pelanggaran">Jumlah Hari (Pelanggaran/Pelunasan)</label>
+                        <input type="number" id="jumlah_hari_pelanggaran" name="jumlah_hari_pelanggaran" placeholder="Contoh: 14" />
+                      </div>
+                      <div class="form-field">
+                        <label for="huruf_hari_pelanggaran">Huruf (Hari Pelanggaran)</label>
+                        <input type="text" id="huruf_hari_pelanggaran" name="huruf_hari_pelanggaran" placeholder="Contoh: Empat Belas" />
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label for="jumlah_hari_bulan_keterlambatan">Jumlah Hari/Bulan (Keterlambatan Pembayaran)</label>
+                        <input type="text" id="jumlah_hari_bulan_keterlambatan" name="jumlah_hari_bulan_keterlambatan" placeholder="Contoh: 30 hari" />
+                      </div>
+                      <div class="form-field">
+                        <label for="huruf_keterlambatan">Huruf (Keterlambatan)</label>
+                        <input type="text" id="huruf_keterlambatan" name="huruf_keterlambatan" placeholder="Contoh: Tiga Puluh" />
+                      </div>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="batas_waktu_penyelesaian">Batas Waktu Penyelesaian Sengketa (Hari)</label>
+                      <input type="number" id="batas_waktu_penyelesaian" name="batas_waktu_penyelesaian" placeholder="Contoh: 30" />
+                    </div>
+                    </div>
+                  </div>
+                </form>
+            </div>
+            
+            <!-- Wizard Navigation Buttons (Fixed at bottom) -->
+            <div class="wizard-actions">
+              <button type="button" class="btn-wizard btn-back" id="prevBtn" style="display: none;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                Kembali
+              </button>
+              <button type="button" class="btn-wizard btn-next" id="nextBtn">
+                Lanjut
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+              <button type="button" class="btn-wizard btn-generate" id="generateBtn" style="display: none;">
+                Generate Dokumen
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Panel: Preview -->
+          <div class="preview-panel-new">
+            <div class="preview-header-new">
+              <h2>Preview Dokumen</h2>
+              <span class="live-badge">🔴 Live</span>
+            </div>
+            <div class="preview-content" id="documentPreview">
+              <div class="preview-document" id="previewDocument">
+                    <h1 style="text-align: center; font-weight: 700; margin-bottom: 1.5rem;">PERJANJIAN SEWA MENYEWA TEMPAT</h1>
+                    
+                    <p>Perjanjian sewa menyewa tempat ini (untuk selanjutnya disebut "<strong>Perjanjian Sewa</strong>") ditandatangani dan dilangsungkan di <span class="preview-field" data-field="tempat_penandatanganan">[Tempat]</span>, pada hari <span class="preview-field" data-field="hari">[Hari]</span>, tanggal <span class="preview-field" data-field="tanggal">[Tanggal]</span> bulan <span class="preview-field" data-field="bulan">[Bulan]</span> tahun <span class="preview-field" data-field="tahun">[Tahun]</span>, oleh dan antara:</p>
+
+                    <ol style="margin-left: 20px;">
+                        <li><strong><span class="preview-field" data-field="nama_pemberi_sewa">[Nama Pemberi Sewa]</span></strong>, pemilik KTP dengan nomor <strong><span class="preview-field" data-field="ktp_pemberi_sewa">[KTP]</span></strong> bertempat tinggal permanen di <strong><span class="preview-field" data-field="alamat_pemberi_sewa">[Alamat]</span></strong>, untuk selanjutnya disebut "<strong>Pemberi Sewa</strong>"; dan</li>
+                        <li><strong><span class="preview-field" data-field="nama_penyewa">[Nama Penyewa]</span></strong>, pemilik KTP dengan nomor <strong><span class="preview-field" data-field="ktp_penyewa">[KTP]</span></strong> bertempat tinggal permanen di <strong><span class="preview-field" data-field="alamat_penyewa">[Alamat]</span></strong>, untuk selanjutnya disebut "<strong>Penyewa</strong>",</li>
+                    </ol>
+
+                    <p>secara bersama-sama disebut sebagai <strong>PARA PIHAK</strong>.</p>
+
+                    <p><strong>Pemberi Sewa</strong> dan <strong>Penyewa</strong> dengan ini terlebih dahulu menerangkan hal-hal sebagai berikut:</p>
+
+                    <ol style="margin-left: 20px;">
+                        <li><strong>Bahwa,</strong> Pemberi Sewa adalah pemilik yang sah atas suatu tempat yang berdiri di atas tanah hak atas tanah milik dengan Sertifikat Hak Milik (SHM) Nomor: <strong><span class="preview-field" data-field="nomor_shm">[Nomor SHM]</span></strong> atas nama <strong><span class="preview-field" data-field="nama_pemilik_shm">[Nama Pemilik]</span></strong> yang setempat dikenal sebagai <strong><span class="preview-field" data-field="alamat_lengkap_tempat">[Alamat Properti]</span></strong> (selanjutnya disebut "<strong>Tempat</strong>").</li>
+                        <li><strong>Bahwa,</strong> Pemberi Sewa bermaksud untuk menyewakan Tempat tersebut kepada Penyewa sebagaimana Penyewa bermaksud untuk menyewa Tempat tersebut dari Pemberi Sewa.</li>
+                        <li><strong>Bahwa</strong> berdasarkan hal-hal tersebut di atas, Para Pihak menyatakan sepakat dan setuju untuk mengadakan dan menandatangani Perjanjian Sewa yang dilaksanakan dengan ketentuan dan syarat-syarat sebagai berikut:</li>
+                    </ol>
+
+                    <h3 style="text-align: center; font-weight: 700; margin: 1.5rem 0 1rem;">PASAL 1<br/>KESEPAKATAN SEWA-MENYEWA</h3>
+
+                    <ol style="margin-left: 20px;">
+                        <li>Pemberi Sewa dengan ini sepakat untuk menyewakan Tempat kepada Penyewa sebagaimana Penyewa dengan ini sepakat untuk menyewa Tempat tersebut dari Pemberi Sewa.</li>
+                        <li>Sewa menyewa Tempat sebagaimana dimaksud ayat (1) dilaksanakan dengan ketentuan sebagai berikut:
+                            <ol style="list-style-type: lower-alpha; margin-left: 20px;">
+                                <li>Harga Sewa sebesar Rp <strong><span class="preview-field" data-field="harga_sewa_angka">[Harga]</span></strong> (<strong><span class="preview-field" data-field="harga_sewa_huruf">[Terbilang]</span></strong>) ("<strong>Harga Sewa</strong>").</li>
+                                <li>Jangka Waktu Sewa adalah untuk selama <strong><span class="preview-field" data-field="durasi_sewa">[Durasi]</span></strong> bulan/tahun*, yang dimulai pada tanggal <strong><span class="preview-field" data-field="tanggal_mulai">[Tanggal Mulai]</span></strong> dan berakhir pada tanggal <strong><span class="preview-field" data-field="tanggal_akhir">[Tanggal Selesai]</span></strong> ("<strong>Masa Sewa</strong>").</li>
+                            </ol>
+                        </li>
+                    </ol>
+
+                    <h3 style="text-align: center; font-weight: 700; margin: 1.5rem 0 1rem;">PASAL 2<br/>PEMBAYARAN</h3>
+
+                    <p style="margin-bottom: 1rem;">Pembayaran atas Harga Sewa dilakukan oleh Penyewa kepada Pemberi Sewa melalui transfer ke rekening bank atas nama <strong><span class="preview-field" data-field="nama_pemilik_rekening">[Nama]</span></strong> pada <strong><span class="preview-field" data-field="nama_bank">[Bank]</span></strong>, nomor rekening <strong><span class="preview-field" data-field="nomor_rekening">[No. Rekening]</span></strong>, selambat-lambatnya pada saat penandatanganan Perjanjian ini...</p>
+
+                    <p style="text-align: center; color: #6b7280; font-size: 0.75rem; margin-top: 2rem;">
+                      ... pasal-pasal selanjutnya akan muncul di dokumen final ...
+                    </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="download-loader" id="downloadLoader">
+      <div class="download-loader__content">
+        <div class="download-loader__spinner" id="loaderSpinner"></div>
+        <div class="download-loader__success" id="loaderSuccess">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <p class="download-loader__text" id="loaderText">Memproses dokumen Anda...</p>
+      </div>
+    </div>
+
+    <script src="../../../script.js" defer></script>
+    <script src="form.js"></script>
+    <style>
+      /* ===== NEW WIZARD DESIGN ===== */
+      .new-header {
+        background: #fff;
+        border-bottom: 1px solid #e5e7eb;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 1rem 0;
+      }
+      
+      .new-header__container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .new-header__left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      
+      .back-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background: transparent;
+        border: 1px solid #e5e7eb;
+        color: var(--primary);
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+      
+      .back-button:hover {
+        background: #f3f4f6;
+        border-color: var(--primary);
+      }
+      
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        text-decoration: none;
+        color: var(--primary);
+      }
+      
+      .logo__icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+      }
+      
+      .logo__text {
+        font-size: 1.125rem;
+        font-weight: 700;
+      }
+      
+      .new-header__right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      
+      .autosave-badge {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.875rem;
+        background: rgba(16, 185, 129, 0.08);
+        border-radius: 8px;
+        color: #10b981;
+        font-size: 0.8125rem;
+        font-weight: 500;
+      }
+      
+      .autosave-badge svg {
+        width: 14px;
+        height: 14px;
+      }
+      
+      .bantuan-link {
+        padding: 0.5rem 0.875rem;
+        color: var(--primary);
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      
+      .bantuan-link:hover {
+        color: #6b7280;
+      }
+      
+      /* Wizard Layout */
+      .form-section-new {
+        background: #f9fafb;
+        min-height: calc(100vh - 80px);
+        padding: 2rem 0;
+        height: calc(100vh - 80px);
+        overflow: hidden;
+      }
+      
+      .wizard-layout {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: start;
+        height: 100%;
+      }
+      
+      .form-panel-new {
+        background: #fff;
+        border-radius: 16px;
+        padding: 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e5e7eb;
+        height: calc(100vh - 120px);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      
+      .wizard-header {
+        padding: 1rem 1.5rem 0.875rem 1.5rem;
+        border-bottom: 1px solid #e5e7eb;
+        flex-shrink: 0;
+      }
+      
+      .wizard-form {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1.5rem;
+      }
+      
+      .wizard-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 0.25rem;
+      }
+      
+      .wizard-subtitle {
+        color: #6b7280;
+        font-size: 0.875rem;
+        margin-bottom: 1.25rem;
+      }
+      
+      /* Progress Steps */
+      .progress-steps-new {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+      
+      .step-new {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        position: relative;
+        flex: 1;
+      }
+      
+      .step-connector-new {
+        flex: 1;
+        height: 2px;
+        background: #e5e7eb;
+        margin: 0 0.5rem;
+        position: relative;
+        top: -16px;
+      }
+      
+      .step-new.active .step-connector-new {
+        background: #0f0f10;
+      }
+      
+      .step-circle-new {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #f3f4f6;
+        border: 2px solid #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 0.8125rem;
+        color: #9ca3af;
+        transition: all 0.3s;
+      }
+      
+      .step-new.active .step-circle-new {
+        background: #0f0f10;
+        border-color: #0f0f10;
+        color: #fff;
+      }
+      
+      .step-new.completed .step-circle-new {
+        background: #10b981;
+        border-color: #10b981;
+        color: #fff;
+      }
+      
+      .step-label-new {
+        font-size: 0.6875rem;
+        font-weight: 500;
+        color: #9ca3af;
+      }
+      
+      .step-new.active .step-label-new {
+        color: #0f0f10;
+        font-weight: 600;
+      }
+      
+      /* Wizard Action Buttons */
+      .wizard-actions {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem 1.5rem;
+        border-top: 1px solid #e5e7eb;
+        background: #fff;
+        flex-shrink: 0;
+        margin: 0;
+      }
+      
+      .btn-wizard {
+        padding: 0.875rem 1.75rem;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 0.9375rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        justify-content: center;
+        font-family: 'Poppins', sans-serif;
+      }
+      
+      .btn-back {
+        background: #f3f4f6;
+        color: var(--primary);
+        flex: 0;
+      }
+      
+      .btn-back:hover {
+        background: #e5e7eb;
+      }
+      
+      .btn-next,
+      .btn-generate {
+        background: #0f0f10;
+        color: #fff;
+        flex: 1;
+      }
+      
+      .btn-next:hover,
+      .btn-generate:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      
+      .btn-generate {
+        background: #10b981;
+      }
+      
+      .btn-generate:hover {
+        background: #059669;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      }
+      
+      /* Preview Panel */
+      .preview-panel-new {
+        background: #fff;
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e5e7eb;
+        height: calc(100vh - 120px);
+        overflow-y: auto;
+      }
+      
+      .preview-header-new {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      
+      .preview-header-new h2 {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0;
+      }
+      
+      .preview-header-new .live-badge {
+        padding: 6px 14px;
+        background: #ffe4e6;
+        color: #e11d48;
+        border-radius: 8px;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      
+      /* Mobile Responsive */
+      @media (max-width: 1024px) {
+        .wizard-layout {
+          grid-template-columns: 1fr;
+        }
+        
+        .preview-panel-new {
+          position: static;
+          max-height: 500px;
+        }
+      }
+      
+      /* ===== END NEW WIZARD DESIGN ===== */
+      
+      /* Form Header Bar Styling */
+      .form-header-bar {
+        background: #fff;
+        border-bottom: 1px solid rgba(15, 15, 16, 0.08);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 0;
+      }
+      
+      .form-header-bar__container {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 12px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+      }
+      
+      .form-header-bar__left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      
+      .form-header-bar__back {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--primary);
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        padding: 8px 12px;
+        border-radius: 8px;
+        transition: background 0.2s ease;
+        font-family: 'Manrope', sans-serif;
+      }
+      
+      .form-header-bar__back:hover {
+        background: rgba(15, 15, 16, 0.05);
+      }
+      
+      .form-header-bar__back svg {
+        width: 18px;
+        height: 18px;
+      }
+      
+      .form-header-bar__logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: var(--primary);
+        font-weight: 600;
+        font-size: 1.125rem;
+        font-family: 'Manrope', sans-serif;
+      }
+      
+      .form-header-bar__logo .logo__mark {
+        width: 32px;
+        height: 32px;
+      }
+      
+      .form-header-bar__right {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      
+      .save-progress-indicator {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #10b981;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        padding: 6px 12px;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 6px;
+        transition: opacity 0.3s ease;
+        font-family: 'Manrope', sans-serif;
+      }
+      
+      .save-progress-indicator svg {
+        width: 14px;
+        height: 14px;
+      }
+      
+      .btn--small {
+        padding: 8px 16px;
+        font-size: 0.875rem;
+      }
+      
+      .btn--ghost {
+        background: transparent;
+        border: 1px solid rgba(15, 15, 16, 0.15);
+        color: var(--primary);
+      }
+      
+      .btn--ghost:hover {
+        background: rgba(15, 15, 16, 0.05);
+        border-color: rgba(15, 15, 16, 0.25);
+      }
+      
+      /* Preview View Styling - 2 Column Layout */
+      .preview-view {
+        min-height: calc(100vh - 60px);
+        background: #fafafa;
+      }
+      
+      .preview-view__layout {
+        display: grid;
+        grid-template-columns: 380px 1fr;
+        min-height: calc(100vh - 60px);
+      }
+      
+      /* Sidebar Left */
+      .preview-sidebar-left {
+        background: #fff;
+        border-right: 1px solid rgba(15, 15, 16, 0.08);
+        padding: 40px 32px;
+        overflow-y: auto;
+        position: sticky;
+        top: 60px;
+        height: calc(100vh - 60px);
+      }
+      
+      .preview-sidebar-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      
+      .preview-sidebar-title {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: rgba(15, 15, 16, 0.6);
+        margin: 0 0 8px 0;
+        font-family: 'Manrope', sans-serif;
+      }
+      
+      .preview-sidebar-heading {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin: 0 0 16px 0;
+        font-family: 'Manrope', sans-serif;
+      }
+      
+      .preview-sidebar-description {
+        font-size: 0.9375rem;
+        color: rgba(15, 15, 16, 0.7);
+        line-height: 1.6;
+        margin: 0 0 32px 0;
+        font-family: 'Manrope', sans-serif;
+      }
+      
+      .preview-package-info {
+        margin-bottom: 32px;
+        padding: 20px;
+        background: rgba(15, 15, 16, 0.02);
+        border-radius: 12px;
+        border: 1px solid rgba(15, 15, 16, 0.08);
+      }
+      
+      .package-label {
+        font-size: 0.875rem;
+        color: rgba(15, 15, 16, 0.7);
+        margin: 0 0 12px 0;
+        font-family: 'Manrope', sans-serif;
+      }
+      
+      .package-details {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      .package-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.875rem;
+        color: var(--primary);
+        font-weight: 500;
+        font-family: 'Manrope', sans-serif;
+      }
+      
+      .package-item svg {
+        color: #2563eb;
+        flex-shrink: 0;
+      }
+      
+      .package-price {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-top: 8px;
+        font-family: 'Manrope', sans-serif;
+      }
+      
+      .preview-sidebar-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: auto;
+        margin-bottom: 24px;
+      }
+      
+      .btn--full {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .preview-privacy {
+        font-size: 0.75rem;
+        color: rgba(15, 15, 16, 0.5);
+        text-align: center;
+        margin: 0;
+        font-family: 'Manrope', sans-serif;
+      }
+      
+      .preview-privacy a {
+        color: #2563eb;
+        text-decoration: underline;
+      }
+      
+      /* Preview Content Right */
+      .preview-content-right {
+        padding: 40px;
+        overflow-y: auto;
+        height: calc(100vh - 60px);
+      }
+      
+      .preview-document-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 12px;
+        padding: 48px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(15, 15, 16, 0.08);
+      }
+      
+      .preview-document-full {
+        line-height: 1.8;
+        color: var(--primary);
+        font-family: 'Manrope', sans-serif;
+      }
+      
+      .preview-document-full h1 {
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 32px;
+        font-size: 1.5rem;
+      }
+      
+      .preview-document-full h3 {
+        text-align: center;
+        font-weight: 600;
+        margin: 32px 0 16px;
+        font-size: 1.125rem;
+      }
+      
+      .preview-document-full p {
+        text-align: justify;
+        margin: 16px 0;
+        font-size: 0.9375rem;
+      }
+      
+      .preview-document-full ol {
+        margin-left: 24px;
+        margin: 16px 0 16px 24px;
+      }
+      
+      .preview-document-full ol ol {
+        list-style-type: lower-alpha;
+        margin-left: 24px;
+      }
+      
+      .preview-document-full li {
+        margin: 12px 0;
+        font-size: 0.9375rem;
+      }
+      
+      /* Filled field - blue highlight */
+      .preview-document-full .filled-field {
+        background: #dbeafe;
+        color: #1e40af;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: 500;
+        border: 1px solid #93c5fd;
+      }
+      
+      /* Placeholder field */
+      .preview-document-full .placeholder-field {
+        background: #f5f5f5;
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #666;
+        font-style: italic;
+      }
+      
+      /* No blur on form page - full preview visible during editing */
+      
+      .btn--primary {
+        background: var(--primary);
+        color: #fff;
+        border: none;
+      }
+      
+      .btn--primary:hover {
+        background: rgba(15, 15, 16, 0.9);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(15, 15, 16, 0.15);
+      }
+      
+      @media (max-width: 1024px) {
+        .preview-view__layout {
+          grid-template-columns: 1fr;
+        }
+        
+        .preview-sidebar-left {
+          position: relative;
+          height: auto;
+          border-right: none;
+          border-bottom: 1px solid rgba(15, 15, 16, 0.08);
+        }
+        
+        .preview-content-right {
+          height: auto;
+        }
+      }
+      
+      /* Form Header Styling */
+      .form-header {
+        margin-bottom: 32px;
+      }
+      
+      .form-header h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: var(--primary);
+        font-family: 'Manrope', sans-serif;
+      }
+      
+      .form-info-note {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        background: rgba(59, 130, 246, 0.08);
+        border-radius: 8px;
+        border: 1px solid rgba(59, 130, 246, 0.15);
+        font-size: 0.8125rem;
+        color: rgba(15, 15, 16, 0.7);
+        line-height: 1.5;
+        font-family: 'Manrope', sans-serif;
+      }
+      
+      .form-info-note svg {
+        width: 16px;
+        height: 16px;
+        color: #3b82f6;
+        flex-shrink: 0;
+      }
+      
+      .form-info-note span {
+        color: rgba(15, 15, 16, 0.7);
+      }
+      
+      @media (max-width: 768px) {
+        .form-header-bar__container {
+          padding: 12px 16px;
+          flex-wrap: wrap;
+        }
+        
+        .form-header-bar__left {
+          flex: 1;
+          min-width: 0;
+        }
+        
+        .form-header-bar__back span {
+          display: none;
+        }
+        
+        .preview-view__content {
+          padding: 24px;
+        }
+        
+        .preview-view__header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        
+        .tutorial-steps {
+          flex-direction: column;
+          gap: 16px;
+        }
+        
+        .tutorial-connector {
+          display: none;
+        }
+        
+        .tutorial-step {
+          flex-direction: row;
+          text-align: left;
+          align-items: flex-start;
+        }
+      }
+      
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+      }
+      
+      .preview-document {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 0.8125rem;
+        line-height: 1.8;
+        color: var(--primary);
+      }
+      
+      .preview-document h1 {
+        font-family: 'Poppins', sans-serif;
+      }
+      
+      .preview-document h3 {
+        font-family: 'Poppins', sans-serif;
+      }
+      
+      .preview-document p {
+        text-align: justify;
+        margin-bottom: 0.875rem;
+      }
+      
+      .preview-field {
+        display: inline-block;
+        background: rgba(15, 15, 16, 0.08);
+        padding: 2px 8px;
+        border-radius: 4px;
+        color: var(--primary);
+        font-weight: 600;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.75rem;
+        transition: all 0.3s ease;
+      }
+      
+      .preview-field.filled {
+        background: rgba(16, 185, 129, 0.15);
+        color: #059669;
+      }
+      
+      .preview-field.active-editing {
+        background: #fef3c7;
+        color: #92400e;
+        box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
+        animation: pulse-highlight 1.5s ease-in-out infinite;
+      }
+      
+      @keyframes pulse-highlight {
+        0%, 100% {
+          box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 0 5px rgba(245, 158, 11, 0.2);
+        }
+      }
+    </style>
+  </body>
+</html>

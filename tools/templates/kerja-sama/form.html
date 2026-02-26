@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <title>Buat Perjanjian Kerja Sama Usaha | Sepakatee</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../style.css?v=14" />
+    <meta
+      name="description"
+      content="Isi form untuk membuat Perjanjian Kerja Sama Usaha (Joint Venture) secara instan. Preview, bayar, dan download dokumen Word."
+    />
+    <style>
+      .new-header {
+        background: #fff;
+        border-bottom: 1px solid #e5e7eb;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 1rem 0;
+      }
+      .new-header__container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .new-header__left { display: flex; align-items: center; gap: 1rem; }
+      .back-button {
+        display: flex; align-items: center; justify-content: center;
+        width: 40px; height: 40px; border-radius: 8px;
+        background: transparent; border: 1px solid #e5e7eb;
+        color: var(--primary); text-decoration: none; transition: all 0.2s;
+      }
+      .back-button:hover { background: #f3f4f6; border-color: var(--primary); }
+      .logo { display: flex; align-items: center; gap: 0.625rem; text-decoration: none; color: var(--primary); }
+      .logo__icon { width: 32px; height: 32px; border-radius: 6px; }
+      .logo__text { font-size: 1.125rem; font-weight: 700; }
+      .new-header__right { display: flex; align-items: center; gap: 1rem; }
+      .bantuan-link { padding: 0.5rem 0.875rem; color: var(--primary); text-decoration: none; font-size: 0.875rem; font-weight: 500; }
+      .bantuan-link:hover { color: #10b981; }
+      .autosave-badge { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.875rem; background: rgba(16, 185, 129, 0.08); border-radius: 8px; color: #10b981; font-size: 0.8125rem; font-weight: 500; }
+      .autosave-badge svg { width: 14px; height: 14px; }
+      .form-section-new { background: #f9fafb; min-height: calc(100vh - 80px); padding: 2rem 0; height: calc(100vh - 80px); overflow: hidden; }
+      .wizard-layout { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; height: 100%; }
+      .form-panel-new { background: #fff; border-radius: 16px; padding: 0; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); border: 1px solid #e5e7eb; height: calc(100vh - 120px); display: flex; flex-direction: column; overflow: hidden; }
+      .wizard-header { padding: 1rem 1.5rem 0.875rem 1.5rem; border-bottom: 1px solid #e5e7eb; flex-shrink: 0; }
+      .wizard-form { flex: 1; overflow-y: auto; padding: 1.5rem; }
+      .wizard-title { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 0.25rem; }
+      .wizard-subtitle { color: #6b7280; font-size: 0.875rem; margin-bottom: 1.25rem; }
+      .progress-steps-new { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+      .step-new { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; position: relative; flex: 1; }
+      .step-connector-new { flex: 1; height: 2px; background: #e5e7eb; margin: 0 0.5rem; position: relative; top: -16px; }
+      .step-circle-new { width: 32px; height: 32px; border-radius: 50%; background: #f3f4f6; border: 2px solid #e5e7eb; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.8125rem; color: #9ca3af; transition: all 0.3s; }
+      .step-new.active .step-circle-new { background: #0f0f10; border-color: #0f0f10; color: #fff; }
+      .step-new.completed .step-circle-new { background: #10b981; border-color: #10b981; color: #fff; }
+      .step-label-new { font-size: 0.6875rem; font-weight: 500; color: #9ca3af; }
+      .step-new.active .step-label-new { color: #0f0f10; font-weight: 600; }
+      .wizard-actions { display: flex; gap: 1rem; padding: 1rem 1.5rem; border-top: 1px solid #e5e7eb; background: #fff; flex-shrink: 0; margin: 0; }
+      .btn-wizard { padding: 0.875rem 1.75rem; border-radius: 12px; font-weight: 600; font-size: 0.9375rem; cursor: pointer; transition: all 0.2s; border: none; display: flex; align-items: center; gap: 0.5rem; justify-content: center; font-family: 'Poppins', sans-serif; }
+      .btn-back { background: #f3f4f6; color: var(--primary); flex: 0; }
+      .btn-back:hover { background: #e5e7eb; }
+      .btn-next, .btn-generate { background: #0f0f10; color: #fff; flex: 1; }
+      .btn-next:hover, .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
+      .btn-generate { background: #10b981; }
+      .btn-generate:hover { background: #059669; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+      .preview-panel-new { background: #fff; border-radius: 16px; padding: 2rem; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); border: 1px solid #e5e7eb; height: calc(100vh - 120px); overflow-y: auto; }
+      .preview-header-new { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #e5e7eb; }
+      .preview-header-new h2 { font-size: 1.125rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; }
+      .preview-header-new .live-badge { padding: 6px 14px; background: #ffe4e6; color: #e11d48; border-radius: 8px; font-size: 0.8125rem; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+      .preview-field { display: inline-block; background: rgba(15, 15, 16, 0.08); padding: 2px 8px; border-radius: 4px; min-width: 2ch; }
+      .preview-field.filled { background: rgba(16, 185, 129, 0.15); color: #059669; }
+      .preview-field.active-editing { background: #fef3c7; color: #92400e; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3); }
+      .placeholder-field { background: #f5f5f5; padding: 2px 6px; border-radius: 4px; }
+      .filled-field { background: #dbeafe; color: #1e40af; padding: 2px 6px; }
+      @media (max-width: 1024px) { .wizard-layout { grid-template-columns: 1fr; } .preview-panel-new { max-height: 500px; } }
+    </style>
+  </head>
+  <body>
+    <header class="new-header">
+      <div class="new-header__container">
+        <div class="new-header__left">
+          <a href="landing.html" class="back-button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </a>
+          <a href="/" class="logo">
+            <span class="logo__text">Sepakatee</span>
+          </a>
+        </div>
+        <div class="new-header__right">
+          <div class="autosave-badge" id="autosaveBadge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Tersimpan otomatis</span>
+          </div>
+          <a href="https://wa.me/6285285995169" target="_blank" rel="noopener noreferrer" class="bantuan-link">Hubungi Kami</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="form-section-new">
+        <div class="wizard-layout">
+          <!-- Left Panel: Form -->
+          <div class="form-panel-new">
+            <div class="wizard-header">
+              <h1 class="wizard-title">Buat Perjanjian Kerja Sama Usaha</h1>
+              <p class="wizard-subtitle">Lengkapi formulir untuk membuat dokumen profesional</p>
+              
+              <!-- Progress Steps -->
+              <div class="progress-steps-new">
+                <div class="step-new" data-step="1">
+                  <div class="step-circle-new">1</div>
+                  <div class="step-label-new">Identitas</div>
+                </div>
+                <div class="step-connector-new"></div>
+                <div class="step-new" data-step="2">
+                  <div class="step-circle-new">2</div>
+                  <div class="step-label-new">Pihak</div>
+                </div>
+                <div class="step-connector-new"></div>
+                <div class="step-new" data-step="3">
+                  <div class="step-circle-new">3</div>
+                  <div class="step-label-new">Kerjasama</div>
+                </div>
+                <div class="step-connector-new"></div>
+                <div class="step-new" data-step="4">
+                  <div class="step-circle-new">4</div>
+                  <div class="step-label-new">Review</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="wizard-form">
+              <form id="documentForm" class="document-form">
+                  <!-- Informasi Umum -->
+                  <div class="form-group form-group--collapsible is-expanded" data-group="informasi-umum">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">01</span>
+                        Informasi Umum
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <div class="form-field">
+                      <label for="tempat_penandatanganan">Tempat Penandatanganan</label>
+                      <input type="text" id="tempat_penandatanganan" name="tempat_penandatanganan" placeholder="Contoh: Jakarta" />
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label for="hari">Hari</label>
+                        <input type="text" id="hari" name="hari" placeholder="Contoh: Senin" />
+                      </div>
+                      <div class="form-field">
+                        <label for="tanggal">Tanggal</label>
+                        <input type="number" id="tanggal" name="tanggal" placeholder="1-31" min="1" max="31" />
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label for="bulan">Bulan</label>
+                        <input type="text" id="bulan" name="bulan" placeholder="Contoh: Januari" />
+                      </div>
+                      <div class="form-field">
+                        <label for="tahun">Tahun</label>
+                        <input type="number" id="tahun" name="tahun" placeholder="Contoh: 2024" />
+                      </div>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="email">Email (untuk pembayaran)</label>
+                      <input type="email" id="email" name="email" placeholder="email@contoh.com" />
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Pihak Pertama -->
+                  <div class="form-group form-group--collapsible" data-group="pihak-pertama">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">02</span>
+                        Pihak Pertama
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <div class="form-field">
+                      <label for="nama_pihak_pertama">Nama Lengkap</label>
+                      <input type="text" id="nama_pihak_pertama" name="nama_pihak_pertama" placeholder="Nama lengkap pihak pertama" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="ktp_pihak_pertama">Nomor KTP</label>
+                      <input type="text" id="ktp_pihak_pertama" name="ktp_pihak_pertama" placeholder="16 digit nomor KTP" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="alamat_pihak_pertama">Alamat Tinggal</label>
+                      <textarea id="alamat_pihak_pertama" name="alamat_pihak_pertama" rows="3" placeholder="Alamat lengkap pihak pertama"></textarea>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="deskripsi_pihak_pertama">Deskripsi Pihak Pertama</label>
+                      <textarea id="deskripsi_pihak_pertama" name="deskripsi_pihak_pertama" rows="3" placeholder="Contoh: seorang pengusaha di bidang teknologi informasi"></textarea>
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Pihak Kedua -->
+                  <div class="form-group form-group--collapsible" data-group="pihak-kedua">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">03</span>
+                        Pihak Kedua
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <div class="form-field">
+                      <label for="nama_pihak_kedua">Nama Lengkap</label>
+                      <input type="text" id="nama_pihak_kedua" name="nama_pihak_kedua" placeholder="Nama lengkap pihak kedua" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="ktp_pihak_kedua">Nomor KTP</label>
+                      <input type="text" id="ktp_pihak_kedua" name="ktp_pihak_kedua" placeholder="16 digit nomor KTP" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="alamat_pihak_kedua">Alamat Tinggal</label>
+                      <textarea id="alamat_pihak_kedua" name="alamat_pihak_kedua" rows="3" placeholder="Alamat lengkap pihak kedua"></textarea>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="deskripsi_pihak_kedua">Deskripsi Pihak Kedua</label>
+                      <textarea id="deskripsi_pihak_kedua" name="deskripsi_pihak_kedua" rows="3" placeholder="Contoh: seorang pemilik jaringan distribusi"></textarea>
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Ruang Lingkup -->
+                  <div class="form-group form-group--collapsible" data-group="ruang-lingkup">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">04</span>
+                        Ruang Lingkup Kerjasama
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <div class="form-field">
+                      <label for="bidang_kerjasama">Bidang Kerjasama</label>
+                      <textarea id="bidang_kerjasama" name="bidang_kerjasama" rows="2" placeholder="Contoh: teknologi informasi dan pengembangan software"></textarea>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="ruang_lingkup_1">Ruang Lingkup 1</label>
+                      <textarea id="ruang_lingkup_1" name="ruang_lingkup_1" rows="2" placeholder="Contoh: Pengembangan aplikasi mobile"></textarea>
+                    </div>
+
+                      <div class="form-field">
+                      <label for="ruang_lingkup_2">Ruang Lingkup 2</label>
+                      <textarea id="ruang_lingkup_2" name="ruang_lingkup_2" rows="2" placeholder="Contoh: Pemasaran dan distribusi produk"></textarea>
+                      </div>
+
+                      <div class="form-field">
+                      <label for="ruang_lingkup_3">Ruang Lingkup 3</label>
+                      <textarea id="ruang_lingkup_3" name="ruang_lingkup_3" rows="2" placeholder="Contoh: Layanan purna jual dan support"></textarea>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="wilayah_kerjasama">Wilayah Kerjasama</label>
+                      <input type="text" id="wilayah_kerjasama" name="wilayah_kerjasama" placeholder="Contoh: Jakarta dan sekitarnya" />
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Hak dan Kewajiban -->
+                  <div class="form-group form-group--collapsible" data-group="hak-kewajiban">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">05</span>
+                        Hak dan Kewajiban
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <h4 style="margin-top: 0; margin-bottom: 15px; font-size: 14px; font-weight: 600;">Hak Pihak Pertama</h4>
+                    
+                    <div class="form-field">
+                      <label for="hak_pihak_pertama_1">Hak 1</label>
+                      <textarea id="hak_pihak_pertama_1" name="hak_pihak_pertama_1" rows="2" placeholder="Contoh: Menggunakan infrastruktur yang disediakan"></textarea>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="hak_pihak_pertama_2">Hak 2</label>
+                      <textarea id="hak_pihak_pertama_2" name="hak_pihak_pertama_2" rows="2" placeholder="Contoh: Mendapat pembagian hasil sesuai kesepakatan"></textarea>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="hak_pihak_pertama_3">Hak 3</label>
+                      <textarea id="hak_pihak_pertama_3" name="hak_pihak_pertama_3" rows="2" placeholder="Contoh: Mengakses laporan keuangan"></textarea>
+                    </div>
+
+                    <h4 style="margin-top: 20px; margin-bottom: 15px; font-size: 14px; font-weight: 600;">Kewajiban Pihak Pertama</h4>
+                    
+                    <div class="form-field">
+                      <label for="kewajiban_pihak_pertama_1">Kewajiban 1</label>
+                      <textarea id="kewajiban_pihak_pertama_1" name="kewajiban_pihak_pertama_1" rows="2" placeholder="Contoh: Menyediakan teknologi dan sistem"></textarea>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="kewajiban_pihak_pertama_2">Kewajiban 2</label>
+                      <textarea id="kewajiban_pihak_pertama_2" name="kewajiban_pihak_pertama_2" rows="2" placeholder="Contoh: Memberikan pelatihan kepada tim"></textarea>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="kewajiban_pihak_pertama_3">Kewajiban 3</label>
+                      <textarea id="kewajiban_pihak_pertama_3" name="kewajiban_pihak_pertama_3" rows="2" placeholder="Contoh: Memelihara dan update sistem"></textarea>
+                    </div>
+
+                    <h4 style="margin-top: 20px; margin-bottom: 15px; font-size: 14px; font-weight: 600;">Hak Pihak Kedua</h4>
+                    
+                    <div class="form-field">
+                      <label for="hak_pihak_kedua_1">Hak 1</label>
+                      <textarea id="hak_pihak_kedua_1" name="hak_pihak_kedua_1" rows="2" placeholder="Contoh: Menggunakan merek dan produk"></textarea>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="hak_pihak_kedua_2">Hak 2</label>
+                      <textarea id="hak_pihak_kedua_2" name="hak_pihak_kedua_2" rows="2" placeholder="Contoh: Mendapat support teknis"></textarea>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="hak_pihak_kedua_3">Hak 3</label>
+                      <textarea id="hak_pihak_kedua_3" name="hak_pihak_kedua_3" rows="2" placeholder="Contoh: Mengakses data dan analitik"></textarea>
+                    </div>
+
+                    <h4 style="margin-top: 20px; margin-bottom: 15px; font-size: 14px; font-weight: 600;">Kewajiban Pihak Kedua</h4>
+                    
+                    <div class="form-field">
+                      <label for="kewajiban_pihak_kedua_1">Kewajiban 1</label>
+                      <textarea id="kewajiban_pihak_kedua_1" name="kewajiban_pihak_kedua_1" rows="2" placeholder="Contoh: Menyediakan modal operasional"></textarea>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="kewajiban_pihak_kedua_2">Kewajiban 2</label>
+                      <textarea id="kewajiban_pihak_kedua_2" name="kewajiban_pihak_kedua_2" rows="2" placeholder="Contoh: Mengelola pemasaran dan penjualan"></textarea>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="kewajiban_pihak_kedua_3">Kewajiban 3</label>
+                      <textarea id="kewajiban_pihak_kedua_3" name="kewajiban_pihak_kedua_3" rows="2" placeholder="Contoh: Membuat laporan berkala"></textarea>
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Jangka Waktu -->
+                  <div class="form-group form-group--collapsible" data-group="jangka-waktu">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">06</span>
+                        Jangka Waktu
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <div class="form-field">
+                      <label for="jangka_waktu">Jangka Waktu</label>
+                      <input type="text" id="jangka_waktu" name="jangka_waktu" placeholder="Contoh: 5 (lima) tahun" />
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label for="tanggal_mulai">Tanggal Mulai</label>
+                        <input type="date" id="tanggal_mulai" name="tanggal_mulai" />
+                      </div>
+                      <div class="form-field">
+                        <label for="tanggal_akhir">Tanggal Akhir</label>
+                        <input type="date" id="tanggal_akhir" name="tanggal_akhir" />
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Pembagian Hasil -->
+                  <div class="form-group form-group--collapsible" data-group="pembagian-hasil">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">07</span>
+                        Pembagian Hasil
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label for="persen_pihak_pertama">Persentase Pihak Pertama</label>
+                        <input type="number" id="persen_pihak_pertama" name="persen_pihak_pertama" placeholder="Contoh: 60" min="0" max="100" />
+                      </div>
+                      <div class="form-field">
+                        <label for="persen_pihak_kedua">Persentase Pihak Kedua</label>
+                        <input type="number" id="persen_pihak_kedua" name="persen_pihak_kedua" placeholder="Contoh: 40" min="0" max="100" />
+                      </div>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="periode_pembagian">Periode Pembagian</label>
+                      <input type="text" id="periode_pembagian" name="periode_pembagian" placeholder="Contoh: bulan / triwulan / tahun" />
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Kontribusi -->
+                  <div class="form-group form-group--collapsible" data-group="kontribusi">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">08</span>
+                        Kontribusi dan Biaya
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <div class="form-field">
+                      <label for="kontribusi_pihak_pertama">Kontribusi Pihak Pertama</label>
+                      <textarea id="kontribusi_pihak_pertama" name="kontribusi_pihak_pertama" rows="2" placeholder="Contoh: teknologi, sistem, dan keahlian teknis"></textarea>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="kontribusi_pihak_kedua">Kontribusi Pihak Kedua</label>
+                      <textarea id="kontribusi_pihak_kedua" name="kontribusi_pihak_kedua" rows="2" placeholder="Contoh: modal, jaringan distribusi, dan pemasaran"></textarea>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="penanggung_jawab_biaya">Penanggung Jawab Biaya Operasional</label>
+                      <input type="text" id="penanggung_jawab_biaya" name="penanggung_jawab_biaya" placeholder="Contoh: kedua belah pihak secara proporsional" />
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Kerahasiaan -->
+                  <div class="form-group form-group--collapsible" data-group="kerahasiaan">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">09</span>
+                        Kerahasiaan
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <div class="form-field">
+                      <label for="masa_kerahasiaan">Masa Kerahasiaan Setelah Perjanjian Berakhir</label>
+                      <input type="text" id="masa_kerahasiaan" name="masa_kerahasiaan" placeholder="Contoh: 2 (dua) tahun" />
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Pengakhiran -->
+                  <div class="form-group form-group--collapsible" data-group="pengakhiran">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">10</span>
+                        Perpanjangan dan Pengakhiran
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <div class="form-field">
+                      <label for="waktu_notifikasi_perpanjangan">Waktu Notifikasi Perpanjangan</label>
+                      <input type="text" id="waktu_notifikasi_perpanjangan" name="waktu_notifikasi_perpanjangan" placeholder="Contoh: 60 (enam puluh) hari" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="waktu_perbaikan">Waktu Perbaikan Setelah Pelanggaran</label>
+                      <input type="text" id="waktu_perbaikan" name="waktu_perbaikan" placeholder="Contoh: 30 (tiga puluh) hari" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="durasi_force_majeure">Durasi Force Majeure untuk Pengakhiran</label>
+                      <input type="text" id="durasi_force_majeure" name="durasi_force_majeure" placeholder="Contoh: 90 (sembilan puluh) hari" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="waktu_notifikasi_pengakhiran">Waktu Notifikasi Pengakhiran</label>
+                      <input type="text" id="waktu_notifikasi_pengakhiran" name="waktu_notifikasi_pengakhiran" placeholder="Contoh: 30 (tiga puluh) hari" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="waktu_notifikasi_force_majeure">Waktu Notifikasi Force Majeure</label>
+                      <input type="text" id="waktu_notifikasi_force_majeure" name="waktu_notifikasi_force_majeure" placeholder="Contoh: 7 (tujuh) hari" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="durasi_max_force_majeure">Durasi Maksimal Force Majeure</label>
+                      <input type="text" id="durasi_max_force_majeure" name="durasi_max_force_majeure" placeholder="Contoh: 90 (sembilan puluh) hari" />
+                    </div>
+                    </div>
+                  </div>
+
+                  <!-- Penyelesaian Sengketa -->
+                  <div class="form-group form-group--collapsible" data-group="penyelesaian">
+                    <div class="form-group__header">
+                      <h3>
+                        <span class="group-number">11</span>
+                        Penyelesaian Sengketa
+                      </h3>
+                      <button type="button" class="group-toggle" aria-label="Toggle section">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="form-group__content">
+                    
+                    <div class="form-field">
+                      <label for="waktu_musyawarah">Waktu Musyawarah</label>
+                      <input type="text" id="waktu_musyawarah" name="waktu_musyawarah" placeholder="Contoh: 30 (tiga puluh) hari" />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="forum_penyelesaian_sengketa">Forum Penyelesaian Sengketa</label>
+                      <input type="text" id="forum_penyelesaian_sengketa" name="forum_penyelesaian_sengketa" placeholder="Contoh: Pengadilan Negeri Jakarta Pusat / Arbitrase" />
+                    </div>
+                    </div>
+                  </div>
+
+                </form>
+            </div>
+            
+            <!-- Wizard Navigation Buttons -->
+            <div class="wizard-actions">
+              <button type="button" class="btn-wizard btn-back" id="prevBtn" style="display: none;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                Kembali
+              </button>
+              <button type="button" class="btn-wizard btn-next" id="nextBtn">
+                Lanjut
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+              <button type="button" class="btn-wizard btn-generate" id="generateBtn" style="display: none;">
+                Generate Dokumen
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Panel: Preview -->
+          <div class="preview-panel-new">
+            <div class="preview-header-new">
+              <h2>Preview Dokumen</h2>
+              <span class="live-badge">🔴 Live</span>
+            </div>
+            <div class="preview-content" id="documentPreview">
+              <!-- Preview akan di-generate oleh JavaScript -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="download-loader" id="downloadLoader">
+      <div class="download-loader__content">
+        <div class="download-loader__spinner" id="loaderSpinner"></div>
+        <div class="download-loader__success" id="loaderSuccess">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <p class="download-loader__text" id="loaderText">Memproses dokumen Anda...</p>
+      </div>
+    </div>
+
+    <script src="../../../script.js" defer></script>
+    <script src="form.js"></script>
+  </body>
+</html>
+

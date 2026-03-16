@@ -88,9 +88,9 @@
       /* Category Cards Grid */
       .category-cards-grid {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 12px;
-        max-width: 900px;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+        max-width: 780px;
         margin: 0 auto 32px;
       }
       
@@ -98,7 +98,7 @@
         background: #fff;
         border: 1px solid rgba(15, 15, 16, 0.08);
         border-radius: 12px;
-        padding: 20px 16px;
+        padding: 16px 14px;
         text-align: center;
         text-decoration: none;
         color: inherit;
@@ -116,8 +116,8 @@
       }
       
       .category-card-icon {
-        width: 40px;
-        height: 40px;
+        width: 32px;
+        height: 32px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -125,16 +125,16 @@
       }
       
       .category-card-icon svg {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
       }
       
       .category-card-text {
-        font-size: 0.6875rem;
+        font-size: 0.65625rem;
         font-weight: 400;
         color: var(--primary);
         font-family: 'Poppins', system-ui, sans-serif;
-        line-height: 1.4;
+        line-height: 1.35;
       }
       
       /* Value Props Grid */
@@ -273,159 +273,7 @@
         background: #e16f73;
       }
       
-      /* Form Builder Demo */
-      .form-builder-demo {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 32px;
-        background: #fff;
-        border-radius: var(--radius-sm);
-        padding: 32px;
-        border: 1px solid rgba(15, 15, 16, 0.08);
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-      }
-      
-      .demo-form-side {
-        display: flex;
-        flex-direction: column;
-      }
-      
-      .demo-form-header {
-        margin-bottom: 24px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid rgba(15, 15, 16, 0.08);
-      }
-      
-      .demo-form-fields {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-      }
-      
-      .demo-field {
-        display: flex;
-        flex-direction: column;
-      }
-      
-      .demo-input {
-        width: 100%;
-        padding: 10px 12px;
-        border: 1px solid rgba(15, 15, 16, 0.1);
-        border-radius: 8px;
-        font-size: 0.8125rem;
-        font-family: 'Poppins', system-ui, sans-serif;
-        color: var(--primary);
-        background: #fff;
-        transition: all 0.3s ease;
-        cursor: default;
-        pointer-events: none;
-      }
-      
-      .demo-input:focus {
-        outline: none;
-        border-color: rgba(15, 15, 16, 0.15);
-        box-shadow: 0 0 0 3px rgba(15, 15, 16, 0.05);
-        background: #fff;
-      }
-      
-      .demo-input::placeholder {
-        color: var(--text-muted);
-      }
-      
-      .demo-input[readonly] {
-        cursor: default;
-        user-select: none;
-      }
-      
-      .demo-input[disabled] {
-        cursor: default;
-        opacity: 0.8;
-        user-select: none;
-      }
-      
-      /* Prevent scroll when demo is running */
-      .form-builder-demo {
-        scroll-margin: 0;
-      }
-      
-      .form-builder-demo input:focus,
-      .form-builder-demo select:focus {
-        scroll-margin: 0;
-      }
-      
-      .demo-preview-side {
-        display: flex;
-        flex-direction: column;
-        background: #f9f9f9;
-        border-radius: 8px;
-        padding: 24px;
-        max-height: 600px;
-        overflow-y: auto;
-      }
-      
-      .demo-preview-header {
-        margin-bottom: 20px;
-        padding-bottom: 16px;
-        border-bottom: 1px solid rgba(15, 15, 16, 0.08);
-      }
-      
-      .demo-preview-content {
-        flex: 1;
-      }
-      
-      .demo-document {
-        background: #fff;
-        padding: 24px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        min-height: 400px;
-      }
-      
-      .demo-doc-header {
-        margin-bottom: 20px;
-        padding-bottom: 16px;
-        border-bottom: 1px solid rgba(15, 15, 16, 0.08);
-      }
-      
-      .demo-doc-section {
-        margin-bottom: 20px;
-      }
-      
-      .demo-doc-section:last-child {
-        margin-bottom: 0;
-      }
-      
-      .demo-placeholder {
-        color: var(--text-muted);
-        font-style: italic;
-        border-bottom: 1px dashed rgba(15, 15, 16, 0.2);
-        transition: all 0.3s ease;
-      }
-      
-      .demo-placeholder.filled {
-        color: #2563eb;
-        font-style: normal;
-        border-bottom: none;
-        font-weight: 500;
-        background: rgba(59, 130, 246, 0.12);
-        padding: 2px 6px;
-        border-radius: 4px;
-        display: inline-block;
-      }
-      
-      /* Auto-fill animation */
-      .demo-input.typing {
-        animation: typingGlow 0.5s ease;
-      }
-      
-      @keyframes typingGlow {
-        0%, 100% {
-          box-shadow: 0 0 0 3px rgba(15, 15, 16, 0.05);
-        }
-        50% {
-          box-shadow: 0 0 0 3px rgba(15, 15, 16, 0.15);
-        }
-      }
+      /* Form Builder Demo styles removed */
       
       /* How It Works */
       .how-it-works-grid {
@@ -1018,21 +866,6 @@
         
         .value-prop-text {
           font-size: 0.75rem;
-        }
-        
-        /* Form Builder Demo Mobile */
-        .form-builder-demo {
-          grid-template-columns: 1fr;
-          padding: 24px;
-          gap: 24px;
-        }
-        
-        .demo-preview-side {
-          max-height: 500px;
-        }
-        
-        .demo-document {
-          padding: 20px;
         }
         
         /* Cara Menggunakan Mobile */
@@ -1638,145 +1471,256 @@
 
     <main>
       <!-- Hero Section -->
-      <section style="padding: 48px 0 64px; background: var(--bg-light); width: 100%;">
+      <section class="home-hero">
         <div class="container">
-          <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-            
-            <!-- Trust Badge -->
-            <div style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: rgba(15, 15, 16, 0.05); border-radius: 50px; margin-bottom: 24px; border: 1px solid rgba(15, 15, 16, 0.1);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--primary);">
-                <path d="M9 11l3 3L22 4"/>
-                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
-              </svg>
-              <span style="font-size: 0.6875rem; font-weight: 400; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">1000+ Dokumen Legal Dibuat</span>
-            </div>
-
-            <!-- Headline -->
-            <h1 style="font-size: clamp(1.875rem, 4vw, 2.75rem); font-weight: 500; line-height: 1.2; margin-bottom: 12px; color: var(--primary); letter-spacing: -0.01em; font-family: 'Poppins', system-ui, sans-serif;">
-              Buat Dokumen Hukum dalam Hitungan Menit.
-            </h1>
-            
-            <!-- Description -->
-            <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; font-family: 'Poppins', system-ui, sans-serif;">
-              Template kontrak legal untuk bisnis di Indonesia, tanpa ribet atau mahal.
-            </p>
-
-            <!-- Search Bar with Button -->
-            <div class="hero-search-container">
-              <div class="hero-search-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="11" cy="11" r="8"/>
-                  <path d="m21 21-4.35-4.35"/>
+          <div class="home-hero__grid">
+            <div class="home-hero__content">
+              <!-- Trust Badge -->
+              <div class="home-hero__badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--primary);">
+                  <path d="M9 11l3 3L22 4"/>
+                  <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
                 </svg>
-                <input 
-                  type="text" 
-                  class="hero-search-input" 
-                  placeholder="Cari kontrak hukum... (contoh: perjanjian kerja)"
-                  id="heroSearch"
-                />
+                <span>1000+ Dokumen Legal Dibuat</span>
               </div>
-              <button type="button" class="hero-search-button" onclick="handleSearch()">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="11" cy="11" r="8"/>
-                  <path d="m21 21-4.35-4.35"/>
-                </svg>
-                Cari
-              </button>
-            </div>
 
-            <!-- Category Cards -->
-            <div class="category-cards-grid">
-              <a href="tools/templates/index.html#Perjanjian Sewa" class="category-card">
-                <div class="category-card-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary);">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
+              <!-- Headline -->
+              <h1 class="home-hero__title">
+                Buat Dokumen Hukum dalam Hitungan Menit.
+              </h1>
+
+              <!-- Description -->
+              <p class="home-hero__lead">
+                Template kontrak legal untuk bisnis di Indonesia, tanpa ribet atau mahal.
+              </p>
+
+              <!-- Search Bar with Button -->
+              <div class="hero-search-container">
+                <div class="hero-search-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
                   </svg>
+                  <input 
+                    type="text" 
+                    class="hero-search-input" 
+                    placeholder="Cari kontrak hukum... (contoh: perjanjian kerja)"
+                    id="heroSearch"
+                  />
                 </div>
-                <div class="category-card-text">Perjanjian Sewa</div>
-              </a>
-              
-              <a href="tools/templates/index.html#Kontrak Karyawan" class="category-card">
-                <div class="category-card-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary);">
-                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                <button type="button" class="hero-search-button" onclick="handleSearch()">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
                   </svg>
-                </div>
-                <div class="category-card-text">Kontrak Karyawan</div>
-              </a>
-              
-              <a href="tools/templates/index.html#NDA" class="category-card">
-                <div class="category-card-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary);">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  Cari
+                </button>
+              </div>
+
+              <!-- Category Cards -->
+              <div class="category-cards-grid">
+                <a href="tools/templates/index.html#Perjanjian Sewa" class="category-card">
+                  <div class="category-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary);">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                      <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                  </div>
+                  <div class="category-card-text">Perjanjian Sewa</div>
+                </a>
+                
+                <a href="tools/templates/index.html#Kontrak Karyawan" class="category-card">
+                  <div class="category-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary);">
+                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                    </svg>
+                  </div>
+                  <div class="category-card-text">Kontrak Karyawan</div>
+                </a>
+                
+                <a href="tools/templates/index.html#NDA" class="category-card">
+                  <div class="category-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary);">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                  </div>
+                  <div class="category-card-text">NDA (Non-Disclosure Agreement)</div>
+                </a>
+                
+                <a href="tools/templates/index.html#Perjanjian Kerjasama" class="category-card">
+                  <div class="category-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary);">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                      <polyline points="14 2 14 8 20 8"/>
+                      <line x1="9" y1="15" x2="15" y2="15"/>
+                      <line x1="12" y1="12" x2="12" y2="18"/>
+                    </svg>
+                  </div>
+                  <div class="category-card-text">Perjanjian Kerjasama</div>
+                </a>
+                
+                <a href="tools/templates/index.html#Kontrak Freelance" class="category-card">
+                  <div class="category-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary);">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                      <polyline points="14 2 14 8 20 8"/>
+                      <line x1="16" y1="13" x2="8" y2="13"/>
+                      <line x1="16" y1="17" x2="8" y2="17"/>
+                      <polyline points="10 9 9 9 8 9"/>
                   </svg>
+                  </div>
+                  <div class="category-card-text">Kontrak Freelance</div>
+                </a>
+              </div>
+
+              <!-- Value Propositions -->
+              <div class="value-props-grid">
+                <div class="value-prop-item">
+                  <svg class="value-prop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                    <path d="M8 12h8M12 8v8"/>
+                  </svg>
+                  <span class="value-prop-text">Disusun oleh ahli hukum Indonesia</span>
                 </div>
-                <div class="category-card-text">NDA (Non-Disclosure Agreement)</div>
-              </a>
-              
-              <a href="tools/templates/index.html#Perjanjian Kerjasama" class="category-card">
-                <div class="category-card-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary);">
+                
+                <div class="value-prop-item">
+                  <svg class="value-prop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                     <polyline points="14 2 14 8 20 8"/>
                     <line x1="9" y1="15" x2="15" y2="15"/>
-                    <line x1="12" y1="12" x2="12" y2="18"/>
                   </svg>
+                  <span class="value-prop-text">Mudah digunakan & siap edit</span>
                 </div>
-                <div class="category-card-text">Perjanjian Kerjasama</div>
-              </a>
-              
-              <a href="tools/templates/index.html#Kontrak Freelance" class="category-card">
-                <div class="category-card-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary);">
+                
+                <div class="value-prop-item">
+                  <svg class="value-prop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                     <polyline points="14 2 14 8 20 8"/>
                     <line x1="16" y1="13" x2="8" y2="13"/>
                     <line x1="16" y1="17" x2="8" y2="17"/>
-                    <polyline points="10 9 9 9 8 9"/>
-                </svg>
+                  </svg>
+                  <span class="value-prop-text">Sesuai hukum Indonesia</span>
                 </div>
-                <div class="category-card-text">Kontrak Freelance</div>
-              </a>
+                
+                <div class="value-prop-item">
+                  <svg class="value-prop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                  <span class="value-prop-text">Hemat waktu & biaya legal</span>
+                </div>
+              </div>
             </div>
 
-            <!-- Value Propositions -->
-            <div class="value-props-grid">
-              <div class="value-prop-item">
-                <svg class="value-prop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-                  <path d="M8 12h8M12 8v8"/>
-                </svg>
-                <span class="value-prop-text">Disusun oleh ahli hukum Indonesia</span>
-              </div>
-              
-              <div class="value-prop-item">
-                <svg class="value-prop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                  <line x1="9" y1="15" x2="15" y2="15"/>
-                </svg>
-                <span class="value-prop-text">Mudah digunakan & siap edit</span>
-              </div>
-              
-              <div class="value-prop-item">
-                <svg class="value-prop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                  <line x1="16" y1="13" x2="8" y2="13"/>
-                  <line x1="16" y1="17" x2="8" y2="17"/>
-                </svg>
-                <span class="value-prop-text">Sesuai hukum Indonesia</span>
-              </div>
-              
-              <div class="value-prop-item">
-                <svg class="value-prop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12 6 12 12 16 14"/>
-                </svg>
-                <span class="value-prop-text">Hemat waktu & biaya legal</span>
+            <div class="home-hero__visual">
+              <div class="hero-demo" aria-label="Form Builder live preview demo">
+                <div class="form-builder-demo hero-form-demo">
+                  <!-- Form Side -->
+                  <div class="demo-form-side">
+                    <div class="demo-form-header">
+                      <h3 style="font-size: 1.0625rem; font-weight: 600; margin-bottom: 6px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">Form Builder</h3>
+                      <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 12px; font-family: 'Poppins', system-ui, sans-serif;">Isi form, preview dokumen akan terisi otomatis</p>
+                      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                        <span style="font-size: 0.6875rem; padding: 4px 8px; background: rgba(15, 15, 16, 0.05); border-radius: 4px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">✓ Disetujui Lawyer</span>
+                        <span style="font-size: 0.6875rem; padding: 4px 8px; background: rgba(15, 15, 16, 0.05); border-radius: 4px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">⚡ 2-3 menit</span>
+                      </div>
+                    </div>
+                    
+                    <div class="demo-form-fields">
+                      <div class="demo-field">
+                        <label style="font-size: 0.75rem; font-weight: 500; color: var(--primary); margin-bottom: 6px; display: block; font-family: 'Poppins', system-ui, sans-serif;">Alamat Properti</label>
+                        <input type="text" class="demo-input" id="hero-demo-property-address" placeholder="Contoh: Jl. Sudirman No. 123, Jakarta" autocomplete="off" readonly tabindex="-1" />
+                      </div>
+                      
+                      <div class="demo-field">
+                        <label style="font-size: 0.75rem; font-weight: 500; color: var(--primary); margin-bottom: 6px; display: block; font-family: 'Poppins', system-ui, sans-serif;">Nama Pemilik</label>
+                        <input type="text" class="demo-input" id="hero-demo-landlord-name" placeholder="Nama lengkap pemilik" autocomplete="off" readonly tabindex="-1" />
+                      </div>
+                      
+                      <div class="demo-field">
+                        <label style="font-size: 0.75rem; font-weight: 500; color: var(--primary); margin-bottom: 6px; display: block; font-family: 'Poppins', system-ui, sans-serif;">Nama Penyewa</label>
+                        <input type="text" class="demo-input" id="hero-demo-tenant-name" placeholder="Nama lengkap penyewa" autocomplete="off" readonly tabindex="-1" />
+                      </div>
+                      
+                      <div class="demo-field">
+                        <label style="font-size: 0.75rem; font-weight: 500; color: var(--primary); margin-bottom: 6px; display: block; font-family: 'Poppins', system-ui, sans-serif;">Harga Sewa Bulanan</label>
+                        <input type="text" class="demo-input" id="hero-demo-monthly-rent" placeholder="Contoh: Rp 5.000.000" autocomplete="off" inputmode="numeric" readonly tabindex="-1" />
+                      </div>
+                      
+                      <div class="demo-field">
+                        <label style="font-size: 0.75rem; font-weight: 500; color: var(--primary); margin-bottom: 6px; display: block; font-family: 'Poppins', system-ui, sans-serif;">Deposit</label>
+                        <input type="text" class="demo-input" id="hero-demo-deposit" placeholder="Contoh: Rp 10.000.000" autocomplete="off" inputmode="numeric" readonly tabindex="-1" />
+                      </div>
+                      
+                      <div class="demo-field">
+                        <label style="font-size: 0.75rem; font-weight: 500; color: var(--primary); margin-bottom: 6px; display: block; font-family: 'Poppins', system-ui, sans-serif;">Durasi Sewa</label>
+                        <select class="demo-input" id="hero-demo-lease-term" disabled tabindex="-1">
+                          <option value="">Pilih durasi sewa</option>
+                          <option value="6 bulan">6 bulan</option>
+                          <option value="12 bulan">12 bulan</option>
+                          <option value="24 bulan">24 bulan</option>
+                          <option value="Bulanan">Bulanan</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Preview Side -->
+                  <div class="demo-preview-side" aria-live="polite">
+                    <div class="demo-preview-header">
+                      <h3 style="font-size: 1.0625rem; font-weight: 600; margin-bottom: 6px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">Preview Dokumen</h3>
+                      <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 12px; font-family: 'Poppins', system-ui, sans-serif;">Update instan saat Anda mengetik</p>
+                    </div>
+                    
+                    <div class="demo-preview-content">
+                      <div class="demo-document">
+                        <div class="demo-doc-header">
+                          <h4 style="font-size: 0.9375rem; font-weight: 600; margin-bottom: 4px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">PERJANJIAN SEWA MENYEWA TEMPAT</h4>
+                          <p style="font-size: 0.6875rem; color: var(--text-muted); font-family: 'Poppins', system-ui, sans-serif;">Perjanjian ini dibuat pada <span id="hero-preview-date">tanggal</span></p>
+                        </div>
+                        
+                        <div class="demo-doc-section">
+                          <h5 style="font-size: 0.8125rem; font-weight: 600; margin-bottom: 8px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">INFORMASI PROPERTI</h5>
+                          <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 4px; font-family: 'Poppins', system-ui, sans-serif;">
+                            Alamat Properti: <span id="hero-preview-property-address" class="demo-placeholder">_________________</span>
+                          </p>
+                        </div>
+
+                        <div class="demo-doc-section">
+                          <h5 style="font-size: 0.8125rem; font-weight: 600; margin-bottom: 8px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">PIHAK-PIHAK</h5>
+                          <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 4px; font-family: 'Poppins', system-ui, sans-serif;">
+                            Pemilik: <span id="hero-preview-landlord" class="demo-placeholder">_________________</span>
+                          </p>
+                          <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 4px; font-family: 'Poppins', system-ui, sans-serif;">
+                            Penyewa: <span id="hero-preview-tenant" class="demo-placeholder">_________________</span>
+                          </p>
+                        </div>
+
+                        <div class="demo-doc-section">
+                          <h5 style="font-size: 0.8125rem; font-weight: 600; margin-bottom: 8px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">KETENTUAN KEUANGAN</h5>
+                          <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 4px; font-family: 'Poppins', system-ui, sans-serif;">
+                            Harga Sewa Bulanan: <span id="hero-preview-rent" class="demo-placeholder">_________________</span>
+                          </p>
+                          <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 4px; font-family: 'Poppins', system-ui, sans-serif;">
+                            Deposit: <span id="hero-preview-deposit" class="demo-placeholder">_________________</span>
+                          </p>
+                          <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 4px; font-family: 'Poppins', system-ui, sans-serif;">
+                            Durasi Sewa: <span id="hero-preview-term" class="demo-placeholder">_________________</span>
+                          </p>
+                        </div>
+
+                        <div class="demo-doc-section">
+                          <h5 style="font-size: 0.8125rem; font-weight: 600; margin-bottom: 8px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">KETENTUAN DAN SYARAT</h5>
+                          <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; font-family: 'Poppins', system-ui, sans-serif;">
+                            Penyewa setuju untuk membayar sewa pada hari pertama setiap bulan. Deposit akan disimpan sesuai dengan ketentuan hukum yang berlaku dan akan dikembalikan setelah berakhirnya perjanjian sewa, dikurangi dengan biaya kerusakan atau sewa yang belum dibayar.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1880,202 +1824,7 @@
         </div>
       </section>
 
-      <!-- Section Divider -->
-      <div style="height: 1px; background: linear-gradient(90deg, transparent, rgba(15, 15, 16, 0.08), transparent); margin: 0;"></div>
-
-      <!-- How It Works Section - Form Builder Demo -->
-      <section style="padding: 100px 0; background: var(--bg-light); width: 100%;">
-        <div class="container">
-          <div style="max-width: 1400px; margin: 0 auto;">
-            <div style="text-align: center; margin-bottom: 64px;">
-              <div style="font-size: 0.75rem; font-weight: 500; color: var(--primary); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; font-family: 'Poppins', system-ui, sans-serif;">Cara Kerja</div>
-              <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; margin-bottom: 20px; color: var(--primary); line-height: 1.2; font-family: 'Poppins', system-ui, sans-serif;">
-                Lihat Cara Kerja Sepakatee
-              </h2>
-              <p style="font-size: 0.9375rem; color: var(--text-muted); line-height: 1.7; max-width: 600px; margin: 0 auto; font-family: 'Poppins', system-ui, sans-serif;">
-                Buat dokumen hukum profesional dengan mudah. Isi form dan lihat preview dokumen terupdate secara real-time.
-              </p>
-            </div>
-
-            <!-- Cara Menggunakan Compact -->
-            <div class="cara-menggunakan-compact" style="margin-top: 0; padding-top: 0; border-top: none; margin-bottom: 48px;">
-              <h3 style="font-size: 1rem; font-weight: 600; text-align: center; margin-bottom: 32px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">Cara Menggunakan</h3>
-              <div class="cara-menggunakan-steps">
-                <div class="cara-step">
-                  <div class="cara-step-icon cara-step-icon--fill">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                      <polyline points="14 2 14 8 20 8"/>
-                      <line x1="9" y1="15" x2="15" y2="15"/>
-                      <path d="M9 12l2 2 4-4"/>
-                    </svg>
-                  </div>
-                  <h4 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 6px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">Pilih & Isi</h4>
-                  <p style="font-size: 0.6875rem; color: var(--text-muted); line-height: 1.5; font-family: 'Poppins', system-ui, sans-serif;">Klik menu di kiri untuk membuka form dan isi informasi yang diperlukan</p>
-                </div>
-                
-                <div class="cara-step-connector">
-                  <div class="connector-line"></div>
-                  <div class="connector-dot connector-dot--start"></div>
-                  <div class="connector-dot connector-dot--end"></div>
-                </div>
-                
-                <div class="cara-step">
-                  <div class="cara-step-icon cara-step-icon--preview">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                      <polyline points="14 2 14 8 20 8"/>
-                      <line x1="9" y1="15" x2="15" y2="15"/>
-                      <line x1="12" y1="12" x2="12" y2="18"/>
-                      <circle cx="18" cy="6" r="2" fill="currentColor"/>
-                      <line x1="17" y1="6" x2="19" y2="6" stroke="white" stroke-width="1.5"/>
-                      <line x1="18" y1="5" x2="18" y2="7" stroke="white" stroke-width="1.5"/>
-                    </svg>
-                  </div>
-                  <h4 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 6px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">Preview Real-Time</h4>
-                  <p style="font-size: 0.6875rem; color: var(--text-muted); line-height: 1.5; font-family: 'Poppins', system-ui, sans-serif;">Lihat dokumen terisi otomatis di panel kanan saat Anda mengetik</p>
-                </div>
-                
-                <div class="cara-step-connector">
-                  <div class="connector-line"></div>
-                  <div class="connector-dot connector-dot--start connector-dot--red"></div>
-                  <div class="connector-dot connector-dot--end"></div>
-                </div>
-                
-                <div class="cara-step">
-                  <div class="cara-step-icon cara-step-icon--download">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                      <polyline points="7 10 12 15 17 10"/>
-                      <line x1="12" y1="15" x2="12" y2="3"/>
-                    </svg>
-                  </div>
-                  <h4 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 6px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">Download Dokumen</h4>
-                  <p style="font-size: 0.6875rem; color: var(--text-muted); line-height: 1.5; font-family: 'Poppins', system-ui, sans-serif;">Klik tombol download untuk mendapatkan file Word siap pakai</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-builder-demo">
-              <!-- Form Side -->
-              <div class="demo-form-side">
-                <div class="demo-form-header">
-                  <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 8px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">Form Builder</h3>
-                  <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 16px; font-family: 'Poppins', system-ui, sans-serif;">Buat dokumen hukum yang mengikat secara real-time</p>
-                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 20px;">
-                    <span style="font-size: 0.6875rem; padding: 4px 8px; background: rgba(15, 15, 16, 0.05); border-radius: 4px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">✓ Disetujui Lawyer</span>
-                    <span style="font-size: 0.6875rem; padding: 4px 8px; background: rgba(15, 15, 16, 0.05); border-radius: 4px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">⚡ 2-3 menit</span>
-                  </div>
-                  <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 16px; font-family: 'Poppins', system-ui, sans-serif;">
-                    <strong style="color: var(--primary);">Informasi Properti</strong> - Langkah 1 dari 6
-                  </div>
-                </div>
-                
-                <div class="demo-form-fields">
-                  <div class="demo-field">
-                    <label style="font-size: 0.75rem; font-weight: 500; color: var(--primary); margin-bottom: 6px; display: block; font-family: 'Poppins', system-ui, sans-serif;">Alamat Properti</label>
-                    <input type="text" class="demo-input" id="demo-property-address" placeholder="Contoh: Jl. Sudirman No. 123, Jakarta" value="" readonly tabindex="-1" />
-                  </div>
-                  
-                  <div class="demo-field">
-                    <label style="font-size: 0.75rem; font-weight: 500; color: var(--primary); margin-bottom: 6px; display: block; font-family: 'Poppins', system-ui, sans-serif;">Nama Pemilik</label>
-                    <input type="text" class="demo-input" id="demo-landlord-name" placeholder="Nama lengkap pemilik" value="" readonly tabindex="-1" />
-                  </div>
-                  
-                  <div class="demo-field">
-                    <label style="font-size: 0.75rem; font-weight: 500; color: var(--primary); margin-bottom: 6px; display: block; font-family: 'Poppins', system-ui, sans-serif;">Nama Penyewa</label>
-                    <input type="text" class="demo-input" id="demo-tenant-name" placeholder="Nama lengkap penyewa" value="" readonly tabindex="-1" />
-                  </div>
-                  
-                  <div class="demo-field">
-                    <label style="font-size: 0.75rem; font-weight: 500; color: var(--primary); margin-bottom: 6px; display: block; font-family: 'Poppins', system-ui, sans-serif;">Harga Sewa Bulanan</label>
-                    <input type="text" class="demo-input" id="demo-monthly-rent" placeholder="Contoh: Rp 5.000.000" value="" readonly tabindex="-1" />
-                  </div>
-                  
-                  <div class="demo-field">
-                    <label style="font-size: 0.75rem; font-weight: 500; color: var(--primary); margin-bottom: 6px; display: block; font-family: 'Poppins', system-ui, sans-serif;">Deposit</label>
-                    <input type="text" class="demo-input" id="demo-deposit" placeholder="Contoh: Rp 10.000.000" value="" readonly tabindex="-1" />
-                  </div>
-                  
-                  <div class="demo-field">
-                    <label style="font-size: 0.75rem; font-weight: 500; color: var(--primary); margin-bottom: 6px; display: block; font-family: 'Poppins', system-ui, sans-serif;">Durasi Sewa</label>
-                    <select class="demo-input" id="demo-lease-term" disabled tabindex="-1">
-                      <option value="">Pilih durasi sewa</option>
-                      <option value="6 bulan">6 bulan</option>
-                      <option value="12 bulan">12 bulan</option>
-                      <option value="24 bulan">24 bulan</option>
-                      <option value="Bulanan">Bulanan</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Preview Side -->
-              <div class="demo-preview-side">
-                <div class="demo-preview-header">
-                  <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 8px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">Preview Dokumen</h3>
-                  <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 16px; font-family: 'Poppins', system-ui, sans-serif;">Perubahan muncul secara instan saat Anda mengisi form</p>
-                </div>
-                
-                <div class="demo-preview-content">
-                  <div class="demo-document">
-                    <div class="demo-doc-header">
-                      <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 4px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">PERJANJIAN SEWA MENYEWA TEMPAT</h4>
-                      <p style="font-size: 0.6875rem; color: var(--text-muted); font-family: 'Poppins', system-ui, sans-serif;">Perjanjian ini dibuat pada <span id="preview-date">tanggal</span></p>
-                    </div>
-                    
-                    <div class="demo-doc-section">
-                      <h5 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">INFORMASI PROPERTI</h5>
-                      <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 4px; font-family: 'Poppins', system-ui, sans-serif;">
-                        Alamat Properti: <span id="preview-property-address" class="demo-placeholder">_________________</span>
-                </p>
-              </div>
-
-                    <div class="demo-doc-section">
-                      <h5 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">PIHAK-PIHAK</h5>
-                      <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 4px; font-family: 'Poppins', system-ui, sans-serif;">
-                        Pemilik: <span id="preview-landlord" class="demo-placeholder">_________________</span>
-                      </p>
-                      <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 4px; font-family: 'Poppins', system-ui, sans-serif;">
-                        Penyewa: <span id="preview-tenant" class="demo-placeholder">_________________</span>
-                </p>
-              </div>
-
-                    <div class="demo-doc-section">
-                      <h5 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">KETENTUAN KEUANGAN</h5>
-                      <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 4px; font-family: 'Poppins', system-ui, sans-serif;">
-                        Harga Sewa Bulanan: <span id="preview-rent" class="demo-placeholder">_________________</span>
-                      </p>
-                      <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 4px; font-family: 'Poppins', system-ui, sans-serif;">
-                        Deposit: <span id="preview-deposit" class="demo-placeholder">_________________</span>
-                      </p>
-                      <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 4px; font-family: 'Poppins', system-ui, sans-serif;">
-                        Durasi Sewa: <span id="preview-term" class="demo-placeholder">_________________</span>
-                </p>
-              </div>
-                    
-                    <div class="demo-doc-section">
-                      <h5 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: var(--primary); font-family: 'Poppins', system-ui, sans-serif;">KETENTUAN DAN SYARAT</h5>
-                      <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; font-family: 'Poppins', system-ui, sans-serif;">
-                        Penyewa setuju untuk membayar sewa pada hari pertama setiap bulan. Deposit akan disimpan sesuai dengan ketentuan hukum yang berlaku dan akan dikembalikan setelah berakhirnya perjanjian sewa, dikurangi dengan biaya kerusakan atau sewa yang belum dibayar.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 48px;">
-              <a href="tools/templates/index.html" class="btn btn--primary" style="font-family: 'Poppins', system-ui, sans-serif;">
-                Mulai Buat Dokumen
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left: 8px;">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <!-- (Form Builder demo section removed; hero now shows live view) -->
 
       <!-- Section Divider - Hidden with Tools Section -->
       <div style="height: 1px; background: linear-gradient(90deg, transparent, rgba(15, 15, 16, 0.08), transparent); margin: 0; display: none;"></div>
@@ -2338,7 +2087,7 @@
         <div class="footer__divider"></div>
         
         <div class="footer__bottom">
-          <p>© 2024 Sepakatee oleh CV Cipta Kontrak Teknologi. Hak cipta dilindungi.</p>
+          <p>© 2026 Sepakatee oleh CV Cipta Kontrak Teknologi. Hak cipta dilindungi.</p>
         </div>
       </div>
     </footer>
@@ -2362,167 +2111,112 @@
         }
       });
       
-      // Form Builder Demo Auto-fill Animation
+      // Hero Form Builder live preview (autoplay demo)
       document.addEventListener('DOMContentLoaded', function() {
-        const demoForm = document.querySelector('.form-builder-demo');
-        if (!demoForm) return;
-        
-        const demoData = {
-          'demo-property-address': { value: 'Jl. Sudirman No. 123, Jakarta Pusat', delay: 1000 },
-          'demo-landlord-name': { value: 'Budi Santoso', delay: 2500 },
-          'demo-tenant-name': { value: 'Siti Nurhaliza', delay: 4000 },
-          'demo-monthly-rent': { value: 'Rp 5.000.000', delay: 5500 },
-          'demo-deposit': { value: 'Rp 10.000.000', delay: 7000 },
-          'demo-lease-term': { value: '12 bulan', delay: 8500 }
-        };
-        
-        const previewMap = {
-          'demo-property-address': 'preview-property-address',
-          'demo-landlord-name': 'preview-landlord',
-          'demo-tenant-name': 'preview-tenant',
-          'demo-monthly-rent': 'preview-rent',
-          'demo-deposit': 'preview-deposit',
-          'demo-lease-term': 'preview-term'
-        };
-        
-        // Set initial date
+        const demoRoot = document.querySelector('.hero-demo');
+        if (!demoRoot) return;
+
+        const placeholderText = '_________________';
+
         const today = new Date();
-        const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-        const dateEl = document.getElementById('preview-date');
+        const dateEl = document.getElementById('hero-preview-date');
         if (dateEl) {
-          dateEl.textContent = dateStr;
+          dateEl.textContent = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
         }
-        
-        // Auto-fill function (non-interactive demo)
-        function autoFillField(fieldId, data) {
-          const field = document.getElementById(fieldId);
-          if (!field) return;
-          
-          setTimeout(() => {
-            field.classList.add('typing');
-            // Remove focus() to prevent scroll behavior
-            
-            let currentValue = '';
-            const value = data.value;
-            let index = 0;
-            
-            const typeInterval = setInterval(() => {
-              if (index < value.length) {
-                currentValue += value[index];
-                field.value = currentValue;
-                index++;
-                
-                // Update preview in real-time
-                const previewId = previewMap[fieldId];
-                if (previewId) {
-                  const previewEl = document.getElementById(previewId);
-                  if (previewEl) {
-                    previewEl.textContent = currentValue;
-                    previewEl.classList.add('filled');
-                  }
-                }
-              } else {
-                clearInterval(typeInterval);
-                field.classList.remove('typing');
-                // Remove blur() to prevent scroll behavior
-                
-                // Trigger change event
-                field.dispatchEvent(new Event('input', { bubbles: true }));
-              }
-            }, 50); // Typing speed
-          }, data.delay);
+
+        const demoData = {
+          'hero-demo-property-address': { value: 'Jl. Sudirman No. 123, Jakarta Pusat', delay: 600 },
+          'hero-demo-landlord-name': { value: 'Budi Santoso', delay: 1700 },
+          'hero-demo-tenant-name': { value: 'Siti Nurhaliza', delay: 2700 },
+          'hero-demo-monthly-rent': { value: 'Rp 5.000.000', delay: 3700 },
+          'hero-demo-deposit': { value: 'Rp 10.000.000', delay: 4700 },
+          'hero-demo-lease-term': { value: '12 bulan', delay: 5700 }
+        };
+
+        const previewMap = {
+          'hero-demo-property-address': 'hero-preview-property-address',
+          'hero-demo-landlord-name': 'hero-preview-landlord',
+          'hero-demo-tenant-name': 'hero-preview-tenant',
+          'hero-demo-monthly-rent': 'hero-preview-rent',
+          'hero-demo-deposit': 'hero-preview-deposit',
+          'hero-demo-lease-term': 'hero-preview-term'
+        };
+
+        function setPreview(previewEl, value) {
+          const v = (value ?? '').toString().trim();
+          if (!previewEl) return;
+          if (!v) {
+            previewEl.textContent = placeholderText;
+            previewEl.classList.remove('filled');
+            return;
+          }
+          previewEl.textContent = v;
+          previewEl.classList.add('filled');
         }
-        
-        // Reset all fields function
-        function resetFields() {
-          Object.keys(demoData).forEach(fieldId => {
+
+        function resetAll() {
+          Object.keys(previewMap).forEach((fieldId) => {
             const field = document.getElementById(fieldId);
             if (field) {
               field.value = '';
               field.classList.remove('typing');
-              const previewId = previewMap[fieldId];
-              if (previewId) {
-                const previewEl = document.getElementById(previewId);
-                if (previewEl) {
-                  previewEl.textContent = '_________________';
-                  previewEl.classList.remove('filled');
-                }
-              }
+            }
+            const previewEl = document.getElementById(previewMap[fieldId]);
+            if (previewEl) {
+              setPreview(previewEl, '');
             }
           });
         }
-        
-        // Start animation function
-        function startAnimation() {
-          // Reset all fields first
-          resetFields();
-          
-          // Start auto-fill after a short delay
+
+        function autoType(fieldId, data) {
+          const field = document.getElementById(fieldId);
+          const previewEl = document.getElementById(previewMap[fieldId]);
+          if (!field || !previewEl) return;
+
           setTimeout(() => {
-            Object.keys(demoData).forEach(fieldId => {
-              // Skip select field - handle separately
-              if (fieldId !== 'demo-lease-term') {
-                autoFillField(fieldId, demoData[fieldId]);
+            field.classList.add('typing');
+            const value = data.value ?? '';
+            let currentValue = '';
+            let index = 0;
+
+            const tick = setInterval(() => {
+              if (index < value.length) {
+                currentValue += value[index];
+                field.value = currentValue;
+                setPreview(previewEl, currentValue);
+                index += 1;
+              } else {
+                clearInterval(tick);
+                field.classList.remove('typing');
               }
-            });
-            
-            // Handle select field separately without focus
-            const selectField = document.getElementById('demo-lease-term');
-            if (selectField && demoData['demo-lease-term']) {
-              setTimeout(() => {
-                selectField.value = demoData['demo-lease-term'].value;
-                const previewEl = document.getElementById('preview-term');
-                if (previewEl) {
-                  previewEl.textContent = demoData['demo-lease-term'].value;
-                  previewEl.classList.add('filled');
-                }
-              }, demoData['demo-lease-term'].delay);
-            }
-          }, 500);
+            }, 35);
+          }, data.delay);
         }
-        
-        // Calculate total animation duration
-        // Last field delay + max typing duration + buffer time
-        const maxDelay = Math.max(...Object.values(demoData).map(d => d.delay));
-        const maxValueLength = Math.max(...Object.values(demoData).map(d => d.value.length));
-        const typingDuration = maxValueLength * 50; // 50ms per character
-        const totalDuration = maxDelay + typingDuration + 3000; // Add 3s buffer before restart
-        
-        // Animation loop control
-        let animationInterval = null;
-        
-        // Start auto-fill sequence (loop continuously)
-        let hasStarted = false;
-        
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            // Start if visible and hasn't started yet
-            if (entry.isIntersecting && !hasStarted) {
-              hasStarted = true;
-              
-              // Start the first animation
-              startAnimation();
-              
-              // Set up loop to restart animation continuously
-              animationInterval = setInterval(() => {
-                startAnimation();
-              }, totalDuration);
-            } else if (!entry.isIntersecting && animationInterval) {
-              // Stop animation when not visible to save resources
-              clearInterval(animationInterval);
-              animationInterval = null;
-              hasStarted = false;
-            }
+
+        function runOnce() {
+          resetAll();
+
+          Object.keys(demoData).forEach((fieldId) => {
+            if (fieldId !== 'hero-demo-lease-term') autoType(fieldId, demoData[fieldId]);
           });
-        }, { 
-          threshold: 0.2,
-          rootMargin: '0px'
-        });
-        
-        observer.observe(demoForm);
-        
-        // Disable manual input handling - this is a demo only
-        // Fields are readonly/disabled so users can't interact
+
+          // handle select field
+          const selectField = document.getElementById('hero-demo-lease-term');
+          const previewEl = document.getElementById(previewMap['hero-demo-lease-term']);
+          if (selectField && previewEl) {
+            setTimeout(() => {
+              selectField.value = demoData['hero-demo-lease-term'].value;
+              setPreview(previewEl, demoData['hero-demo-lease-term'].value);
+            }, demoData['hero-demo-lease-term'].delay);
+          }
+        }
+
+        const maxDelay = Math.max(...Object.values(demoData).map(d => d.delay));
+        const maxLen = Math.max(...Object.values(demoData).map(d => (d.value || '').length));
+        const totalDuration = maxDelay + (maxLen * 35) + 2200;
+
+        runOnce();
+        setInterval(runOnce, totalDuration);
       });
       
       // How It Works Section Interactive Animations

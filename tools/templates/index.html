@@ -14,8 +14,396 @@
     <link rel="stylesheet" href="../../style.css" />
     <meta
       name="description"
-      content="Pilih dari ratusan template dokumen hukum yang dibuat oleh ahli hukum untuk kebutuhan bisnismu."
+      content="Jelajahi 500+ dokumen hukum Sepakatee: filter jenis &amp; tier, estimasi harga, dan ajukan atau buat online untuk template aktif."
     />
+    <style>
+      /* Katalog dokumen — tampilan komersial */
+      .doc-cat {
+        --dc-ink: #0c0d10;
+        --dc-muted: #5c5f69;
+        --dc-line: rgba(12, 13, 16, 0.09);
+        --dc-accent: #1a1b1f;
+        --dc-gold: #b8860b;
+        --dc-tier-a: #1a1b1f;
+        --dc-tier-b: #1e3a5f;
+        --dc-tier-c: #4a5568;
+        font-family: 'Poppins', system-ui, sans-serif;
+        background: linear-gradient(180deg, #f3f1ec 0%, #ebe8e1 45%, #e8e5de 100%);
+        padding: 56px 0 100px;
+      }
+      .doc-cat__inner {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 24px;
+        position: relative;
+      }
+      .doc-cat__panel-head {
+        margin-bottom: 28px;
+        padding-bottom: 22px;
+        border-bottom: 1px solid var(--dc-line);
+      }
+      .doc-cat__panel-head .doc-cat__title {
+        font-family: 'Poppins', system-ui, sans-serif;
+        font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: var(--primary, var(--dc-ink));
+        margin: 0 0 10px;
+        line-height: 1.3;
+      }
+      .doc-cat__panel-head .doc-cat__lead {
+        font-family: 'Poppins', system-ui, sans-serif;
+        font-size: 0.8125rem;
+        font-weight: 400;
+        line-height: 1.55;
+        color: var(--primary);
+        margin: 0;
+        max-width: 40rem;
+      }
+      .doc-cat__panel {
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 4px 6px rgba(12, 13, 16, 0.04), 0 24px 48px rgba(12, 13, 16, 0.08);
+        border: 1px solid var(--dc-line);
+        padding: 32px 28px 36px;
+        position: relative;
+        z-index: 1;
+      }
+      @media (max-width: 640px) {
+        .doc-cat__panel {
+          padding: 24px 18px 28px;
+          border-radius: 16px;
+        }
+      }
+      .doc-cat__live {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-bottom: 36px;
+      }
+      @media (max-width: 900px) {
+        .doc-cat__live {
+          grid-template-columns: 1fr;
+        }
+      }
+      .doc-cat-live-card {
+        background: linear-gradient(165deg, #fafaf8 0%, #f4f2ee 100%);
+        border: 1px solid var(--dc-line);
+        border-radius: 16px;
+        padding: 22px 22px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        min-height: 168px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .doc-cat-live-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 40px rgba(12, 13, 16, 0.1);
+      }
+      .doc-cat-live-card__label {
+        font-size: 0.625rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #047857;
+      }
+      .doc-cat-live-card__label--demo {
+        color: #1d4ed8;
+      }
+      .doc-cat-live-card__t {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--dc-ink);
+        line-height: 1.35;
+        margin: 0;
+        flex: 1;
+      }
+      .doc-cat-live-card__a {
+        align-self: flex-start;
+        font-size: 0.8125rem;
+        font-weight: 700;
+        color: #fff;
+        background: var(--dc-accent);
+        text-decoration: none;
+        padding: 10px 18px;
+        border-radius: 999px;
+        transition: background 0.2s, transform 0.2s;
+      }
+      .doc-cat-live-card__a:hover {
+        background: #000;
+        transform: translateX(2px);
+      }
+      .doc-cat-live-card--outline .doc-cat-live-card__a {
+        background: transparent;
+        color: var(--dc-accent);
+        border: 2px solid var(--dc-accent);
+        padding: 8px 16px;
+      }
+      .doc-cat-live-card--outline .doc-cat-live-card__a:hover {
+        background: var(--dc-accent);
+        color: #fff;
+      }
+      .doc-cat-tabs-wrap {
+        margin-bottom: 24px;
+      }
+      .doc-cat-tabs-wrap > span {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--dc-muted);
+        margin-bottom: 12px;
+      }
+      .doc-cat-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .doc-cat-tab {
+        font-family: inherit;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--dc-line);
+        background: #fafaf9;
+        color: var(--dc-ink);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .doc-cat-tab:hover {
+        border-color: rgba(12, 13, 16, 0.2);
+        background: #fff;
+      }
+      .doc-cat-tab.is-active {
+        background: var(--dc-accent);
+        color: #fff;
+        border-color: var(--dc-accent);
+        box-shadow: 0 4px 14px rgba(12, 13, 16, 0.18);
+      }
+      .doc-cat-toolbar {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 22px;
+        padding: 22px;
+        background: linear-gradient(180deg, #fafaf9 0%, #f7f6f3 100%);
+        border-radius: 14px;
+        border: 1px solid var(--dc-line);
+      }
+      .doc-cat-toolbar-row2 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        align-items: end;
+      }
+      @media (max-width: 520px) {
+        .doc-cat-toolbar-row2 {
+          grid-template-columns: 1fr;
+        }
+      }
+      .doc-cat-field label {
+        display: block;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--dc-muted);
+        margin-bottom: 8px;
+      }
+      .doc-cat-field input,
+      .doc-cat-field select {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid var(--dc-line);
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 0.875rem;
+        background: #fff;
+        color: var(--dc-ink);
+        box-shadow: 0 1px 2px rgba(12, 13, 16, 0.04);
+      }
+      .doc-cat-field input:focus,
+      .doc-cat-field select:focus {
+        outline: none;
+        border-color: rgba(12, 13, 16, 0.35);
+        box-shadow: 0 0 0 3px rgba(12, 13, 16, 0.06);
+      }
+      #catalogMainMeta {
+        font-family: 'Poppins', system-ui, sans-serif;
+        font-size: 0.8125rem;
+        font-weight: 400;
+        color: var(--primary);
+        margin: 0 0 22px;
+      }
+      .doc-cat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+      }
+      .doc-card {
+        position: relative;
+        display: flex;
+        background: #fff;
+        border: 1px solid var(--dc-line);
+        border-radius: 16px;
+        overflow: hidden;
+        text-decoration: none;
+        color: inherit;
+        transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.2s;
+        box-shadow: 0 2px 8px rgba(12, 13, 16, 0.04);
+      }
+      .doc-card:hover {
+        box-shadow: 0 20px 50px rgba(12, 13, 16, 0.12);
+        transform: translateY(-4px);
+        border-color: rgba(12, 13, 16, 0.14);
+      }
+      .doc-card__rail {
+        width: 5px;
+        flex-shrink: 0;
+        background: var(--dc-tier-c);
+      }
+      .doc-card--tier-a .doc-card__rail {
+        background: linear-gradient(180deg, #2d3748 0%, var(--dc-tier-a) 100%);
+      }
+      .doc-card--tier-b .doc-card__rail {
+        background: linear-gradient(180deg, #2563eb 0%, var(--dc-tier-b) 100%);
+      }
+      .doc-card__deco {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        opacity: 0.07;
+        color: var(--dc-ink);
+      }
+      .doc-card__body {
+        padding: 20px 20px 18px;
+        flex: 1;
+        min-width: 0;
+        position: relative;
+      }
+      .doc-card__chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-bottom: 12px;
+      }
+      .doc-chip {
+        font-size: 0.625rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 5px 9px;
+        border-radius: 8px;
+        background: rgba(12, 13, 16, 0.06);
+        color: var(--dc-muted);
+      }
+      .doc-chip--tier-a {
+        background: rgba(26, 27, 31, 0.1);
+        color: var(--dc-tier-a);
+      }
+      .doc-chip--tier-b {
+        background: rgba(37, 99, 235, 0.1);
+        color: #1d4ed8;
+      }
+      .doc-chip--tier-c {
+        background: rgba(71, 85, 105, 0.12);
+        color: var(--dc-tier-c);
+      }
+      .doc-chip--notary {
+        background: rgba(180, 83, 9, 0.1);
+        color: #9a3412;
+      }
+      .doc-card__title {
+        font-size: 1.02rem;
+        font-weight: 600;
+        line-height: 1.42;
+        margin: 0 0 14px;
+        padding-right: 36px;
+        color: var(--dc-ink);
+        letter-spacing: -0.02em;
+      }
+      .doc-card__price {
+        font-size: 0.875rem;
+        color: var(--dc-muted);
+        margin: 0 0 16px;
+      }
+      .doc-card__price strong {
+        color: var(--dc-ink);
+        font-weight: 700;
+        font-size: 1.05rem;
+      }
+      .doc-card__hint {
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: var(--dc-muted);
+      }
+      .doc-card__cta-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 0.8125rem;
+        font-weight: 700;
+        color: #fff;
+        background: var(--dc-accent);
+        border-radius: 12px;
+        transition: background 0.2s, transform 0.2s;
+      }
+      .doc-card:hover .doc-card__cta-btn {
+        background: #000;
+      }
+      .doc-cat-empty {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 64px 24px;
+        color: var(--dc-muted);
+        font-size: 1rem;
+      }
+      .doc-cat-empty--err {
+        color: #b91c1c;
+      }
+      .doc-cat-empty--err a {
+        color: #1d4ed8;
+        font-weight: 600;
+      }
+      #catalogMainPagination {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        margin-top: 40px;
+        flex-wrap: wrap;
+      }
+      .doc-cat-pagebtn {
+        font-family: inherit;
+        font-size: 0.875rem;
+        font-weight: 700;
+        padding: 12px 24px;
+        border-radius: 12px;
+        border: 1px solid var(--dc-line);
+        background: #fff;
+        cursor: pointer;
+        color: var(--dc-ink);
+        box-shadow: 0 2px 6px rgba(12, 13, 16, 0.06);
+      }
+      .doc-cat-pagebtn:hover:not(:disabled) {
+        border-color: var(--dc-accent);
+        background: #fafaf9;
+      }
+      .doc-cat-pagebtn:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+      .doc-cat-pageinfo {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--dc-muted);
+      }
+    </style>
   </head>
   <body>
     <div class="page-loader" id="pageLoader">
@@ -248,8 +636,11 @@
             </h1>
             
             <!-- Pricing -->
-            <p style="font-size: 0.8125rem; font-weight: 400; color: var(--primary); margin-bottom: 20px; font-family: 'Poppins', system-ui, sans-serif;">
-              Rp 350.000/dokumen atau Rp 500.000/tahun untuk dokumen unlimited
+            <p id="catalogPricingLine" style="font-size: 0.8125rem; font-weight: 400; color: var(--primary); margin-bottom: 20px; font-family: 'Poppins', system-ui, sans-serif;">
+              Pembayaran sekali per dokumen — tanpa langganan. Tier C mulai Rp 149.000; Tier A (premium) dari Rp 350.000.
+            </p>
+            <p style="font-size: 0.8125rem; margin: -12px 0 20px; font-family: 'Poppins', system-ui, sans-serif;">
+              <a href="#katalog-dokumen" style="font-weight: 600; color: var(--primary); text-decoration: none; border-bottom: 1px solid rgba(15,15,16,0.2);">📚 Jelajahi 500+ dokumen — cari &amp; filter per tier</a>
             </p>
 
             <!-- Search Bar -->
@@ -278,7 +669,7 @@
                   </svg>
                 </div>
                 <p style="font-size: 0.75rem; color: var(--primary); line-height: 1.5; font-family: 'Poppins', system-ui, sans-serif; margin: 0;">
-                  Pilih dari 150+ template form yang disusun oleh ahli hukum
+                  Lebih dari 500 dokumen hukum dalam katalog — disaring per jenis &amp; tier
                 </p>
               </div>
               <div style="display: flex; align-items: flex-start; gap: 8px;">
@@ -347,28 +738,83 @@
         </div>
       </section>
 
-      <!-- All Templates Grid Section -->
-      <section style="padding: 100px 0; background: #fff; width: 100%;">
-        <div class="container" style="max-width: var(--max-width); margin: 0 auto; padding: 0 24px;">
-          <div style="max-width: 1200px; margin: 0 auto;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 48px; flex-wrap: wrap; gap: 16px;">
-              <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; color: var(--primary); line-height: 1.2; font-family: 'Poppins', system-ui, sans-serif;">
-                Semua Template
-            </h2>
-              
-              <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;">
-                <button class="category-tab is-active" data-category="Semua Dokumen" style="padding: 10px 20px; background: var(--primary); border: 1px solid var(--primary); border-radius: 8px; color: #fff; font-weight: 500; font-size: 0.875rem; cursor: pointer; transition: all 0.3s; font-family: 'Poppins', system-ui, sans-serif;">Semua</button>
-                <button class="category-tab" data-category="Kontrak Bisnis" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; transition: all 0.3s; font-family: 'Poppins', system-ui, sans-serif;">Kontrak Bisnis</button>
-                <button class="category-tab" data-category="Kepemilikan & Saham" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; transition: all 0.3s; font-family: 'Poppins', system-ui, sans-serif;">Kepemilikan & Saham</button>
-                <button class="category-tab" data-category="Ketenagakerjaan" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; transition: all 0.3s; font-family: 'Poppins', system-ui, sans-serif;">Ketenagakerjaan</button>
-                <button class="category-tab" data-category="Tata Kelola Korporasi" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; transition: all 0.3s; font-family: 'Poppins', system-ui, sans-serif;">Tata Kelola</button>
-                <button class="category-tab" data-category="Lainnya" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; transition: all 0.3s; font-family: 'Poppins', system-ui, sans-serif;">Lainnya</button>
-          </div>
+      <!-- Katalog dokumen -->
+      <section id="katalog-dokumen" class="doc-cat" aria-labelledby="katalog-dokumen-title">
+        <div class="doc-cat__inner">
+          <div class="doc-cat__panel">
+          <header class="doc-cat__panel-head">
+            <h2 id="katalog-dokumen-title" class="doc-cat__title">Katalog dokumen hukum</h2>
+            <p class="doc-cat__lead">
+              Pilih jenis dokumen, saring menurut paket layanan, lalu buka halaman produk untuk pratinjau, pengisian terpandu (Paket Panduan Penuh), atau pembelian langsung (Paket Bisnis &amp; Paket Dasar).
+            </p>
+          </header>
+          <div class="doc-cat__live" aria-label="Dokumen dengan pengisian online">
+            <div class="doc-cat-live-card">
+              <span class="doc-cat-live-card__label">Tersedia online</span>
+              <p class="doc-cat-live-card__t">Perjanjian Sewa Menyewa Tempat</p>
+              <a class="doc-cat-live-card__a" href="sewa-menyewa/landing.html">Isi dokumen sekarang</a>
+            </div>
+            <div class="doc-cat-live-card">
+              <span class="doc-cat-live-card__label">Tersedia online</span>
+              <p class="doc-cat-live-card__t">Perjanjian Kerja Sama Usaha (Joint Venture)</p>
+              <a class="doc-cat-live-card__a" href="kerja-sama/landing.html">Isi dokumen sekarang</a>
+            </div>
+            <div class="doc-cat-live-card doc-cat-live-card--outline">
+              <span class="doc-cat-live-card__label doc-cat-live-card__label--demo">Contoh lanjutan</span>
+              <p class="doc-cat-live-card__t">Alur pengisian bertingkat (Paket Bisnis)</p>
+              <a class="doc-cat-live-card__a" href="dynamic/index.html">Lihat contoh</a>
+            </div>
           </div>
 
-            <div class="template-grid" id="templateGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 32px;">
-            <!-- Template cards akan ditambahkan via JavaScript -->
+          <div class="doc-cat-tabs-wrap">
+            <span>Jenis dokumen</span>
+            <div class="doc-cat-tabs" role="tablist">
+              <button type="button" class="doc-cat-tab is-active" role="tab" aria-selected="true" data-bucket="all">Semua</button>
+              <button type="button" class="doc-cat-tab" role="tab" aria-selected="false" data-bucket="perjanjian_kontrak">Perjanjian &amp; kontrak</button>
+              <button type="button" class="doc-cat-tab" role="tab" aria-selected="false" data-bucket="kuasa">Surat kuasa</button>
+              <button type="button" class="doc-cat-tab" role="tab" aria-selected="false" data-bucket="pernyataan">Surat pernyataan</button>
+              <button type="button" class="doc-cat-tab" role="tab" aria-selected="false" data-bucket="berita">Berita acara</button>
+              <button type="button" class="doc-cat-tab" role="tab" aria-selected="false" data-bucket="akta">Akta &amp; notaris</button>
+              <button type="button" class="doc-cat-tab" role="tab" aria-selected="false" data-bucket="lainnya">Lainnya</button>
             </div>
+          </div>
+
+          <div class="doc-cat-toolbar" aria-label="Saring katalog">
+            <div class="doc-cat-field doc-cat-field--search">
+              <label for="catalogMainSearch">Cari judul</label>
+              <input type="search" id="catalogMainSearch" placeholder="Contoh: sewa, kuasa, RUPS, jual beli…" autocomplete="off" />
+            </div>
+            <div class="doc-cat-toolbar-row2">
+              <div class="doc-cat-field">
+                <label for="catalogTierSelect">Paket layanan</label>
+                <select id="catalogTierSelect">
+                  <option value="">Semua paket</option>
+                  <option value="A">Paket Panduan Penuh</option>
+                  <option value="B">Paket Bisnis</option>
+                  <option value="C">Paket Dasar</option>
+                </select>
+              </div>
+              <div class="doc-cat-field">
+                <label for="catalogSort">Urutkan</label>
+                <select id="catalogSort">
+                  <option value="title">Judul A–Z</option>
+                  <option value="tier">Paket panduan dulu</option>
+                </select>
+              </div>
+              <div class="doc-cat-field">
+                <label for="catalogPageSize">Per halaman</label>
+                <select id="catalogPageSize">
+                  <option value="12">12</option>
+                  <option value="24" selected>24</option>
+                  <option value="48">48</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <p id="catalogMainMeta"></p>
+          <div id="catalogMainGrid" class="doc-cat-grid" aria-live="polite"></div>
+          <div id="catalogMainPagination"></div>
           </div>
         </div>
       </section>
@@ -396,8 +842,7 @@
             <h4>Legal Documents</h4>
             <ul>
               <li><a href="https://sepakatee.github.io/website/tools/templates/index.html">Templates</a></li>
-              <li><a href="https://sepakatee.github.io/website/tools/templates/index.html#Kontrak Bisnis">Kontrak Bisnis</a></li>
-              <li><a href="https://sepakatee.github.io/website/tools/templates/index.html#Ketenagakerjaan">Ketenagakerjaan</a></li>
+              <li><a href="https://sepakatee.github.io/website/tools/templates/index.html#katalog-dokumen">Katalog dokumen</a></li>
             </ul>
           </div>
           <div class="footer__column" style="display: none;">
@@ -422,6 +867,10 @@
         </div>
       </div>
     </footer>
+    <script src="data/catalog-inventory.bundle.js" defer></script>
+    <script src="_shared/pricing.js" defer></script>
+    <script src="_shared/paket-commercial.js" defer></script>
+    <script src="template-catalog-main.js" defer></script>
     <script src="../script.js" defer></script>
     <script src="products.js" defer></script>
     
@@ -494,18 +943,6 @@
             box-shadow: 0 4px 12px rgba(15, 15, 16, 0.15);
         }
         
-        /* Category Tabs Active State */
-        .category-tab.is-active {
-            background: var(--primary) !important;
-            color: #fff !important;
-            border-color: var(--primary) !important;
-        }
-        
-        .category-tab:not(.is-active):hover {
-            background: rgba(15, 15, 16, 0.05);
-            border-color: rgba(15, 15, 16, 0.15);
-        }
-        
         /* Hero Section Split Layout Responsive */
         .hero-split-container {
             display: grid;
@@ -541,13 +978,8 @@
                 padding: 48px 24px !important;
             }
             
-            .template-grid {
+            .doc-cat-grid {
                 grid-template-columns: 1fr !important;
-            }
-            
-            .category-tab {
-                font-size: 0.8125rem !important;
-                padding: 8px 16px !important;
             }
         }
         
@@ -557,6 +989,19 @@
             }
         }
     </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var P = window.SepakateePricing;
+        var T = P && P.TIER_PRICE_IDR;
+        var el = document.getElementById('catalogPricingLine');
+        if (el && T && P.formatIdr) {
+          el.textContent = 'Pembayaran sekali per dokumen — tanpa langganan. Tier C mulai ' +
+            P.formatIdr(T.C) + '; Tier B ' +
+            P.formatIdr(T.B) + '; Tier A dari ' +
+            P.formatIdr(T.A) + '.';
+        }
+      });
+    </script>
   </body>
 </html>
 

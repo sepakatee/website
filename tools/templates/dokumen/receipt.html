@@ -357,6 +357,52 @@
             .join('/');
         }
 
+        /** Beberapa server lokal / monorepo punya path berbeda; coba urutan URL sampai satu berhasil. */
+        function collectDocxFetchUrls(relEncoded, customBase) {
+          var urls = [];
+          var custom = String(customBase || '').trim().replace(/\/$/, '');
+          if (custom) {
+            urls.push(custom + '/' + relEncoded);
+            return urls;
+          }
+          var here = window.location.href;
+          var origin = window.location.origin || '';
+          var host = (window.location.hostname || '').toLowerCase();
+          var isLocal =
+            host === '127.0.0.1' ||
+            host === 'localhost' ||
+            host === '0.0.0.0' ||
+            host === '[::1]' ||
+            host === '';
+
+          function push(u) {
+            if (u && urls.indexOf(u) === -1) urls.push(u);
+          }
+
+          push(new URL('../../../' + relEncoded, here).href);
+          if (isLocal) {
+            push(origin + '/website/' + relEncoded);
+          }
+          return urls;
+        }
+
+        async function fetchDocxFirstOk(urls) {
+          var lastStatus = '';
+          var i;
+          for (i = 0; i < urls.length; i++) {
+            var u = urls[i];
+            try {
+              var res = await fetch(u, { method: 'GET', cache: 'no-store', credentials: 'same-origin' });
+              if (res.ok) return { res: res, url: u };
+              lastStatus = res.status + ' ' + u;
+            } catch (err) {
+              lastStatus = (err && err.message) || String(err);
+              console.warn('Unduhan .docx gagal coba URL:', u, err);
+            }
+          }
+          throw new Error(lastStatus || 'no_urls');
+        }
+
         function titleCaseWords(s) {
           return String(s || '')
             .trim()
@@ -479,6 +525,7 @@
           downloadBtn.disabled = true;
           downloadBtn.innerHTML = 'Menyiapkan dokumen...';
 
+          var tryUrls = [];
           try {
             var fileName =
               String(item.source_rel || '').split('/').pop() ||
@@ -489,15 +536,11 @@
               custom =
                 window.__SEP_DOCX_BASE_URL__ && String(window.__SEP_DOCX_BASE_URL__).trim();
             } catch (e0) {}
-            custom = custom.replace(/\/$/, '');
-            var href = custom
-              ? custom + '/' + rel
-              : new URL('../../../' + rel, window.location.href).href;
 
-            var res = await fetch(href, { method: 'GET', cache: 'no-store', credentials: 'same-origin' });
-            if (!res.ok) {
-              throw new Error('HTTP ' + res.status);
-            }
+            tryUrls = collectDocxFetchUrls(rel, custom);
+            var got = await fetchDocxFirstOk(tryUrls);
+            var res = got.res;
+
             var blob = await res.blob();
             var objUrl = URL.createObjectURL(blob);
             var a = document.createElement('a');
@@ -508,9 +551,15 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(objUrl);
           } catch (e) {
-            console.error(e);
+            console.error('Unduhan .docx gagal:', e);
+            if (tryUrls.length) console.error('URL yang sudah dicoba:', tryUrls);
+            console.info(
+              'Tip lokal: jalankan server dari folder website, lalu buka receipt lewat URL seperti http://127.0.0.1:8080/tools/templates/dokumen/receipt.html — jangan set document root ke tools/templates saja. Di GitHub Pages folder semua template biasanya tidak ikut; set window.__SEP_DOCX_BASE_URL__ ke URL publik tempat .docx di-host.'
+            );
             alert(
-              'File .docx tidak ditemukan di server (biasanya 404). Folder "semua template" beserta file .docx belum di-deploy ke GitHub / hosting. Setelah di-push, unduhan akan jalan. Alternatif: set window.__SEP_DOCX_BASE_URL__ ke basis URL tempat file di-host. Simpan ID pesanan dan hubungi kami jika butuh bantuan.'
+              'File .docx tidak ditemukan (404 atau path salah). Cek konsol (F12) untuk URL yang dicoba.\n\n' +
+                'Lokal: di terminal, `cd website` lalu `python3 -m http.server 8080`, lalu buka alamat yang memuat /tools/templates/dokumen/receipt.html.\n\n' +
+                'Produksi: unggah folder semua template ke hosting/CDN atau set window.__SEP_DOCX_BASE_URL__ ke basis URL-nya. Simpan ID pesanan jika perlu bantuan.'
             );
           }
 

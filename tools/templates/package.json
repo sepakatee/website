@@ -1,0 +1,12 @@
+{
+  "name": "sepakatee-templates-tooling",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "catalog:bundle": "node scripts/build-catalog-bundle.mjs",
+    "seo:draft-batch": "node scripts/extract-seo-drafts-from-docx.mjs"
+  },
+  "devDependencies": {
+    "mammoth": "^1.9.0"
+  }
+}

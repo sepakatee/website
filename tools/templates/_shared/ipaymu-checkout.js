@@ -25,9 +25,11 @@
     'sewa-menyewa': 'sewa-menyewa',
     'kerja-sama': 'kerja-sama',
     'sample-tier-b': 'dynamic',
-    // Catalog B/C: dedicated receipt + download for the purchased catalog item.
     'catalog-paket-bisnis': 'dokumen',
     'catalog-paket-dasar': 'dokumen',
+    'catalog-tier-a': 'dokumen',
+    'catalog-tier-b': 'dokumen',
+    'catalog-tier-c': 'dokumen',
   };
 
   function cleanForIpaymu(str) {
@@ -57,7 +59,8 @@
       }
     } catch (e2) {}
 
-    return 'https://www.sepakatee.com';
+    // file:// or missing origin: receipt must be absolute https (apex matches live site)
+    return 'https://sepakatee.com';
   }
 
   function generateReferenceId() {

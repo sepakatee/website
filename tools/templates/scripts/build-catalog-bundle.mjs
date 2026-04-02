@@ -10,14 +10,25 @@ import { fileURLToPath, pathToFileURL } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const __filename = fileURLToPath(import.meta.url);
 const JSON_PATH = path.join(__dirname, '../data/catalog-inventory.json');
+const SEO_PATH = path.join(__dirname, '../data/catalog-seo-overrides.json');
 const OUT_PATH = path.join(__dirname, '../data/catalog-inventory.bundle.js');
 
 export function writeCatalogBundle() {
   const raw = fs.readFileSync(JSON_PATH, 'utf8');
   const data = JSON.parse(raw);
+  let seo = { version: 1, by_id: {} };
+  if (fs.existsSync(SEO_PATH)) {
+    seo = JSON.parse(fs.readFileSync(SEO_PATH, 'utf8'));
+  }
   const banner =
-    '/* Auto-generated from data/catalog-inventory.json — run scripts/build-catalog-bundle.mjs after ingest. */\n';
-  const body = 'window.__SEPAKATEE_CATALOG__=' + JSON.stringify(data) + ';\n';
+    '/* Auto-generated: catalog-inventory.json + catalog-seo-overrides.json — run scripts/build-catalog-bundle.mjs after ingest or SEO edits. */\n';
+  const body =
+    'window.__SEPAKATEE_CATALOG__=' +
+    JSON.stringify(data) +
+    ';\n' +
+    'window.__SEPAKATEE_CATALOG_SEO__=' +
+    JSON.stringify(seo) +
+    ';\n';
   fs.writeFileSync(OUT_PATH, banner + body, 'utf8');
   console.log('Wrote', OUT_PATH);
 }

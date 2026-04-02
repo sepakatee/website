@@ -6,9 +6,10 @@
 (function (global) {
   'use strict';
 
+  /** Tier letters for katalog semua-template (A = paling kompleks). Builder sewa/JV tetap pakai harga produk sendiri. */
   var TIER_PRICE_IDR = {
-    A: 350000,
-    B: 249000,
+    A: 250000,
+    B: 199000,
     C: 149000,
   };
 
@@ -25,18 +26,33 @@
     },
     'sample-tier-b': {
       tier: 'B',
-      priceIdr: 249000,
+      priceIdr: 199000,
       productName: 'Contoh dokumen Tier B (dynamic template demo)',
     },
     'catalog-paket-bisnis': {
       tier: 'B',
-      priceIdr: 249000,
+      priceIdr: 199000,
       productName: 'Paket Bisnis — dokumen hukum Sepakatee',
     },
     'catalog-paket-dasar': {
       tier: 'C',
       priceIdr: 149000,
       productName: 'Paket Dasar — dokumen hukum Sepakatee',
+    },
+    'catalog-tier-a': {
+      tier: 'A',
+      priceIdr: 250000,
+      productName: 'Katalog dokumen Tier A — Sepakatee',
+    },
+    'catalog-tier-b': {
+      tier: 'B',
+      priceIdr: 199000,
+      productName: 'Katalog dokumen Tier B — Sepakatee',
+    },
+    'catalog-tier-c': {
+      tier: 'C',
+      priceIdr: 149000,
+      productName: 'Katalog dokumen Tier C — Sepakatee',
     },
   };
 

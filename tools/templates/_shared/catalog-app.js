@@ -191,9 +191,11 @@
         var priceStr = fmt ? fmt(price) : 'Rp —';
         var notary = it.flags && it.flags.requires_notary;
         var chip =
-          Pak && Pak.meta
-            ? Pak.meta(it.provisional_tier).chip
-            : 'Paket';
+          Pak && Pak.metaForCatalog
+            ? Pak.metaForCatalog(it.provisional_tier).chip
+            : Pak && Pak.meta
+              ? Pak.meta(it.provisional_tier).chip
+              : 'Paket';
         var href = 'dokumen/index.html?id=' + encodeURIComponent(it.id);
         return (
           '<a class="catalog-card" href="' +

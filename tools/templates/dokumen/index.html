@@ -7,450 +7,565 @@
     <link rel="icon" type="image/png" href="https://sepakatee.github.io/website/asset/Blue_and_Black_Minimalist_Brand_Logo-removebg-preview.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../../../style.css" />
     <meta name="description" content="Detail dokumen hukum Sepakatee — pratinjau, paket, dan pemesanan." />
     <style>
-      body {
-        margin: 0;
-        background: #f4f3f0;
-        font-family: 'Poppins', system-ui, sans-serif;
+      .pp-error-landing {
+        padding: 72px 24px 96px;
+        text-align: center;
+        max-width: 520px;
+        margin: 0 auto;
+      }
+      .pp-error-landing .product-detail-title {
+        margin-bottom: 12px;
+      }
+      .pp-error-landing p {
+        color: rgba(15, 15, 16, 0.62);
+        line-height: 1.55;
+      }
+      .pp-error-landing a {
+        font-weight: 600;
         color: var(--primary, #0f0f10);
       }
-      .pp-file-hint {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 10px 24px;
+      .pp-beli-err {
+        display: none;
         font-size: 0.8125rem;
-        line-height: 1.5;
-        color: rgba(15, 15, 16, 0.8);
-        background: #fffbeb;
-        border-bottom: 1px solid rgba(234, 179, 8, 0.4);
+        color: #b91c1c;
+        margin: 12px 0 0;
+        line-height: 1.45;
+        text-align: center;
       }
-      .pp-file-hint code {
-        font-size: 0.75rem;
-        word-break: break-all;
-      }
-      .pp-top {
+      .top-bar {
+        top: 0 !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
         background: #fff;
         border-bottom: 1px solid rgba(15, 15, 16, 0.08);
-        padding: 14px 24px;
       }
-      .pp-top__inner {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
+      .top-bar__container {
+        max-width: 100% !important;
+        border-radius: 0 !important;
+        background: #fff !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 16px 24px !important;
+        margin: 0 !important;
       }
-      .pp-top a.logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-        color: var(--primary);
-        font-weight: 600;
+      .top-bar.is-scrolled .top-bar__container {
+        border-radius: 0 !important;
+        background: #fff !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+        border-bottom: 1px solid rgba(15, 15, 16, 0.08) !important;
+        padding: 12px 24px !important;
       }
-      .pp-top a.logo img {
-        height: 32px;
-      }
-      .pp-back {
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: var(--primary);
-        text-decoration: none;
-      }
-      .pp-back:hover {
-        text-decoration: underline;
-      }
-      .pp-wrap {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 32px 24px 80px;
-      }
-      .pp-hero {
+      body {
         background: #fff;
-        border-radius: 16px;
-        padding: 28px 32px;
-        margin-bottom: 24px;
-        border: 1px solid rgba(15, 15, 16, 0.08);
-        box-shadow: 0 2px 12px rgba(15, 15, 16, 0.04);
       }
-      .pp-breadcrumb {
-        font-size: 0.75rem;
-        color: rgba(15, 15, 16, 0.5);
-        margin-bottom: 16px;
+      .product-detail-hero {
+        padding: 40px 0 40px !important;
       }
-      .pp-breadcrumb a {
-        color: rgba(15, 15, 16, 0.55);
-        text-decoration: none;
+      .product-detail-hero .container {
+        margin-top: 0;
       }
-      .pp-breadcrumb a:hover {
-        color: var(--primary);
+      .document-preview {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
       }
-      .pp-breadcrumb span {
-        margin: 0 6px;
-        color: rgba(15, 15, 16, 0.35);
+      .product-detail-hero + .document-preview {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
       }
-      .pp-title {
-        font-size: clamp(1.35rem, 3vw, 1.75rem);
-        font-weight: 700;
-        margin: 0 0 10px;
-        line-height: 1.25;
-        letter-spacing: -0.02em;
+      .seo-article {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
       }
-      .pp-sub {
-        font-size: 1rem;
-        color: rgba(15, 15, 16, 0.65);
-        line-height: 1.55;
-        margin: 0 0 16px;
-        max-width: 48rem;
-      }
-      .pp-meta {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 12px;
-      }
-      .pp-pill {
-        font-size: 0.75rem;
-        font-weight: 600;
-        padding: 6px 12px;
-        border-radius: 999px;
-        background: rgba(15, 15, 16, 0.06);
-        color: rgba(15, 15, 16, 0.75);
-      }
-      .pp-pill--accent {
-        background: rgba(15, 23, 42, 0.08);
-        color: #0f172a;
-      }
-      .pp-price-inline {
-        font-size: 1.125rem;
-        font-weight: 700;
-      }
-      .pp-layout {
-        display: grid;
-        grid-template-columns: 1fr 360px;
-        gap: 24px;
-        align-items: start;
-      }
-      @media (max-width: 960px) {
-        .pp-layout {
-          grid-template-columns: 1fr;
-        }
-      }
-      .pp-main {
-        background: #fff;
-        border-radius: 16px;
-        border: 1px solid rgba(15, 15, 16, 0.08);
-        overflow: hidden;
-        box-shadow: 0 2px 12px rgba(15, 15, 16, 0.04);
-      }
-      .pp-main h2 {
-        font-size: 0.8125rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        color: rgba(15, 15, 16, 0.5);
-        margin: 0;
-        padding: 18px 24px;
-        border-bottom: 1px solid rgba(15, 15, 16, 0.06);
-        background: #fafaf9;
-      }
-      .pp-preview-body {
-        padding: 24px;
-        max-height: 520px;
-        overflow-y: auto;
-        font-size: 0.9375rem;
-        line-height: 1.65;
-        color: rgba(15, 15, 16, 0.85);
-      }
-      .pp-preview-body .hl {
-        background: #fef3c7;
-        padding: 0 2px;
-        border-radius: 2px;
-      }
-      .pp-summary {
-        padding: 24px;
-        font-size: 0.9375rem;
-        line-height: 1.6;
-        color: rgba(15, 15, 16, 0.75);
-      }
-      .pp-summary ul {
-        margin: 12px 0 0;
-        padding-left: 1.2rem;
-      }
-      .pp-summary li {
-        margin-bottom: 8px;
-      }
-      .pp-side {
-        background: #fff;
-        border-radius: 16px;
-        border: 1px solid rgba(15, 15, 16, 0.08);
-        padding: 24px;
-        position: sticky;
-        top: 20px;
-        box-shadow: 0 4px 24px rgba(15, 15, 16, 0.06);
-      }
-      .pp-badge-row {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: rgba(15, 15, 16, 0.55);
-        border: 1px solid rgba(15, 15, 16, 0.12);
-        padding: 6px 10px;
-        border-radius: 999px;
-        margin-bottom: 16px;
-      }
-      .pp-side h3 {
-        font-size: 1.125rem;
-        font-weight: 700;
-        margin: 0 0 8px;
-      }
-      .pp-side-price {
-        font-size: 1.75rem;
-        font-weight: 700;
-        margin: 0 0 4px;
-      }
-      .pp-side-note {
-        font-size: 0.8125rem;
-        color: rgba(15, 15, 16, 0.55);
-        margin: 0 0 20px;
-      }
-      .pp-features {
-        list-style: none;
-        margin: 0 0 24px;
-        padding: 0;
-        border-top: 1px solid rgba(15, 15, 16, 0.08);
-        padding-top: 20px;
-      }
-      .pp-features li {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-        font-size: 0.875rem;
-        margin-bottom: 12px;
-        color: rgba(15, 15, 16, 0.75);
-      }
-      .pp-features li svg {
-        flex-shrink: 0;
-        margin-top: 2px;
-        color: rgba(15, 15, 16, 0.45);
-      }
-      .pp-btn {
-        display: block;
-        width: 100%;
-        text-align: center;
-        padding: 14px 20px;
-        font-size: 0.9375rem;
-        font-weight: 700;
-        font-family: inherit;
-        border: none;
-        border-radius: 999px;
-        cursor: pointer;
-        text-decoration: none;
-        box-sizing: border-box;
-      }
-      .pp-btn--primary {
-        background: var(--primary, #0f0f10);
-        color: #fff;
-      }
-      .pp-btn--primary:hover {
-        opacity: 0.92;
-      }
-      .pp-btn--secondary {
-        background: transparent;
-        color: var(--primary);
-        border: 2px solid var(--primary);
-        margin-top: 10px;
-      }
-      .pp-foot {
-        font-size: 0.75rem;
-        color: rgba(15, 15, 16, 0.45);
-        text-align: center;
-        margin-top: 16px;
-        line-height: 1.45;
-      }
-      .pp-error {
-        background: #fff;
-        border-radius: 16px;
-        padding: 48px 32px;
-        text-align: center;
-        border: 1px solid rgba(15, 15, 16, 0.08);
-      }
-      .pp-error p {
-        color: rgba(15, 15, 16, 0.6);
-      }
-      .pp-modal-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(15, 15, 16, 0.45);
-        z-index: 200;
-        align-items: center;
-        justify-content: center;
-        padding: 24px;
-      }
-      .pp-modal-overlay.is-open {
-        display: flex;
-      }
-      .pp-modal {
-        background: #fff;
-        border-radius: 16px;
-        padding: 28px;
-        max-width: 400px;
-        width: 100%;
-        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
-      }
-      .pp-modal h4 {
-        margin: 0 0 8px;
-        font-size: 1.125rem;
-      }
-      .pp-modal p {
-        font-size: 0.875rem;
-        color: rgba(15, 15, 16, 0.6);
-        margin: 0 0 20px;
-      }
-      .pp-field {
-        margin-bottom: 14px;
-      }
-      .pp-field label {
-        display: block;
-        font-size: 0.75rem;
-        font-weight: 600;
-        margin-bottom: 6px;
-        color: rgba(15, 15, 16, 0.65);
-      }
-      .pp-field input {
-        width: 100%;
-        padding: 11px 14px;
-        border: 1px solid rgba(15, 15, 16, 0.15);
-        border-radius: 10px;
-        font-family: inherit;
-        font-size: 0.875rem;
-        box-sizing: border-box;
-      }
-      .pp-modal-actions {
-        display: flex;
-        gap: 10px;
-        margin-top: 20px;
-      }
-      .pp-modal-actions .pp-btn {
-        flex: 1;
-        margin: 0;
-      }
-      .pp-modal-actions .pp-btn--ghost {
-        background: #f3f4f6;
-        color: var(--primary);
-      }
-      #ppRoot[data-mode='beli'] .pp-only-panduan {
-        display: none;
-      }
-      #ppRoot[data-mode='panduan'] .pp-only-beli {
-        display: none;
+      .product-description + .seo-article {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
       }
     </style>
   </head>
   <body>
-    <div id="ppFileDevHint" class="pp-file-hint" hidden>
-      Halaman dibuka sebagai <code>file://</code>. Setelah bayar, iPaymu hanya bisa mengarahkan ke alamat <strong>http(s)</strong>. Jalankan folder <code>website/</code> dengan static server, lalu di konsol peramban:
-      <code>localStorage.setItem('sep_site_base_url','http://127.0.0.1:8080'); location.reload()</code>
-      (sesuaikan port). Atau set <code>window.__SEP_SITE_BASE_URL__</code> sebelum skrip checkout.
-    </div>
-    <script>
-      if (typeof location !== 'undefined' && location.protocol === 'file:') {
-        var _h = document.getElementById('ppFileDevHint');
-        if (_h) _h.hidden = false;
-      }
-    </script>
-    <div class="pp-top">
-      <div class="pp-top__inner">
-        <a class="logo" href="../../../index.html">
-          <img src="https://sepakatee.github.io/website/asset/Blue_and_Black_Minimalist_Brand_Logo-removebg-preview.png" alt="" />
-          <span>Sepakatee</span>
-        </a>
-        <a class="pp-back" href="../index.html#katalog-dokumen">← Kembali ke katalog</a>
+    <div class="page-loader" id="pageLoader">
+      <div class="page-loader__content">
+        <div class="page-loader__document">
+          <svg class="page-loader__doc-icon" width="64" height="64" viewBox="0 0 64 64" fill="none">
+            <rect x="12" y="8" width="40" height="48" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+            <path d="M20 20h24M20 28h24M20 36h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <path d="M20 44h24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4" />
+          </svg>
+          <div class="page-loader__checkmark">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
+    <header class="top-bar">
+      <div class="top-bar__container">
+        <a href="../../../index.html" class="logo">
+          <img src="https://sepakatee.github.io/website/asset/Blue_and_Black_Minimalist_Brand_Logo-removebg-preview.png" alt="Sepakatee" class="logo__mark" />
+          <span>Sepakatee</span>
+        </a>
+        <nav class="main-nav">
+          <div class="nav-dropdown">
+            <a href="#" class="nav-link nav-link--dropdown">
+              Dokumen Hukum
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-arrow">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../index.html#Kontrak Bisnis" class="dropdown-item">
+                <div class="dropdown-item-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                  </svg>
+                </div>
+                <div class="dropdown-item-content">
+                  <div class="dropdown-item-title">Bisnis</div>
+                  <div class="dropdown-item-desc">Kontrak dan formulir untuk memulai, mengelola, dan mengembangkan bisnis Anda.</div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-item-arrow">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+              <a href="../index.html#Perjanjian Sewa" class="dropdown-item">
+                <div class="dropdown-item-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                  </svg>
+                </div>
+                <div class="dropdown-item-content">
+                  <div class="dropdown-item-title">Properti</div>
+                  <div class="dropdown-item-desc">Sederhanakan sewa properti, penjualan, dan perjanjian penyewa.</div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-item-arrow">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+              <a href="../index.html" class="dropdown-item">
+                <div class="dropdown-item-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                </div>
+                <div class="dropdown-item-content">
+                  <div class="dropdown-item-title">Perencanaan Estate</div>
+                  <div class="dropdown-item-desc">Dokumen untuk melindungi aset Anda dan merencanakan masa depan.</div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-item-arrow">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+              <a href="../index.html" class="dropdown-item">
+                <div class="dropdown-item-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                </div>
+                <div class="dropdown-item-content">
+                  <div class="dropdown-item-title">Personal & Keluarga</div>
+                  <div class="dropdown-item-desc">Dokumen sehari-hari untuk mengelola urusan personal dan keuangan.</div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-item-arrow">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../index.html" class="dropdown-item dropdown-item--all">
+                <span>Semua Dokumen</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
 
-    <div class="pp-wrap">
-      <div id="ppError" class="pp-error" hidden>
-        <h1 class="pp-title" id="ppErrorTitle">Dokumen tidak ditemukan</h1>
+          <div class="nav-dropdown" style="display: none;">
+            <a href="#" class="nav-link nav-link--dropdown">
+              Alat Hukum
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-arrow">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../sign/index.html" class="dropdown-item">
+                <div class="dropdown-item-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="12" y1="18" x2="12" y2="12" />
+                    <line x1="9" y1="15" x2="15" y2="15" />
+                  </svg>
+                </div>
+                <div class="dropdown-item-content">
+                  <div class="dropdown-item-title">E-Signature</div>
+                  <div class="dropdown-item-desc">Tandatangani dokumen secara digital dengan legalitas yang sama.</div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-item-arrow">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+              <a href="../compare/index.html" class="dropdown-item">
+                <div class="dropdown-item-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.35-4.35" />
+                  </svg>
+                </div>
+                <div class="dropdown-item-content">
+                  <div class="dropdown-item-title">Document Compare</div>
+                  <div class="dropdown-item-desc">Bandingkan versi dokumen dan temukan perbedaan dengan mudah.</div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-item-arrow">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="nav-dropdown">
+            <a href="#" class="nav-link nav-link--dropdown">
+              Bantuan Hukum
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-arrow">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../../../legal-aid/pembentukan-perusahaan.html" class="dropdown-item">
+                <div class="dropdown-item-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    <line x1="9" y1="3" x2="9" y2="21" />
+                    <line x1="3" y1="9" x2="21" y2="9" />
+                  </svg>
+                </div>
+                <div class="dropdown-item-content">
+                  <div class="dropdown-item-title">Pembentukan Perusahaan</div>
+                  <div class="dropdown-item-desc">Pendirian PT, CV, atau bentuk badan usaha lainnya dengan pendampingan lawyer.</div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-item-arrow">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+              <a href="../../../legal-aid/pendaftaran-merek.html" class="dropdown-item">
+                <div class="dropdown-item-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                  </svg>
+                </div>
+                <div class="dropdown-item-content">
+                  <div class="dropdown-item-title">Pendaftaran Merek</div>
+                  <div class="dropdown-item-desc">Layanan pendaftaran merek dagang dengan pendampingan lawyer.</div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-item-arrow">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+              <a href="../../../legal-aid/konsultasi-dokumen.html" class="dropdown-item">
+                <div class="dropdown-item-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                  </svg>
+                </div>
+                <div class="dropdown-item-content">
+                  <div class="dropdown-item-title">Konsultasi Dokumen</div>
+                  <div class="dropdown-item-desc">Review dan konsultasi dokumen hukum dengan lawyer untuk kontrak custom.</div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-item-arrow">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../../../legal-aid/index.html" class="dropdown-item dropdown-item--all">
+                <span>Lihat Semua Bantuan Hukum</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <a href="../index.html" class="nav-link" style="display: flex; align-items: center; padding: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+          </a>
+
+          <div class="nav-dropdown">
+            <a href="#" class="nav-link nav-link--dropdown">
+              Support
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-arrow">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </a>
+            <div class="dropdown-menu">
+              <a href="mailto:sepakatee@outlook.com" class="dropdown-item">
+                <div class="dropdown-item-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg>
+                </div>
+                <div class="dropdown-item-content">
+                  <div class="dropdown-item-title">Hubungi Kami</div>
+                  <div class="dropdown-item-desc">Email tim support kami</div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-item-arrow">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+              <a href="../../../legal-aid/konsultasi-dokumen.html" class="dropdown-item">
+                <div class="dropdown-item-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                </div>
+                <div class="dropdown-item-content">
+                  <div class="dropdown-item-title">FAQ</div>
+                  <div class="dropdown-item-desc">Pertanyaan yang sering diajukan</div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-item-arrow">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div id="ppError" class="pp-error-landing" hidden>
+        <h1 class="product-detail-title" id="ppErrorTitle">Dokumen tidak ditemukan</h1>
         <p id="ppErrorLead">Periksa tautan atau kembali ke katalog untuk memilih dokumen lain.</p>
         <p><a href="../index.html#katalog-dokumen">Buka katalog</a></p>
       </div>
 
-      <div id="ppRoot" data-mode="panduan" hidden>
-        <div class="pp-hero">
-          <nav class="pp-breadcrumb" id="ppBreadcrumb"></nav>
-          <h1 class="pp-title" id="ppTitle"></h1>
-          <p class="pp-sub" id="ppSub"></p>
-          <div class="pp-meta">
-            <span class="pp-pill pp-pill--accent" id="ppPaketPill"></span>
-            <span class="pp-pill" id="ppFamilyPill"></span>
-            <span class="pp-price-inline" id="ppPriceHero"></span>
+      <div id="ppRoot" data-mode="beli" hidden>
+        <section class="product-detail-hero">
+          <div class="container">
+            <nav class="breadcrumb" id="ppBreadcrumb"></nav>
+            <div class="product-detail-header">
+              <div class="product-detail-icon">
+                <span class="product-emoji" id="ppEmoji">📄</span>
+              </div>
+              <div class="product-detail-info">
+                <h1 class="product-detail-title" id="ppTitle"></h1>
+                <p class="product-detail-subtitle" id="ppSub"></p>
+                <div class="product-detail-meta">
+                  <span class="product-category" id="ppCategory"></span>
+                  <span class="product-price" data-price-display></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="document-preview">
+          <div class="container">
+            <div class="preview-layout">
+              <div class="preview-document">
+                <div class="document-header">
+                  <h2>Preview Dokumen</h2>
+                </div>
+                <div class="document-content">
+                  <div class="document-page" id="ppDocumentPreview"></div>
+                </div>
+              </div>
+              <div class="preview-sidebar">
+                <div class="purchase-card">
+                  <div class="purchase-header">
+                    <span class="document-badge">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 11l3 3L22 4" />
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                      </svg>
+                      Dibuat oleh Ahli Hukum
+                    </span>
+                    <h3 id="ppPurchaseHeading">Beli dokumen</h3>
+                    <div class="purchase-price">
+                      <span class="price-amount" data-price-display></span>
+                      <span class="price-note">Satu kali pembayaran</span>
+                    </div>
+                  </div>
+                  <div class="purchase-features">
+                    <div class="purchase-feature">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span>Format Word (.docx)</span>
+                    </div>
+                    <div class="purchase-feature">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span>Dapat diedit sepenuhnya</span>
+                    </div>
+                    <div class="purchase-feature">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span>Unduh instan setelah pembayaran</span>
+                    </div>
+                    <div class="purchase-feature">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span>Panduan penggunaan</span>
+                    </div>
+                  </div>
+                  <button type="button" id="ppCtaBeli" class="btn btn--primary btn--full">Beli sekarang</button>
+                  <p id="ppPurchaseNote" class="purchase-note">Setelah konfirmasi, dokumen akan dikirim langsung.</p>
+                  <p id="ppBeliErr" class="pp-beli-err" role="alert"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="product-features">
+          <div class="container">
+            <div class="features-grid">
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 11l3 3L22 4" />
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                  </svg>
+                </div>
+                <h3>Dibuat oleh Ahli Hukum</h3>
+                <p>Template disusun dan ditinjau oleh tim hukum berpengalaman</p>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                  </svg>
+                </div>
+                <h3>Format Lengkap</h3>
+                <p>Mencakup struktur pasal dan klausul penting sesuai kebiasaan dokumen Indonesia</p>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                </div>
+                <h3>Siap Pakai</h3>
+                <p>Dapat diunduh dan digunakan langsung setelah pembayaran</p>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="8.5" cy="7" r="4" />
+                    <path d="M20 8v6M23 11h-6" />
+                  </svg>
+                </div>
+                <h3>Dapat Diedit</h3>
+                <p>Format Word (.docx) yang mudah disesuaikan dengan kebutuhan</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="product-description">
+          <div class="container">
+            <div class="description-content">
+              <div class="description-main" id="ppDescriptionMain"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="seo-article">
+          <div class="container">
+            <article class="article-content" id="ppSeoArticle"></article>
+          </div>
+        </section>
+
+        <section class="product-faq">
+          <div class="container">
+            <h2>Pertanyaan Umum</h2>
+            <div class="faq-list" id="ppFaqList"></div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer" style="margin-top: 0;">
+      <div class="footer__container">
+        <div class="footer__content">
+          <div class="footer__column footer__column--brand">
+            <h3>Sepakatee</h3>
+            <p class="footer__tagline">Hukum yang jelas, terstruktur, dan dapat diterapkan untuk bisnis nyata.</p>
+          </div>
+          <div class="footer__column">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="https://sepakatee.github.io/website/terms.html">Syarat & Ketentuan</a></li>
+              <li><a href="https://sepakatee.github.io/website/privacy-policy.html">Kebijakan Privasi</a></li>
+              <li><a href="https://sepakatee.github.io/website/refund-policy.html">Kebijakan Refund</a></li>
+              <li><a href="https://sepakatee.github.io/website/faq.html">FAQ</a></li>
+              <li><a href="https://sepakatee.github.io/website/editorial-team.html">Tim Editorial</a></li>
+            </ul>
+          </div>
+          <div class="footer__column">
+            <h4>Legal Documents</h4>
+            <ul>
+              <li><a href="https://sepakatee.github.io/website/tools/templates/index.html">Templates</a></li>
+              <li><a href="https://sepakatee.github.io/website/tools/templates/index.html#Kontrak Bisnis">Kontrak Bisnis</a></li>
+              <li><a href="https://sepakatee.github.io/website/tools/templates/index.html#Ketenagakerjaan">Ketenagakerjaan</a></li>
+            </ul>
+          </div>
+          <div class="footer__column" style="display: none;">
+            <h4>Tools</h4>
+            <ul>
+              <li><a href="https://sepakatee.github.io/website/tools/sign/index.html">E-Signature</a></li>
+              <li><a href="https://sepakatee.github.io/website/tools/compare/index.html">Document Compare</a></li>
+            </ul>
+          </div>
+          <div class="footer__column">
+            <h4>Legal Aid</h4>
+            <ul>
+              <li><a href="https://sepakatee.github.io/website/legal-aid/pembentukan-perusahaan.html">Pembentukan Perusahaan</a></li>
+              <li><a href="https://sepakatee.github.io/website/legal-aid/pendaftaran-merek.html">Pendaftaran Merek</a></li>
+              <li><a href="https://sepakatee.github.io/website/legal-aid/konsultasi-dokumen.html">Konsultasi Dokumen</a></li>
+            </ul>
           </div>
         </div>
-
-        <div class="pp-layout">
-          <div>
-            <div class="pp-main pp-only-panduan" id="ppBlockPanduan">
-              <h2>Pratinjau dokumen</h2>
-              <div class="pp-preview-body" id="ppPreviewBody"></div>
-            </div>
-            <div class="pp-main pp-only-beli" id="ppBlockBeli">
-              <h2>Ringkasan</h2>
-              <div class="pp-summary" id="ppSummaryBody"></div>
-            </div>
-          </div>
-
-          <aside class="pp-side">
-            <div class="pp-badge-row">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-              Disusun berdasarkan konsep hukum bisnis
-            </div>
-            <h3 id="ppSideTitle">Buat dokumen</h3>
-            <p class="pp-side-price" id="ppSidePrice"></p>
-            <p class="pp-side-note" id="ppSideNote"></p>
-            <ul class="pp-features" id="ppFeatures"></ul>
-            <a class="pp-btn pp-btn--primary pp-only-panduan" id="ppCtaPanduan" href="#">Buat dokumen sekarang</a>
-            <button type="button" class="pp-btn pp-btn--primary pp-only-beli" id="ppCtaBeli">Beli sekarang</button>
-            <p class="pp-foot">Harga merupakan perkiraan untuk referensi pembelian awal. Final mengikuti konfirmasi tim.</p>
-          </aside>
+        <div class="footer__divider"></div>
+        <div class="footer__bottom">
+          <p>© 2026 Sepakatee oleh CV Cipta Kontrak Teknologi. Hak cipta dilindungi.</p>
         </div>
       </div>
-    </div>
-
-    <div class="pp-modal-overlay" id="ppPayOverlay" aria-hidden="true">
-      <div class="pp-modal" role="dialog" aria-labelledby="ppPayTitle">
-        <h4 id="ppPayTitle">Lanjut ke pembayaran</h4>
-        <p>Isi data pembeli untuk menyelesaikan pesanan dokumen ini.</p>
-        <form id="ppPayForm">
-          <div class="pp-field">
-            <label for="ppPayName">Nama lengkap</label>
-            <input id="ppPayName" name="name" required autocomplete="name" />
-          </div>
-          <div class="pp-field">
-            <label for="ppPayEmail">Email</label>
-            <input id="ppPayEmail" name="email" type="email" required autocomplete="email" />
-          </div>
-          <div class="pp-field">
-            <label for="ppPayPhone">Nomor WhatsApp / HP</label>
-            <input id="ppPayPhone" name="phone" required autocomplete="tel" />
-          </div>
-          <p id="ppPayErr" style="color: #b91c1c; font-size: 0.8125rem; margin: 0; display: none"></p>
-          <div class="pp-modal-actions">
-            <button type="button" class="pp-btn pp-btn--ghost" id="ppPayCancel">Batal</button>
-            <button type="submit" class="pp-btn pp-btn--primary" id="ppPaySubmit">Bayar</button>
-          </div>
-        </form>
-      </div>
-    </div>
+    </footer>
 
     <script>
       (function () {
@@ -470,6 +585,8 @@
     <script src="../_shared/catalog-shim.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="../_shared/ipaymu-checkout.js"></script>
-    <script src="product-page.js"></script>
+    <script src="catalog-auto-education.js"></script>
+    <script src="../../../script.js" defer></script>
+    <script src="product-page.js" defer></script>
   </body>
 </html>

@@ -37,10 +37,41 @@
     };
   }
 
+  /** Label untuk halaman katalog Word (semua template): semua beli langsung, beda harga per tier. */
+  function metaForCatalog(tierLetter) {
+    var L = letter(tierLetter);
+    if (L === 'A') {
+      return {
+        key: 'A',
+        name: 'Paket Kompleks',
+        chip: 'Tingkat kompleks',
+        sidebarTitle: 'Beli dokumen',
+        sidebarHint: 'Satu kali pembayaran — unduh .docx setelah pembayaran terverifikasi',
+      };
+    }
+    if (L === 'B') {
+      return {
+        key: 'B',
+        name: 'Paket Bisnis',
+        chip: 'Paket Bisnis',
+        sidebarTitle: 'Beli dokumen',
+        sidebarHint: 'Satu kali pembayaran — unduh .docx setelah pembayaran terverifikasi',
+      };
+    }
+    return {
+      key: 'C',
+      name: 'Paket Dasar',
+      chip: 'Paket Dasar',
+      sidebarTitle: 'Beli dokumen',
+      sidebarHint: 'Satu kali pembayaran — unduh .docx setelah pembayaran terverifikasi',
+    };
+  }
+
   function ipaymuFlowKey(tierLetter) {
     var L = letter(tierLetter);
-    if (L === 'B') return 'catalog-paket-bisnis';
-    return 'catalog-paket-dasar';
+    if (L === 'A') return 'catalog-tier-a';
+    if (L === 'B') return 'catalog-tier-b';
+    return 'catalog-tier-c';
   }
 
   /** Slug → URL path to existing wizard landing (relative to tools/templates/) */
@@ -57,6 +88,7 @@
   global.SepakateePaket = {
     letter: letter,
     meta: meta,
+    metaForCatalog: metaForCatalog,
     ipaymuFlowKey: ipaymuFlowKey,
     builderLandingRel: builderLandingRel,
     BUILDER_LANDING_BY_SLUG: BUILDER_LANDING_BY_SLUG,

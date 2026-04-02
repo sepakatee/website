@@ -1,5 +1,5 @@
 /**
- * Main template catalog on index.html — full inventory, tier filters, no "coming soon".
+ * Main template catalog on index.html — sidebar subjects, card grid with unique imagery.
  * Requires SepakateePricing (pricing.js).
  * Prefers fetch(data/catalog-inventory.json); falls back to window.__SEPAKATEE_CATALOG__ (bundle).
  */
@@ -7,6 +7,7 @@
   'use strict';
 
   var JSON_URL = 'data/catalog-inventory.json';
+  var STOCK_POOL_URL = 'data/catalog-stock-pool.json';
   var PRODUCT_PAGE = 'dokumen/index.html';
 
   var FAMILY_LABELS = {
@@ -36,11 +37,15 @@
     items: [],
     summary: null,
     filtered: [],
-    bucket: 'all',
+    subject: 'all',
     tier: '',
     page: 1,
-    pageSize: 24,
+    pageSize: 48,
     sort: 'title',
+    /** @type {Record<string, string>|null} */
+    imageById: null,
+    /** @type {Record<string, { meta_description?: string }>} */
+    seoById: {},
   };
 
   function $(id) {
@@ -54,6 +59,19 @@
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
+  }
+
+  function escapeAttr(s) {
+    return escapeHtml(s).replace(/'/g, '&#39;');
+  }
+
+  function picsumSeedFromId(id) {
+    var s = String(id || '');
+    var h = 5381;
+    for (var i = 0; i < s.length; i++) {
+      h = (h * 33) ^ s.charCodeAt(i);
+    }
+    return 'sk' + (h >>> 0).toString(16);
   }
 
   function formatTitle(s) {
@@ -74,18 +92,290 @@
     return fams.indexOf(it.family) !== -1;
   }
 
+  function titleIsAddendum(t) {
+    return /\baddendum\b/i.test(t || '');
+  }
+
+  function itemMatchesSubject(it, subjectId) {
+    if (!subjectId || subjectId === 'all') return true;
+    if (it.family === 'akta_notaris' && subjectId !== 'akta') return false;
+    var t = (it.title || '').toLowerCase();
+    var f = it.flags || {};
+    switch (subjectId) {
+      case 'addendum':
+        return titleIsAddendum(t);
+      case 'bisnis_kontrak':
+        return itemInBucket(it, 'perjanjian_kontrak');
+      case 'properti':
+        return (
+          f.property === true ||
+          /sewa|menyewa|tanah|bangunan|gedung|properti|rusun|apartemen|rumah|ppjb|jual\s*beli\s*tanah|jual beli tanah|kontraktor|pembangunan|konter|kios|ruko|perumahan/i.test(
+            t
+          )
+        );
+      case 'ketenagakerjaan':
+        return (
+          f.employment === true ||
+          /phk|pkwt|pkwtt|kerja|karyawan|pegawai|buruh|tenaga kerja|honor|outsourcing|hubungan kerja|pekerja/i.test(t)
+        );
+      case 'korporasi':
+        return (
+          f.corporate === true ||
+          /\b(pt|cv|rups|dewan komisaris|direksi|perseroan|badan hukum|yayasan|koperasi|persero)\b/i.test(t)
+        );
+      case 'kuasa':
+        return itemInBucket(it, 'kuasa');
+      case 'pernyataan':
+        return itemInBucket(it, 'pernyataan');
+      case 'berita':
+        return itemInBucket(it, 'berita');
+      case 'akta':
+        return itemInBucket(it, 'akta');
+      case 'hutang':
+        if (titleIsAddendum(t)) return false;
+        return /hutang|piutang|pinjaman|pengakuan|cicilan|faktur|kredit|jaminan|berhutang|utang|gadai|gadaian/i.test(t);
+      case 'rahasia':
+        return /nda|kerahasiaan|rahasia|non\s*disclosure|data\s*pribadi|perlindungan\s*data/i.test(t);
+      case 'lainnya':
+        if (titleIsAddendum(t)) return false;
+        return itemInBucket(it, 'lainnya');
+      default:
+        return true;
+    }
+  }
+
   function itemHref(it) {
     return PRODUCT_PAGE + '?id=' + encodeURIComponent(it.id);
   }
 
   function paketChipText(tierLetter) {
     var P = typeof window !== 'undefined' && window.SepakateePaket;
+    if (P && P.metaForCatalog) return P.metaForCatalog(tierLetter).chip;
     if (P && P.meta) return P.meta(tierLetter).chip;
     return 'Paket';
   }
 
   function itemCtaLabel() {
-    return 'Buka halaman produk';
+    return 'Lihat detail';
+  }
+
+  /**
+   * Map judul dokumen → kunci pool gambar (Unsplash per topik). Urutan: spesifik dulu (BANK, SAHAM…).
+   */
+  function primaryImageKey(it) {
+    if (it.family === 'berita_acara') return 'meeting';
+    if (it.family === 'surat_pernyataan') return 'documents';
+    var t = ' ' + (it.title || '').toUpperCase() + ' ';
+    var f = it.flags || {};
+    var rules = [
+      { key: 'addendum', re: /\bADDENDUM\b/ },
+      { key: 'bank', re: /\bBANK\b|PERBANKAN|KREDIT\s*USAHA|KREDIT\s*MIKRO|\bKUR\b|TABUNGAN|DEPOSITO|GIRO|\bATM\b|REKENING\s*BANK|KANTOR\s*BANK|TELLER/ },
+      { key: 'saham', re: /\bSAHAM\b|OBLIGASI|EMITEN|\bRUPS\b|PEMEGANG\s*SAHAM|DIVIDEN|MODAL\s*SAHAM|MODAL\s*SETOR|\bIPO\b|\bESOP\b|WARRANT|KONVERSI\s*SAHAM|LEMBAR\s*SAHAM/ },
+      { key: 'valas', re: /VALAS|DEVISA|VALUTA|FOREX|MATA\s+UANG\s+ASING|\bDOLLAR\b|\bEURO\b|KURS(\s+MATA)?/ },
+      {
+        key: 'legal',
+        re: /\bAKTA\b|NOTARIS|PPAT|PENGADILAN|GUGAT|PERKARA|SITA|EKSEKUSI|HIPOTIK|WARIS|WASIAT|TESTAMENT/,
+      },
+      {
+        key: 'hutang',
+        re: /GADAI|GADAIAN|HUTANG|PIUTANG|PINJAMAN|PENGAKUAN|PENAGIH|CICILAN|UTANG\s*PIUTANG|WANPRESTASI/,
+      },
+      { key: 'automotive', re: /BENGKEL|\bMOBIL\b|\bMOTOR\b|KENDARAAN|OTOMOTIF|VELG|\bBAN\b|KAPAL|PESAWAT|ARMADA|KENDARAAN\s*BERMOTOR/ },
+      {
+        key: 'property',
+        re: /SEWA|MENYEWA|TANAH|BANGUNAN|RUKO|RUMAH|APARTEMEN|KONTRAKAN|RUSUN|PERUMAHAN|PPJB|KIOS|KONTER|GEDUNG|HAK\s*MILIK|SERTIFIKAT/,
+      },
+      {
+        key: 'employment',
+        re: /PHK|PKWT|PKWTT|KARYAWAN|PEGAWAI|BURUH|TENAGA\s*KERJA|HUBUNGAN\s*KERJA|OUTSOURCING|UPAH|LEMBUR|MAGANG\s*KERJA|SPK\s*KERJA/,
+      },
+      { key: 'nda', re: /NDA|KERAHASIAAN|RAHASIA|NON\s*-?\s*DISCLOSURE|DATA\s*PRIBADI|PERLINDUNGAN\s*DATA/ },
+      {
+        key: 'corporate',
+        re: /DIREKSI|DEWAN\s*KOMISARIS|PERSEROAN|YAYASAN|\bPT\b|\bCV\b|KOPERASI|BADAN\s*HUKUM|NOTULEN|LIQUIDASI\s*PT/,
+      },
+      { key: 'kuasa', re: /KUASA/ },
+      { key: 'commerce', re: /JUAL\s*BELI|PERDAGANGAN|DISTRIBUSI|SUPPLIER|\bAGEN\b|WARALABA|FRANCHISE|DAGANG|KOMISI|EKSPOR|IMPOR/ },
+      { key: 'construction', re: /KONSTRUKSI|PEMBANGUNAN|PROYEK|BORONGAN|PELAKSANA\s*PEKERJAAN|PENGEMBANG/ },
+      { key: 'commerce', re: /GUDANG|LOGISTIK|PENGIRIMAN|PENGANGKUTAN|EKSPEDISI|WAREHOUSE/ },
+      { key: 'commerce', re: /TOKO|RETAIL|MINIMARKET|WARUNG/ },
+      { key: 'medical', re: /RUMAH\s*SAKIT|\bRS\b|KLINIK|DOKTER|REKAM\s*MEDIS|MEDIS|PASIEN|APOTEK/ },
+      { key: 'tech', re: /SOFTWARE|APLIKASI|WEBSITE|DOMAIN|HOSTING|LISENS(I|Y)|\bIT\b|SISTEM\s*INFORMASI|TEKNOLOGI\s*INFORMASI/ },
+    ];
+    var i;
+    for (i = 0; i < rules.length; i++) {
+      if (rules[i].re.test(t)) return rules[i].key;
+    }
+    if (f.property === true) return 'property';
+    if (f.employment === true) return 'employment';
+    if (f.corporate === true) return 'corporate';
+    if (it.family === 'akta_notaris') return 'legal';
+    if (it.family === 'surat_kuasa' || it.family === 'kuasa_other') return 'kuasa';
+    return 'general';
+  }
+
+  function hashPickString(salt) {
+    var s = String(salt || '');
+    var h = 5381;
+    for (var i = 0; i < s.length; i++) {
+      h = (h * 33) ^ s.charCodeAt(i);
+    }
+    return h >>> 0;
+  }
+
+  function pickFromArray(arr, salt) {
+    if (!arr || !arr.length) return null;
+    var idx = hashPickString(salt) % arr.length;
+    return arr[idx];
+  }
+
+  function dedupeChain(seq) {
+    var seen = {};
+    var out = [];
+    var i;
+    for (i = 0; i < seq.length; i++) {
+      var x = seq[i];
+      if (!x || seen[x]) continue;
+      seen[x] = 1;
+      out.push(x);
+    }
+    return out;
+  }
+
+  /** Fallback urutan pool jika pool utama kosong/habis — hindari Picsum acak yang tidak relevan. */
+  var IMAGE_FALLBACK_EXTRA = {
+    addendum: ['documents', 'legal', 'hutang'],
+    hutang: ['documents', 'legal', 'bank'],
+    bank: ['documents', 'legal'],
+    saham: ['corporate', 'documents', 'bank'],
+    valas: ['bank', 'hutang', 'documents'],
+    automotive: ['commerce', 'documents'],
+    property: ['construction', 'corporate', 'documents'],
+    employment: ['meeting', 'corporate', 'documents'],
+    nda: ['tech', 'documents'],
+    corporate: ['meeting', 'documents', 'legal'],
+    legal: ['documents', 'meeting'],
+    kuasa: ['legal', 'documents'],
+    commerce: ['corporate', 'documents'],
+    construction: ['property', 'documents'],
+    medical: ['documents'],
+    tech: ['corporate', 'documents'],
+    meeting: ['corporate', 'documents'],
+    documents: ['meeting', 'legal'],
+    general: ['documents', 'meeting', 'legal', 'corporate'],
+  };
+
+  var IMAGE_FALLBACK_TAIL = ['documents', 'legal', 'meeting', 'corporate', 'commerce', 'hutang'];
+
+  function resolveImageUrl(pools, generalArr, key, id) {
+    var chain = [key].concat(IMAGE_FALLBACK_EXTRA[key] || []).concat(IMAGE_FALLBACK_TAIL);
+    chain = dedupeChain(chain);
+    var i;
+    for (i = 0; i < chain.length; i++) {
+      var pk = chain[i];
+      var arr = pools[pk];
+      var url = pickFromArray(arr, id + '|img|' + pk);
+      if (url) return url;
+    }
+    return pickFromArray(generalArr, id + '|img|general');
+  }
+
+  function buildImageByIdMap(items, poolData) {
+    var pools = {};
+    var general = [];
+    if (poolData && poolData.version === 2 && poolData.pools) {
+      pools = poolData.pools;
+      general = (poolData.general || []).slice();
+    } else if (poolData && poolData.urls && poolData.urls.length) {
+      general = poolData.urls.slice();
+    }
+
+    var sorted = items.slice().sort(function (a, b) {
+      return (a.id || '').localeCompare(b.id || '', 'en');
+    });
+
+    var map = {};
+    sorted.forEach(function (it) {
+      var k = primaryImageKey(it);
+      var url = resolveImageUrl(pools, general, k, it.id);
+      if (!url) {
+        url = 'https://picsum.photos/seed/' + picsumSeedFromId(it.id) + '/640/853';
+      }
+      map[it.id] = url;
+    });
+    return map;
+  }
+
+  function loadStockPool() {
+    return fetch(STOCK_POOL_URL)
+      .then(function (r) {
+        if (!r.ok) throw new Error('pool');
+        return r.json();
+      })
+      .catch(function () {
+        return { version: 0, pools: {}, general: [] };
+      });
+  }
+
+  function shortenCatalogBlurb(text, maxLen) {
+    maxLen = maxLen || 132;
+    var s = String(text || '')
+      .replace(/\s+/g, ' ')
+      .replace(/\s*Sepakatee:\s*/gi, ' ')
+      .trim();
+    if (s.length <= maxLen) return s;
+    var cut = s.slice(0, maxLen);
+    var dot = cut.lastIndexOf('.');
+    if (dot > 50) return cut.slice(0, dot + 1);
+    var sp = cut.lastIndexOf(' ');
+    if (sp > 40) cut = cut.slice(0, sp);
+    return cut.trim() + '…';
+  }
+
+  function itemBlurb(it) {
+    var seo = state.seoById && state.seoById[it.id];
+    if (seo && seo.meta_description) return shortenCatalogBlurb(seo.meta_description, 140);
+
+    var title = formatTitle(it.title);
+    var shortT = title.length > 70 ? title.slice(0, 67).trim() + '…' : title;
+    switch (it.family) {
+      case 'berita_acara':
+        return (
+          'Berita acara untuk ' +
+          shortT +
+          '. Format Word (.docx); lengkapi tanggal, hadirin, dan ringkasan kejadian atau keputusan.'
+        );
+      case 'surat_kuasa':
+      case 'kuasa_other':
+        return (
+          'Surat kuasa terkait ' +
+          shortT +
+          '. Template Word: identitas pemberi/penerima kuasa dan batas waktu serta ruang lingkup.'
+        );
+      case 'surat_pernyataan':
+        return 'Surat pernyataan mengenai ' + shortT + '. Sesuaikan isi dengan fakta, lalu tandatangani.';
+      case 'akta_notaris':
+        return (
+          'Kerangka draf untuk ' +
+          shortT +
+          '. Format Word; finalisasi teks dan akta resmi bersama notaris/PPAT berwenang.'
+        );
+      case 'kontrak':
+      case 'perjanjian':
+      case 'surat_perjanjian':
+        return (
+          'Perjanjian tertulis untuk ' +
+          shortT +
+          '. Dokumen Word (.docx) yang dapat diedit—hak, kewajiban, dan sanksi sesuai kebutuhan.'
+        );
+      case 'lainnya':
+      default:
+        return (
+          'Dokumen hukum: ' +
+          shortT +
+          '. File Word (.docx); susun identitas pihak dan detail sesuai situasi Anda.'
+        );
+    }
   }
 
   function applyFilters() {
@@ -95,7 +385,7 @@
     state.tier = (tierEl && tierEl.value) || '';
 
     var items = state.items.filter(function (it) {
-      if (!itemInBucket(it, state.bucket)) return false;
+      if (!itemMatchesSubject(it, state.subject)) return false;
       if (state.tier && String(it.provisional_tier) !== state.tier) return false;
       if (q) {
         var hay = (it.title + ' ' + it.slug + ' ' + it.id).toLowerCase();
@@ -136,8 +426,7 @@
       return;
     }
     if (n === s.count) {
-      meta.textContent =
-        s.count + ' dokumen hukum siap Anda telusuri.';
+      meta.textContent = s.count + ' dokumen hukum siap Anda telusuri.';
     } else {
       meta.textContent =
         n + ' dokumen sesuai filter Anda — dari ' + s.count + ' judul dalam katalog.';
@@ -205,9 +494,11 @@
 
     if (!slice.length) {
       grid.innerHTML =
-        '<p class="doc-cat-empty">Tidak ada dokumen yang cocok. Ubah filter atau kata kunci.</p>';
+        '<p class="doc-cat-empty">Tidak ada dokumen yang cocok. Ubah subjek, filter, atau kata kunci.</p>';
       return;
     }
+
+    var imgMap = state.imageById || {};
 
     var html = slice
       .map(function (it) {
@@ -215,36 +506,41 @@
         var chipLabel = escapeHtml(paketChipText(tier));
         var price =
           fmt && tierPrice ? fmt(tierPrice(tier)) : '—';
-        var notary = it.flags && it.flags.requires_notary;
         var href = escapeHtml(itemHref(it));
         var cta = escapeHtml(itemCtaLabel());
+        var title = escapeHtml(formatTitle(it.title));
+        var desc = escapeHtml(itemBlurb(it));
+        var fbPlain = 'https://picsum.photos/seed/' + picsumSeedFromId(it.id) + '/640/853';
+        var imgSrc = escapeHtml(imgMap[it.id] || fbPlain);
+        var alt = escapeAttr(formatTitle(it.title));
+        var fb = escapeHtml(fbPlain);
         return (
-          '<a class="doc-card doc-card--tier-' +
-          escapeHtml(String(tier).toLowerCase()) +
-          '" href="' +
+          '<a class="catalog-cover" href="' +
           href +
           '">' +
-          '<span class="doc-card__rail" aria-hidden="true"></span>' +
-          '<div class="doc-card__body">' +
-          '<svg class="doc-card__deco" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>' +
-          '<div class="doc-card__chips">' +
-          '<span class="doc-chip doc-chip--tier-' +
-          escapeHtml(String(tier).toLowerCase()) +
-          '">' +
+          '<div class="catalog-cover__media">' +
+          '<img src="' +
+          imgSrc +
+          '" alt="' +
+          alt +
+          '" width="640" height="853" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'' +
+          fb +
+          '\';" />' +
+          '<span class="catalog-cover__badge">' +
           chipLabel +
           '</span>' +
-          '<span class="doc-chip">' +
-          escapeHtml(familyLabel(it.family)) +
-          '</span>' +
-          (notary ? '<span class="doc-chip doc-chip--notary">Notaris</span>' : '') +
           '</div>' +
-          '<h3 class="doc-card__title">' +
-          escapeHtml(formatTitle(it.title)) +
+          '<h3 class="catalog-cover__title">' +
+          title +
           '</h3>' +
-          '<p class="doc-card__price">Mulai dari <strong>' +
+          '<p class="catalog-cover__desc">' +
+          desc +
+          '</p>' +
+          '<div class="catalog-cover__meta">' +
+          '<span class="catalog-cover__price">Mulai <strong>' +
           escapeHtml(price) +
-          '</strong> <span class="doc-card__hint">per dokumen</span></p>' +
-          '<span class="doc-card__cta-btn">' +
+          '</strong></span>' +
+          '<span class="catalog-cover__cta">' +
           cta +
           '</span>' +
           '</div></a>'
@@ -261,17 +557,19 @@
     renderGrid();
   }
 
-  function initTabs() {
-    var tabs = document.querySelectorAll('.doc-cat-tab');
-    tabs.forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        tabs.forEach(function (t) {
-          t.classList.remove('is-active');
-          t.setAttribute('aria-selected', 'false');
+  function initSubjectNav() {
+    var nav = $('catalogSubjectNav');
+    if (!nav) return;
+    var btns = nav.querySelectorAll('[data-subject]');
+    btns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btns.forEach(function (b) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected', 'false');
         });
-        tab.classList.add('is-active');
-        tab.setAttribute('aria-selected', 'true');
-        state.bucket = tab.getAttribute('data-bucket') || 'all';
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+        state.subject = btn.getAttribute('data-subject') || 'all';
         applyFilters();
       });
     });
@@ -301,7 +599,10 @@
   function init() {
     if (!$('catalogMainGrid')) return;
 
-    initTabs();
+    var seoG = typeof window !== 'undefined' && window.__SEPAKATEE_CATALOG_SEO__;
+    state.seoById = seoG && seoG.by_id && typeof seoG.by_id === 'object' ? seoG.by_id : {};
+
+    initSubjectNav();
     syncHeroSearch();
 
     var hero = $('templateSearch');
@@ -321,16 +622,17 @@
     var sortEl = $('catalogSort');
     if (sortEl) sortEl.addEventListener('change', applyFilters);
     var sizeEl = $('catalogPageSize');
-    if (sizeEl)
+    if (sizeEl) {
+      state.pageSize = parseInt(sizeEl.value, 10) || state.pageSize;
       sizeEl.addEventListener('change', function () {
         state.pageSize = parseInt(sizeEl.value, 10) || 24;
         state.page = 1;
         render();
       });
+    }
 
     function loadCatalogData() {
-      var emb =
-        typeof window !== 'undefined' && window.__SEPAKATEE_CATALOG__;
+      var emb = typeof window !== 'undefined' && window.__SEPAKATEE_CATALOG__;
       return fetch(JSON_URL)
         .then(function (r) {
           if (!r.ok) throw new Error('HTTP ' + r.status);
@@ -342,10 +644,13 @@
         });
     }
 
-    loadCatalogData()
-      .then(function (data) {
+    Promise.all([loadCatalogData(), loadStockPool()])
+      .then(function (pair) {
+        var data = pair[0];
+        var poolJson = pair[1];
         state.summary = data.summary;
         state.items = data.items || [];
+        state.imageById = buildImageByIdMap(state.items, poolJson);
         state.filtered = state.items.slice();
         applyFilters();
       })

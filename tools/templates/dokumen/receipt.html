@@ -474,30 +474,47 @@
         var downloadBtnHtml = downloadBtn.innerHTML;
         var invoiceBtnHtml = invoiceBtn.innerHTML;
 
-        downloadBtn.addEventListener('click', function () {
+        downloadBtn.addEventListener('click', async function () {
           downloadBtn.disabled = true;
           downloadBtn.innerHTML = 'Menyiapkan dokumen...';
 
           try {
-            var fileName = String(item.source_rel || '').split('/').pop() || (catalogPurchaseTitle || 'Dokumen') + '.docx';
+            var fileName =
+              String(item.source_rel || '').split('/').pop() ||
+              (catalogPurchaseTitle || 'Dokumen') + '.docx';
             var rel = encodeRelPath(item.source_rel);
-            var href = '../../../' + rel;
+            var custom = '';
+            try {
+              custom =
+                window.__SEP_DOCX_BASE_URL__ && String(window.__SEP_DOCX_BASE_URL__).trim();
+            } catch (e0) {}
+            custom = custom.replace(/\/$/, '');
+            var href = custom
+              ? custom + '/' + rel
+              : new URL('../../../' + rel, window.location.href).href;
 
+            var res = await fetch(href, { method: 'GET', cache: 'no-store', credentials: 'same-origin' });
+            if (!res.ok) {
+              throw new Error('HTTP ' + res.status);
+            }
+            var blob = await res.blob();
+            var objUrl = URL.createObjectURL(blob);
             var a = document.createElement('a');
-            a.href = href;
+            a.href = objUrl;
             a.download = fileName;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
+            URL.revokeObjectURL(objUrl);
           } catch (e) {
             console.error(e);
-            alert('Tidak dapat mengunduh dokumen. Silakan coba lagi.');
+            alert(
+              'File .docx tidak ditemukan di server (biasanya 404). Folder "semua template" beserta file .docx belum di-deploy ke GitHub / hosting. Setelah di-push, unduhan akan jalan. Alternatif: set window.__SEP_DOCX_BASE_URL__ ke basis URL tempat file di-host. Simpan ID pesanan dan hubungi kami jika butuh bantuan.'
+            );
           }
 
-          setTimeout(function () {
-            downloadBtn.disabled = false;
-            downloadBtn.innerHTML = downloadBtnHtml;
-          }, 1500);
+          downloadBtn.disabled = false;
+          downloadBtn.innerHTML = downloadBtnHtml;
         });
 
         invoiceBtn.addEventListener('click', async function () {

@@ -346,11 +346,11 @@
             </div>
             <div class="summary-item">
               <span class="summary-label">Harga</span>
-              <span class="summary-value">Rp 350.000</span>
+              <span class="summary-value" data-price-display>Rp 350.000</span>
             </div>
             <div class="summary-item">
               <span class="summary-label">Total Pembayaran</span>
-              <span class="summary-value">Rp 350.000</span>
+              <span class="summary-value" data-price-display>Rp 350.000</span>
             </div>
           </div>
           
@@ -403,6 +403,7 @@
       <div class="loading-text">Memproses pembayaran...</div>
     </div>
     
+    <script src="../_shared/pricing.js"></script>
     <script src="payment.js"></script>
     <script>
       let selectedMethod = null;
@@ -411,6 +412,11 @@
       
       // Load form data from sessionStorage
       document.addEventListener('DOMContentLoaded', () => {
+        var prp = window.SepakateePricing.getByPath(window.location.pathname);
+        document.querySelectorAll('[data-price-display]').forEach(function (el) {
+          el.textContent = window.SepakateePricing.formatIdr(prp.priceIdr);
+        });
+
         // Check if user cancelled payment (from URL param)
         const urlParams = new URLSearchParams(window.location.search);
         const cancelled = urlParams.get('cancel');

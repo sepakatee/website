@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sepakatee.local/schemas/template-v1.json",
+  "title": "SepakateeTemplateV1",
+  "type": "object",
+  "required": ["template_id", "slug", "tier", "product"],
+  "properties": {
+    "template_id": { "type": "string" },
+    "slug": { "type": "string" },
+    "tier": { "type": "string", "enum": ["A", "B", "C"] },
+    "category": { "type": "string" },
+    "jurisdiction_scope": { "type": "string" },
+    "intent_tags": { "type": "array", "items": { "type": "string" } },
+    "price_model": { "type": "string", "enum": ["single", "bundle_component", "addon"] },
+    "product": {
+      "type": "object",
+      "required": ["name_id"],
+      "properties": {
+        "name_id": { "type": "string" },
+        "price_idr": { "type": "integer" }
+      }
+    },
+    "variables": { "type": "array" },
+    "clauses": { "type": "array" },
+    "landing_content": { "type": "object" },
+    "seo_fields": { "type": "object" }
+  }
+}

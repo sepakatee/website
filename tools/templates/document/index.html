@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mengalihkan…</title>
+    <script>
+      (function () {
+        var q = window.location.search || '';
+        var h = window.location.hash || '';
+        window.location.replace('../dokumen/index.html' + q + h);
+      })();
+    </script>
+  </head>
+  <body>
+    <p style="font-family: system-ui, sans-serif; padding: 1.5rem">
+      Mengalihkan ke
+      <a href="../dokumen/index.html">halaman dokumen</a>…
+    </p>
+  </body>
+</html>

@@ -325,7 +325,7 @@
                   </svg>
                   <span>Template Standar</span>
                 </div>
-                <div class="package-price">Rp 350.000</div>
+                <div class="package-price" id="packagePriceDisplay">Rp 350.000</div>
               </div>
             </div>
             
@@ -350,90 +350,15 @@
       </div>
     </div>
 
+    <script src="../_shared/pricing.js"></script>
+    <script src="../_shared/ipaymu-checkout.js"></script>
     <script src="form.js"></script>
     <script>
-      var IPAYMU_VA     = "0000005776604685";
-      var IPAYMU_APIKEY = "SANDBOX98A25EA0-9F38-49BC-82C1-9DD6EB48AFBC";
-      var IPAYMU_URL    = "https://sandbox.ipaymu.com/api/v2/payment";
-
-      function generateReferenceId() {
-        var now = new Date();
-        var y = now.getFullYear();
-        var m = String(now.getMonth() + 1).padStart(2, '0');
-        var d = String(now.getDate()).padStart(2, '0');
-        var rand = Math.random().toString(36).substring(2, 8).toUpperCase();
-        return 'KNTF-' + y + m + d + '-' + rand;
-      }
-
-      function cleanForIpaymu(str) {
-        if (!str || typeof str !== 'string') return '';
-        return str.replace(/[`'"\\]/g, '').trim().substring(0, 255);
-      }
-
-      async function initiateIpaymuPayment(buyerName, buyerEmail, buyerPhone) {
-        buyerName = cleanForIpaymu(buyerName) || 'Customer';
-        buyerEmail = cleanForIpaymu(buyerEmail) || 'customer@example.com';
-        buyerPhone = cleanForIpaymu(buyerPhone) || '08123456789';
-
-        var baseUrl = (window.location.origin && window.location.origin.startsWith('http'))
-          ? window.location.origin
-          : 'https://sepakatee.github.io/website';
-
-        var referenceId = generateReferenceId();
-
-        sessionStorage.setItem('paymentReferenceId', referenceId);
-        sessionStorage.setItem('paymentBuyerName', buyerName);
-        sessionStorage.setItem('paymentBuyerEmail', buyerEmail);
-        var previewData = sessionStorage.getItem('previewDocumentData');
-        if (previewData) {
-          localStorage.setItem('previewDocumentData_backup', previewData);
-          localStorage.setItem('previewDocumentData_ref', referenceId);
-        }
-
-        var receiptBase = baseUrl + "/tools/templates/kerja-sama/receipt.html?ref=" + encodeURIComponent(referenceId) + "&status=berhasil";
-        var returnUrl = receiptBase + "&name=" + encodeURIComponent(buyerName) + "&email=" + encodeURIComponent(buyerEmail);
-        var cancelUrl = baseUrl + "/tools/templates/kerja-sama/receipt.html?ref=" + encodeURIComponent(referenceId) + "&status=batal";
-
-        var body = {
-          "product":    ["Perjanjian Kerja Sama Usaha"],
-          "qty":        ["1"],
-          "price":      ["350000"],
-          "amount":     "350000",
-          "returnUrl":  returnUrl,
-          "cancelUrl":  cancelUrl,
-          "notifyUrl":  "https://jblbjdvipspzrcjeipei.supabase.co/functions/v1/ipaymu-webhook",
-          "referenceId": referenceId,
-          "buyerName":  buyerName,
-          "buyerPhone": buyerPhone,
-          "buyerEmail": buyerEmail,
-        };
-
-        var bodyEncrypt = CryptoJS.SHA256(JSON.stringify(body));
-        var stringtosign = "POST:" + IPAYMU_VA + ":" + bodyEncrypt + ":" + IPAYMU_APIKEY;
-        var signature = CryptoJS.enc.Hex.stringify(CryptoJS.HmacSHA256(stringtosign, IPAYMU_APIKEY));
-
-        var response = await fetch(IPAYMU_URL, {
-          method: "POST",
-          headers: {
-            "Accept":       "application/json",
-            "Content-Type": "application/json",
-            "va":           IPAYMU_VA,
-            "signature":    signature,
-            "timestamp":    "20150201121045"
-          },
-          body: JSON.stringify(body)
-        });
-
-        var result = await response.json();
-        var paymentUrl = result?.Data?.Url || result?.Data?.PaymentUrl || null;
-        if (!paymentUrl) {
-          var errMsg = result?.Message || result?.message || 'Gagal mendapatkan URL pembayaran dari iPaymu';
-          throw new Error(errMsg);
-        }
-        window.location.href = paymentUrl;
-      }
-
       document.addEventListener('DOMContentLoaded', () => {
+        var pr0 = window.SepakateePricing.getByPath(window.location.pathname);
+        var elPrice = document.getElementById('packagePriceDisplay');
+        if (elPrice) elPrice.textContent = window.SepakateePricing.formatIdr(pr0.priceIdr);
+
         const previewData = sessionStorage.getItem('previewDocumentData');
         
         if (!previewData) {
@@ -484,7 +409,12 @@
               payBtn.style.opacity = '0.7';
               
               try {
-                await initiateIpaymuPayment(buyerName, buyerEmail, buyerPhone);
+                await window.SepakateeIpaymuCheckout.redirectToPayment({
+                  flowKey: 'kerja-sama',
+                  buyerName: buyerName,
+                  buyerEmail: buyerEmail,
+                  buyerPhone: buyerPhone,
+                });
               } catch (error) {
                 console.error('Payment error:', error);
                 alert('Terjadi kesalahan: ' + error.message);

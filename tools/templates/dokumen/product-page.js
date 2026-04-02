@@ -6,6 +6,11 @@
 
   var JSON_URL = '../data/catalog-inventory.json';
 
+  /** Stale or mistaken ?id= values (old links, typos) → canonical catalog id */
+  var ID_ALIASES = {
+    '62-akta-jual-beli-tanah-bersama-notaris': '82-akta-jual-beli-tanah-bersama-notaris',
+  };
+
   var FAMILY_LABELS = {
     perjanjian: 'Perjanjian',
     kontrak: 'Kontrak',
@@ -87,6 +92,15 @@
     );
   }
 
+  function showPpError(title, lead) {
+    var box = document.getElementById('ppError');
+    var tEl = document.getElementById('ppErrorTitle');
+    var lEl = document.getElementById('ppErrorLead');
+    if (tEl) tEl.textContent = title;
+    if (lEl) lEl.textContent = lead;
+    box.hidden = false;
+  }
+
   function buildSummaryHtml(displayTitle, fam, notary) {
     return (
       '<p><strong>' +
@@ -105,9 +119,14 @@
 
   function run() {
     var params = new URLSearchParams(window.location.search);
-    var id = params.get('id');
+    var rawId = params.get('id');
+    var id = rawId;
+    if (id && ID_ALIASES[id]) id = ID_ALIASES[id];
     if (!id) {
-      document.getElementById('ppError').hidden = false;
+      showPpError(
+        'Parameter tidak lengkap',
+        'Buka dokumen dari katalog agar tautan memuat ID yang benar.'
+      );
       return;
     }
 
@@ -118,14 +137,34 @@
           return x.id === id;
         });
         if (!it) {
-          document.getElementById('ppError').hidden = false;
+          showPpError(
+            'Dokumen tidak ditemukan',
+            'ID ini tidak ada di katalog kami. Tautan mungkin sudah usang — cari judul yang sama di katalog.'
+          );
           return;
+        }
+
+        if (rawId && rawId !== it.id) {
+          try {
+            var u = new URL(window.location.href);
+            u.searchParams.set('id', it.id);
+            window.history.replaceState({}, '', u.pathname + u.search + u.hash);
+          } catch (e) {}
         }
 
         var Pak = window.SepakateePaket;
         var Price = window.SepakateePricing;
-        if (!Pak || !Price) {
-          document.getElementById('ppError').hidden = false;
+        if (
+          !Pak ||
+          !Price ||
+          typeof Pak.meta !== 'function' ||
+          typeof Price.priceForTierLetter !== 'function' ||
+          typeof Price.formatIdr !== 'function'
+        ) {
+          showPpError(
+            'Halaman belum siap',
+            'Beberapa skrip gagal dimuat. Muat ulang halaman; jika tetap gagal, coba nonaktifkan pemblokir iklan untuk situs ini.'
+          );
           return;
         }
 
@@ -272,7 +311,10 @@
         });
       })
       .catch(function () {
-        document.getElementById('ppError').hidden = false;
+        showPpError(
+          'Katalog tidak bisa dimuat',
+          'Periksa koneksi lalu muat ulang. Jika Anda membuka file secara lokal (file://), buka situs lewat http://localhost agar data katalog tersedia.'
+        );
       });
   }
 

@@ -309,7 +309,7 @@
               <p class="product-detail-subtitle">Dokumen hukum lengkap untuk sewa-menyewa properti komersial atau residensial</p>
               <div class="product-detail-meta">
                 <span class="product-category">Kontrak Bisnis</span>
-                <span class="product-price">Rp 350.000</span>
+                <span class="product-price" data-price-display>Rp 350.000</span>
               </div>
             </div>
           </div>
@@ -403,7 +403,7 @@
                   </span>
                   <h3>Buat Dokumen</h3>
                   <div class="purchase-price">
-                    <span class="price-amount">Rp 350.000</span>
+                    <span class="price-amount" data-price-display>Rp 350.000</span>
                     <span class="price-note">Satu kali pembayaran</span>
                   </div>
                 </div>
@@ -989,6 +989,15 @@
             }
         }
     </style>
+    <script src="../_shared/pricing.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var p = window.SepakateePricing.getByPath(window.location.pathname);
+        document.querySelectorAll('[data-price-display]').forEach(function (el) {
+          el.textContent = window.SepakateePricing.formatIdr(p.priceIdr);
+        });
+      });
+    </script>
   </body>
 </html>
 

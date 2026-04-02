@@ -179,11 +179,11 @@
       <tbody>
         <tr>
           <td>Perjanjian Sewa Menyewa Tempat</td>
-          <td>Rp 350.000</td>
+          <td data-price-display>Rp 350.000</td>
         </tr>
         <tr class="invoice-total-row">
           <td>Total</td>
-          <td>Rp 350.000</td>
+          <td data-price-display>Rp 350.000</td>
         </tr>
       </tbody>
     </table>
@@ -203,6 +203,15 @@
         document.getElementById('inv-email').textContent = p.get('email') || '-';
       }
     })();
+  </script>
+  <script src="../_shared/pricing.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var pr = window.SepakateePricing.getByPath(window.location.pathname);
+      document.querySelectorAll('[data-price-display]').forEach(function (el) {
+        el.textContent = window.SepakateePricing.formatIdr(pr.priceIdr);
+      });
+    });
   </script>
 </body>
 </html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Library Dokumen | Sepakatee</title>
+  <link rel="icon" type="image/png" href="https://sepakatee.github.io/website/asset/Blue_and_Black_Minimalist_Brand_Logo-removebg-preview.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../style.css" />
+  <meta name="description" content="Jelajahi ratusan template dokumen hukum. Filter, cari, dan lihat estimasi harga per tier." />
+  <meta name="robots" content="noindex, follow" />
+  <style>
+    body { margin: 0; background: #fafafa; font-family: Poppins, system-ui, sans-serif; color: var(--primary, #0f0f10); }
+    .cat-wrap { max-width: 1200px; margin: 0 auto; padding: 24px 20px 80px; }
+    .cat-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 28px; }
+    .cat-top h1 { font-size: 1.5rem; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
+    .cat-top a { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 0.875rem; }
+    .cat-top a:hover { text-decoration: underline; }
+    .cat-live { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-bottom: 28px; }
+    .cat-live-card { background: #fff; border: 1px solid rgba(15,15,16,.08); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; }
+    .cat-live-card strong { font-size: 0.8125rem; color: rgba(15,15,16,.55); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+    .cat-live-card span { font-size: 0.9375rem; font-weight: 600; }
+    .cat-live-card a.btn { margin-top: 4px; text-align: center; text-decoration: none; }
+    .cat-toolbar { background: #fff; border: 1px solid rgba(15,15,16,.08); border-radius: 12px; padding: 16px 18px; margin-bottom: 20px; display: grid; grid-template-columns: 1fr repeat(3, minmax(0, 160px)) minmax(0, 120px); gap: 12px; align-items: end; }
+    @media (max-width: 900px) { .cat-toolbar { grid-template-columns: 1fr 1fr; } }
+    .cat-field label { display: block; font-size: 0.75rem; font-weight: 600; color: rgba(15,15,16,.55); margin-bottom: 6px; }
+    .cat-field input, .cat-field select { width: 100%; padding: 10px 12px; border: 1px solid rgba(15,15,16,.12); border-radius: 8px; font-family: inherit; font-size: 0.875rem; }
+    #catMeta { font-size: 0.8125rem; color: rgba(15,15,16,.6); margin-bottom: 16px; }
+    .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+    .catalog-card { background: #fff; border: 1px solid rgba(15,15,16,.08); border-radius: 12px; padding: 16px 18px; }
+    a.catalog-card { text-decoration: none; color: inherit; display: block; transition: box-shadow .2s, border-color .2s; }
+    a.catalog-card:hover { box-shadow: 0 8px 28px rgba(15,15,16,.08); border-color: rgba(15,15,16,.14); }
+    .catalog-card__badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .catalog-badge { font-size: 0.6875rem; font-weight: 600; padding: 4px 8px; border-radius: 6px; background: rgba(15,15,16,.06); color: rgba(15,15,16,.75); }
+    .catalog-badge--tier { background: rgba(37, 99, 235, .12); color: #1d4ed8; }
+    .catalog-badge--warn { background: rgba(245, 158, 11, .15); color: #b45309; }
+    .catalog-card__title { font-size: 0.9375rem; font-weight: 600; line-height: 1.45; margin: 0 0 10px; }
+    .catalog-card__price { font-size: 0.8125rem; margin: 0 0 6px; color: rgba(15,15,16,.75); }
+    .catalog-card__price strong { color: var(--primary); }
+    .catalog-card__hint { font-size: 0.75rem; color: rgba(15,15,16,.45); }
+    .catalog-card__meta { font-size: 0.75rem; color: rgba(15,15,16,.4); margin: 0; }
+    .catalog-empty { text-align: center; padding: 48px 20px; color: rgba(15,15,16,.55); }
+    .catalog-empty--error { color: #b91c1c; }
+    .catalog-empty--error a { color: #1d4ed8; }
+    #catPagination { display: none; align-items: center; justify-content: center; gap: 16px; margin-top: 28px; flex-wrap: wrap; }
+    .catalog-page-info { font-size: 0.875rem; color: rgba(15,15,16,.55); }
+  </style>
+</head>
+<body>
+  <div class="cat-wrap">
+    <div class="cat-top">
+      <div>
+        <h1>Library dokumen</h1>
+        <p style="margin:8px 0 0;font-size:0.875rem;color:rgba(15,15,16,.55);">Inventori dari file Word internal — tier &amp; harga estimasi mengikuti pengaturan situs.</p>
+      </div>
+      <a href="index.html">← Katalog template (curated)</a>
+    </div>
+
+    <section class="cat-live" aria-label="Template dengan builder online">
+      <div class="cat-live-card">
+        <strong>Live</strong>
+        <span>Perjanjian Sewa Menyewa Tempat</span>
+        <a class="btn btn--primary" href="sewa-menyewa/landing.html">Buat dokumen</a>
+      </div>
+      <div class="cat-live-card">
+        <strong>Live</strong>
+        <span>Perjanjian Kerja Sama Usaha (JV)</span>
+        <a class="btn btn--primary" href="kerja-sama/landing.html">Buat dokumen</a>
+      </div>
+      <div class="cat-live-card">
+        <strong>Demo</strong>
+        <span>Template dinamis (schema JSON · Tier B)</span>
+        <a class="btn btn--primary" href="dynamic/index.html">Coba builder</a>
+      </div>
+    </section>
+
+    <section class="cat-toolbar" aria-label="Filter">
+      <div class="cat-field" style="grid-column: 1 / -1;">
+        <label for="catSearch">Cari judul</label>
+        <input type="search" id="catSearch" placeholder="Contoh: kuasa, sewa, RUPS…" autocomplete="off" />
+      </div>
+      <div class="cat-field">
+        <label for="catFamily">Jenis dokumen</label>
+        <select id="catFamily">
+          <option value="">Semua jenis</option>
+        </select>
+      </div>
+      <div class="cat-field">
+        <label for="catTier">Paket layanan</label>
+        <select id="catTier">
+          <option value="">Semua paket</option>
+          <option value="A">Paket Panduan Penuh</option>
+          <option value="B">Paket Bisnis</option>
+          <option value="C">Paket Dasar</option>
+        </select>
+      </div>
+      <div class="cat-field">
+        <label for="catPageSize">Per halaman</label>
+        <select id="catPageSize">
+          <option value="24">24</option>
+          <option value="48" selected>48</option>
+          <option value="96">96</option>
+        </select>
+      </div>
+    </section>
+
+    <p id="catMeta"></p>
+    <div id="catList" class="catalog-grid" aria-live="polite"></div>
+    <div id="catPagination"></div>
+  </div>
+
+  <script src="data/catalog-inventory.bundle.js"></script>
+  <script src="_shared/pricing.js"></script>
+  <script src="_shared/paket-commercial.js"></script>
+  <script src="_shared/catalog-shim.js"></script>
+  <script src="_shared/catalog-app.js"></script>
+</body>
+</html>

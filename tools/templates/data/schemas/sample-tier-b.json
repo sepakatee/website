@@ -1,0 +1,45 @@
+{
+  "template_id": "sample-tier-b",
+  "slug": "sample-tier-b",
+  "tier": "B",
+  "category": "Demo",
+  "product": {
+    "name_id": "Contoh dokumen Tier B (dynamic template demo)"
+  },
+  "landing_content": {
+    "headline": "Contoh NDA ringkas (demo Tier B)",
+    "intro": "Alur schema-driven: isi field, lihat preview teks, lalu bayar (sandbox atau lewat Supabase Function). Ini bukan nasihat hukum."
+  },
+  "variables": [
+    {
+      "key": "nama_pihak_a",
+      "label": "Nama pihak pertama",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "nama_pihak_b",
+      "label": "Nama pihak kedua",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "objek",
+      "label": "Objek kerahasiaan (singkat)",
+      "type": "textarea",
+      "required": false
+    },
+    {
+      "key": "email_pembeli",
+      "label": "Email untuk struk",
+      "type": "text",
+      "required": true
+    }
+  ],
+  "preview_template": "PERJANJIAN KERAHASIAAN SEDERHANA\n\nAntara {{nama_pihak_a}} (\"Pihak Pertama\") dan {{nama_pihak_b}} (\"Pihak Kedua\") sepakat untuk menjaga kerahasiaan mengenai: {{objek}}.\n\nDemikian dibuat untuk keperluan demonstrasi produk Sepakatee.",
+  "seo_fields": {
+    "title": "Demo template dinamis | Sepakatee",
+    "robots": "noindex, nofollow",
+    "description": "Contoh builder berbasis JSON schema (Tier B)."
+  }
+}

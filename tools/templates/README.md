@@ -223,12 +223,46 @@ Receipt → sessionStorage (read all data)
 4. **Document changes** - Update this README when structure changes
 5. **Test complete flow** - Always test landing → form → preview → payment → receipt
 
+
+
+## Pricing and tier bands
+
+- Canonical **IDR amounts** and per-flow product names live in [`_shared/pricing.js`](_shared/pricing.js) (`window.SepakateePricing`). Tier **C** = lowest price, **B** = mid, **A** = highest.
+- Template folders that include `pricing.js` on landing, preview, payment, and invoice keep **displayed prices** and **iPaymu `amount`** aligned.
+
+## Raw `.docx` library (500+ files)
+
+- Files live under [`../../semua template`](../../semua%20template) (path from this folder: `website/semua template`).
+- Regenerate the indexed manifest (Pass-1 family tags + provisional tier heuristics):
+
+```bash
+node website/tools/templates/scripts/ingest-semua-template.mjs
+```
+
+- Output: [`data/catalog-inventory.json`](data/catalog-inventory.json). Pass-2 review guide: [`docs/TIER-RUBRIC.md`](docs/TIER-RUBRIC.md). Schema draft for config-driven templates: [`template-schema.json`](template-schema.json).
+
+
+
+## Library browse (500+ rows)
+
+- Halaman **[index.html](index.html)** (katalog utama) dan **[catalog.html](catalog.html)** memuat daftar dari `data/catalog-inventory.json` (pencarian, filter, tier, paginasi, harga dari `_shared/pricing.js`).
+- **`data/catalog-inventory.bundle.js`** menyalin data yang sama ke `window.__SEPAKATEE_CATALOG__` agar katalog tetap jalan bila `fetch` ke JSON gagal. Regenerasi: `node website/tools/templates/scripts/build-catalog-bundle.mjs` (juga dipanggil otomatis setelah **ingest**).
+
+## Checkout (browser vs Supabase)
+
+- **[`_shared/ipaymu-checkout.js`](_shared/ipaymu-checkout.js)** — dipakai `sewa-menyewa/preview.html`, `kerja-sama/preview.html`, dan demo **[`dynamic/index.html`](dynamic/index.html)**. Tanpa `window.__SEP_CREATE_PAYMENT_URL__` → sandbox + CryptoJS; dengan URL itu → **POST** ke Edge Function.
+- Function di repo: **[`../../../supabase/functions/create-ipaymu-session/index.ts`](../../../supabase/functions/create-ipaymu-session/index.ts)** — deploy & secrets: **[`docs/OWNER-RUNBOOK.md`](docs/OWNER-RUNBOOK.md)**.
+
+## Template dinamis (demo)
+
+- **[`dynamic/index.html`](dynamic/index.html)** + schema contoh **[`data/schemas/sample-tier-b.json`](data/schemas/sample-tier-b.json)** + **[`_shared/schema-dynamic-page.js`](_shared/schema-dynamic-page.js)**.
+
 ## 📞 Need Help?
 
 Questions about the structure? Check:
 1. Existing templates (sewa-menyewa, kerja-sama) as reference
 2. Shared utilities documentation above
-3. products.js for template registration examples
+3. **`template-catalog-main.js`** untuk katalog di `index.html`
 
 ---
 

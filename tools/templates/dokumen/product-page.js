@@ -809,7 +809,8 @@
           var Checkout = window.SepakateeIpaymuCheckout;
           if (!Checkout || !Checkout.redirectToPayment) {
             if (beliErr) {
-              beliErr.textContent = 'Pembayaran belum siap di peramban ini.';
+              beliErr.textContent =
+                'Modul pembayaran tidak termuat (ipaymu-checkout.js). Perbarui peramban, matikan pemblokir iklan untuk situs ini, buka konsol (F12) untuk error skrip, atau pastikan halaman diakses lewat http(s) bukan file://.';
               beliErr.style.display = 'block';
             }
             return;

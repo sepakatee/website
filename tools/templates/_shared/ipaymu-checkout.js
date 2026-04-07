@@ -241,11 +241,13 @@
     });
 
     var result = await response.json();
-    var paymentUrl = result?.Data?.Url || result?.Data?.PaymentUrl || null;
+    var d = result && result.Data;
+    var paymentUrl =
+      (d && d.Url) || (d && d.PaymentUrl) || null;
     if (!paymentUrl) {
       var errMsg =
-        result?.Message ||
-        result?.message ||
+        (result && result.Message) ||
+        (result && result.message) ||
         'Gagal mendapatkan URL pembayaran dari iPaymu';
       throw new Error(errMsg);
     }

@@ -563,13 +563,7 @@
     var btns = nav.querySelectorAll('[data-subject]');
     btns.forEach(function (btn) {
       btn.addEventListener('click', function () {
-        btns.forEach(function (b) {
-          b.classList.remove('is-active');
-          b.setAttribute('aria-selected', 'false');
-        });
-        btn.classList.add('is-active');
-        btn.setAttribute('aria-selected', 'true');
-        state.subject = btn.getAttribute('data-subject') || 'all';
+        setSubject(btn.getAttribute('data-subject') || 'all');
         applyFilters();
       });
     });
@@ -594,6 +588,53 @@
     var headerOffset = 80;
     var y = sec.getBoundingClientRect().top + window.pageYOffset - headerOffset;
     window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+
+  /** Marketing deep links (index.html pills) → sidebar data-subject */
+  var HASH_TO_SUBJECT = {
+    ketenagakerjaan: 'ketenagakerjaan',
+    'kontrak bisnis': 'bisnis_kontrak',
+    'perjanjian sewa': 'properti',
+  };
+
+  function normalizeHashFragment(raw) {
+    if (!raw) return '';
+    var h = String(raw).replace(/^#/, '');
+    try {
+      h = decodeURIComponent(h);
+    } catch (e) {}
+    return h
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, ' ');
+  }
+
+  function setSubject(subjectId) {
+    var nav = $('catalogSubjectNav');
+    var sid = subjectId || 'all';
+    state.subject = sid;
+    if (!nav) return;
+    var btns = nav.querySelectorAll('[data-subject]');
+    btns.forEach(function (b) {
+      var match = b.getAttribute('data-subject') === sid;
+      b.classList.toggle('is-active', match);
+      b.setAttribute('aria-selected', match ? 'true' : 'false');
+    });
+  }
+
+  function applyHashFromLocation() {
+    var norm = normalizeHashFragment(typeof location !== 'undefined' ? location.hash : '');
+    if (!norm) return false;
+    if (norm === 'katalog-dokumen') {
+      scrollToCatalog();
+      return true;
+    }
+    var subj = HASH_TO_SUBJECT[norm];
+    if (!subj) return false;
+    setSubject(subj);
+    applyFilters();
+    scrollToCatalog();
+    return true;
   }
 
   function init() {
@@ -653,6 +694,23 @@
         state.imageById = buildImageByIdMap(state.items, poolJson);
         state.filtered = state.items.slice();
         applyFilters();
+
+        try {
+          applyHashFromLocation();
+        } catch (eHash) {}
+
+        try {
+          var _params = new URLSearchParams(typeof location !== 'undefined' ? location.search : '');
+          var _qs = (_params.get('search') || _params.get('q') || '').trim();
+          if (_qs) {
+            var _mainS = $('catalogMainSearch');
+            var _heroS = $('templateSearch');
+            if (_mainS) _mainS.value = _qs;
+            if (_heroS) _heroS.value = _qs;
+            applyFilters();
+            scrollToCatalog();
+          }
+        } catch (eSync) {}
       })
       .catch(function (err) {
         console.error(err);
@@ -662,6 +720,13 @@
             '<p class="doc-cat-empty doc-cat-empty--err">Tidak dapat memuat daftar dokumen. Muat ulang halaman atau coba lagi sebentar lagi.</p>';
         }
       });
+
+    window.addEventListener('hashchange', function () {
+      if (!$('catalogMainGrid') || !state.items || !state.items.length) return;
+      try {
+        applyHashFromLocation();
+      } catch (eHc) {}
+    });
   }
 
   if (document.readyState === 'loading') {

@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Template dinamis | Sepakatee</title>
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="icon" type="image/png" href="https://sepakatee.github.io/website/asset/Blue_and_Black_Minimalist_Brand_Logo-removebg-preview.png" />
+    <link rel="icon" type="image/png" href="https://sepakatee.github.io/website/asset/Sepakatee%20Logo.png" />
+    <link rel="apple-touch-icon" href="https://sepakatee.github.io/website/asset/Sepakatee%20Logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../../../style.css?v=14" />
@@ -47,12 +48,12 @@
         <span class="dyn-price" id="dynPriceLine"></span>
       </div>
       <p style="margin-top:28px;font-size:0.75rem;color:rgba(15,15,16,.45);">
-        Demo teknis — set <code>window.__SEP_CREATE_PAYMENT_URL__</code> di console untuk uji Supabase Function.
+        Demo teknis — isi URL Worker di <code>_shared/checkout-endpoint.js</code> atau set <code>window.__SEP_CREATE_PAYMENT_URL__</code> di console.
       </p>
     </div>
 
-    <!-- Opsional: window.__SEP_CREATE_PAYMENT_URL__ = 'https://xxx.supabase.co/functions/v1/create-ipaymu-session'; -->
     <script src="../_shared/pricing.js"></script>
+    <script src="../_shared/checkout-endpoint.js"></script>
     <script src="../_shared/ipaymu-checkout.js"></script>
     <script src="../_shared/schema-dynamic-page.js"></script>
     <script>

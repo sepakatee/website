@@ -498,9 +498,9 @@ function replaceTxtTemplateVariables(txt, data) {
   return result;
 }
 
-const TEMPLATE_CACHE_VERSION = '20260410c';
-const SOURCE_DOCX_URL =
-  '../../../legaldocs/Kontraktify%20I%20Perjanjian%20Sewa%20Menyewa%20%5BTemplate%5D%20(1).docx';
+const TEMPLATE_CACHE_VERSION = '20260410d';
+const SOURCE_DOCX_FILENAME = 'Sepakatee I Perjanjian Sewa Menyewa [Template].docx';
+const SOURCE_DOCX_URL = '../../../legaldocs/' + encodeURIComponent(SOURCE_DOCX_FILENAME).replace(/%20/g, '%20');
 
 // Generate Word from TXT template (tools/templates/documents/perjanjian_sewa_menyewa_template_variables.txt)
 async function generateWordFromTxtTemplate(formData) {
@@ -553,13 +553,8 @@ function generateWordDocument(formData) {
 function downloadSourceDocx(referenceId) {
   const link = document.createElement('a');
   link.href = SOURCE_DOCX_URL + '?v=' + TEMPLATE_CACHE_VERSION;
-  const safeRef = String(referenceId || '')
-    .replace(/[^A-Za-z0-9_-]+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-  link.download = safeRef
-    ? `Kontraktify-Perjanjian-Sewa-Menyewa-${safeRef}.docx`
-    : 'Kontraktify-Perjanjian-Sewa-Menyewa.docx';
+  // Keep downloaded title exactly same as source Word document title.
+  link.download = SOURCE_DOCX_FILENAME;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

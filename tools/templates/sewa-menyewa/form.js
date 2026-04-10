@@ -501,6 +501,7 @@ function replaceTxtTemplateVariables(txt, data) {
 const TEMPLATE_CACHE_VERSION = '20260410d';
 const SOURCE_DOCX_FILENAME = 'Sepakatee I Perjanjian Sewa Menyewa [Template].docx';
 const SOURCE_DOCX_URL = '../../../legaldocs/' + encodeURIComponent(SOURCE_DOCX_FILENAME).replace(/%20/g, '%20');
+const JSZIP_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
 
 // Generate Word from TXT template (tools/templates/documents/perjanjian_sewa_menyewa_template_variables.txt)
 async function generateWordFromTxtTemplate(formData) {
@@ -550,14 +551,141 @@ function generateWordDocument(formData) {
   generateWordFromTxtTemplate(formData);
 }
 
-function downloadSourceDocx(referenceId) {
+function xmlEscape(v) {
+  return String(v == null ? '' : v)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+function replaceFirstN(input, needle, values) {
+  let out = input;
+  values.forEach((val) => {
+    const i = out.indexOf(needle);
+    if (i === -1) return;
+    out = out.slice(0, i) + xmlEscape(val) + out.slice(i + needle.length);
+  });
+  return out;
+}
+
+function replaceAllLiteral(input, needle, value) {
+  return input.split(needle).join(xmlEscape(value || ''));
+}
+
+function downloadBlobAsFile(blob, fileName) {
+  const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
-  link.href = SOURCE_DOCX_URL + '?v=' + TEMPLATE_CACHE_VERSION;
-  // Keep downloaded title exactly same as source Word document title.
-  link.download = SOURCE_DOCX_FILENAME;
+  link.href = url;
+  link.download = fileName;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+function ensureJsZipLoaded() {
+  if (window.JSZip) return Promise.resolve(window.JSZip);
+  return new Promise((resolve, reject) => {
+    const existing = document.querySelector('script[data-jszip="1"]');
+    if (existing) {
+      existing.addEventListener('load', () => resolve(window.JSZip));
+      existing.addEventListener('error', () => reject(new Error('Gagal memuat JSZip')));
+      return;
+    }
+    const s = document.createElement('script');
+    s.src = JSZIP_CDN;
+    s.async = true;
+    s.dataset.jszip = '1';
+    s.onload = () => resolve(window.JSZip);
+    s.onerror = () => reject(new Error('Gagal memuat JSZip'));
+    document.head.appendChild(s);
+  });
+}
+
+async function buildFilledSourceDocx(formData) {
+  await ensureJsZipLoaded();
+  const res = await fetch(SOURCE_DOCX_URL + '?v=' + TEMPLATE_CACHE_VERSION);
+  if (!res.ok) throw new Error('Template DOCX tidak tersedia di server');
+
+  const arrayBuffer = await res.arrayBuffer();
+  const zip = await window.JSZip.loadAsync(arrayBuffer);
+  const docXmlFile = zip.file('word/document.xml');
+  if (!docXmlFile) throw new Error('Template DOCX tidak valid');
+
+  let xml = await docXmlFile.async('string');
+  const d = Object.assign({}, formData || {});
+
+  if (d.tanggal_mulai) d.tanggal_mulai = formatDate(d.tanggal_mulai);
+  if (d.tanggal_akhir) d.tanggal_akhir = formatDate(d.tanggal_akhir);
+  if (d.batas_akhir_pelunasan) d.batas_akhir_pelunasan = formatDate(d.batas_akhir_pelunasan);
+
+  xml = replaceFirstN(xml, '[NAMA]', [d.nama_pemberi_sewa, d.nama_penyewa]);
+  xml = replaceFirstN(xml, '[NOMOR KTP]', [d.ktp_pemberi_sewa, d.ktp_penyewa]);
+  xml = replaceFirstN(xml, '[ALAMAT TINGGAL]', [d.alamat_pemberi_sewa, d.alamat_penyewa]);
+  xml = replaceFirstN(xml, '[HURUF RUPIAH]', [d.harga_sewa_huruf, d.nominal_deposit_huruf]);
+  xml = replaceFirstN(xml, '[JUMLAH HARI/BULAN]', [d.jumlah_hari_pemberitahuan, d.jumlah_hari_bulan_keterlambatan]);
+  xml = replaceFirstN(xml, '[HURUF]', [
+    d.huruf_hari_pemberitahuan,
+    d.huruf_hari_pelanggaran,
+    d.huruf_keterlambatan,
+    d.huruf_hari_pelanggaran,
+  ]);
+
+  const map = {
+    '[MASUKAN NOMOR SHM]': d.nomor_shm,
+    '[MASUKAN NAMA PEMILIK]': d.nama_pemilik_shm,
+    '[MASUKAN ALAMAT LENGKAP: JALAN, NO, RT/RW, KELURAHAN, KECAMATAN, KABUPATEN/KOTA, PROVINSI, KODE POS]': d.alamat_lengkap_tempat,
+    '[ANGKA NOMINAL]': d.harga_sewa_angka,
+    '[DURASI]': d.durasi_sewa,
+    '[TANGGAL MULAI]': d.tanggal_mulai,
+    '[TANGGAL AKHIR]': d.tanggal_akhir,
+    '[NAMA PEMILIK REKENING]': d.nama_pemilik_rekening,
+    '[NAMA BANK]': d.nama_bank,
+    '[NOMOR REKENING]': d.nomor_rekening,
+    '[NOMINAL DEPOSIT]': d.nominal_deposit,
+    '[JUMLAH CICILAN]': d.jumlah_cicilan,
+    '[NOMINAL CICILAN]': d.nominal_cicilan,
+    '[TANGGAL PEMBAYARAN]': d.tanggal_pembayaran,
+    '[BATAS AKHIR PELUNASAN]': d.batas_akhir_pelunasan,
+    '[PERSENTASE DENDA]': d.persentase_denda,
+    '[JUMLAH HARI]': d.jumlah_hari_pelanggaran,
+    '[BATAS WAKTU]': d.batas_waktu_penyelesaian,
+  };
+
+  Object.keys(map).forEach((k) => {
+    xml = replaceAllLiteral(xml, k, map[k]);
+  });
+
+  // Fill opening place/date sentence which is blank in source.
+  xml = xml.replace(
+    /dilangsungkan di\s*, pada hari\s*, tanggal\s*bulan\s*tahun\s*,/g,
+    'dilangsungkan di ' +
+      xmlEscape(d.tempat_penandatanganan || '') +
+      ', pada hari ' +
+      xmlEscape(d.hari || '') +
+      ', tanggal ' +
+      xmlEscape(d.tanggal || '') +
+      ' bulan ' +
+      xmlEscape(d.bulan || '') +
+      ' tahun ' +
+      xmlEscape(d.tahun || '') +
+      ','
+  );
+
+  zip.file('word/document.xml', xml);
+  return zip.generateAsync({ type: 'blob' });
+}
+
+async function downloadSourceDocxWithFormData(formData) {
+  try {
+    const blob = await buildFilledSourceDocx(formData || {});
+    downloadBlobAsFile(blob, SOURCE_DOCX_FILENAME);
+  } catch (e) {
+    console.error('DOCX fill error:', e);
+    throw e;
+  }
 }
 
 // SHA256 and HMAC-SHA256 using Web Crypto API (native browser, no CSP issues)
@@ -923,9 +1051,28 @@ function downloadDocument(formData) {
   const refFromStorage = sessionStorage.getItem('paymentReferenceId');
   const effectiveRef = refFromUrl || refFromStorage || '';
 
-  // Use the exact source DOCX to preserve original Word formatting.
+  // On receipt flow, fill data directly into source DOCX to preserve formatting.
   if (window.location.pathname.includes('receipt.html')) {
-    downloadSourceDocx(effectiveRef);
+    const btn = document.getElementById('downloadBtn');
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Menyiapkan dokumen...';
+    }
+    downloadSourceDocxWithFormData(formData || {})
+      .catch((err) => {
+        alert((err && err.message) || 'Gagal menyiapkan file .docx');
+      })
+      .finally(() => {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML =
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+            '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>' +
+            '<polyline points="7 10 12 15 17 10"></polyline>' +
+            '<line x1="12" y1="15" x2="12" y2="3"></line>' +
+            '</svg>Download Dokumen';
+        }
+      });
     return;
   }
 

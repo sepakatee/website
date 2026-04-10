@@ -1,30 +1,10 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 PERJANJIAN SEWA MENYEWA TEMPAT
 
+Perjanjian sewa menyewa tempat ini (untuk selanjutnya disebut “Perjanjian Sewa”) ditandatangani dan dilangsungkan di {{tempat_penandatanganan}}, pada hari {{hari}}, tanggal {{tanggal}} bulan {{bulan}} tahun {{tahun}}, oleh dan antara:
 
+{{nama_pemberi_sewa}}, pemilik KTP dengan nomor {{ktp_pemberi_sewa}} bertempat tinggal permanen di {{alamat_pemberi_sewa}} , untuk selanjutnya disebut “Pemberi Sewa”; dan
 
-
-
-
-Perjanjian sewa menyewa tempat ini (untuk selanjutnya disebut “Perjanjian Sewa”) ditandatangani dan dilangsungkan di      , pada hari      , tanggal       bulan       tahun      , oleh dan antara:
-
-{{nama}}, pemilik KTP dengan nomor {{nomor_ktp}} bertempat tinggal permanen di {{alamat_tinggal}} , untuk selanjutnya disebut “Pemberi Sewa”; dan
-
-{{nama}}, pemilik KTP dengan nomor {{nomor_ktp}} bertempat tinggal permanen di {{alamat_tinggal}}, untuk selanjutnya disebut “Penyewa”,
+{{nama_penyewa}}, pemilik KTP dengan nomor {{ktp_penyewa}} bertempat tinggal permanen di {{alamat_penyewa}}, untuk selanjutnya disebut “Penyewa”,
 
 secara bersama-sama disebut sebagai PARA PIHAK.
 
@@ -37,6 +17,41 @@ Bahwa, Pemberi Sewa bermaksud untuk menyewakan Tempat tersebut kepada Penyewa se
 Bahwa berdasarkan hal-hal tersebut di atas, Para Pihak menyatakan sepakat dan setuju untuk mengadakan dan menandatangani Perjanjian Sewa yang dilaksanakan dengan ketentuan dan syarat-syarat sebagai berikut:
 
 PASAL 1
+
+DEFINISI DAN INTERPRETASI
+
+Kata-kata dan ungkapan-ungkapan yang digunakan dalam Perjanjian ini memiliki pengertian sebagaimana ditetapkan dalam Lampiran 1, kecuali jika konteksnya menentukan lain.
+
+Dalam Perjanjian ini, kecuali jika konteksnya menentukan lain:
+
+kata-kata yang dalam bentuk tunggal mencakup bentuk jamak dan sebaliknya;
+
+kata-kata yang mengindikasikan jenis kelamin mencakup semua jenis kelamin;
+
+rujukan kepada dokumen apapun (termasuk Perjanjian ini) mencakup rujukan pada dokumen tersebut sebagaimana diamandemen, dikonsolidasikan, ditambahkan, diperbaharui atau diganti, dari waktu ke waktu;
+
+rujukan pada suatu perjanjian mencakup setiap usaha, representasi, akta, kesepakatan atau perintah yang berkekuatan hukum, pengaturan atau pemahaman baik secara tertulis atau tidak;
+
+rujukan pada Perjanjian ini berarti mencakup rujukan pada Perjanjian ini beserta aneks, lampiran, dan ekshibitnya;
+
+rujukan pada pasal, klausul, pendahuluan, lampiran, aneks, dan ekshibit merujuk pada pasal dan klausul, serta lampiran, aneks, dan ekshibit dalam Perjanjian ini;
+
+judul hanya untuk memudahkan dan harus diabaikan dalam menafsirkan Perjanjian ini;
+
+rujukan pada setiap orang atau Pihak manapun mencakup rujukan pada penerus, penerima kuasa atau substitusi, eksekutor dan administrator;
+
+referensi kepada orang mencakup rujukan pada seseorang, perusahaan, badan usaha, asosiasi, kemitraan, perusahaan patungan, perwalian atau negara atau pemerintah atau lembaga negara atau pemerintahan;
+
+jika suatu pembayaran atau tindakan lain (tetapi untuk klausul ini) harus dilakukan atau dilaksanakan pada hari yang bukan merupakan Hari Kerja, maka tindakan tersebut harus dilakukan atau dilaksanakan pada Hari Kerja berikutnya;
+
+Perjanjian ini merupakan hasil negosiasi antara Para Pihak dan pelaksanaan Perjanjian ini harus diinterpretasikan secara netral, dan tidak lebih kuat untuk atau melawan pihak mana pun berdasarkan sumber pembuatannya;
+
+referensi pada “Rupiah” atau “Rp” adalah merujuk pada Rupiah Indonesia.
+
+Lampiran dan Apendiks merupakan bagian yang tidak terpisahkan dari Perjanjian ini.
+
+PASAL 2
+
 KESEPAKATAN SEWA-MENYEWA
 
 Pemberi Sewa dengan ini sepakat untuk menyewakan Tempat kepada Penyewa sebagaimana Penyewa dengan ini sepakat untuk menyewa Tempat tersebut dari Pemberi Sewa.
@@ -47,7 +62,8 @@ Harga Sewa sebesar Rp {{harga_sewa_angka}} ({{harga_sewa_huruf}}) (“Harga Sewa
 
 Jangka Waktu Sewa adalah untuk selama {{durasi_sewa}} bulan/tahun*, yang dimulai pada tanggal {{tanggal_mulai}} dan berakhir pada tanggal {{tanggal_akhir}} (“Masa Sewa”).
 
-PASAL 2
+PASAL 3
+
 PEMBAYARAN
 
 Pembayaran atas Harga Sewa dilakukan oleh Penyewa kepada Pemberi Sewa melalui transfer ke rekening bank atas nama {{nama_pemilik_rekening}} pada {{nama_bank}}, nomor rekening {{nomor_rekening}}, selambat-lambatnya pada saat penandatanganan Perjanjian ini, kecuali disepakati lain secara tertulis oleh Para Pihak.
@@ -63,7 +79,8 @@ Apabila terjadi keterlambatan pembayaran, Penyewa dikenakan denda keterlambatan 
 
 Setiap pembayaran yang dilakukan oleh Penyewa wajib disertai dengan bukti transfer yang sah, dan Pemberi Sewa akan memberikan kuitansi atau tanda terima resmi sebagai bukti penerimaan.
 
-PASAL 3
+PASAL 4
+
 JAMINAN
 
 Pemberi Sewa memberikan jaminan sebagai berikut:
@@ -76,7 +93,8 @@ Apabila di kemudian hari terbukti bahwa jaminan yang diberikan Pemberi Sewa tida
 
 Penyewa menjamin bahwa selama Masa Sewa, Tempat akan digunakan dengan itikad baik, sesuai peruntukannya, tidak dialihsewakan tanpa persetujuan tertulis dari Pemberi Sewa, dan tidak digunakan untuk kegiatan yang melanggar hukum, peraturan perundang-undangan, atau ketertiban umum.
 
-PASAL 4
+PASAL 5
+
 PEMBEBANAN BIAYA DAN PERAWATAN
 
 Penyewa berhak menggunakan fasilitas yang telah tersedia pada Tempat, termasuk tetapi tidak terbatas pada aliran listrik, saluran telepon, dan air bersih (misalnya dari PDAM), sepanjang biaya penggunaannya ditanggung oleh Penyewa.
@@ -89,7 +107,8 @@ Penyewa wajib menjaga, merawat, dan mempertahankan Tempat dalam kondisi baik dan
 
 Perawatan struktural, termasuk perbaikan atas kerusakan besar yang bukan disebabkan oleh Penyewa, menjadi tanggung jawab Pemberi Sewa, kecuali disepakati lain secara tertulis oleh Para Pihak.
 
-PASAL 5
+PASAL 6
+
 HAK DAN KEWAJIBAN
 
 Selama masa berlakunya Perjanjian ini, Penyewa tidak diperkenankan untuk melakukan hal-hal berikut tanpa persetujuan tertulis terlebih dahulu dari Pemberi Sewa:
@@ -104,7 +123,8 @@ Mengubah, memodifikasi, atau membongkar bagian dari struktur dan/atau instalasi 
 
 Yang dimaksud dengan struktur dalam ketentuan ini mencakup seluruh bagian konstruksi tetap dari Tempat yang berfungsi menopang atau membentuk bangunan, termasuk namun tidak terbatas pada fondasi, balok, kolom, lantai, dinding, dan atap.
 
-PASAL 6
+PASAL 7
+
 KERUSAKAN DAN BENCANA ALAM
 
 Kerusakan pada struktur atau bagian lain dari Tempat yang timbul akibat penggunaan atau kelalaian selama masa sewa sepenuhnya menjadi tanggung jawab Penyewa, termasuk biaya perbaikan dan penggantian.
@@ -119,7 +139,8 @@ Kerusuhan massal, huru-hara, pemberontakan, aksi terorisme, sabotase, serta pera
 
 Tindakan pemerintah, peraturan baru, atau kebijakan otoritas yang secara langsung menghalangi pelaksanaan sebagian atau seluruh kewajiban dalam Perjanjian ini.
 
-PASAL 7
+PASAL 8
+
 SYARAT PEMUTUSAN HUBUNGAN OLEH PENYEWA
 
 Penyewa hanya dapat mengakhiri Perjanjian ini sebelum berakhirnya Masa Sewa, dengan syarat dan ketentuan sebagai berikut:
@@ -134,7 +155,8 @@ Menyerahkan kembali Tempat dalam kondisi sebagaimana disyaratkan dalam Perjanjia
 
 Dalam hal pemutusan dilakukan oleh Penyewa sebelum berakhirnya Masa Sewa, Penyewa tidak berhak menuntut pengembalian sebagian atau seluruh Harga Sewa atas sisa masa sewa yang belum dijalani, kecuali disepakati lain secara tertulis oleh Para Pihak.
 
-PASAL 8
+PASAL 9
+
 SYARAT PEMUTUSAN HUBUNGAN OLEH PEMBERI SEWA
 
 Pemberi Sewa berhak mengakhiri Perjanjian ini sebelum berakhirnya Masa Sewa, dengan syarat-syarat berikut:
@@ -149,26 +171,40 @@ Penyewa wajib segera menyerahkan kembali Tempat kepada Pemberi Sewa paling lamba
 
 Pemberi Sewa tidak berkewajiban untuk mengembalikan Harga Sewa atas sisa waktu sewa yang belum dijalani, serta berhak menuntut ganti rugi atas kerugian yang timbul akibat pelanggaran tersebut.
 
-PASAL 9
+PASAL 10
+
 MASA BERAKHIR KONTRAK
 
 Setelah berakhirnya Masa Sewa sesuai dengan ketentuan dalam Perjanjian ini, Penyewa wajib mengosongkan dan menyerahkan kembali Tempat kepada Pemberi Sewa dalam keadaan baik, bersih, dan layak pakai, serta telah memenuhi seluruh kewajiban lainnya berdasarkan Perjanjian ini, kecuali apabila Para Pihak secara tertulis menyepakati perpanjangan masa sewa.
 
+PASAL 11
 
-PASAL 10
 HUKUM YANG BERLAKU
 
 Perjanjian ini dan interpretasinya, penerapan dan seluruh sengketa yang timbul sehubungan dengan Perjanjian ini akan diatur dan ditafsirkan berdasarkan hukum Republik Indonesia.
 
-PASAL 11
+PASAL 12
+
 PERSELISIHAN DAN PENYELESAIAN PERSELISIHAN
 
 Bilamana dalam pelaksanaan Perjanjian Sewa ini terdapat perselisihan antara Para Pihak baik dalam pelaksanaannya ataupun dalam penafsiran salah satu Pasal dalam Perjanjian Sewa ini, maka Para Pihak sepakat untuk sedapat mungkin menyelesaikan perselisihan tersebut dengan cara musyawarah dalam waktu {{batas_waktu_penyelesaian}} hari sejak salah satu pihak yang merasa dirugikan menyatakan maksudnya untuk menyelesaikan perselisihan secara tertulis kepada pihak lainnya. Apabila musyawarah telah dilakukan oleh Para Pihak, namun ternyata tidak berhasil mencapai suatu kemufakatan maka Para Pihak sepakat bahwa segala perselisihan yang timbul dari perjanjian ini akan diselesaikan melalui Pengadilan Negeri.
 
-PASAL 11
+PASAL 13
+
 KETENTUAN PENUTUP
 
 Hal-hal yang belum diatur atau belum cukup diatur dalam Perjanjian Sewa ini apabila dikemudian hari dibutuhkan dan dianggap perlu akan ditetapkan tersendiri secara musyawarah dan selanjutnya akan ditetapkan dalam suatu Addendum yang berlaku mengikat Para Pihak, yang akan direkatkan dan merupakan bagian yang tidak terpisahkan dari Perjanjian Sewa ini.
 
 Demikianlah Perjanjian Investasi ini dibuat dalam rangkap 2 (dua), untuk masing-masing pihak, yang ditandatangani di atas kertas bermaterai cukup, yang masing-masing mempunyai kekuatan hukum yang sama dan berlaku sejak ditandatangani.
 
+PIHAK PERTAMA
+
+_____________________________________
+
+Nama:
+
+PIHAK KEDUA
+
+_____________________________________
+
+Nama:

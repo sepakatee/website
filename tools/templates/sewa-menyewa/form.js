@@ -498,9 +498,11 @@ function replaceTxtTemplateVariables(txt, data) {
   return result;
 }
 
+const TEMPLATE_CACHE_VERSION = '20260410b';
+
 // Generate Word from TXT template (tools/templates/documents/perjanjian_sewa_menyewa_template_variables.txt)
 async function generateWordFromTxtTemplate(formData) {
-  const url = '../documents/perjanjian_sewa_menyewa_template_variables.txt';
+  const url = '../documents/perjanjian_sewa_menyewa_template_variables.txt?v=' + TEMPLATE_CACHE_VERSION;
 
   let txtContent;
   try {

@@ -498,7 +498,9 @@ function replaceTxtTemplateVariables(txt, data) {
   return result;
 }
 
-const TEMPLATE_CACHE_VERSION = '20260410b';
+const TEMPLATE_CACHE_VERSION = '20260410c';
+const SOURCE_DOCX_URL =
+  '../../../legaldocs/Kontraktify%20I%20Perjanjian%20Sewa%20Menyewa%20%5BTemplate%5D%20(1).docx';
 
 // Generate Word from TXT template (tools/templates/documents/perjanjian_sewa_menyewa_template_variables.txt)
 async function generateWordFromTxtTemplate(formData) {
@@ -546,6 +548,21 @@ function downloadWordBlob(html) {
 // Generate and download Word document (uses TXT template, fallback to HTML)
 function generateWordDocument(formData) {
   generateWordFromTxtTemplate(formData);
+}
+
+function downloadSourceDocx(referenceId) {
+  const link = document.createElement('a');
+  link.href = SOURCE_DOCX_URL + '?v=' + TEMPLATE_CACHE_VERSION;
+  const safeRef = String(referenceId || '')
+    .replace(/[^A-Za-z0-9_-]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+  link.download = safeRef
+    ? `Kontraktify-Perjanjian-Sewa-Menyewa-${safeRef}.docx`
+    : 'Kontraktify-Perjanjian-Sewa-Menyewa.docx';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 // SHA256 and HMAC-SHA256 using Web Crypto API (native browser, no CSP issues)
@@ -907,6 +924,16 @@ function createFallbackFormData(buyerName, buyerEmail) {
 
 // Download document after payment confirmation
 function downloadDocument(formData) {
+  const refFromUrl = new URLSearchParams(window.location.search).get('ref');
+  const refFromStorage = sessionStorage.getItem('paymentReferenceId');
+  const effectiveRef = refFromUrl || refFromStorage || '';
+
+  // Use the exact source DOCX to preserve original Word formatting.
+  if (window.location.pathname.includes('receipt.html')) {
+    downloadSourceDocx(effectiveRef);
+    return;
+  }
+
   if (!formData) {
     // Try to get from sessionStorage
     const pendingDoc = sessionStorage.getItem('pendingDocument');

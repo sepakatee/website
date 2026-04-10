@@ -498,7 +498,7 @@ function replaceTxtTemplateVariables(txt, data) {
   return result;
 }
 
-const TEMPLATE_CACHE_VERSION = '20260410d';
+const TEMPLATE_CACHE_VERSION = '20260410f';
 const SOURCE_DOCX_FILENAME = 'Sepakatee I Perjanjian Sewa Menyewa [Template].docx';
 const SOURCE_DOCX_URL = '../../../legaldocs/' + encodeURIComponent(SOURCE_DOCX_FILENAME).replace(/%20/g, '%20');
 const JSZIP_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
@@ -560,18 +560,40 @@ function xmlEscape(v) {
     .replace(/'/g, '&apos;');
 }
 
-function replaceFirstN(input, needle, values) {
+function escapeRegExp(s) {
+  return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function buildTokenRunRegex(token) {
+  // Word sering memecah teks placeholder ke beberapa <w:t> berbeda.
+  // Regex ini mengizinkan sisipan tag XML di antara tiap karakter token.
+  const chars = Array.from(String(token || ''));
+  const sep = '(?:<[^>]+>)*';
+  return new RegExp(chars.map((c) => escapeRegExp(c)).join(sep), 'g');
+}
+
+function replaceTokenSmart(input, token, value) {
+  const escapedValue = xmlEscape(value || '');
   let out = input;
-  values.forEach((val) => {
-    const i = out.indexOf(needle);
-    if (i === -1) return;
-    out = out.slice(0, i) + xmlEscape(val) + out.slice(i + needle.length);
-  });
+  // Fast path: token utuh dalam 1 text node.
+  out = out.split(token).join(escapedValue);
+  // Fallback: token terpecah antar XML tags/runs.
+  out = out.replace(buildTokenRunRegex(token), escapedValue);
   return out;
 }
 
+function replaceFirstN(input, needle, values) {
+  const rx = buildTokenRunRegex(needle);
+  let idx = 0;
+  return input.replace(rx, () => {
+    if (idx >= values.length) return needle;
+    const v = values[idx++];
+    return xmlEscape(v || '');
+  });
+}
+
 function replaceAllLiteral(input, needle, value) {
-  return input.split(needle).join(xmlEscape(value || ''));
+  return replaceTokenSmart(input, needle, value);
 }
 
 function downloadBlobAsFile(blob, fileName) {

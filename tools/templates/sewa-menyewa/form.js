@@ -498,7 +498,7 @@ function replaceTxtTemplateVariables(txt, data) {
   return result;
 }
 
-const TEMPLATE_CACHE_VERSION = '20260410f';
+const TEMPLATE_CACHE_VERSION = '20260410g';
 const SOURCE_DOCX_FILENAME = 'Sepakatee I Perjanjian Sewa Menyewa [Template].docx';
 const SOURCE_DOCX_URL = '../../../legaldocs/' + encodeURIComponent(SOURCE_DOCX_FILENAME).replace(/%20/g, '%20');
 const JSZIP_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
@@ -588,11 +588,13 @@ function replaceFirstN(input, needle, values) {
   return input.replace(rx, () => {
     if (idx >= values.length) return needle;
     const v = values[idx++];
-    return xmlEscape(v || '');
+    if (v == null || String(v).trim() === '') return needle;
+    return xmlEscape(v);
   });
 }
 
 function replaceAllLiteral(input, needle, value) {
+  if (value == null || String(value).trim() === '') return input;
   return replaceTokenSmart(input, needle, value);
 }
 
@@ -684,15 +686,15 @@ async function buildFilledSourceDocx(formData) {
   xml = xml.replace(
     /dilangsungkan di\s*, pada hari\s*, tanggal\s*bulan\s*tahun\s*,/g,
     'dilangsungkan di ' +
-      xmlEscape(d.tempat_penandatanganan || '') +
+      xmlEscape((d.tempat_penandatanganan || '').trim() || '[TEMPAT PENANDATANGANAN]') +
       ', pada hari ' +
-      xmlEscape(d.hari || '') +
+      xmlEscape((d.hari || '').trim() || '[HARI]') +
       ', tanggal ' +
-      xmlEscape(d.tanggal || '') +
+      xmlEscape((d.tanggal || '').trim() || '[TANGGAL]') +
       ' bulan ' +
-      xmlEscape(d.bulan || '') +
+      xmlEscape((d.bulan || '').trim() || '[BULAN]') +
       ' tahun ' +
-      xmlEscape(d.tahun || '') +
+      xmlEscape((d.tahun || '').trim() || '[TAHUN]') +
       ','
   );
 

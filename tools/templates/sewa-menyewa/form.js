@@ -498,7 +498,7 @@ function replaceTxtTemplateVariables(txt, data) {
   return result;
 }
 
-const TEMPLATE_CACHE_VERSION = '20260410g';
+const TEMPLATE_CACHE_VERSION = '20260411a';
 const SOURCE_DOCX_FILENAME = 'Sepakatee I Perjanjian Sewa Menyewa [Template].docx';
 const SOURCE_DOCX_URL = '../../../legaldocs/' + encodeURIComponent(SOURCE_DOCX_FILENAME).replace(/%20/g, '%20');
 const JSZIP_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
@@ -645,12 +645,20 @@ async function buildFilledSourceDocx(formData) {
   if (d.tanggal_akhir) d.tanggal_akhir = formatDate(d.tanggal_akhir);
   if (d.batas_akhir_pelunasan) d.batas_akhir_pelunasan = formatDate(d.batas_akhir_pelunasan);
 
-  xml = replaceFirstN(xml, '[NAMA]', [d.nama_pemberi_sewa, d.nama_penyewa]);
-  xml = replaceFirstN(xml, '[NOMOR KTP]', [d.ktp_pemberi_sewa, d.ktp_penyewa]);
-  xml = replaceFirstN(xml, '[ALAMAT TINGGAL]', [d.alamat_pemberi_sewa, d.alamat_penyewa]);
-  xml = replaceFirstN(xml, '[HURUF RUPIAH]', [d.harga_sewa_huruf, d.nominal_deposit_huruf]);
-  xml = replaceFirstN(xml, '[JUMLAH HARI/BULAN]', [d.jumlah_hari_pemberitahuan, d.jumlah_hari_bulan_keterlambatan]);
-  xml = replaceFirstN(xml, '[HURUF]', [
+  // Token di DOCX memakai {{...}} (sering terpecah antar <w:r>); replaceTokenSmart menanganinya.
+  xml = replaceFirstN(xml, '{{NAMA}}', [d.nama_pemberi_sewa, d.nama_penyewa]);
+  xml = replaceFirstN(xml, '{{NOMOR_KTP}}', [d.ktp_pemberi_sewa, d.ktp_penyewa]);
+  xml = replaceFirstN(xml, '{{ALAMAT}}', [d.alamat_pemberi_sewa, d.alamat_penyewa]);
+  xml = replaceFirstN(xml, '{{JUMLAH HARI/BULAN}}', [
+    d.jumlah_hari_pemberitahuan,
+    d.jumlah_hari_bulan_keterlambatan,
+  ]);
+  xml = replaceFirstN(xml, '{{JUMLAH HARI}}', [
+    d.jumlah_hari_pelanggaran,
+    d.jumlah_hari_bulan_keterlambatan,
+    d.jumlah_hari_pelanggaran,
+  ]);
+  xml = replaceFirstN(xml, '{{HURUF}}', [
     d.huruf_hari_pemberitahuan,
     d.huruf_hari_pelanggaran,
     d.huruf_keterlambatan,
@@ -658,45 +666,35 @@ async function buildFilledSourceDocx(formData) {
   ]);
 
   const map = {
-    '[MASUKAN NOMOR SHM]': d.nomor_shm,
-    '[MASUKAN NAMA PEMILIK]': d.nama_pemilik_shm,
-    '[MASUKAN ALAMAT LENGKAP: JALAN, NO, RT/RW, KELURAHAN, KECAMATAN, KABUPATEN/KOTA, PROVINSI, KODE POS]': d.alamat_lengkap_tempat,
-    '[ANGKA NOMINAL]': d.harga_sewa_angka,
-    '[DURASI]': d.durasi_sewa,
-    '[TANGGAL MULAI]': d.tanggal_mulai,
-    '[TANGGAL AKHIR]': d.tanggal_akhir,
-    '[NAMA PEMILIK REKENING]': d.nama_pemilik_rekening,
-    '[NAMA BANK]': d.nama_bank,
-    '[NOMOR REKENING]': d.nomor_rekening,
-    '[NOMINAL DEPOSIT]': d.nominal_deposit,
-    '[JUMLAH CICILAN]': d.jumlah_cicilan,
-    '[NOMINAL CICILAN]': d.nominal_cicilan,
-    '[TANGGAL PEMBAYARAN]': d.tanggal_pembayaran,
-    '[BATAS AKHIR PELUNASAN]': d.batas_akhir_pelunasan,
-    '[PERSENTASE DENDA]': d.persentase_denda,
-    '[JUMLAH HARI]': d.jumlah_hari_pelanggaran,
-    '[BATAS WAKTU]': d.batas_waktu_penyelesaian,
+    '{{NOMOR_SHM}}': d.nomor_shm,
+    '{{NAMA_PEMILIK}}': d.nama_pemilik_shm,
+    '{{ALAMAT_LENGKAP}}': d.alamat_lengkap_tempat,
+    '{{ANGKA_NOMINAL}}': d.harga_sewa_angka,
+    '{{HURUF_RUPIAH}}': d.harga_sewa_huruf,
+    '{{HURUF RUPIAH}}': d.nominal_deposit_huruf,
+    '{{DURASI}}': d.durasi_sewa,
+    '{{TANGGAL_MULAI}}': d.tanggal_mulai,
+    '{{TANGGAL_AKHIR}}': d.tanggal_akhir,
+    '{{NAMA PEMILIK REKENING}}': d.nama_pemilik_rekening,
+    '{{NAMA BANK}}': d.nama_bank,
+    '{{NOMOR REKENING}}': d.nomor_rekening,
+    '{{NOMINAL DEPOSIT}}': d.nominal_deposit,
+    '{{JUMLAH CICILAN}}': d.jumlah_cicilan,
+    '{{NOMINAL CICILAN}}': d.nominal_cicilan,
+    '{{TANGGAL PEMBAYARAN}}': d.tanggal_pembayaran,
+    '{{BATAS AKHIR PELUNASAN}}': d.batas_akhir_pelunasan,
+    '{{PERSENTASE DENDA}}': d.persentase_denda,
+    '{{BATAS WAKTU}}': d.batas_waktu_penyelesaian,
+    '{{TEMPAT_PERJANJIAN}}': d.tempat_penandatanganan,
+    '{{NAMA_HARI}}': d.hari,
+    '{{NOMOR_TANGGAL}}': d.tanggal,
+    '{{NAMA_BULAN}}': d.bulan,
+    '{{NOMOR_TAHUN}}': d.tahun,
   };
 
   Object.keys(map).forEach((k) => {
     xml = replaceAllLiteral(xml, k, map[k]);
   });
-
-  // Fill opening place/date sentence which is blank in source.
-  xml = xml.replace(
-    /dilangsungkan di\s*, pada hari\s*, tanggal\s*bulan\s*tahun\s*,/g,
-    'dilangsungkan di ' +
-      xmlEscape((d.tempat_penandatanganan || '').trim() || '[TEMPAT PENANDATANGANAN]') +
-      ', pada hari ' +
-      xmlEscape((d.hari || '').trim() || '[HARI]') +
-      ', tanggal ' +
-      xmlEscape((d.tanggal || '').trim() || '[TANGGAL]') +
-      ' bulan ' +
-      xmlEscape((d.bulan || '').trim() || '[BULAN]') +
-      ' tahun ' +
-      xmlEscape((d.tahun || '').trim() || '[TAHUN]') +
-      ','
-  );
 
   zip.file('word/document.xml', xml);
   return zip.generateAsync({ type: 'blob' });

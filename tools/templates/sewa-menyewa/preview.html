@@ -86,6 +86,8 @@
         border: 1px solid rgba(15, 15, 16, 0.1);
         border-radius: 10px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        text-align: justify;
+        text-justify: inter-word;
       }
 
       .preview-notes__title {
@@ -109,6 +111,8 @@
       .preview-notes__list li {
         margin-bottom: 10px;
         padding-left: 0;
+        text-align: justify;
+        text-justify: inter-word;
       }
 
       .preview-notes__list li:last-child {
@@ -309,6 +313,52 @@
         padding: 0.5em;
       }
 
+      /* Penomoran kontrak (sinkron dengan <style> di body template form.js) */
+      .preview-document-full ol.contract-numbered-list {
+        list-style: none;
+        counter-reset: docnum;
+        margin: 12px 0 16px;
+        padding: 0;
+      }
+      .preview-document-full ol.contract-numbered-list > li {
+        counter-increment: docnum;
+        position: relative;
+        padding-left: 2.35em;
+        margin: 10px 0;
+        text-align: justify;
+      }
+      .preview-document-full ol.contract-numbered-list > li::before {
+        content: '(' counter(docnum, decimal) ')';
+        position: absolute;
+        left: 0;
+        width: 2.1em;
+        text-align: right;
+        font-weight: 700;
+      }
+      .preview-document-full ol.contract-letter-list {
+        list-style: none;
+        counter-reset: doclet;
+        margin: 12px 0 16px;
+        padding: 0;
+      }
+      .preview-document-full ol.contract-letter-list > li {
+        counter-increment: doclet;
+        position: relative;
+        padding-left: 2em;
+        margin: 10px 0;
+        text-align: justify;
+      }
+      .preview-document-full ol.contract-letter-list > li::before {
+        content: counter(doclet, lower-alpha) '.';
+        position: absolute;
+        left: 0;
+        width: 1.5em;
+        font-weight: 700;
+      }
+      .preview-document-full ol.contract-numbered-list ol.contract-letter-list {
+        margin: 8px 0 4px;
+      }
+
       .preview-document-full .filled-field {
         background: rgba(255, 235, 59, 0.55);
         color: var(--primary);
@@ -391,13 +441,10 @@
               <h4 id="preview-notes-title" class="preview-notes__title">Ketentuan berkas unduhan</h4>
               <ul class="preview-notes__list">
                 <li>
-                  🟡 Pada berkas Word yang Anda unduh, bagian yang sudah Anda isi di formulir akan ditandai dengan
-                  <strong>sorotan kuning</strong>. Sorotan ini dapat disesuaikan atau dihapus sesuai kebutuhan; kami
-                  <strong>menyarankan</strong> Anda meninjau ulang naskah sebelum digunakan secara resmi.
+                  🟡 <strong>Sorotan kuning</strong> di Word = isian Anda (boleh diedit). <strong>Tinjau ulang</strong> sebelum dipakai resmi.
                 </li>
                 <li>
-                  ✏️ Teks berbentuk <code>{{nama_kolom}}</code> menandakan kolom yang
-                  <strong>belum dilengkapi</strong>. Mohon dilengkapi di Word terlebih dahulu agar perjanjian mencerminkan data Anda dengan tepat.
+                  ✏️ <code>{{nama_kolom}}</code> = <strong>belum diisi</strong>—lengkapi di Word sebelum penandatanganan.
                 </li>
               </ul>
             </aside>
@@ -438,7 +485,7 @@
     <script src="../_shared/pricing.js"></script>
     <script src="../_shared/checkout-endpoint.js"></script>
     <script src="../_shared/ipaymu-checkout.js"></script>
-    <script src="form.js?v=20260411e"></script>
+    <script src="form.js?v=20260411f"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         var pr0 = window.SepakateePricing.getByPath(window.location.pathname);

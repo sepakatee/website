@@ -17,6 +17,15 @@ const documentTemplate = `<!DOCTYPE html>
     </style>
 </head>
 <body>
+<style>
+ol.contract-numbered-list { list-style: none; counter-reset: docnum; margin: 12px 0 16px; padding: 0; }
+ol.contract-numbered-list > li { counter-increment: docnum; position: relative; padding-left: 2.35em; margin: 10px 0; text-align: justify; }
+ol.contract-numbered-list > li::before { content: "(" counter(docnum, decimal) ")"; position: absolute; left: 0; width: 2.1em; text-align: right; font-weight: 700; }
+ol.contract-letter-list { list-style: none; counter-reset: doclet; margin: 12px 0 16px; padding: 0; }
+ol.contract-letter-list > li { counter-increment: doclet; position: relative; padding-left: 2em; margin: 10px 0; text-align: justify; }
+ol.contract-letter-list > li::before { content: counter(doclet, lower-alpha) "."; position: absolute; left: 0; width: 1.5em; font-weight: 700; }
+ol.contract-numbered-list ol.contract-letter-list { margin: 8px 0 4px; }
+</style>
     <h1>PERJANJIAN SEWA MENYEWA TEMPAT</h1>
     <p>PERJANJIAN SEWA MENYEWA TEMPAT</p>
     <p>Perjanjian sewa menyewa tempat ini (untuk selanjutnya disebut “Perjanjian Sewa”) ditandatangani dan dilangsungkan di {{tempat_penandatanganan}}, pada hari {{hari}}, tanggal {{tanggal}} bulan {{bulan}} tahun {{tahun}}, oleh dan antara:</p>
@@ -30,30 +39,39 @@ const documentTemplate = `<!DOCTYPE html>
     <div class="section-title">PASAL 1<br>DEFINISI DAN INTERPRETASI</div>
     <p>Kata-kata dan ungkapan-ungkapan yang digunakan dalam Perjanjian ini memiliki pengertian sebagaimana ditetapkan dalam Lampiran 1, kecuali jika konteksnya menentukan lain.</p>
     <p>Dalam Perjanjian ini, kecuali jika konteksnya menentukan lain:</p>
-    <p>kata-kata yang dalam bentuk tunggal mencakup bentuk jamak dan sebaliknya;</p>
-    <p>kata-kata yang mengindikasikan jenis kelamin mencakup semua jenis kelamin;</p>
-    <p>rujukan kepada dokumen apapun (termasuk Perjanjian ini) mencakup rujukan pada dokumen tersebut sebagaimana diamandemen, dikonsolidasikan, ditambahkan, diperbaharui atau diganti, dari waktu ke waktu;</p>
-    <p>rujukan pada suatu perjanjian mencakup setiap usaha, representasi, akta, kesepakatan atau perintah yang berkekuatan hukum, pengaturan atau pemahaman baik secara tertulis atau tidak;</p>
-    <p>rujukan pada Perjanjian ini berarti mencakup rujukan pada Perjanjian ini beserta aneks, lampiran, dan ekshibitnya;</p>
-    <p>rujukan pada pasal, klausul, pendahuluan, lampiran, aneks, dan ekshibit merujuk pada pasal dan klausul, serta lampiran, aneks, dan ekshibit dalam Perjanjian ini;</p>
-    <p>judul hanya untuk memudahkan dan harus diabaikan dalam menafsirkan Perjanjian ini;</p>
-    <p>rujukan pada setiap orang atau Pihak manapun mencakup rujukan pada penerus, penerima kuasa atau substitusi, eksekutor dan administrator;</p>
-    <p>referensi kepada orang mencakup rujukan pada seseorang, perusahaan, badan usaha, asosiasi, kemitraan, perusahaan patungan, perwalian atau negara atau pemerintah atau lembaga negara atau pemerintahan;</p>
-    <p>jika suatu pembayaran atau tindakan lain (tetapi untuk klausul ini) harus dilakukan atau dilaksanakan pada hari yang bukan merupakan Hari Kerja, maka tindakan tersebut harus dilakukan atau dilaksanakan pada Hari Kerja berikutnya;</p>
-    <p>Perjanjian ini merupakan hasil negosiasi antara Para Pihak dan pelaksanaan Perjanjian ini harus diinterpretasikan secara netral, dan tidak lebih kuat untuk atau melawan pihak mana pun berdasarkan sumber pembuatannya;</p>
-    <p>referensi pada “Rupiah” atau “Rp” adalah merujuk pada Rupiah Indonesia.</p>
-    <p>Lampiran dan Apendiks merupakan bagian yang tidak terpisahkan dari Perjanjian ini.</p>
+    <ol class="contract-numbered-list">
+    <li>kata-kata yang dalam bentuk tunggal mencakup bentuk jamak dan sebaliknya;</li>
+    <li>kata-kata yang mengindikasikan jenis kelamin mencakup semua jenis kelamin;</li>
+    <li>rujukan kepada dokumen apapun (termasuk Perjanjian ini) mencakup rujukan pada dokumen tersebut sebagaimana diamandemen, dikonsolidasikan, ditambahkan, diperbaharui atau diganti, dari waktu ke waktu;</li>
+    <li>rujukan pada suatu perjanjian mencakup setiap usaha, representasi, akta, kesepakatan atau perintah yang berkekuatan hukum, pengaturan atau pemahaman baik secara tertulis atau tidak;</li>
+    <li>rujukan pada Perjanjian ini berarti mencakup rujukan pada Perjanjian ini beserta aneks, lampiran, dan ekshibitnya;</li>
+    <li>rujukan pada pasal, klausul, pendahuluan, lampiran, aneks, dan ekshibit merujuk pada pasal dan klausul, serta lampiran, aneks, dan ekshibit dalam Perjanjian ini;</li>
+    <li>judul hanya untuk memudahkan dan harus diabaikan dalam menafsirkan Perjanjian ini;</li>
+    <li>rujukan pada setiap orang atau Pihak manapun mencakup rujukan pada penerus, penerima kuasa atau substitusi, eksekutor dan administrator;</li>
+    <li>referensi kepada orang mencakup rujukan pada seseorang, perusahaan, badan usaha, asosiasi, kemitraan, perusahaan patungan, perwalian atau negara atau pemerintah atau lembaga negara atau pemerintahan;</li>
+    <li>jika suatu pembayaran atau tindakan lain (tetapi untuk klausul ini) harus dilakukan atau dilaksanakan pada hari yang bukan merupakan Hari Kerja, maka tindakan tersebut harus dilakukan atau dilaksanakan pada Hari Kerja berikutnya;</li>
+    <li>Perjanjian ini merupakan hasil negosiasi antara Para Pihak dan pelaksanaan Perjanjian ini harus diinterpretasikan secara netral, dan tidak lebih kuat untuk atau melawan pihak mana pun berdasarkan sumber pembuatannya;</li>
+    <li>referensi pada “Rupiah” atau “Rp” adalah merujuk pada Rupiah Indonesia.</li>
+    <li>Lampiran dan Apendiks merupakan bagian yang tidak terpisahkan dari Perjanjian ini.</li>
+    </ol>
     <div class="section-title">PASAL 2<br>KESEPAKATAN SEWA-MENYEWA</div>
-    <p>Pemberi Sewa dengan ini sepakat untuk menyewakan Tempat kepada Penyewa sebagaimana Penyewa dengan ini sepakat untuk menyewa Tempat tersebut dari Pemberi Sewa.</p>
-    <p>Sewa menyewa Tempat sebagaimana dimaksud ayat (1) dilaksanakan dengan ketentuan sebagai berikut:</p>
-    <p>Harga Sewa sebesar Rp {{harga_sewa_angka}} ({{harga_sewa_huruf}}) (“Harga Sewa”).</p>
-    <p>Jangka Waktu Sewa adalah untuk selama {{durasi_sewa}} bulan/tahun*, yang dimulai pada tanggal {{tanggal_mulai}} dan berakhir pada tanggal {{tanggal_akhir}} (“Masa Sewa”).</p>
+    <ol class="contract-numbered-list">
+    <li>Pemberi Sewa dengan ini sepakat untuk menyewakan Tempat kepada Penyewa sebagaimana Penyewa dengan ini sepakat untuk menyewa Tempat tersebut dari Pemberi Sewa.</li>
+    <li>Sewa menyewa Tempat sebagaimana dimaksud ayat (1) dilaksanakan dengan ketentuan sebagai berikut:
+        <ol class="contract-letter-list">
+        <li>Harga Sewa sebesar Rp {{harga_sewa_angka}} ({{harga_sewa_huruf}}) (“Harga Sewa”).</li>
+        <li>Jangka Waktu Sewa adalah untuk selama {{durasi_sewa}} bulan/tahun*, yang dimulai pada tanggal {{tanggal_mulai}} dan berakhir pada tanggal {{tanggal_akhir}} (“Masa Sewa”).</li>
+        </ol>
+    </li>
+    </ol>
     <div class="section-title">PASAL 3<br>PEMBAYARAN</div>
     <p>Pembayaran atas Harga Sewa dilakukan oleh Penyewa kepada Pemberi Sewa melalui transfer ke rekening bank atas nama {{nama_pemilik_rekening}} pada {{nama_bank}}, nomor rekening {{nomor_rekening}}, selambat-lambatnya pada saat penandatanganan Perjanjian ini, kecuali disepakati lain secara tertulis oleh Para Pihak.</p>
     <p>Apabila disepakati pembayaran secara bertahap, maka:</p>
-    <p>Penyewa wajib membayar deposit awal sebesar Rp {{nominal_deposit}} ({{nominal_deposit_huruf}}) pada saat penandatanganan Perjanjian ini; dan</p>
-    <p>Sisa Harga Sewa dibayarkan dalam {{jumlah_cicilan}} kali cicilan, masing-masing sebesar Rp {{nominal_cicilan}}, paling lambat setiap tanggal {{tanggal_pembayaran}};</p>
-    <p style="margin-left:16px;">c. Seluruh Harga Sewa harus telah dibayar lunas paling lambat pada tanggal {{batas_akhir_pelunasan}}.</p>
+    <ol class="contract-letter-list">
+    <li>Penyewa wajib membayar deposit awal sebesar Rp {{nominal_deposit}} ({{nominal_deposit_huruf}}) pada saat penandatanganan Perjanjian ini; dan</li>
+    <li>Sisa Harga Sewa dibayarkan dalam {{jumlah_cicilan}} kali cicilan, masing-masing sebesar Rp {{nominal_cicilan}}, paling lambat setiap tanggal {{tanggal_pembayaran}};</li>
+    <li>Seluruh Harga Sewa harus telah dibayar lunas paling lambat pada tanggal {{batas_akhir_pelunasan}}.</li>
+    </ol>
     <p>Apabila terjadi keterlambatan pembayaran, Penyewa dikenakan denda keterlambatan sebesar {{persentase_denda}}% dari jumlah yang tertunda per hari kalender keterlambatan, kecuali keterlambatan disebabkan oleh force majeure yang dibuktikan secara memadai.</p>
     <p>Setiap pembayaran yang dilakukan oleh Penyewa wajib disertai dengan bukti transfer yang sah, dan Pemberi Sewa akan memberikan kuitansi atau tanda terima resmi sebagai bukti penerimaan.</p>
     <div class="section-title">PASAL 4<br>JAMINAN</div>
@@ -70,32 +88,40 @@ const documentTemplate = `<!DOCTYPE html>
     <p>Perawatan struktural, termasuk perbaikan atas kerusakan besar yang bukan disebabkan oleh Penyewa, menjadi tanggung jawab Pemberi Sewa, kecuali disepakati lain secara tertulis oleh Para Pihak.</p>
     <div class="section-title">PASAL 6<br>HAK DAN KEWAJIBAN</div>
     <p>Selama masa berlakunya Perjanjian ini, Penyewa tidak diperkenankan untuk melakukan hal-hal berikut tanpa persetujuan tertulis terlebih dahulu dari Pemberi Sewa:</p>
-    <p>Mengalihkan, memindahtangankan, atau menyerahkan sebagian atau seluruh hak sewa kepada pihak ketiga, baik dalam bentuk sewa ulang (sublease), pengalihan hak, atau bentuk perikatan lainnya;</p>
-    <p>Menggunakan Tempat untuk tujuan lain selain yang secara tegas disepakati dalam Perjanjian ini;</p>
-    <p>Mendirikan bangunan tambahan, melakukan penggalian, atau pembangunan lainnya di dalam atau di sekitar Tempat, termasuk pembuatan sumur bor, tanpa izin tertulis dari Pemberi Sewa; dan/atau</p>
-    <p>Mengubah, memodifikasi, atau membongkar bagian dari struktur dan/atau instalasi tetap yang terdapat dalam Tempat, termasuk tetapi tidak terbatas pada instalasi listrik, saluran air, partisi permanen, atau sistem bangunan lainnya.</p>
+    <ol class="contract-letter-list">
+    <li>Mengalihkan, memindahtangankan, atau menyerahkan sebagian atau seluruh hak sewa kepada pihak ketiga, baik dalam bentuk sewa ulang (sublease), pengalihan hak, atau bentuk perikatan lainnya;</li>
+    <li>Menggunakan Tempat untuk tujuan lain selain yang secara tegas disepakati dalam Perjanjian ini;</li>
+    <li>Mendirikan bangunan tambahan, melakukan penggalian, atau pembangunan lainnya di dalam atau di sekitar Tempat, termasuk pembuatan sumur bor, tanpa izin tertulis dari Pemberi Sewa; dan/atau</li>
+    <li>Mengubah, memodifikasi, atau membongkar bagian dari struktur dan/atau instalasi tetap yang terdapat dalam Tempat, termasuk tetapi tidak terbatas pada instalasi listrik, saluran air, partisi permanen, atau sistem bangunan lainnya.</li>
+    </ol>
     <p>Yang dimaksud dengan struktur dalam ketentuan ini mencakup seluruh bagian konstruksi tetap dari Tempat yang berfungsi menopang atau membentuk bangunan, termasuk namun tidak terbatas pada fondasi, balok, kolom, lantai, dinding, dan atap.</p>
     <div class="section-title">PASAL 7<br>KERUSAKAN DAN BENCANA ALAM</div>
     <p>Kerusakan pada struktur atau bagian lain dari Tempat yang timbul akibat penggunaan atau kelalaian selama masa sewa sepenuhnya menjadi tanggung jawab Penyewa, termasuk biaya perbaikan dan penggantian.</p>
     <p>Penyewa dibebaskan dari segala tuntutan, ganti rugi, atau kewajiban kepada Pemberi Sewa atas kerusakan Tempat yang secara langsung disebabkan oleh kejadian Force Majeure, sepanjang Penyewa dapat membuktikan bahwa kerusakan tersebut bukan akibat kelalaian atau pelanggaran terhadap ketentuan Perjanjian ini.</p>
     <p>Yang dimaksud dengan “Force Majeure” dalam Perjanjian ini mencakup namun tidak terbatas pada:</p>
-    <p>Bencana alam, seperti banjir, gempa bumi, tanah longsor, petir, angin topan, dan kebakaran yang disebabkan oleh faktor eksternal yang berada di luar kendali Para Pihak;</p>
-    <p>Kerusuhan massal, huru-hara, pemberontakan, aksi terorisme, sabotase, serta perang (baik dinyatakan maupun tidak dinyatakan); dan/atau</p>
-    <p>Tindakan pemerintah, peraturan baru, atau kebijakan otoritas yang secara langsung menghalangi pelaksanaan sebagian atau seluruh kewajiban dalam Perjanjian ini.</p>
+    <ol class="contract-letter-list">
+    <li>Bencana alam, seperti banjir, gempa bumi, tanah longsor, petir, angin topan, dan kebakaran yang disebabkan oleh faktor eksternal yang berada di luar kendali Para Pihak;</li>
+    <li>Kerusuhan massal, huru-hara, pemberontakan, aksi terorisme, sabotase, serta perang (baik dinyatakan maupun tidak dinyatakan); dan/atau</li>
+    <li>Tindakan pemerintah, peraturan baru, atau kebijakan otoritas yang secara langsung menghalangi pelaksanaan sebagian atau seluruh kewajiban dalam Perjanjian ini.</li>
+    </ol>
     <div class="section-title">PASAL 8<br>SYARAT PEMUTUSAN HUBUNGAN OLEH PENYEWA</div>
     <p>Penyewa hanya dapat mengakhiri Perjanjian ini sebelum berakhirnya Masa Sewa, dengan syarat dan ketentuan sebagai berikut:</p>
     <p>Penyewa wajib memberitahukan maksud pengakhiran secara tertulis kepada Pemberi Sewa paling lambat {{jumlah_hari_pemberitahuan}} ({{huruf_hari_pemberitahuan}}) sebelum tanggal pengakhiran yang dimaksud.</p>
     <p>Sebelum tanggal efektif pengakhiran, Penyewa telah:</p>
-    <p>Membayar seluruh tagihan, rekening, dan biaya lain yang timbul dari penggunaan Tempat; dan</p>
-    <p>Menyerahkan kembali Tempat dalam kondisi sebagaimana disyaratkan dalam Perjanjian ini, kecuali untuk keausan normal (wear and tear).</p>
+    <ol class="contract-letter-list">
+    <li>Membayar seluruh tagihan, rekening, dan biaya lain yang timbul dari penggunaan Tempat; dan</li>
+    <li>Menyerahkan kembali Tempat dalam kondisi sebagaimana disyaratkan dalam Perjanjian ini, kecuali untuk keausan normal (wear and tear).</li>
+    </ol>
     <p>Dalam hal pemutusan dilakukan oleh Penyewa sebelum berakhirnya Masa Sewa, Penyewa tidak berhak menuntut pengembalian sebagian atau seluruh Harga Sewa atas sisa masa sewa yang belum dijalani, kecuali disepakati lain secara tertulis oleh Para Pihak.</p>
     <div class="section-title">PASAL 9<br>SYARAT PEMUTUSAN HUBUNGAN OLEH PEMBERI SEWA</div>
     <p>Pemberi Sewa berhak mengakhiri Perjanjian ini sebelum berakhirnya Masa Sewa, dengan syarat-syarat berikut:</p>
     <p>Penyewa melanggar atau lalai melaksanakan salah satu ketentuan atau kewajiban dalam Perjanjian ini, dan tidak memperbaiki pelanggaran tersebut dalam jangka waktu {{jumlah_hari_pelanggaran}} ({{huruf_hari_pelanggaran}}) hari kalender sejak tanggal pemberitahuan tertulis dari Pemberi Sewa; atau</p>
     <p>Penyewa lalai membayar Harga Sewa, biaya perawatan, dan/atau tagihan lain yang menjadi kewajiban Penyewa, selama lebih dari {{jumlah_hari_bulan_keterlambatan}} ({{huruf_keterlambatan}}) hari/bulan* setelah tanggal jatuh tempo pembayaran.</p>
     <p>Dalam hal Perjanjian ini diakhiri oleh Pemberi Sewa berdasarkan ayat (1), maka:</p>
-    <p>Penyewa wajib segera menyerahkan kembali Tempat kepada Pemberi Sewa paling lambat {{jumlah_hari_pelanggaran}} ({{huruf_hari_pelanggaran}}) hari setelah tanggal efektif pengakhiran; dan</p>
-    <p>Pemberi Sewa tidak berkewajiban untuk mengembalikan Harga Sewa atas sisa waktu sewa yang belum dijalani, serta berhak menuntut ganti rugi atas kerugian yang timbul akibat pelanggaran tersebut.</p>
+    <ol class="contract-letter-list">
+    <li>Penyewa wajib segera menyerahkan kembali Tempat kepada Pemberi Sewa paling lambat {{jumlah_hari_pelanggaran}} ({{huruf_hari_pelanggaran}}) hari setelah tanggal efektif pengakhiran; dan</li>
+    <li>Pemberi Sewa tidak berkewajiban untuk mengembalikan Harga Sewa atas sisa waktu sewa yang belum dijalani, serta berhak menuntut ganti rugi atas kerugian yang timbul akibat pelanggaran tersebut.</li>
+    </ol>
     <div class="section-title">PASAL 10<br>MASA BERAKHIR KONTRAK</div>
     <p>Setelah berakhirnya Masa Sewa sesuai dengan ketentuan dalam Perjanjian ini, Penyewa wajib mengosongkan dan menyerahkan kembali Tempat kepada Pemberi Sewa dalam keadaan baik, bersih, dan layak pakai, serta telah memenuhi seluruh kewajiban lainnya berdasarkan Perjanjian ini, kecuali apabila Para Pihak secara tertulis menyepakati perpanjangan masa sewa.</p>
     <div class="section-title">PASAL 11<br>HUKUM YANG BERLAKU</div>
@@ -456,7 +482,7 @@ function replaceTxtTemplateVariables(txt, data) {
   return result;
 }
 
-const TEMPLATE_CACHE_VERSION = '20260411e';
+const TEMPLATE_CACHE_VERSION = '20260411f';
 const SOURCE_DOCX_FILENAME = 'Sepakatee I Perjanjian Sewa Menyewa [Template].docx';
 const SOURCE_DOCX_URL = '../../../legaldocs/' + encodeURIComponent(SOURCE_DOCX_FILENAME).replace(/%20/g, '%20');
 const JSZIP_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';

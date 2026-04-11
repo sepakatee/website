@@ -15,740 +15,8 @@
     <link rel="stylesheet" href="../../style.css" />
     <meta
       name="description"
-      content="Pilih dari ratusan template dokumen hukum Sepakatee yang disusun ahli hukum — pembayaran per dokumen, tier C/B/A hingga Rp 199.000."
+      content="Pilih dari ratusan template dokumen hukum yang dibuat oleh ahli hukum untuk kebutuhan bisnismu."
     />
-    <style>
-      /* Katalog dokumen — tampilan komersial */
-      .doc-cat {
-        --dc-ink: #0c0d10;
-        --dc-muted: #5c5f69;
-        --dc-line: rgba(12, 13, 16, 0.09);
-        --dc-accent: #1a1b1f;
-        --dc-gold: #b8860b;
-        --dc-tier-a: #1a1b1f;
-        --dc-tier-b: #1e3a5f;
-        --dc-tier-c: #4a5568;
-        font-family: 'Poppins', system-ui, sans-serif;
-        background: #f5f5f5;
-        padding: 56px 0 100px;
-      }
-      .doc-cat__inner {
-        max-width: 1320px;
-        margin: 0 auto;
-        padding: 0 20px;
-        position: relative;
-      }
-      .doc-cat__panel-head {
-        margin: 0 0 24px;
-        padding: 22px 22px 20px;
-        border-radius: 12px;
-        background: #f0ebe3;
-        border: 1px solid rgba(12, 13, 16, 0.06);
-      }
-      @media (max-width: 640px) {
-        .doc-cat__panel-head {
-          padding: 18px 16px 16px;
-        }
-      }
-      .doc-cat__panel-head .doc-cat__title {
-        font-family: 'Poppins', system-ui, sans-serif;
-        font-size: clamp(1.375rem, 2.5vw, 1.75rem);
-        font-weight: 600;
-        letter-spacing: -0.01em;
-        color: var(--primary, var(--dc-ink));
-        margin: 0 0 10px;
-        line-height: 1.3;
-      }
-      .doc-cat__panel-head .doc-cat__lead {
-        font-family: 'Poppins', system-ui, sans-serif;
-        font-size: 0.8125rem;
-        font-weight: 400;
-        line-height: 1.55;
-        color: var(--primary);
-        margin: 0;
-        max-width: 40rem;
-      }
-      .doc-cat-checkout-steps {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px 18px;
-        margin: 14px 0 0;
-        padding: 12px 14px;
-        background: rgba(255, 255, 255, 0.72);
-        border: 1px solid var(--dc-line);
-        border-radius: 10px;
-        font-family: 'Poppins', system-ui, sans-serif;
-        font-size: 0.75rem;
-        font-weight: 400;
-        line-height: 1.45;
-        color: var(--dc-muted);
-      }
-      .doc-cat-checkout-steps strong {
-        color: var(--dc-ink);
-        font-weight: 600;
-        margin-right: 4px;
-      }
-      .doc-cat__panel {
-        background: transparent;
-        border-radius: 0;
-        box-shadow: none;
-        border: none;
-        padding: 0;
-        position: relative;
-        z-index: 1;
-      }
-      .doc-cat__live {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 14px;
-        margin-bottom: 28px;
-      }
-      @media (max-width: 900px) {
-        .doc-cat__live {
-          grid-template-columns: 1fr;
-        }
-      }
-      .doc-cat-live-card {
-        background: #fafafa;
-        border: 1px solid #e8e8e8;
-        border-radius: 10px;
-        padding: 18px 18px 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        min-height: 0;
-        transition: border-color 0.15s ease;
-      }
-      .doc-cat-live-card:hover {
-        border-color: #cfcfcf;
-        transform: none;
-        box-shadow: none;
-      }
-      .doc-cat-live-card__label {
-        font-size: 0.625rem;
-        font-weight: 700;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: #047857;
-      }
-      .doc-cat-live-card__label--demo {
-        color: #1d4ed8;
-      }
-      .doc-cat-live-card__t {
-        font-size: 1rem;
-        font-weight: 600;
-        color: var(--dc-ink);
-        line-height: 1.35;
-        margin: 0;
-        flex: 1;
-      }
-      .doc-cat-live-card__a {
-        align-self: flex-start;
-        font-size: 0.8125rem;
-        font-weight: 700;
-        color: #fff;
-        background: var(--dc-accent);
-        text-decoration: none;
-        padding: 10px 18px;
-        border-radius: 999px;
-        transition: background 0.2s, transform 0.2s;
-      }
-      .doc-cat-live-card__a:hover {
-        background: #000;
-        transform: translateX(2px);
-      }
-      .doc-cat-live-card--outline .doc-cat-live-card__a {
-        background: transparent;
-        color: var(--dc-accent);
-        border: 2px solid var(--dc-accent);
-        padding: 8px 16px;
-      }
-      .doc-cat-live-card--outline .doc-cat-live-card__a:hover {
-        background: var(--dc-accent);
-        color: #fff;
-      }
-      .doc-cat-tabs-wrap {
-        margin-bottom: 24px;
-      }
-      .doc-cat-tabs-wrap > span {
-        display: block;
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--dc-muted);
-        margin-bottom: 12px;
-      }
-      .doc-cat-tabs {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .doc-cat-tab {
-        font-family: inherit;
-        font-size: 0.8125rem;
-        font-weight: 600;
-        padding: 10px 18px;
-        border-radius: 999px;
-        border: 1px solid var(--dc-line);
-        background: #fafaf9;
-        color: var(--dc-ink);
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-      .doc-cat-tab:hover {
-        border-color: rgba(12, 13, 16, 0.2);
-        background: #fff;
-      }
-      .doc-cat-tab.is-active {
-        background: var(--dc-accent);
-        color: #fff;
-        border-color: var(--dc-accent);
-        box-shadow: 0 4px 14px rgba(12, 13, 16, 0.18);
-      }
-      .doc-cat-toolbar {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        margin-bottom: 22px;
-        padding: 22px;
-        background: linear-gradient(180deg, #fafaf9 0%, #f7f6f3 100%);
-        border-radius: 14px;
-        border: 1px solid var(--dc-line);
-      }
-      .doc-cat-toolbar-row2 {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-        align-items: end;
-      }
-      @media (max-width: 520px) {
-        .doc-cat-toolbar-row2 {
-          grid-template-columns: 1fr;
-        }
-      }
-      .doc-cat-field label {
-        display: block;
-        font-size: 0.6875rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--dc-muted);
-        margin-bottom: 8px;
-      }
-      .doc-cat-field input,
-      .doc-cat-field select {
-        width: 100%;
-        padding: 12px 16px;
-        border: 1px solid var(--dc-line);
-        border-radius: 12px;
-        font-family: inherit;
-        font-size: 0.875rem;
-        background: #fff;
-        color: var(--dc-ink);
-        box-shadow: 0 1px 2px rgba(12, 13, 16, 0.04);
-      }
-      .doc-cat-field input:focus,
-      .doc-cat-field select:focus {
-        outline: none;
-        border-color: rgba(12, 13, 16, 0.35);
-        box-shadow: 0 0 0 3px rgba(12, 13, 16, 0.06);
-      }
-      #catalogMainMeta {
-        font-family: 'Poppins', system-ui, sans-serif;
-        font-size: 0.8125rem;
-        font-weight: 400;
-        color: var(--primary);
-        margin: 0 0 22px;
-      }
-      .doc-cat-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 20px;
-      }
-      .doc-card {
-        position: relative;
-        display: flex;
-        background: #fff;
-        border: 1px solid var(--dc-line);
-        border-radius: 16px;
-        overflow: hidden;
-        text-decoration: none;
-        color: inherit;
-        transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.2s;
-        box-shadow: 0 2px 8px rgba(12, 13, 16, 0.04);
-      }
-      .doc-card:hover {
-        box-shadow: 0 20px 50px rgba(12, 13, 16, 0.12);
-        transform: translateY(-4px);
-        border-color: rgba(12, 13, 16, 0.14);
-      }
-      .doc-card__rail {
-        width: 5px;
-        flex-shrink: 0;
-        background: var(--dc-tier-c);
-      }
-      .doc-card--tier-a .doc-card__rail {
-        background: linear-gradient(180deg, #2d3748 0%, var(--dc-tier-a) 100%);
-      }
-      .doc-card--tier-b .doc-card__rail {
-        background: linear-gradient(180deg, #2563eb 0%, var(--dc-tier-b) 100%);
-      }
-      .doc-card__deco {
-        position: absolute;
-        top: 14px;
-        right: 14px;
-        opacity: 0.07;
-        color: var(--dc-ink);
-      }
-      .doc-card__body {
-        padding: 20px 20px 18px;
-        flex: 1;
-        min-width: 0;
-        position: relative;
-      }
-      .doc-card__chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 7px;
-        margin-bottom: 12px;
-      }
-      .doc-chip {
-        font-size: 0.625rem;
-        font-weight: 700;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        padding: 5px 9px;
-        border-radius: 8px;
-        background: rgba(12, 13, 16, 0.06);
-        color: var(--dc-muted);
-      }
-      .doc-chip--tier-a {
-        background: rgba(26, 27, 31, 0.1);
-        color: var(--dc-tier-a);
-      }
-      .doc-chip--tier-b {
-        background: rgba(37, 99, 235, 0.1);
-        color: #1d4ed8;
-      }
-      .doc-chip--tier-c {
-        background: rgba(71, 85, 105, 0.12);
-        color: var(--dc-tier-c);
-      }
-      .doc-chip--notary {
-        background: rgba(180, 83, 9, 0.1);
-        color: #9a3412;
-      }
-      .doc-card__title {
-        font-size: 1.02rem;
-        font-weight: 600;
-        line-height: 1.42;
-        margin: 0 0 14px;
-        padding-right: 36px;
-        color: var(--dc-ink);
-        letter-spacing: -0.02em;
-      }
-      .doc-card__price {
-        font-size: 0.875rem;
-        color: var(--dc-muted);
-        margin: 0 0 16px;
-      }
-      .doc-card__price strong {
-        color: var(--dc-ink);
-        font-weight: 700;
-        font-size: 1.05rem;
-      }
-      .doc-card__hint {
-        font-size: 0.8125rem;
-        font-weight: 500;
-        color: var(--dc-muted);
-      }
-      .doc-card__cta-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        padding: 12px 16px;
-        font-size: 0.8125rem;
-        font-weight: 700;
-        color: #fff;
-        background: var(--dc-accent);
-        border-radius: 12px;
-        transition: background 0.2s, transform 0.2s;
-      }
-      .doc-card:hover .doc-card__cta-btn {
-        background: #000;
-      }
-      .doc-cat-empty {
-        grid-column: 1 / -1;
-        text-align: center;
-        padding: 64px 24px;
-        color: var(--dc-muted);
-        font-size: 1rem;
-      }
-      .doc-cat-empty--err {
-        color: #b91c1c;
-      }
-      .doc-cat-empty--err a {
-        color: #1d4ed8;
-        font-weight: 600;
-      }
-      /* LegalZoom-style: sidebar + card grid */
-      .doc-cat-layout {
-        display: grid;
-        grid-template-columns: minmax(200px, 240px) 1fr;
-        gap: 40px;
-        align-items: start;
-      }
-      @media (max-width: 900px) {
-        .doc-cat-layout {
-          grid-template-columns: 1fr;
-          gap: 28px;
-        }
-      }
-      .cat-sidebar {
-        position: sticky;
-        top: 88px;
-        padding: 0;
-        margin: 0;
-      }
-      @media (max-width: 900px) {
-        .cat-sidebar {
-          position: relative;
-          top: auto;
-        }
-      }
-      .cat-sidebar__label {
-        display: block;
-        font-size: 0.6875rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--dc-muted);
-        margin-bottom: 14px;
-      }
-      .cat-sidebar__nav {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-      }
-      .cat-sidebar__btn {
-        font-family: inherit;
-        font-size: 0.875rem;
-        font-weight: 500;
-        text-align: left;
-        width: 100%;
-        padding: 10px 14px;
-        border: none;
-        border-radius: 10px;
-        background: transparent;
-        color: var(--dc-ink);
-        cursor: pointer;
-        transition: background 0.15s ease, color 0.15s ease;
-        line-height: 1.35;
-      }
-      .cat-sidebar__btn:hover {
-        background: rgba(12, 13, 16, 0.05);
-      }
-      .cat-sidebar__btn.is-active {
-        background: #ebe6dc;
-        font-weight: 600;
-        color: var(--dc-ink);
-      }
-      .cat-sidebar__btn--featured {
-        font-weight: 600;
-        background: rgba(235, 230, 220, 0.5);
-        border: 1px solid rgba(12, 13, 16, 0.1);
-      }
-      .cat-sidebar__btn--featured:hover {
-        background: rgba(235, 230, 220, 0.85);
-      }
-      .cat-sidebar__btn--featured.is-active {
-        background: #ebe6dc;
-        border-color: rgba(12, 13, 16, 0.08);
-        font-weight: 700;
-      }
-      .cat-main {
-        min-width: 0;
-      }
-      .doc-cat-grid--lz {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
-        gap: 20px 16px;
-        align-items: stretch;
-      }
-      @media (min-width: 1100px) {
-        .doc-cat-grid--lz {
-          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        }
-      }
-      @media (max-width: 640px) {
-        .doc-cat-grid--lz {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 16px 12px;
-        }
-      }
-      /* Kartu hanya untuk tiap item di grid daftar dokumen (bukan seluruh panel katalog) */
-      .doc-cat-grid--lz .catalog-cover {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        min-height: 0;
-        text-decoration: none;
-        color: inherit;
-        background: #fff;
-        border: 1px solid var(--dc-line);
-        border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(12, 13, 16, 0.06);
-        padding: 12px;
-        transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-      }
-      .doc-cat-grid--lz .catalog-cover:hover {
-        opacity: 1;
-        border-color: rgba(12, 13, 16, 0.14);
-        box-shadow: 0 8px 24px rgba(12, 13, 16, 0.1);
-        transform: translateY(-2px);
-      }
-      .catalog-cover__media {
-        position: relative;
-        aspect-ratio: 3 / 4;
-        border-radius: 8px;
-        overflow: hidden;
-        background: #eceae6;
-        margin-bottom: 10px;
-      }
-      .catalog-cover__media img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        vertical-align: middle;
-      }
-      .catalog-cover__badge {
-        position: absolute;
-        top: 8px;
-        left: 8px;
-        font-size: 0.5625rem;
-        font-weight: 700;
-        letter-spacing: 0.07em;
-        text-transform: uppercase;
-        padding: 5px 8px;
-        border-radius: 999px;
-        background: #fff;
-        color: #0c0d10;
-        border: 1px solid rgba(0, 0, 0, 0.06);
-        max-width: calc(100% - 16px);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .catalog-cover__title {
-        font-size: 0.8125rem;
-        font-weight: 700;
-        line-height: 1.35;
-        margin: 0 0 6px;
-        color: #0c0d10;
-        letter-spacing: -0.01em;
-      }
-      .catalog-cover__desc {
-        font-size: 0.75rem;
-        line-height: 1.45;
-        color: #5c5f69;
-        margin: 0 0 8px;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-      }
-      .catalog-cover__meta {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        font-size: 0.75rem;
-        margin-top: auto;
-        padding-top: 4px;
-      }
-      .catalog-cover__price {
-        color: #5c5f69;
-        margin: 0;
-      }
-      .catalog-cover__price strong {
-        color: #0c0d10;
-        font-weight: 700;
-      }
-      .catalog-cover__cta {
-        font-weight: 700;
-        color: #0c0d10;
-        text-decoration: underline;
-        text-underline-offset: 3px;
-      }
-      #catalogMainPagination {
-        display: none;
-        align-items: center;
-        justify-content: center;
-        gap: 24px;
-        margin-top: 40px;
-        flex-wrap: wrap;
-      }
-      .doc-cat-pagebtn {
-        font-family: inherit;
-        font-size: 0.875rem;
-        font-weight: 700;
-        padding: 12px 24px;
-        border-radius: 12px;
-        border: 1px solid var(--dc-line);
-        background: #fff;
-        cursor: pointer;
-        color: var(--dc-ink);
-        box-shadow: 0 2px 6px rgba(12, 13, 16, 0.06);
-      }
-      .doc-cat-pagebtn:hover:not(:disabled) {
-        border-color: var(--dc-accent);
-        background: #fafaf9;
-      }
-      .doc-cat-pagebtn:disabled {
-        opacity: 0.35;
-        cursor: not-allowed;
-      }
-      .doc-cat-pageinfo {
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: var(--dc-muted);
-      }
-      .doc-cat-promo {
-        --promo-orange: #ea580c;
-        --promo-red: #dc2626;
-        --promo-green: #15803d;
-        margin-top: 36px;
-        position: relative;
-        overflow: hidden;
-        padding: 20px 22px 22px;
-        border-radius: 16px;
-        background: linear-gradient(118deg, #fff7ed 0%, #ffedd5 42%, #fef9c3 88%);
-        border: 2px solid rgba(234, 88, 12, 0.4);
-        box-shadow:
-          0 10px 40px rgba(234, 88, 12, 0.18),
-          0 0 0 1px rgba(255, 255, 255, 0.6) inset;
-      }
-      .doc-cat-promo::before {
-        content: '';
-        position: absolute;
-        top: -40%;
-        right: -15%;
-        width: 55%;
-        height: 140%;
-        background: radial-gradient(circle, rgba(251, 191, 36, 0.35) 0%, transparent 65%);
-        pointer-events: none;
-      }
-      .doc-cat-promo__tag {
-        display: inline-block;
-        margin-bottom: 10px;
-        padding: 5px 12px;
-        border-radius: 999px;
-        font-size: 0.65rem;
-        font-weight: 800;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: #fff;
-        background: linear-gradient(90deg, var(--promo-red) 0%, #f97316 100%);
-        box-shadow: 0 3px 10px rgba(220, 38, 38, 0.35);
-      }
-      .doc-cat-promo__inner {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-      }
-      .doc-cat-promo__text h3 {
-        margin: 0 0 12px;
-        font-size: clamp(1.15rem, 2.2vw, 1.35rem);
-        font-weight: 800;
-        color: #1c1917;
-        letter-spacing: -0.03em;
-        line-height: 1.25;
-      }
-      .doc-cat-promo__deal {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: baseline;
-        gap: 8px 14px;
-        margin-bottom: 10px;
-      }
-      .doc-cat-promo__old {
-        font-size: 1.125rem;
-        font-weight: 700;
-        color: #991b1b;
-        text-decoration: line-through;
-        text-decoration-color: var(--promo-red);
-        text-decoration-thickness: 3px;
-        text-underline-offset: 2px;
-      }
-      .doc-cat-promo__arrow {
-        font-size: 1.25rem;
-        font-weight: 800;
-        color: var(--promo-orange);
-      }
-      .doc-cat-promo__new {
-        font-size: clamp(1.5rem, 3.5vw, 1.85rem);
-        font-weight: 900;
-        letter-spacing: -0.04em;
-        color: var(--promo-green);
-        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-      }
-      .doc-cat-promo__pill {
-        display: inline-block;
-        margin-left: 4px;
-        padding: 3px 8px;
-        border-radius: 8px;
-        font-size: 0.7rem;
-        font-weight: 800;
-        color: #7c2d12;
-        background: rgba(251, 191, 36, 0.65);
-        border: 1px solid rgba(245, 158, 11, 0.5);
-        vertical-align: middle;
-      }
-      .doc-cat-promo__sub {
-        margin: 0;
-        font-size: 0.875rem;
-        line-height: 1.55;
-        color: #44403c;
-        max-width: 38rem;
-      }
-      .doc-cat-promo__sub strong {
-        color: #1c1917;
-      }
-      .doc-cat-promo__cta {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 14px 26px;
-        border-radius: 999px;
-        font-size: 0.9rem;
-        font-weight: 800;
-        text-decoration: none;
-        color: #fff;
-        white-space: nowrap;
-        background: linear-gradient(180deg, #1c1917 0%, #000 100%);
-        border: 2px solid rgba(251, 191, 36, 0.5);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
-        transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-      }
-      .doc-cat-promo__cta:hover {
-        transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3), 0 0 24px rgba(234, 88, 12, 0.25);
-        filter: brightness(1.05);
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .doc-cat-promo__cta:hover {
-          transform: none;
-        }
-      }
-    </style>
   </head>
   <body>
     <div class="page-loader" id="pageLoader">
@@ -981,8 +249,8 @@
             </h1>
             
             <!-- Pricing -->
-            <p id="catalogPricingLine" style="font-size: 0.8125rem; font-weight: 400; color: var(--primary); margin-bottom: 20px; font-family: 'Poppins', system-ui, sans-serif;">
-              Pembayaran sekali per dokumen — tanpa langganan. Tier C Rp 99.000; Tier B Rp 149.000; Tier A (kompleks) Rp 199.000. Harga katalog tidak melebihi Rp 199.000 per dokumen. Builder sewa/JV terpisah.
+            <p style="font-size: 0.8125rem; font-weight: 400; color: var(--primary); margin-bottom: 20px; font-family: 'Poppins', system-ui, sans-serif;">
+              Rp 350.000/dokumen atau Rp 500.000/tahun untuk dokumen unlimited
             </p>
 
             <!-- Search Bar -->
@@ -1080,25 +348,26 @@
         </div>
       </section>
 
-      <!-- Katalog: layout tab + grid (seperti versi awal) -->
-      <section id="katalog-dokumen" style="padding: 100px 0; background: #fff; width: 100%;" aria-labelledby="semua-template-title">
+      <!-- All Templates Grid Section (sama seperti Kontraktify) -->
+      <section id="katalog-dokumen" style="padding: 100px 0; background: #fff; width: 100%;">
         <div class="container" style="max-width: var(--max-width); margin: 0 auto; padding: 0 24px;">
           <div style="max-width: 1200px; margin: 0 auto;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
-              <h2 id="semua-template-title" style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; color: var(--primary); line-height: 1.2; font-family: 'Poppins', system-ui, sans-serif; margin: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 48px; flex-wrap: wrap; gap: 16px;">
+              <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; color: var(--primary); line-height: 1.2; font-family: 'Poppins', system-ui, sans-serif;">
                 Semua Template
               </h2>
-              <div style="display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px;">
-                <button type="button" class="category-tab is-active" data-subject="all" style="padding: 10px 20px; background: var(--primary); border: 1px solid var(--primary); border-radius: 8px; color: #fff; font-weight: 500; font-size: 0.875rem; cursor: pointer; font-family: 'Poppins', system-ui, sans-serif;">Semua</button>
-                <button type="button" class="category-tab" data-subject="tab-kontrak-bisnis" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; font-family: 'Poppins', system-ui, sans-serif;">Kontrak Bisnis</button>
-                <button type="button" class="category-tab" data-subject="tab-kepemilikan-saham" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; font-family: 'Poppins', system-ui, sans-serif;">Kepemilikan &amp; Saham</button>
-                <button type="button" class="category-tab" data-subject="tab-ketenagakerjaan" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; font-family: 'Poppins', system-ui, sans-serif;">Ketenagakerjaan</button>
-                <button type="button" class="category-tab" data-subject="tab-tata-kelola" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; font-family: 'Poppins', system-ui, sans-serif;">Tata Kelola</button>
-                <button type="button" class="category-tab" data-subject="tab-lainnya" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; font-family: 'Poppins', system-ui, sans-serif;">Lainnya</button>
+
+              <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;">
+                <button type="button" class="category-tab" data-category="Semua Dokumen" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; transition: all 0.3s; font-family: 'Poppins', system-ui, sans-serif;">Semua</button>
+                <button type="button" class="category-tab is-active" data-category="Kontrak Bisnis" style="padding: 10px 20px; background: var(--primary); border: 1px solid var(--primary); border-radius: 8px; color: #fff; font-weight: 500; font-size: 0.875rem; cursor: pointer; transition: all 0.3s; font-family: 'Poppins', system-ui, sans-serif;">Kontrak Bisnis</button>
+                <button type="button" class="category-tab" data-category="Kepemilikan &amp; Saham" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; transition: all 0.3s; font-family: 'Poppins', system-ui, sans-serif;">Kepemilikan &amp; Saham</button>
+                <button type="button" class="category-tab" data-category="Ketenagakerjaan" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; transition: all 0.3s; font-family: 'Poppins', system-ui, sans-serif;">Ketenagakerjaan</button>
+                <button type="button" class="category-tab" data-category="Tata Kelola Korporasi" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; transition: all 0.3s; font-family: 'Poppins', system-ui, sans-serif;">Tata Kelola</button>
+                <button type="button" class="category-tab" data-category="Lainnya" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; transition: all 0.3s; font-family: 'Poppins', system-ui, sans-serif;">Lainnya</button>
               </div>
             </div>
-            <p id="catalogMainMeta" style="font-size: 0.8125rem; color: var(--text-muted); margin: 0 0 20px; font-family: 'Poppins', system-ui, sans-serif;"></p>
-            <div id="templateGrid" class="doc-cat-grid doc-cat-grid--lz" aria-live="polite"></div>
+
+            <div class="template-grid" id="templateGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 32px;"></div>
           </div>
         </div>
       </section>
@@ -1112,50 +381,43 @@
             <h3>Sepakatee</h3>
             <p class="footer__tagline">Hukum yang jelas, terstruktur, dan dapat diterapkan untuk bisnis nyata.</p>
           </div>
+
+          <div class="footer__column" style="display: none;">
+            <h4>Alat Hukum</h4>
+            <ul>
+              <li><a href="index.html">Template</a></li>
+              <li><a href="../sign/index.html">E-Signature</a></li>
+              <li><a href="../compare/index.html">Pembanding Dokumen</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__column">
+            <h4>Perusahaan</h4>
+            <ul>
+              <li><a href="../../index.html">Beranda</a></li>
+              <li><a href="https://wa.me/6285285995169" target="_blank" rel="noopener noreferrer">Kontak</a></li>
+              <li><a href="https://wa.me/6285285995169" target="_blank" rel="noopener noreferrer">Layanan Kustom</a></li>
+            </ul>
+          </div>
+
           <div class="footer__column">
             <h4>Legal</h4>
             <ul>
-              <li><a href="../../terms.html">Syarat & Ketentuan</a></li>
+              <li><a href="../../terms.html">Syarat &amp; Ketentuan</a></li>
               <li><a href="../../privacy-policy.html">Kebijakan Privasi</a></li>
               <li><a href="../../refund-policy.html">Kebijakan Refund</a></li>
               <li><a href="../../faq.html">FAQ</a></li>
-              <li><a href="../../editorial-team.html">Tim Editorial</a></li>
-            </ul>
-          </div>
-          <div class="footer__column">
-            <h4>Legal Documents</h4>
-            <ul>
-              <li><a href="index.html">Templates</a></li>
-              <li><a href="index.html#katalog-dokumen">Semua template</a></li>
-            </ul>
-          </div>
-          <div class="footer__column" style="display: none;">
-            <h4>Tools</h4>
-            <ul>
-              <li><a href="../sign/index.html">E-Signature</a></li>
-              <li><a href="../compare/index.html">Document Compare</a></li>
-            </ul>
-          </div>
-          <div class="footer__column">
-            <h4>Legal Aid</h4>
-            <ul>
-              <li><a href="../../legal-aid/pembentukan-perusahaan.html">Pembentukan Perusahaan</a></li>
-              <li><a href="../../legal-aid/pendaftaran-merek.html">Pendaftaran Merek</a></li>
-              <li><a href="../../legal-aid/konsultasi-dokumen.html">Konsultasi Dokumen</a></li>
             </ul>
           </div>
         </div>
+
         <div class="footer__divider"></div>
+
         <div class="footer__bottom">
           <p>© 2026 Sepakatee oleh CV Cipta Kontrak Teknologi. Hak cipta dilindungi.</p>
         </div>
       </div>
     </footer>
-    <script src="data/catalog-inventory.bundle.js" defer></script>
-    <script src="_shared/pricing.js" defer></script>
-    <script src="_shared/paket-commercial.js" defer></script>
-    <script src="_shared/catalog-shim.js" defer></script>
-    <script src="template-catalog-main.js" defer></script>
     <script src="products.js" defer></script>
     
     <!-- Auth Script -->
@@ -1262,7 +524,7 @@
                 padding: 48px 24px !important;
             }
             
-            .doc-cat-grid {
+            .template-grid {
                 grid-template-columns: 1fr !important;
             }
 
@@ -1289,25 +551,6 @@
             }
         }
     </style>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        var P = window.SepakateePricing;
-        var T = P && P.TIER_PRICE_IDR;
-        var el = document.getElementById('catalogPricingLine');
-        if (el && T && P.formatIdr) {
-          el.textContent =
-            'Pembayaran sekali per dokumen — tanpa langganan. Tier C ' +
-            P.formatIdr(T.C) +
-            '; Tier B ' +
-            P.formatIdr(T.B) +
-            '; Tier A (kompleks) ' +
-            P.formatIdr(T.A) +
-            '. Harga katalog tidak melebihi ' +
-            P.formatIdr(T.A) +
-            ' per dokumen. Builder sewa/JV terpisah.';
-        }
-      });
-    </script>
   </body>
 </html>
 

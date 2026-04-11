@@ -206,7 +206,7 @@ function replaceVariables(template, data, forPreview = false) {
       if (forPreview) {
         result = result.replace(
           regex,
-          `<span class="placeholder-field preview-field" data-field="${key}" title="Belum diisi di formulir">{{${key}}}</span>`
+          `<span class="placeholder-field preview-field" data-field="${key}">{{${key}}}</span>`
         );
       } else {
         result = result.replace(regex, `<mark style="background-color: #F5F5F5; padding: 2px 4px;">[${fieldName}]</mark>`);
@@ -456,7 +456,7 @@ function replaceTxtTemplateVariables(txt, data) {
   return result;
 }
 
-const TEMPLATE_CACHE_VERSION = '20260411d';
+const TEMPLATE_CACHE_VERSION = '20260411e';
 const SOURCE_DOCX_FILENAME = 'Sepakatee I Perjanjian Sewa Menyewa [Template].docx';
 const SOURCE_DOCX_URL = '../../../legaldocs/' + encodeURIComponent(SOURCE_DOCX_FILENAME).replace(/%20/g, '%20');
 const JSZIP_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';

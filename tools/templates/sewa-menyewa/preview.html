@@ -99,14 +99,16 @@
 
       .preview-notes__list {
         margin: 0;
-        padding-left: 1.1rem;
+        padding-left: 0;
+        list-style: none;
         font-size: 0.8125rem;
-        line-height: 1.65;
+        line-height: 1.5;
         color: rgba(15, 15, 16, 0.88);
       }
 
       .preview-notes__list li {
-        margin-bottom: 12px;
+        margin-bottom: 10px;
+        padding-left: 0;
       }
 
       .preview-notes__list li:last-child {
@@ -245,29 +247,30 @@
         box-sizing: border-box;
       }
 
+      /* Same typeface as site (style.css body); layout mirrors Word (justify, headings, lists) */
       .preview-document-full {
-        font-family: 'Times New Roman', Times, 'Noto Serif', Georgia, serif;
-        font-size: 12pt;
-        line-height: 1.35;
-        color: #000;
+        font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 13px;
+        line-height: 1.6;
+        color: var(--primary);
         -webkit-font-smoothing: antialiased;
       }
 
       .preview-document-full h1 {
         text-align: center;
-        font-weight: bold;
-        font-size: 12pt;
-        margin: 0 0 1.25em;
-        letter-spacing: 0.02em;
+        font-weight: 600;
+        font-size: 1rem;
+        margin: 0 0 1.15em;
+        letter-spacing: 0.04em;
         text-transform: uppercase;
       }
 
       .preview-document-full h3,
       .preview-document-full .section-title {
         text-align: center;
-        font-weight: bold;
-        font-size: 12pt;
-        margin: 1.25em 0 0.75em;
+        font-weight: 600;
+        font-size: 0.9375rem;
+        margin: 1.15em 0 0.65em;
       }
 
       .preview-document-full p {
@@ -298,7 +301,7 @@
         width: 100%;
         border-collapse: collapse;
         margin-top: 2em;
-        font-size: 12pt;
+        font-size: 13px;
       }
 
       .preview-document-full .signature-table td {
@@ -306,24 +309,22 @@
         padding: 0.5em;
       }
 
-      /* Filled = yellow highlight (approx. Word unduhan) */
       .preview-document-full .filled-field {
         background: rgba(255, 235, 59, 0.55);
-        color: #000;
+        color: var(--primary);
         padding: 0 1px;
-        border-radius: 1px;
-        font-weight: normal;
+        border-radius: 2px;
+        font-weight: 500;
         box-decoration-break: clone;
         -webkit-box-decoration-break: clone;
       }
 
-      /* Kosong = placeholder {{key}} seperti berkas Word */
       .preview-document-full .placeholder-field {
         font-family: ui-monospace, 'Cascadia Code', 'Consolas', 'Courier New', monospace;
         font-size: 0.92em;
-        color: #1a1a1a;
-        background: rgba(0, 0, 0, 0.04);
-        border-bottom: 1px dotted rgba(0, 0, 0, 0.45);
+        color: var(--primary);
+        background: rgba(15, 15, 16, 0.05);
+        border-bottom: 1px dotted rgba(15, 15, 16, 0.4);
         padding: 0 2px;
         font-style: normal;
         font-weight: 500;
@@ -388,20 +389,14 @@
 
             <aside class="preview-notes" aria-labelledby="preview-notes-title">
               <h4 id="preview-notes-title" class="preview-notes__title">Ketentuan berkas unduhan</h4>
-              <ol class="preview-notes__list">
+              <ul class="preview-notes__list">
                 <li>
-                  Setelah pembayaran terverifikasi, dokumen Microsoft Word yang Anda unduh akan menandai setiap bagian yang telah Anda isi pada formulir dengan
-                  <strong>sorotan warna kuning</strong> (highlight), setara dengan penanda revisi pada naskah konvensional. Sorotan tersebut bersifat
-                  <strong>reminder editorial</strong>—Anda bebas mengubah, menghapus, atau mempertahankannya sesuai kebutuhan; namun demikian,
-                  <strong>disarankan untuk meninjau ulang</strong> seluruh teks guna memastikan kesesuaian dengan fakta hukum dan kehendak Para Pihak.
+                  🟡 <strong>Highlight kuning</strong> = isian dari form (di Word bisa diedit/dihapus). <strong>Cek ulang</strong> sebelum pakai resmi.
                 </li>
                 <li>
-                  Untuk kolom yang <strong>belum</strong> Anda lengkapi pada formulir, berkas yang diunduh akan mempertahankan
-                  <strong>placeholder bertanda ganda kurung kurawal</strong>, misalnya <code>{{nama_penyewa}}</code>, sebagai pengingat bahwa informasi tersebut
-                  <strong>wajib dilengkapi atau disesuaikan</strong> sebelum dokumen ditandatangani atau diberikan kepada pihak lawan. Kelalaian melengkapi
-                  placeholder dapat menurunkan kejelasan isi perjanjian.
+                  ✏️ <code>{{nama_kolom}}</code> = <strong>belum diisi</strong>—lengkapi di Word sebelum ditandatangani.
                 </li>
-              </ol>
+              </ul>
             </aside>
 
             <div class="preview-package-info">
@@ -440,7 +435,7 @@
     <script src="../_shared/pricing.js"></script>
     <script src="../_shared/checkout-endpoint.js"></script>
     <script src="../_shared/ipaymu-checkout.js"></script>
-    <script src="form.js?v=20260411d"></script>
+    <script src="form.js?v=20260411e"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         var pr0 = window.SepakateePricing.getByPath(window.location.pathname);

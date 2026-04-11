@@ -268,7 +268,7 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="form.js?v=20260411d"></script>
+    <script src="form.js?v=20260411e"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -368,7 +368,7 @@
           btn.disabled = true;
           btn.textContent = 'Membuat PDF...';
           try {
-            const res = await fetch('invoice.html?v=20260411d');
+            const res = await fetch('invoice.html?v=20260411e');
             if (!res.ok) throw new Error('Template tidak ditemukan');
             let html = await res.text();
             html = html.replace(/\{\{ref\}\}/g, invRef)

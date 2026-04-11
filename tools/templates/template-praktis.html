@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template Praktis | Sepakatee</title>
+    <link rel="icon" type="image/png" href="../../asset/Sepakatee%20Logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../style.css" />
+    <meta
+      name="description"
+      content="Template Praktis Sepakatee: ratusan surat & formulir siap pakai. Rp50.000 per file atau paket 500+ template Rp199.000 (nilai referensi Rp499.000)."
+    />
+    <style>
+      .doc-cat {
+        --dc-ink: #0c0d10;
+        --dc-muted: #5c5f69;
+        --dc-line: rgba(12, 13, 16, 0.09);
+        --dc-accent: #1a1b1f;
+        font-family: 'Poppins', system-ui, sans-serif;
+        background: #f5f5f5;
+        padding: 32px 0 80px;
+      }
+      .doc-cat__inner {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      .tp-back {
+        display: inline-block;
+        margin-bottom: 18px;
+        font-size: 0.86rem;
+        font-weight: 600;
+        color: #111;
+        text-decoration: none;
+      }
+      .tp-back:hover {
+        text-decoration: underline;
+      }
+      .tp-hero {
+        background: #fff;
+        border: 1px solid var(--dc-line);
+        border-radius: 14px;
+        padding: 22px 22px 24px;
+        margin-bottom: 22px;
+        box-shadow: 0 2px 12px rgba(12, 13, 16, 0.05);
+      }
+      .tp-hero h1 {
+        margin: 0 0 10px;
+        font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+        color: var(--dc-ink);
+        letter-spacing: -0.02em;
+      }
+      .tp-hero > p {
+        margin: 0 0 18px;
+        color: var(--dc-muted);
+        line-height: 1.55;
+        font-size: 0.9rem;
+        max-width: 48rem;
+      }
+      .tp-hero__row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        align-items: stretch;
+      }
+      .tp-hero__card {
+        flex: 1 1 240px;
+        border: 1px solid var(--dc-line);
+        border-radius: 12px;
+        padding: 16px;
+        background: #fafaf9;
+      }
+      .tp-hero__card h2 {
+        margin: 0 0 8px;
+        font-size: 0.95rem;
+        color: var(--dc-ink);
+      }
+      .tp-hero__card p {
+        margin: 0 0 12px;
+        font-size: 0.82rem;
+        color: var(--dc-muted);
+        line-height: 1.5;
+      }
+      .tp-hero__card strong {
+        color: var(--dc-ink);
+        font-size: 1.05rem;
+      }
+      .tp-btn {
+        border: 0;
+        border-radius: 999px;
+        padding: 10px 16px;
+        font: inherit;
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+        background: #111;
+        color: #fff;
+      }
+      .tp-btn:hover {
+        background: #000;
+      }
+      .tp-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .tp-err {
+        color: #b91c1c;
+        font-size: 0.78rem;
+        margin-top: 8px;
+        display: none;
+      }
+      .doc-cat__panel-head {
+        margin: 0 0 20px;
+        padding: 18px 18px 16px;
+        border-radius: 12px;
+        background: #f0ebe3;
+        border: 1px solid rgba(12, 13, 16, 0.06);
+      }
+      .doc-cat__panel-head .doc-cat__title {
+        font-size: clamp(1.2rem, 2vw, 1.45rem);
+        font-weight: 600;
+        margin: 0 0 8px;
+        color: var(--dc-ink);
+      }
+      .doc-cat__panel-head .doc-cat__lead {
+        margin: 0;
+        font-size: 0.8125rem;
+        line-height: 1.55;
+        color: var(--dc-muted);
+        max-width: 42rem;
+      }
+      .doc-cat-layout {
+        display: grid;
+        grid-template-columns: minmax(200px, 240px) 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .doc-cat-layout {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+      }
+      .cat-sidebar__label {
+        display: block;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--dc-muted);
+        margin-bottom: 14px;
+      }
+      .cat-sidebar__nav {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .cat-sidebar__btn {
+        font-family: inherit;
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-align: left;
+        width: 100%;
+        padding: 10px 14px;
+        border: none;
+        border-radius: 10px;
+        background: transparent;
+        color: var(--dc-ink);
+        cursor: pointer;
+        line-height: 1.35;
+      }
+      .cat-sidebar__btn:hover {
+        background: rgba(12, 13, 16, 0.05);
+      }
+      .cat-sidebar__btn.is-active {
+        background: #ebe6dc;
+        font-weight: 600;
+      }
+      .doc-cat-toolbar {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 22px;
+        padding: 22px;
+        background: linear-gradient(180deg, #fafaf9 0%, #f7f6f3 100%);
+        border-radius: 14px;
+        border: 1px solid var(--dc-line);
+      }
+      .doc-cat-toolbar-row2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+      @media (max-width: 520px) {
+        .doc-cat-toolbar-row2 {
+          grid-template-columns: 1fr;
+        }
+      }
+      .doc-cat-field label {
+        display: block;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--dc-muted);
+        margin-bottom: 8px;
+      }
+      .doc-cat-field input,
+      .doc-cat-field select {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid var(--dc-line);
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 0.875rem;
+        background: #fff;
+        color: var(--dc-ink);
+      }
+      #tpCatalogMeta {
+        font-size: 0.8125rem;
+        color: var(--dc-muted);
+        margin: 0 0 22px;
+      }
+      .doc-cat-grid--lz {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+        gap: 20px 16px;
+      }
+      @media (min-width: 1100px) {
+        .doc-cat-grid--lz {
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        }
+      }
+      .doc-cat-grid--lz .catalog-cover {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        text-decoration: none;
+        color: inherit;
+        background: #fff;
+        border: 1px solid var(--dc-line);
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(12, 13, 16, 0.06);
+        padding: 12px;
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
+      }
+      .doc-cat-grid--lz .catalog-cover:hover {
+        border-color: rgba(12, 13, 16, 0.14);
+        box-shadow: 0 8px 24px rgba(12, 13, 16, 0.1);
+        transform: translateY(-2px);
+      }
+      .catalog-cover__media {
+        position: relative;
+        aspect-ratio: 3 / 4;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #eceae6;
+        margin-bottom: 10px;
+      }
+      .catalog-cover__media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .catalog-cover__badge {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        font-size: 0.5625rem;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        padding: 5px 8px;
+        border-radius: 999px;
+        background: #fff;
+        color: #0c0d10;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+      }
+      .catalog-cover__badge--praktis {
+        background: #f3f4f6;
+        color: #374151;
+        border-color: rgba(55, 65, 81, 0.15);
+      }
+      .catalog-cover__title {
+        font-size: 0.8125rem;
+        font-weight: 700;
+        line-height: 1.35;
+        margin: 0 0 6px;
+        color: #0c0d10;
+      }
+      .catalog-cover__desc {
+        font-size: 0.75rem;
+        line-height: 1.45;
+        color: #5c5f69;
+        margin: 0 0 8px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .catalog-cover__meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 0.75rem;
+        margin-top: auto;
+        padding-top: 4px;
+      }
+      .catalog-cover__cta {
+        font-weight: 700;
+        color: #0c0d10;
+        text-decoration: underline;
+      }
+      .doc-cat-empty {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 48px 24px;
+        color: var(--dc-muted);
+      }
+      .doc-cat-empty--err {
+        color: #b91c1c;
+      }
+      #tpCatalogPagination {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        margin-top: 40px;
+        flex-wrap: wrap;
+      }
+      .doc-cat-pagebtn {
+        font-family: inherit;
+        font-size: 0.875rem;
+        font-weight: 700;
+        padding: 12px 24px;
+        border-radius: 12px;
+        border: 1px solid var(--dc-line);
+        background: #fff;
+        cursor: pointer;
+        color: var(--dc-ink);
+      }
+      .doc-cat-pagebtn:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+      .doc-cat-pageinfo {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--dc-muted);
+      }
+      .cat-sidebar {
+        position: sticky;
+        top: 88px;
+      }
+      @media (max-width: 900px) {
+        .cat-sidebar {
+          position: relative;
+          top: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="doc-cat" id="katalog-praktis" aria-labelledby="tp-title">
+        <div class="doc-cat__inner">
+          <a class="tp-back" href="index.html">← Katalog Perjanjian premium</a>
+
+          <div class="tp-hero">
+            <h1 id="tp-title">Template Praktis</h1>
+            <p>
+              Koleksi surat dan formulir siap pakai untuk kebutuhan cepat — tidak digabung dengan katalog Perjanjian premium.
+              Cocok sebagai rujukan operasional; untuk dokumen bisnis inti, gunakan
+              <a href="index.html#katalog-dokumen">Perjanjian premium</a>.
+            </p>
+            <div class="tp-hero__row">
+              <div class="tp-hero__card">
+                <h2>Paket 500+ berkas (.zip)</h2>
+                <p>
+                  Hemat dengan mengambil seluruh koleksi sekaligus.
+                  <strong>Rp199.000</strong>
+                  <span aria-hidden="true"> · </span>
+                  <span>nilai referensi <del>Rp499.000</del></span>
+                </p>
+                <button id="buyTemplatePraktisBundle" type="button" class="tp-btn">Beli paket ZIP</button>
+                <p id="errTpBundle" class="tp-err"></p>
+              </div>
+              <div class="tp-hero__card">
+                <h2>Beli satuan</h2>
+                <p>
+                  Pilih satu judul di katalog di bawah, lalu buka halaman detail untuk checkout —
+                  <strong>Rp50.000</strong> per file.
+                </p>
+                <p style="margin: 0; font-size: 0.78rem; color: var(--dc-muted)">
+                  Untuk pembelian via admin (tanpa memilih judul di web), gunakan chat tim kami.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <header class="doc-cat__panel-head">
+            <h2 class="doc-cat__title">Jelajah berdasarkan jenis dokumen</h2>
+            <p class="doc-cat__lead">
+              Kategori di bawah mengikuti pola nama file di folder Template Praktis. Harga tetap per file — tidak memakai tier A/B.
+            </p>
+          </header>
+
+          <div class="doc-cat-layout">
+            <aside class="cat-sidebar" aria-label="Kategori Template Praktis">
+              <span class="cat-sidebar__label">Jenis dokumen</span>
+              <nav class="cat-sidebar__nav" role="tablist" id="tpSubjectNav"></nav>
+            </aside>
+            <div class="cat-main">
+              <div class="doc-cat-toolbar" aria-label="Saring koleksi">
+                <div class="doc-cat-field">
+                  <label for="tpCatalogSearch">Cari judul</label>
+                  <input type="search" id="tpCatalogSearch" placeholder="Contoh: kuasa, pernyataan, berita acara…" autocomplete="off" />
+                </div>
+                <div class="doc-cat-toolbar-row2">
+                  <div class="doc-cat-field">
+                    <label for="tpCatalogPageSize">Per halaman</label>
+                    <select id="tpCatalogPageSize">
+                      <option value="24">24</option>
+                      <option value="48" selected>48</option>
+                      <option value="72">72</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <p id="tpCatalogMeta"></p>
+              <div id="tpCatalogGrid" class="doc-cat-grid doc-cat-grid--lz" aria-live="polite"></div>
+              <div id="tpCatalogPagination"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="_shared/pricing.js"></script>
+    <script src="_shared/checkout-endpoint.js"></script>
+    <script src="_shared/ipaymu-checkout.js"></script>
+    <script src="data/perintilan-inventory.bundle.js"></script>
+    <script src="template-praktis-catalog.js"></script>
+    <script>
+      (function () {
+        var btn = document.getElementById('buyTemplatePraktisBundle');
+        var err = document.getElementById('errTpBundle');
+        if (!btn) return;
+        btn.addEventListener('click', function () {
+          if (err) {
+            err.style.display = 'none';
+            err.textContent = '';
+          }
+          if (!window.SepakateeIpaymuCheckout || !window.SepakateeIpaymuCheckout.redirectToPayment) {
+            if (err) {
+              err.textContent = 'Modul pembayaran belum termuat. Coba refresh halaman.';
+              err.style.display = 'block';
+            }
+            return;
+          }
+          btn.disabled = true;
+          window.SepakateeIpaymuCheckout
+            .redirectToPayment({ flowKey: 'perintilan-bundle', buyerName: '', buyerEmail: '', buyerPhone: '' })
+            .catch(function (e) {
+              btn.disabled = false;
+              if (err) {
+                err.textContent = (e && e.message) || 'Gagal membuka pembayaran.';
+                err.style.display = 'block';
+              }
+            });
+        });
+      })();
+    </script>
+  </body>
+</html>

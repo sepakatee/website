@@ -1,12 +1,12 @@
 /**
- * Shared Sepakatee invoice styling — print-friendly, cream paper, serif + sans.
+ * Shared Sepakatee invoice styling — print-friendly, hitam-putih, serif + sans.
  * Link from invoice.html as: href="../_shared/invoice-pro.css" (adjust ../ depth per folder).
  */
 :root {
-  --inv-bg: #f9f8f5;
-  --inv-ink: #141414;
-  --inv-muted: #5c5c5c;
-  --inv-line: rgba(20, 20, 20, 0.14);
+  --inv-bg: #ffffff;
+  --inv-ink: #000000;
+  --inv-muted: #404040;
+  --inv-line: rgba(0, 0, 0, 0.2);
   --inv-serif: 'Libre Baskerville', 'Georgia', serif;
   --inv-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
 }
@@ -123,24 +123,38 @@ body {
 
 .invoice-table-wrap {
   margin-bottom: 8px;
+  overflow: hidden;
 }
 
 .invoice-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   font-size: 0.8125rem;
+}
+
+.invoice-table col.inv-col-desc {
+  width: 46%;
+}
+.invoice-table col.inv-col-qty {
+  width: 8%;
+}
+.invoice-table col.inv-col-money {
+  width: 23%;
 }
 
 .invoice-table thead th {
   font-weight: 700;
   text-align: left;
-  padding: 10px 0 10px;
+  padding: 12px 10px;
   border-top: 1px solid var(--inv-ink);
   border-bottom: 1px solid var(--inv-ink);
   font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--inv-ink);
+  background: #ffffff;
+  vertical-align: bottom;
 }
 
 .invoice-table thead th.num,
@@ -149,9 +163,29 @@ body {
 }
 
 .invoice-table tbody td {
-  padding: 14px 0 12px;
+  padding: 14px 10px 12px;
   border-bottom: 1px solid var(--inv-line);
   vertical-align: top;
+}
+
+.invoice-table tbody td:first-child {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  padding-left: 0;
+}
+
+.invoice-table thead th:first-child {
+  padding-left: 0;
+}
+
+.invoice-table thead th:last-child,
+.invoice-table tbody td:last-child {
+  padding-right: 0;
+}
+
+.invoice-table td.num {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .invoice-table tbody tr:last-child td {

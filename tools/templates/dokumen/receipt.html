@@ -316,6 +316,7 @@
       </div>
     </div>
 
+    <script src="../data/perintilan-inventory.bundle.js"></script>
     <script src="../data/catalog-inventory.bundle.js"></script>
     <script src="../_shared/pricing.js"></script>
     <script src="../_shared/paket-commercial.js"></script>
@@ -463,6 +464,16 @@
               return x.id === catalogPurchaseId;
             });
           }
+          if (
+            !item &&
+            window.__SEPAKATEE_PERINTILAN_CATALOG__ &&
+            Array.isArray(window.__SEPAKATEE_PERINTILAN_CATALOG__.items) &&
+            catalogPurchaseId
+          ) {
+            item = window.__SEPAKATEE_PERINTILAN_CATALOG__.items.find(function (x) {
+              return x.id === catalogPurchaseId;
+            });
+          }
         } catch (e) {}
 
         var downloadBtn = document.getElementById('downloadBtn');
@@ -603,19 +614,23 @@
               s.remove();
             });
 
+            var cssRes = await fetch(new URL('../_shared/invoice-pro.css', window.location.href).href);
+            if (!cssRes.ok) throw new Error('Gaya invoice (invoice-pro.css) tidak ditemukan');
+            var invoiceCss = await cssRes.text();
+
             var linkEl = doc.querySelector('link[href*="fonts"]');
-            var styleEl = doc.querySelector('style');
             var bodyContent = doc.body ? doc.body.innerHTML : '';
             var linkHtml = linkEl ? linkEl.outerHTML : '';
-            var styleHtml = styleEl ? styleEl.outerHTML : '';
 
             var invSource = document.createElement('div');
             invSource.id = 'invoice-pdf-source';
             invSource.style.cssText =
-              'position:absolute;left:-9999px;top:0;width:640px;background:#fff;padding:56px 48px;font-family:Poppins,-apple-system,sans-serif;color:#111;';
+              'position:absolute;left:-9999px;top:0;width:720px;box-sizing:border-box;background:#fff;padding:0;font-family:DM Sans,system-ui,sans-serif;color:#000;';
             invSource.innerHTML =
               linkHtml +
-              styleHtml +
+              '<style>' +
+              invoiceCss +
+              '</style>' +
               '<div class="invoice-pdf-body">' +
               bodyContent +
               '</div>';
@@ -627,10 +642,14 @@
 
             if (typeof html2pdf !== 'function') throw new Error('html2pdf tidak tersedia');
             var targetEl = invSource.querySelector('#invoice-content') || invSource;
+            var safeInvRef = String(invRef || '')
+              .replace(/[\x00-\x1f\\/:*?"<>|#]+/g, '-')
+              .replace(/\s+/g, ' ')
+              .trim() || 'order';
             await html2pdf()
               .set({
                 margin: [10, 10, 10, 10],
-                filename: 'Invoice_' + invRef + '.pdf',
+                filename: 'Invoice - Sepakatee - ' + safeInvRef + '.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true, logging: false },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },

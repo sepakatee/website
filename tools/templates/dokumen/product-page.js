@@ -11,7 +11,7 @@
    */
   function ensureCatalogGlobals() {
     var g = typeof window !== 'undefined' ? window : globalThis;
-    var TIER_PRICE_IDR = { A: 199000, B: 149000, C: 99000 };
+    var TIER_PRICE_IDR = { A: 199000, B: 149000, C: 50000 };
     var CATALOG_PRODUCTS = {
       'sewa-menyewa': {
         tier: 'A',
@@ -35,8 +35,8 @@
       },
       'catalog-paket-dasar': {
         tier: 'C',
-        priceIdr: 99000,
-        productName: 'Paket Dasar — dokumen hukum Sepakatee',
+        priceIdr: 50000,
+        productName: 'Template Praktis (satuan) — Sepakatee',
       },
       'catalog-tier-a': {
         tier: 'A',
@@ -50,8 +50,18 @@
       },
       'catalog-tier-c': {
         tier: 'C',
-        priceIdr: 99000,
+        priceIdr: 50000,
         productName: 'Katalog dokumen Tier C — Sepakatee',
+      },
+      'perintilan-single': {
+        tier: 'C',
+        priceIdr: 50000,
+        productName: 'Template Praktis (pilihan satuan)',
+      },
+      'perintilan-bundle': {
+        tier: 'A',
+        priceIdr: 199000,
+        productName: 'Paket Template Praktis — 500+ berkas (.zip)',
       },
     };
 
@@ -215,6 +225,7 @@
   ensureCatalogGlobals();
 
   var JSON_URL = '../data/catalog-inventory.json';
+  var PERINTILAN_JSON_URL = '../data/perintilan-inventory.json';
   var SEO_JSON_URL = '../data/catalog-seo-overrides.json';
 
   /** Stale or mistaken ?id= values (old links, typos) → canonical catalog id */
@@ -267,6 +278,19 @@
       .catch(function () {
         if (emb && emb.items && emb.items.length) return emb;
         throw new Error('no catalog');
+      });
+  }
+
+  function loadPerintilanCatalogData() {
+    var emb = typeof window !== 'undefined' && window.__SEPAKATEE_PERINTILAN_CATALOG__;
+    return fetch(PERINTILAN_JSON_URL)
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .catch(function () {
+        if (emb && emb.items && emb.items.length) return emb;
+        return { items: [] };
       });
   }
 
@@ -661,14 +685,20 @@
       return;
     }
 
-    Promise.all([loadCatalogData(), loadSeoOverrides()])
-      .then(function (pair) {
-        var data = pair[0];
-        var seoDb = pair[1] || { by_id: {} };
+    Promise.all([loadCatalogData(), loadPerintilanCatalogData(), loadSeoOverrides()])
+      .then(function (triple) {
+        var data = triple[0];
+        var perData = triple[1] || { items: [] };
+        var seoDb = triple[2] || { by_id: {} };
         var items = data.items || [];
         var it = items.find(function (x) {
           return x.id === id;
         });
+        if (!it) {
+          it = (perData.items || []).find(function (x) {
+            return x.id === id;
+          });
+        }
         if (!it) {
           showPpError(
             'Dokumen tidak ditemukan',
@@ -701,14 +731,23 @@
           return;
         }
 
-        var pak =
-          typeof Pak.metaForCatalog === 'function'
+        var isPraktis = it.product_type === 'perintilan';
+        var pak = isPraktis
+          ? {
+              key: 'C',
+              name: 'Template Praktis',
+              chip: 'Template Praktis',
+              sidebarTitle: 'Beli template',
+              sidebarHint:
+                'Satu kali pembayaran — file dikirim setelah konfirmasi. Sebutkan judul template yang Anda pilih ke tim kami bila diminta.',
+            }
+          : typeof Pak.metaForCatalog === 'function'
             ? Pak.metaForCatalog(it.provisional_tier)
             : Pak.meta(it.provisional_tier);
         var displayTitle = formatTitle(it.title);
         var fam = familyLabel(it.family);
         var notary = it.flags && it.flags.requires_notary;
-        var priceIdr = Price.priceForTierLetter(it.provisional_tier);
+        var priceIdr = isPraktis ? 50000 : Price.priceForTierLetter(it.provisional_tier);
         var priceStr = Price.formatIdr(priceIdr);
 
         var seo = (seoDb.by_id && seoDb.by_id[it.id]) || {};
@@ -735,7 +774,11 @@
         document.getElementById('ppRoot').hidden = false;
 
         document.getElementById('ppBreadcrumb').innerHTML =
-          '<a href="../index.html">Templates</a><span>/</span><a href="../index.html#katalog-dokumen">Katalog</a><span>/</span><span>' +
+          '<a href="../index.html">Templates</a><span>/</span><a href="../index.html#katalog-dokumen">Katalog Perjanjian</a><span>/</span>' +
+          (isPraktis
+            ? '<a href="../template-praktis.html">Template Praktis</a><span>/</span>'
+            : '') +
+          '<span>' +
           escapeHtml(fam) +
           '</span><span>/</span><span>' +
           escapeHtml(displayTitle) +
@@ -744,11 +787,15 @@
         document.getElementById('ppTitle').textContent = displayTitle;
         document.getElementById('ppSub').textContent =
           seo.hero_subtitle ||
-          'Template Word (.docx) dari katalog dokumen hukum Sepakatee — ' +
-          pak.name.toLowerCase() +
-          '. Beli sekali, unduh file setelah pembayaran terverifikasi.';
+          (isPraktis
+            ? 'Template Word (.docx) dari koleksi Template Praktis — untuk kebutuhan cepat dan operasional. Beli sekali, unduh setelah pembayaran terverifikasi.'
+            : 'Template Word (.docx) dari katalog dokumen hukum Sepakatee — ' +
+              pak.name.toLowerCase() +
+              '. Beli sekali, unduh file setelah pembayaran terverifikasi.');
 
-        document.getElementById('ppCategory').textContent = fam + ' · ' + pak.name;
+        document.getElementById('ppCategory').textContent = isPraktis
+          ? 'Template Praktis · ' + fam
+          : fam + ' · ' + pak.name;
         document.getElementById('ppEmoji').textContent = emojiForFamily(it.family);
 
         syncPriceDisplays(priceStr);
@@ -793,7 +840,7 @@
           attachFaqHandlers(faqEl);
         }
 
-        var flowKey = Pak.ipaymuFlowKey(it.provisional_tier);
+        var flowKey = it.ipaymu_flow_key || Pak.ipaymuFlowKey(it.provisional_tier);
         var beliBtn = document.getElementById('ppCtaBeli');
         var beliErr = document.getElementById('ppBeliErr');
 

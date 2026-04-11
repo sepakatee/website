@@ -6,9 +6,9 @@
   'use strict';
 
   var TIER_PRICE_IDR = {
-    A: 250000,
-    B: 199000,
-    C: 149000,
+    A: 199000,
+    B: 149000,
+    C: 50000,
   };
 
   var CATALOG_PRODUCTS = {
@@ -24,33 +24,43 @@
     },
     'sample-tier-b': {
       tier: 'B',
-      priceIdr: 199000,
+      priceIdr: 149000,
       productName: 'Contoh dokumen Tier B (dynamic template demo)',
     },
     'catalog-paket-bisnis': {
       tier: 'B',
-      priceIdr: 199000,
+      priceIdr: 149000,
       productName: 'Paket Bisnis — dokumen hukum Sepakatee',
     },
     'catalog-paket-dasar': {
       tier: 'C',
-      priceIdr: 149000,
-      productName: 'Paket Dasar — dokumen hukum Sepakatee',
+      priceIdr: 50000,
+      productName: 'Template Praktis (satuan) — Sepakatee',
     },
     'catalog-tier-a': {
       tier: 'A',
-      priceIdr: 250000,
+      priceIdr: 199000,
       productName: 'Katalog dokumen Tier A — Sepakatee',
     },
     'catalog-tier-b': {
       tier: 'B',
-      priceIdr: 199000,
+      priceIdr: 149000,
       productName: 'Katalog dokumen Tier B — Sepakatee',
     },
     'catalog-tier-c': {
       tier: 'C',
-      priceIdr: 149000,
+      priceIdr: 50000,
       productName: 'Katalog dokumen Tier C — Sepakatee',
+    },
+    'perintilan-single': {
+      tier: 'C',
+      priceIdr: 50000,
+      productName: 'Template Praktis (pilihan satuan)',
+    },
+    'perintilan-bundle': {
+      tier: 'A',
+      priceIdr: 199000,
+      productName: 'Paket Template Praktis — 500+ berkas (.zip)',
     },
   };
 

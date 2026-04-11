@@ -1,6 +1,6 @@
 /**
  * Canonical tier + product pricing for template flows (static site).
- * Tier C = lowest IDR, Tier B = mid, Tier A = highest (per product plan).
+ * Tier C = low-ticket, Tier B = premium mid, Tier A = premium high.
  * Edit amounts here; preview/payment/landing read from this file.
  */
 (function (global) {
@@ -10,7 +10,7 @@
   var TIER_PRICE_IDR = {
     A: 199000,
     B: 149000,
-    C: 99000,
+    C: 50000,
   };
 
   var PRODUCTS = {
@@ -36,8 +36,8 @@
     },
     'catalog-paket-dasar': {
       tier: 'C',
-      priceIdr: 99000,
-      productName: 'Paket Dasar — dokumen hukum Sepakatee',
+      priceIdr: 50000,
+      productName: 'Template Praktis (satuan) — Sepakatee',
     },
     'catalog-tier-a': {
       tier: 'A',
@@ -51,8 +51,18 @@
     },
     'catalog-tier-c': {
       tier: 'C',
-      priceIdr: 99000,
+      priceIdr: 50000,
       productName: 'Katalog dokumen Tier C — Sepakatee',
+    },
+    'perintilan-single': {
+      tier: 'C',
+      priceIdr: 50000,
+      productName: 'Template Praktis (pilihan satuan)',
+    },
+    'perintilan-bundle': {
+      tier: 'A',
+      priceIdr: 199000,
+      productName: 'Paket Template Praktis — 500+ berkas (.zip)',
     },
   };
 

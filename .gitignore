@@ -3,3 +3,6 @@ node_modules/
 
 # Local batch tooling (absolute machine paths); not for the public site
 tools/scripts/
+
+# Legacy bulk DOCX library (removed from Git; do not re-add)
+semua template/

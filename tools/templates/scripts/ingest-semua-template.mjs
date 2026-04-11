@@ -3,6 +3,9 @@
  * Indexes premium files under website/semua template/Perjanjian and writes catalog-inventory.json
  * with Pass-1 family tags + provisional tier heuristics.
  *
+ * The `semua template/` tree was removed from the repo; if the folder is absent, this script exits
+ * without overwriting tools/templates/data/catalog-inventory.json (catalog is maintained in-repo).
+ *
  * Usage (from repo root):
  *   node website/tools/templates/scripts/ingest-semua-template.mjs
  */
@@ -104,6 +107,15 @@ function ipaymuFlowForPremiumTier(tier) {
 }
 
 function main() {
+  if (!fs.existsSync(PREMIUM_DIR)) {
+    console.warn(
+      '[ingest-semua-template] Skip: folder not found:',
+      path.relative(WEBSITE_ROOT, PREMIUM_DIR).split(path.sep).join('/'),
+      '(catalog JSON left unchanged).'
+    );
+    process.exit(0);
+  }
+
   const files = [];
   walkWordDocs(PREMIUM_DIR, files);
   files.sort();

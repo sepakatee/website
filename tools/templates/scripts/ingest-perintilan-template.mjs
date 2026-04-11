@@ -2,6 +2,9 @@
 /**
  * Indexes economical templates under website/semua template/Perintilan (Template Praktis).
  * Output: perintilan-inventory.json + bundle for static site.
+ *
+ * If `semua template/Perintilan` is absent, exits without overwriting the committed JSON
+ * (catalog maintained in-repo).
  */
 import fs from 'fs';
 import path from 'path';
@@ -56,6 +59,15 @@ function walkWordDocs(dir, acc) {
 }
 
 function main() {
+  if (!fs.existsSync(PERINTILAN_DIR)) {
+    console.warn(
+      '[ingest-perintilan-template] Skip: folder not found:',
+      path.relative(WEBSITE_ROOT, PERINTILAN_DIR).split(path.sep).join('/'),
+      '(perintilan JSON left unchanged).'
+    );
+    process.exit(0);
+  }
+
   const files = [];
   walkWordDocs(PERINTILAN_DIR, files);
   files.sort();

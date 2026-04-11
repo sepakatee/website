@@ -268,7 +268,7 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="form.js?v=20260411a"></script>
+    <script src="form.js?v=20260411c"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -308,6 +308,15 @@
         }
         if (!sessionStorage.getItem('previewDocumentData')) restoreFromUrl();
         if (!sessionStorage.getItem('previewDocumentData')) restoreFromLocalStorage();
+        // Cadangan per ID pesanan (set saat klik bayar) + autosave form — isi ulang session jika kosong.
+        if (!sessionStorage.getItem('previewDocumentData') && typeof restoreFormDataForReceipt === 'function') {
+          const fdRestored = restoreFormDataForReceipt(referenceId);
+          if (fdRestored) {
+            try {
+              sessionStorage.setItem('previewDocumentData', JSON.stringify(fdRestored));
+            } catch (eR) {}
+          }
+        }
 
         document.getElementById('referenceId').textContent = referenceId;
 
@@ -315,7 +324,11 @@
         let buyerName = urlParams.get('name') || urlParams.get('buyer_name') || sessionStorage.getItem('paymentBuyerName') || '-';
         let buyerEmail = urlParams.get('email') || urlParams.get('buyer_email') || sessionStorage.getItem('paymentBuyerEmail') || '-';
         try {
-          const pd = sessionStorage.getItem('previewDocumentData');
+          let pd = sessionStorage.getItem('previewDocumentData');
+          if (!pd && typeof restoreFormDataForReceipt === 'function') {
+            const fr = restoreFormDataForReceipt(referenceId);
+            if (fr) pd = JSON.stringify(fr);
+          }
           if (pd) {
             const fd = JSON.parse(pd);
             if ((!buyerName || buyerName === '-') && (fd.nama_penyewa || fd.nama_pemberi_sewa)) buyerName = fd.nama_penyewa || fd.nama_pemberi_sewa;
@@ -355,7 +368,7 @@
           btn.disabled = true;
           btn.textContent = 'Membuat PDF...';
           try {
-            const res = await fetch('invoice.html?v=20260411a');
+            const res = await fetch('invoice.html?v=20260411c');
             if (!res.ok) throw new Error('Template tidak ditemukan');
             let html = await res.text();
             html = html.replace(/\{\{ref\}\}/g, invRef)
@@ -397,20 +410,25 @@
         });
 
         document.getElementById('downloadBtn').addEventListener('click', () => {
-          let previewData = sessionStorage.getItem('previewDocumentData');
-          if (!previewData) {
-            const backupRef = localStorage.getItem('previewDocumentData_ref');
-            if (backupRef && backupRef === referenceId) {
-              previewData = localStorage.getItem('previewDocumentData_backup');
-            }
-          }
-          if (!previewData) restoreFromUrl();
-          if (!previewData) previewData = sessionStorage.getItem('previewDocumentData');
           let formData = null;
-          if (previewData) {
-            try {
-              formData = JSON.parse(previewData);
-            } catch (e) {}
+          if (typeof restoreFormDataForReceipt === 'function') {
+            formData = restoreFormDataForReceipt(referenceId);
+          }
+          if (!formData) {
+            let previewData = sessionStorage.getItem('previewDocumentData');
+            if (!previewData) {
+              const backupRef = localStorage.getItem('previewDocumentData_ref');
+              if (backupRef && backupRef === referenceId) {
+                previewData = localStorage.getItem('previewDocumentData_backup');
+              }
+            }
+            if (!previewData) restoreFromUrl();
+            if (!previewData) previewData = sessionStorage.getItem('previewDocumentData');
+            if (previewData) {
+              try {
+                formData = JSON.parse(previewData);
+              } catch (e) {}
+            }
           }
           if (!formData && typeof createFallbackFormData === 'function') {
             formData = createFallbackFormData(buyerName, buyerEmail);
@@ -418,7 +436,7 @@
           if (formData && typeof downloadDocument === 'function') {
             downloadDocument(formData);
           } else {
-            alert('Fungsi download tidak tersedia. Silakan refresh halaman.');
+            alert('Data formulir tidak ditemukan. Pastikan Anda menyelesaikan pembayaran dari perangkat yang sama, atau hubungi kami dengan ID pesanan.');
           }
         });
       });

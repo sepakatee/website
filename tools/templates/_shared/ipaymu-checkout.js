@@ -30,6 +30,8 @@
     'catalog-tier-a': 'dokumen',
     'catalog-tier-b': 'dokumen',
     'catalog-tier-c': 'dokumen',
+    'perintilan-single': 'dokumen',
+    'perintilan-bundle': 'dokumen',
   };
 
   function cleanForIpaymu(str) {
@@ -81,6 +83,10 @@
       if (previewData) {
         global.localStorage.setItem('previewDocumentData_backup', previewData);
         global.localStorage.setItem('previewDocumentData_ref', referenceId);
+        // Cadangan per-ID pesanan: tidak tertimpa pembayaran lain; dipakai receipt setelah redirect iPaymu.
+        try {
+          global.localStorage.setItem('sep_receipt_form_' + referenceId, previewData);
+        } catch (e3) {}
       }
 
       // For catalog purchases, sessionStorage is often cleared on the cross-origin redirect.

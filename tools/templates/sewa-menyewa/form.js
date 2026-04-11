@@ -498,7 +498,7 @@ function replaceTxtTemplateVariables(txt, data) {
   return result;
 }
 
-const TEMPLATE_CACHE_VERSION = '20260411a';
+const TEMPLATE_CACHE_VERSION = '20260411c';
 const SOURCE_DOCX_FILENAME = 'Sepakatee I Perjanjian Sewa Menyewa [Template].docx';
 const SOURCE_DOCX_URL = '../../../legaldocs/' + encodeURIComponent(SOURCE_DOCX_FILENAME).replace(/%20/g, '%20');
 const JSZIP_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
@@ -630,7 +630,9 @@ function ensureJsZipLoaded() {
 
 async function buildFilledSourceDocx(formData) {
   await ensureJsZipLoaded();
-  const res = await fetch(SOURCE_DOCX_URL + '?v=' + TEMPLATE_CACHE_VERSION);
+  const res = await fetch(SOURCE_DOCX_URL + '?v=' + TEMPLATE_CACHE_VERSION, {
+    cache: 'no-store',
+  });
   if (!res.ok) throw new Error('Template DOCX tidak tersedia di server');
 
   const arrayBuffer = await res.arrayBuffer();
@@ -1056,6 +1058,76 @@ async function initiatePayment_OLD(formData, paymentMethod = null, paymentChanne
   }
 }
 */
+
+/**
+ * Pulihkan data form untuk receipt/download setelah redirect pembayaran.
+ * Urutan: cadangan per ID pesanan (paling tepercaya) → session → cadangan lama + ref → autosave form terakhir.
+ */
+function restoreFormDataForReceipt(referenceId) {
+  const ref = String(referenceId || '').trim();
+  const tryParse = function (s) {
+    try {
+      return JSON.parse(s);
+    } catch (e) {
+      return null;
+    }
+  };
+
+  let raw = null;
+  // Prioritas: data yang disimpan saat bayar untuk ref ini — hindari session dari tab/form lain.
+  if (ref && ref !== 'N/A') {
+    try {
+      raw = localStorage.getItem('sep_receipt_form_' + ref);
+    } catch (e0) {}
+  }
+
+  if (!raw) {
+    try {
+      raw = sessionStorage.getItem('previewDocumentData');
+    } catch (e) {}
+  }
+
+  if (!raw) {
+    let backupRef = '';
+    let backup = '';
+    try {
+      backupRef = localStorage.getItem('previewDocumentData_ref') || '';
+      backup = localStorage.getItem('previewDocumentData_backup') || '';
+    } catch (e3) {}
+    if (backup && backupRef === ref) raw = backup;
+    if (
+      !raw &&
+      backup &&
+      ref &&
+      backupRef &&
+      ref.startsWith('KNTF-') &&
+      backupRef.startsWith('KNTF-') &&
+      backupRef.slice(0, 13) === ref.slice(0, 13)
+    ) {
+      raw = backup;
+    }
+  }
+
+  if (!raw) {
+    try {
+      const latest = localStorage.getItem('formsewamenyewa_progress_latest');
+      if (latest) {
+        const parsed = tryParse(latest);
+        if (parsed && parsed.data && typeof parsed.data === 'object') return parsed.data;
+      }
+    } catch (e4) {}
+  }
+
+  if (raw) {
+    const fd = tryParse(raw);
+    if (fd && typeof fd === 'object') return fd;
+  }
+  return null;
+}
+
+if (typeof window !== 'undefined') {
+  window.restoreFormDataForReceipt = restoreFormDataForReceipt;
+}
 
 // Create minimal formData for fallback download when session/localStorage data is lost (e.g. after iPaymu redirect)
 function createFallbackFormData(buyerName, buyerEmail) {

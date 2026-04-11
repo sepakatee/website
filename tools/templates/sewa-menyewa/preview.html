@@ -22,78 +22,125 @@
       body {
         margin: 0;
         padding: 0;
-        background: #fafafa;
+        background: #ecece8;
         font-family: 'Poppins', system-ui, sans-serif;
       }
-      
+
       .preview-page {
         min-height: 100vh;
       }
-      
+
       .preview-page__layout {
         display: grid;
-        grid-template-columns: 380px 1fr;
+        grid-template-columns: minmax(300px, 400px) 1fr;
         min-height: 100vh;
       }
-      
-      /* Sidebar Left */
+
       .preview-sidebar-left {
-        background: #fff;
-        border-right: 1px solid rgba(15, 15, 16, 0.08);
-        padding: 40px 32px;
+        background: linear-gradient(180deg, #fafaf8 0%, #f3f3f0 100%);
+        border-right: 1px solid rgba(15, 15, 16, 0.1);
+        padding: 36px 28px 32px;
         overflow-y: auto;
         position: sticky;
         top: 0;
         height: 100vh;
+        box-sizing: border-box;
       }
-      
+
       .preview-sidebar-content {
         display: flex;
         flex-direction: column;
-        height: 100%;
+        min-height: 100%;
+        gap: 0;
       }
-      
+
       .preview-sidebar-title {
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: rgba(15, 15, 16, 0.6);
-        margin: 0 0 8px 0;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgba(15, 15, 16, 0.5);
+        margin: 0 0 6px 0;
       }
-      
+
       .preview-sidebar-heading {
-        font-size: 2rem;
-        font-weight: 700;
+        font-size: 1.625rem;
+        font-weight: 600;
         color: var(--primary);
-        margin: 0 0 16px 0;
-      }
-      
-      .preview-sidebar-description {
-        font-size: 0.9375rem;
-        color: rgba(15, 15, 16, 0.7);
-        line-height: 1.6;
-        margin: 0 0 32px 0;
-      }
-      
-      .preview-package-info {
-        margin-bottom: 32px;
-        padding: 20px;
-        background: rgba(15, 15, 16, 0.02);
-        border-radius: 12px;
-        border: 1px solid rgba(15, 15, 16, 0.08);
-      }
-      
-      .package-label {
-        font-size: 0.875rem;
-        color: rgba(15, 15, 16, 0.7);
         margin: 0 0 12px 0;
+        line-height: 1.25;
       }
-      
+
+      .preview-sidebar-description {
+        font-size: 0.875rem;
+        color: rgba(15, 15, 16, 0.72);
+        line-height: 1.65;
+        margin: 0 0 22px 0;
+      }
+
+      /* Formal notes — left rail */
+      .preview-notes {
+        margin: 0 0 22px 0;
+        padding: 16px 16px 16px 18px;
+        background: #fff;
+        border: 1px solid rgba(15, 15, 16, 0.1);
+        border-radius: 10px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      }
+
+      .preview-notes__title {
+        margin: 0 0 12px 0;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(15, 15, 16, 0.55);
+      }
+
+      .preview-notes__list {
+        margin: 0;
+        padding-left: 1.1rem;
+        font-size: 0.8125rem;
+        line-height: 1.65;
+        color: rgba(15, 15, 16, 0.88);
+      }
+
+      .preview-notes__list li {
+        margin-bottom: 12px;
+      }
+
+      .preview-notes__list li:last-child {
+        margin-bottom: 0;
+      }
+
+      .preview-notes__list code {
+        font-size: 0.78em;
+        padding: 1px 5px;
+        border-radius: 4px;
+        background: rgba(15, 15, 16, 0.06);
+        font-family: ui-monospace, 'Cascadia Code', 'Consolas', monospace;
+      }
+
+      .preview-package-info {
+        margin-bottom: 22px;
+        padding: 18px 18px 16px;
+        background: #fff;
+        border-radius: 10px;
+        border: 1px solid rgba(15, 15, 16, 0.1);
+      }
+
+      .package-label {
+        font-size: 0.8125rem;
+        color: rgba(15, 15, 16, 0.6);
+        margin: 0 0 10px 0;
+      }
+
       .package-details {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 8px;
       }
-      
+
       .package-item {
         display: flex;
         align-items: center;
@@ -102,34 +149,34 @@
         color: var(--primary);
         font-weight: 500;
       }
-      
+
       .package-item svg {
-        color: #2563eb;
+        color: #1a1a1a;
         flex-shrink: 0;
       }
-      
+
       .package-price {
-        font-size: 1.5rem;
+        font-size: 1.375rem;
         font-weight: 700;
         color: var(--primary);
-        margin-top: 8px;
+        margin-top: 6px;
       }
-      
+
       .preview-sidebar-actions {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
         margin-top: auto;
-        margin-bottom: 24px;
+        margin-bottom: 18px;
       }
-      
+
       .btn {
-        padding: 14px 24px;
+        padding: 13px 22px;
         border-radius: 8px;
-        font-size: 0.9375rem;
+        font-size: 0.875rem;
         font-weight: 500;
         cursor: pointer;
-        transition: all 0.2s ease;
+        transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
         border: none;
         display: inline-flex;
         align-items: center;
@@ -138,171 +185,192 @@
         text-decoration: none;
         font-family: 'Poppins', system-ui, sans-serif;
       }
-      
+
       .btn--full {
         width: 100%;
       }
-      
+
       .btn--ghost {
-        background: transparent;
-        border: 1px solid rgba(15, 15, 16, 0.15);
+        background: #fff;
+        border: 1px solid rgba(15, 15, 16, 0.18);
         color: var(--primary);
       }
-      
+
       .btn--ghost:hover {
-        background: rgba(15, 15, 16, 0.05);
-        border-color: rgba(15, 15, 16, 0.25);
+        background: rgba(15, 15, 16, 0.04);
+        border-color: rgba(15, 15, 16, 0.28);
       }
-      
+
       .btn--primary {
         background: var(--primary);
         color: #fff;
       }
-      
+
       .btn--primary:hover {
-        background: rgba(15, 15, 16, 0.9);
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(15, 15, 16, 0.15);
+        background: rgba(15, 15, 16, 0.88);
       }
-      
+
       .preview-privacy {
-        font-size: 0.75rem;
-        color: rgba(15, 15, 16, 0.5);
+        font-size: 0.6875rem;
+        color: rgba(15, 15, 16, 0.48);
         text-align: center;
         margin: 0;
+        line-height: 1.5;
       }
-      
+
       .preview-privacy a {
-        color: #2563eb;
+        color: rgba(15, 15, 16, 0.65);
         text-decoration: underline;
       }
-      
-      /* Preview Content Right */
+
+      /* Right: “paper” + Word-like body */
       .preview-content-right {
-        padding: 40px;
+        padding: 28px 24px 48px;
         overflow-y: auto;
         height: 100vh;
+        box-sizing: border-box;
       }
-      
+
       .preview-document-container {
-        max-width: 800px;
+        max-width: 210mm;
         margin: 0 auto;
         background: #fff;
-        border-radius: 12px;
-        padding: 48px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        border: 1px solid rgba(15, 15, 16, 0.08);
+        border-radius: 2px;
+        padding: 22mm 24mm 26mm;
+        box-shadow:
+          0 1px 1px rgba(0, 0, 0, 0.06),
+          0 12px 40px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        min-height: 260mm;
+        box-sizing: border-box;
       }
-      
+
       .preview-document-full {
-        line-height: 1.8;
-        color: var(--primary);
+        font-family: 'Times New Roman', Times, 'Noto Serif', Georgia, serif;
+        font-size: 12pt;
+        line-height: 1.35;
+        color: #000;
+        -webkit-font-smoothing: antialiased;
       }
-      
+
       .preview-document-full h1 {
         text-align: center;
-        font-weight: 700;
-        margin-bottom: 32px;
-        font-size: 1.5rem;
+        font-weight: bold;
+        font-size: 12pt;
+        margin: 0 0 1.25em;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
       }
-      
-      .preview-document-full h3 {
+
+      .preview-document-full h3,
+      .preview-document-full .section-title {
         text-align: center;
-        font-weight: 600;
-        margin: 32px 0 16px;
-        font-size: 1.125rem;
+        font-weight: bold;
+        font-size: 12pt;
+        margin: 1.25em 0 0.75em;
       }
-      
+
       .preview-document-full p {
         text-align: justify;
-        margin: 16px 0;
-        font-size: 0.9375rem;
+        margin: 0 0 0.65em;
+        text-indent: 0;
+        orphans: 2;
+        widows: 2;
       }
-      
-      .preview-document-full ol {
-        margin-left: 24px;
-        margin: 16px 0 16px 24px;
+
+      .preview-document-full ol,
+      .preview-document-full ul {
+        margin: 0.5em 0 0.65em 1.5em;
+        padding-left: 0.25em;
       }
-      
+
       .preview-document-full ol ol {
         list-style-type: lower-alpha;
-        margin-left: 24px;
+        margin-left: 0.5em;
       }
-      
+
       .preview-document-full li {
-        margin: 12px 0;
-        font-size: 0.9375rem;
+        margin: 0.35em 0;
+        text-align: justify;
       }
-      
-      /* Filled field - blue highlight */
+
+      .preview-document-full .signature-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2em;
+        font-size: 12pt;
+      }
+
+      .preview-document-full .signature-table td {
+        vertical-align: top;
+        padding: 0.5em;
+      }
+
+      /* Filled = yellow highlight (approx. Word unduhan) */
       .preview-document-full .filled-field {
-        background: #dbeafe;
-        color: #1e40af;
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-weight: 500;
-        border: 1px solid #93c5fd;
+        background: rgba(255, 235, 59, 0.55);
+        color: #000;
+        padding: 0 1px;
+        border-radius: 1px;
+        font-weight: normal;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
       }
-      
-      /* Placeholder field */
+
+      /* Kosong = placeholder {{key}} seperti berkas Word */
       .preview-document-full .placeholder-field {
-        background: #f5f5f5;
-        padding: 2px 6px;
-        border-radius: 4px;
-        color: #666;
-        font-style: italic;
+        font-family: ui-monospace, 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+        font-size: 0.92em;
+        color: #1a1a1a;
+        background: rgba(0, 0, 0, 0.04);
+        border-bottom: 1px dotted rgba(0, 0, 0, 0.45);
+        padding: 0 2px;
+        font-style: normal;
+        font-weight: 500;
       }
-      
-      /* Blurred section - blur everything */
+
       .preview-document-full .blurred-section {
-        filter: blur(4px);
+        filter: blur(3.5px);
         user-select: none;
         pointer-events: none;
-        opacity: 0.4;
+        opacity: 0.42;
         position: relative;
       }
-      
+
       .preview-document-full .blurred-section::after {
         content: '';
         position: absolute;
         inset: 0;
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.25);
       }
-      
-      /* Keep user-filled fields clear and visible - override blur */
+
       .preview-document-full .blurred-section .filled-field,
       .preview-document-full .blurred-section .placeholder-field {
         filter: none !important;
         opacity: 1 !important;
         position: relative;
-        z-index: 10;
-        background: #dbeafe;
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-weight: 600;
-        display: inline-block;
+        z-index: 2;
       }
-      
-      .preview-document-full .blurred-section .placeholder-field {
-        background: #f5f5f5;
-        color: #666;
-        font-weight: 400;
-      }
-      
+
       @media (max-width: 1024px) {
         .preview-page__layout {
           grid-template-columns: 1fr;
         }
-        
+
         .preview-sidebar-left {
           position: relative;
           height: auto;
+          max-height: none;
           border-right: none;
-          border-bottom: 1px solid rgba(15, 15, 16, 0.08);
+          border-bottom: 1px solid rgba(15, 15, 16, 0.1);
         }
-        
+
         .preview-content-right {
           height: auto;
+        }
+
+        .preview-document-container {
+          padding: 14mm 16mm 20mm;
         }
       }
     </style>
@@ -310,15 +378,32 @@
   <body>
     <div class="preview-page">
       <div class="preview-page__layout">
-        <!-- Sidebar Left -->
         <div class="preview-sidebar-left">
           <div class="preview-sidebar-content">
             <h3 class="preview-sidebar-title">Perjanjian Sewa Menyewa Tempat</h3>
             <h2 class="preview-sidebar-heading">Preview</h2>
             <p class="preview-sidebar-description">
-              Ini adalah preview dokumen akhir yang akan Anda terima, periksa kembali data yang Anda masukkan.
+              Berikut tampilan naskah yang mendekati format berkas akhir. Silakan verifikasi kembali seluruh entri sebelum melanjutkan ke pembayaran.
             </p>
-            
+
+            <aside class="preview-notes" aria-labelledby="preview-notes-title">
+              <h4 id="preview-notes-title" class="preview-notes__title">Ketentuan berkas unduhan</h4>
+              <ol class="preview-notes__list">
+                <li>
+                  Setelah pembayaran terverifikasi, dokumen Microsoft Word yang Anda unduh akan menandai setiap bagian yang telah Anda isi pada formulir dengan
+                  <strong>sorotan warna kuning</strong> (highlight), setara dengan penanda revisi pada naskah konvensional. Sorotan tersebut bersifat
+                  <strong>reminder editorial</strong>—Anda bebas mengubah, menghapus, atau mempertahankannya sesuai kebutuhan; namun demikian,
+                  <strong>disarankan untuk meninjau ulang</strong> seluruh teks guna memastikan kesesuaian dengan fakta hukum dan kehendak Para Pihak.
+                </li>
+                <li>
+                  Untuk kolom yang <strong>belum</strong> Anda lengkapi pada formulir, berkas yang diunduh akan mempertahankan
+                  <strong>placeholder bertanda ganda kurung kurawal</strong>, misalnya <code>{{nama_penyewa}}</code>, sebagai pengingat bahwa informasi tersebut
+                  <strong>wajib dilengkapi atau disesuaikan</strong> sebelum dokumen ditandatangani atau diberikan kepada pihak lawan. Kelalaian melengkapi
+                  placeholder dapat menurunkan kejelasan isi perjanjian.
+                </li>
+              </ol>
+            </aside>
+
             <div class="preview-package-info">
               <p class="package-label">Anda memilih paket:</p>
               <div class="package-details">
@@ -331,28 +416,22 @@
                 <div class="package-price" id="packagePriceDisplay">Rp 350.000</div>
               </div>
             </div>
-            
+
             <div class="preview-sidebar-actions">
-              <a href="form.html" class="btn btn--ghost btn--full">
-                Kembali ke Form
-              </a>
-              <button type="button" class="btn btn--primary btn--full" id="payAndDownloadBtn">
-                Lanjut ke Pembayaran
-              </button>
+              <a href="form.html" class="btn btn--ghost btn--full">Kembali ke Form</a>
+              <button type="button" class="btn btn--primary btn--full" id="payAndDownloadBtn">Lanjut ke Pembayaran</button>
             </div>
-            
+
             <p class="preview-privacy">
-              Privasi dan data Anda terjaga, <a href="#">pelajari lebih lanjut</a>
+              Privasi dan data Anda terjaga —
+              <a href="../../../index.html">selengkapnya</a>
             </p>
           </div>
         </div>
-        
-        <!-- Preview Content Right -->
+
         <div class="preview-content-right">
           <div class="preview-document-container">
-            <div class="preview-document-full" id="fullDocumentPreview">
-              <!-- Full document preview akan di-generate oleh JavaScript -->
-            </div>
+            <div class="preview-document-full" id="fullDocumentPreview"></div>
           </div>
         </div>
       </div>
@@ -361,71 +440,69 @@
     <script src="../_shared/pricing.js"></script>
     <script src="../_shared/checkout-endpoint.js"></script>
     <script src="../_shared/ipaymu-checkout.js"></script>
-    <script src="form.js"></script>
+    <script src="form.js?v=20260411d"></script>
     <script>
-      // Load form data from sessionStorage and generate preview
       document.addEventListener('DOMContentLoaded', () => {
         var pr0 = window.SepakateePricing.getByPath(window.location.pathname);
         var elPrice = document.getElementById('packagePriceDisplay');
         if (elPrice) elPrice.textContent = window.SepakateePricing.formatIdr(pr0.priceIdr);
 
         const previewData = sessionStorage.getItem('previewDocumentData');
-        
+
         if (!previewData) {
           alert('Tidak ada data dokumen. Silakan isi form terlebih dahulu.');
           window.location.href = 'form.html';
           return;
         }
-        
+
         try {
           const formData = JSON.parse(previewData);
-          
-          // Generate full document preview
+
           if (typeof generateFullDocumentPreview === 'function') {
             generateFullDocumentPreview(formData);
             applyBlurToPreview();
           } else {
             console.error('generateFullDocumentPreview function not found');
           }
-          
-          // Blur paragraphs that have no user placeholders (paywall effect)
+
           function applyBlurToPreview() {
             const fullPreview = document.getElementById('fullDocumentPreview');
             if (!fullPreview) return;
-            
+
             const blockElements = fullPreview.querySelectorAll('p, li, ol > li, h3, .section-title');
-            blockElements.forEach(element => {
+            blockElements.forEach((element) => {
               const hasUserFields = element.querySelector('.filled-field, .placeholder-field');
-              const isTitle = element.classList.contains('section-title') || element.tagName === 'H3' || element.tagName === 'H1';
+              const isTitle =
+                element.classList.contains('section-title') ||
+                element.tagName === 'H3' ||
+                element.tagName === 'H1';
               if (!hasUserFields && !isTitle && element.textContent.trim().length > 0) {
                 if (!element.closest('.blurred-section')) {
                   element.classList.add('blurred-section');
                 }
               }
             });
-            
+
             const signatureTable = fullPreview.querySelector('.signature-table');
             if (signatureTable && !signatureTable.querySelector('.filled-field, .placeholder-field')) {
               signatureTable.classList.add('blurred-section');
             }
-            
-            console.log('✅ Blur applied per paragraph based on placeholder presence');
           }
-          
-          // Handle payment button — buyer info from formData (iPaymu collects name/email on their page)
+
           const payBtn = document.getElementById('payAndDownloadBtn');
           if (payBtn) {
             payBtn.addEventListener('click', async (e) => {
               e.preventDefault();
-              
-              const buyerName  = formData.buyer?.name || formData.nama_penyewa || formData.nama_pemberi_sewa || 'Customer';
+
+              const buyerName =
+                formData.buyer?.name || formData.nama_penyewa || formData.nama_pemberi_sewa || 'Customer';
               const buyerEmail = formData.buyer?.email || formData.email || 'customer@example.com';
               const buyerPhone = formData.buyer?.phone || formData.phone || '08123456789';
-              
+
               payBtn.disabled = true;
               payBtn.textContent = 'Memproses...';
               payBtn.style.opacity = '0.7';
-              
+
               try {
                 await window.SepakateeIpaymuCheckout.redirectToPayment({
                   flowKey: 'sewa-menyewa',
@@ -451,4 +528,3 @@
     </script>
   </body>
 </html>
-

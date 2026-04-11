@@ -186,21 +186,28 @@ function replaceVariables(template, data, forPreview = false) {
   if (previewData.tanggal_akhir) {
     previewData.tanggal_akhir = formatDate(previewData.tanggal_akhir);
   }
-  
+
   Object.keys(variableMapping).forEach(key => {
     const value = previewData[key];
     const regex = new RegExp(`{{${key}}}`, 'g');
     const fieldName = key.replace(/_/g, ' ');
     
     if (value && value !== '') {
+      const displayVal = key === 'batas_akhir_pelunasan' ? formatDate(value) : value;
       if (forPreview) {
-        result = result.replace(regex, `<span class="filled-field preview-field" data-field="${key}">${value}</span>`);
+        result = result.replace(
+          regex,
+          `<span class="filled-field preview-field" data-field="${key}">${displayVal}</span>`
+        );
       } else {
-        result = result.replace(regex, value);
+        result = result.replace(regex, key === 'batas_akhir_pelunasan' ? formatDate(value) : value);
       }
     } else {
       if (forPreview) {
-        result = result.replace(regex, `<span class="placeholder-field preview-field" data-field="${key}">[${fieldName}]</span>`);
+        result = result.replace(
+          regex,
+          `<span class="placeholder-field preview-field" data-field="${key}" title="Belum diisi di formulir">{{${key}}}</span>`
+        );
       } else {
         result = result.replace(regex, `<mark style="background-color: #F5F5F5; padding: 2px 4px;">[${fieldName}]</mark>`);
       }
@@ -383,63 +390,14 @@ function updateProgress() {
   }
 }
 
-// Generate full document preview for preview view
+// Generate full document preview for preview view (same rules as live preview: spans + {{key}} empty)
 function generateFullDocumentPreview(formData) {
   const fullPreview = document.getElementById('fullDocumentPreview');
   if (!fullPreview) return;
-  
-  // Start with original template (before variable replacement)
-  let htmlContent = documentTemplate;
-  
-  // Extract body content only
+
+  let htmlContent = replaceVariables(documentTemplate, formData, true);
   const bodyMatch = htmlContent.match(/<body>([\s\S]*?)<\/body>/);
-  if (bodyMatch) {
-    htmlContent = bodyMatch[1];
-  }
-  
-  // Format dates for preview
-  const previewData = { ...formData };
-  if (previewData.tanggal_mulai) {
-    previewData.tanggal_mulai = formatDate(previewData.tanggal_mulai);
-  }
-  if (previewData.tanggal_akhir) {
-    previewData.tanggal_akhir = formatDate(previewData.tanggal_akhir);
-  }
-  if (previewData.batas_akhir_pelunasan) {
-    previewData.batas_akhir_pelunasan = formatDate(previewData.batas_akhir_pelunasan);
-  }
-  
-  // Handle conditional pembayaran bertahap
-  const conditionalContent = previewData.pembayaran_bertahap ? `
-        <li>Apabila disepakati pembayaran secara bertahap, maka:
-            <ol>
-                <li>Penyewa wajib membayar deposit awal sebesar Rp <strong>${previewData.nominal_deposit || '[nominal deposit]'}</strong> (<strong>${previewData.nominal_deposit_huruf || '[deposit huruf]'}</strong>) pada saat penandatanganan Perjanjian ini; dan</li>
-                <li>Sisa Harga Sewa dibayarkan dalam <strong>${previewData.jumlah_cicilan || '[jumlah cicilan]'}</strong> kali cicilan, masing-masing sebesar Rp <strong>${previewData.nominal_cicilan || '[nominal cicilan]'}</strong>, paling lambat setiap tanggal <strong>${previewData.tanggal_pembayaran || '[tanggal pembayaran]'}</strong>;</li>
-                <li>Seluruh Harga Sewa harus telah dibayar lunas paling lambat pada tanggal <strong>${previewData.batas_akhir_pelunasan || '[batas akhir pelunasan]'}</strong>.</li>
-            </ol>
-        </li>` : '';
-  
-  htmlContent = htmlContent.replace('{{CONDITIONAL_PEMBAYARAN_BERTAHAP}}', conditionalContent);
-  
-  // Replace variables: filled ones get blue highlight, empty ones get placeholder
-  Object.keys(variableMapping).forEach(key => {
-    const value = previewData[key];
-    const regex = new RegExp(`{{${key}}}`, 'g');
-    
-    if (value && value !== '') {
-      // Filled field - highlight in blue
-      htmlContent = htmlContent.replace(regex, `<span class="filled-field">${value}</span>`);
-    } else {
-      // Empty field - show placeholder
-      const fieldName = key.replace(/_/g, ' ');
-      htmlContent = htmlContent.replace(regex, `<span class="placeholder-field">[${fieldName}]</span>`);
-    }
-  });
-  
-  // No blur on form page - users should see full preview while editing
-  // Blur will be applied on the preview.html page before payment
-  
-  fullPreview.innerHTML = htmlContent;
+  fullPreview.innerHTML = bodyMatch ? bodyMatch[1] : htmlContent;
 }
 
 // Preview view functions removed - now using separate page
@@ -498,7 +456,7 @@ function replaceTxtTemplateVariables(txt, data) {
   return result;
 }
 
-const TEMPLATE_CACHE_VERSION = '20260411c';
+const TEMPLATE_CACHE_VERSION = '20260411d';
 const SOURCE_DOCX_FILENAME = 'Sepakatee I Perjanjian Sewa Menyewa [Template].docx';
 const SOURCE_DOCX_URL = '../../../legaldocs/' + encodeURIComponent(SOURCE_DOCX_FILENAME).replace(/%20/g, '%20');
 const JSZIP_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';

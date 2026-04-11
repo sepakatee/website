@@ -1,6 +1,6 @@
 /**
  * Shared helpers for template pages (loader, smooth scroll, FAQ if present).
- * Main catalog UI lives in template-catalog-main.js on index.html.
+ * Main catalog UI: template-catalog-main.js (grid #templateGrid, tab .category-tab).
  */
 
 // FAQ Accordion (no-op if no .faq-item on page)

@@ -96,8 +96,52 @@
     return /\baddendum\b/i.test(t || '');
   }
 
+  function itemMatchesTabKontrakBisnis(it) {
+    var slug = it.premium_category_slug;
+    if (slug === 'perjanjian-ketenagakerjaan' || slug === 'perjanjian-sewa-menyewa') return false;
+    return true;
+  }
+
+  function itemMatchesTabKepemilikanSaham(it) {
+    var slug = it.premium_category_slug;
+    if (slug === 'perjanjian-perusahaan' || slug === 'perjanjian-seputar-keuangan-usaha') return true;
+    var t = (it.title || '').toLowerCase();
+    return /\b(saham|rups|obligasi|pemegang saham|dividen|modal disetor|warrant|emiten)\b/i.test(t);
+  }
+
+  function itemMatchesTabKetenagakerjaan(it) {
+    if (it.premium_category_slug === 'perjanjian-ketenagakerjaan') return true;
+    return legacyItemMatchesSubject(it, 'ketenagakerjaan');
+  }
+
+  function itemMatchesTabTataKelola(it) {
+    if (it.premium_category_slug === 'tambahan-dan-perubahan-perjanjian') return true;
+    if (it.flags && it.flags.corporate) return true;
+    var t = (it.title || '').toLowerCase();
+    return /\b(notulen|rapat umum|dewan komisaris|direksi|perseroan|badan hukum|yayasan|koperasi)\b/i.test(t);
+  }
+
+  function itemMatchesTabLainnya(it) {
+    if (it.family === 'berita_acara' || it.family === 'akta_notaris' || it.family === 'lainnya') return true;
+    if (it.premium_category_slug === 'perjanjian-kerja-sama-fotografi') return true;
+    return false;
+  }
+
+  /** Filter utama: folder Perjanjian (premium_category_slug). */
   function itemMatchesSubject(it, subjectId) {
     if (!subjectId || subjectId === 'all') return true;
+    if (subjectId === 'tab-kontrak-bisnis') return itemMatchesTabKontrakBisnis(it);
+    if (subjectId === 'tab-kepemilikan-saham') return itemMatchesTabKepemilikanSaham(it);
+    if (subjectId === 'tab-ketenagakerjaan') return itemMatchesTabKetenagakerjaan(it);
+    if (subjectId === 'tab-tata-kelola') return itemMatchesTabTataKelola(it);
+    if (subjectId === 'tab-lainnya') return itemMatchesTabLainnya(it);
+    if (it.premium_category_slug) {
+      return it.premium_category_slug === subjectId;
+    }
+    return legacyItemMatchesSubject(it, subjectId);
+  }
+
+  function legacyItemMatchesSubject(it, subjectId) {
     if (it.family === 'akta_notaris' && subjectId !== 'akta') return false;
     var t = (it.title || '').toLowerCase();
     var f = it.flags || {};
@@ -379,7 +423,7 @@
   }
 
   function applyFilters() {
-    var qEl = $('catalogMainSearch');
+    var qEl = $('catalogMainSearch') || $('templateSearch');
     var q = ((qEl && qEl.value) || '').trim().toLowerCase();
     var tierEl = $('catalogTierSelect');
     state.tier = (tierEl && tierEl.value) || '';
@@ -426,10 +470,10 @@
       return;
     }
     if (n === s.count) {
-      meta.textContent = s.count + ' dokumen hukum siap Anda telusuri.';
+      meta.textContent = s.count + ' template Perjanjian premium siap Anda telusuri.';
     } else {
       meta.textContent =
-        n + ' dokumen sesuai filter Anda — dari ' + s.count + ' judul dalam katalog.';
+        n + ' dokumen sesuai filter Anda — dari ' + s.count + ' judul dalam katalog Perjanjian.';
     }
   }
 
@@ -477,8 +521,12 @@
     el.appendChild(next);
   }
 
+  function getCatalogGrid() {
+    return $('catalogMainGrid') || $('templateGrid');
+  }
+
   function renderGrid() {
-    var grid = $('catalogMainGrid');
+    var grid = getCatalogGrid();
     if (!grid) return;
 
     var fmt = window.SepakateePricing && window.SepakateePricing.formatIdr;
@@ -559,27 +607,31 @@
 
   function initSubjectNav() {
     var nav = $('catalogSubjectNav');
-    if (!nav) return;
-    var btns = nav.querySelectorAll('[data-subject]');
-    btns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        setSubject(btn.getAttribute('data-subject') || 'all');
-        applyFilters();
-      });
+    if (!nav || nav.dataset.bound) return;
+    nav.dataset.bound = '1';
+    nav.addEventListener('click', function (e) {
+      var btn = e.target && e.target.closest ? e.target.closest('[data-subject]') : null;
+      if (!btn) return;
+      setSubject(btn.getAttribute('data-subject') || 'all');
+      applyFilters();
     });
   }
 
   function syncHeroSearch() {
     var hero = $('templateSearch');
     var main = $('catalogMainSearch');
-    if (!hero || !main) return;
-    hero.addEventListener('input', function () {
-      main.value = hero.value;
-      applyFilters();
-    });
-    main.addEventListener('input', function () {
-      hero.value = main.value;
-    });
+    if (!hero) return;
+    if (main) {
+      hero.addEventListener('input', function () {
+        main.value = hero.value;
+        applyFilters();
+      });
+      main.addEventListener('input', function () {
+        hero.value = main.value;
+      });
+    } else {
+      hero.addEventListener('input', applyFilters);
+    }
   }
 
   function scrollToCatalog() {
@@ -590,12 +642,41 @@
     window.scrollTo({ top: y, behavior: 'smooth' });
   }
 
-  /** Marketing deep links (index.html pills) → sidebar data-subject */
+  /** Marketing deep links (index.html pills / hash) → subject id */
   var HASH_TO_SUBJECT = {
-    ketenagakerjaan: 'ketenagakerjaan',
-    'kontrak bisnis': 'bisnis_kontrak',
-    'perjanjian sewa': 'properti',
+    ketenagakerjaan: 'tab-ketenagakerjaan',
+    'kontrak bisnis': 'tab-kontrak-bisnis',
+    'perjanjian sewa': 'perjanjian-sewa-menyewa',
   };
+
+  var FEATURED_PREMIUM_SLUG = 'perjanjian-perusahaan';
+
+  function renderPremiumCategoryNav(summary) {
+    var nav = $('catalogSubjectNav');
+    if (!nav) return;
+    var cats = summary && summary.premium_categories;
+    nav.innerHTML = '';
+
+    function addBtn(slug, label, isActive, featured) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'cat-sidebar__btn' + (isActive ? ' is-active' : '');
+      if (featured) b.className += ' cat-sidebar__btn--featured';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      b.setAttribute('data-subject', slug);
+      b.textContent = label;
+      nav.appendChild(b);
+    }
+
+    addBtn('all', 'Semua template', true, false);
+    if (cats && cats.length) {
+      cats.forEach(function (c) {
+        var feat = c.slug === FEATURED_PREMIUM_SLUG;
+        addBtn(c.slug, c.label, false, feat);
+      });
+    }
+  }
 
   function normalizeHashFragment(raw) {
     if (!raw) return '';
@@ -610,15 +691,20 @@
   }
 
   function setSubject(subjectId) {
-    var nav = $('catalogSubjectNav');
     var sid = subjectId || 'all';
     state.subject = sid;
-    if (!nav) return;
-    var btns = nav.querySelectorAll('[data-subject]');
-    btns.forEach(function (b) {
+    var nav = $('catalogSubjectNav');
+    if (nav) {
+      var btns = nav.querySelectorAll('[data-subject]');
+      btns.forEach(function (b) {
+        var match = b.getAttribute('data-subject') === sid;
+        b.classList.toggle('is-active', match);
+        b.setAttribute('aria-selected', match ? 'true' : 'false');
+      });
+    }
+    document.querySelectorAll('.category-tab[data-subject]').forEach(function (b) {
       var match = b.getAttribute('data-subject') === sid;
       b.classList.toggle('is-active', match);
-      b.setAttribute('aria-selected', match ? 'true' : 'false');
     });
   }
 
@@ -637,13 +723,30 @@
     return true;
   }
 
+  function initCategoryTabs() {
+    var tabs = document.querySelectorAll('.category-tab[data-subject]');
+    if (!tabs.length || document.body.dataset.categoryTabsBound) return;
+    document.body.dataset.categoryTabsBound = '1';
+    tabs.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        setSubject(btn.getAttribute('data-subject') || 'all');
+        applyFilters();
+      });
+    });
+  }
+
   function init() {
-    if (!$('catalogMainGrid')) return;
+    if (!getCatalogGrid()) return;
 
     var seoG = typeof window !== 'undefined' && window.__SEPAKATEE_CATALOG_SEO__;
     state.seoById = seoG && seoG.by_id && typeof seoG.by_id === 'object' ? seoG.by_id : {};
 
+    if (!$('catalogMainSearch') && $('templateSearch')) {
+      state.pageSize = 999;
+    }
+
     initSubjectNav();
+    initCategoryTabs();
     syncHeroSearch();
 
     var hero = $('templateSearch');
@@ -691,6 +794,7 @@
         var poolJson = pair[1];
         state.summary = data.summary;
         state.items = data.items || [];
+        renderPremiumCategoryNav(data.summary);
         state.imageById = buildImageByIdMap(state.items, poolJson);
         state.filtered = state.items.slice();
         applyFilters();
@@ -714,7 +818,7 @@
       })
       .catch(function (err) {
         console.error(err);
-        var grid = $('catalogMainGrid');
+        var grid = getCatalogGrid();
         if (grid) {
           grid.innerHTML =
             '<p class="doc-cat-empty doc-cat-empty--err">Tidak dapat memuat daftar dokumen. Muat ulang halaman atau coba lagi sebentar lagi.</p>';
@@ -722,7 +826,7 @@
       });
 
     window.addEventListener('hashchange', function () {
-      if (!$('catalogMainGrid') || !state.items || !state.items.length) return;
+      if (!getCatalogGrid() || !state.items || !state.items.length) return;
       try {
         applyHashFromLocation();
       } catch (eHc) {}

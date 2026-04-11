@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../../style.css" />
     <meta
       name="description"
-      content="Jelajahi 150+ dokumen hukum Sepakatee: harga katalog mulai Rp 99rb hingga Rp 199rb per tier, filter jenis, beli .docx atau builder untuk sewa/JV."
+      content="Pilih dari ratusan template dokumen hukum Sepakatee yang disusun ahli hukum — pembayaran per dokumen, tier C/B/A hingga Rp 199.000."
     />
     <style>
       /* Katalog dokumen — tampilan komersial */
@@ -617,6 +617,137 @@
         font-weight: 600;
         color: var(--dc-muted);
       }
+      .doc-cat-promo {
+        --promo-orange: #ea580c;
+        --promo-red: #dc2626;
+        --promo-green: #15803d;
+        margin-top: 36px;
+        position: relative;
+        overflow: hidden;
+        padding: 20px 22px 22px;
+        border-radius: 16px;
+        background: linear-gradient(118deg, #fff7ed 0%, #ffedd5 42%, #fef9c3 88%);
+        border: 2px solid rgba(234, 88, 12, 0.4);
+        box-shadow:
+          0 10px 40px rgba(234, 88, 12, 0.18),
+          0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+      }
+      .doc-cat-promo::before {
+        content: '';
+        position: absolute;
+        top: -40%;
+        right: -15%;
+        width: 55%;
+        height: 140%;
+        background: radial-gradient(circle, rgba(251, 191, 36, 0.35) 0%, transparent 65%);
+        pointer-events: none;
+      }
+      .doc-cat-promo__tag {
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 5px 12px;
+        border-radius: 999px;
+        font-size: 0.65rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #fff;
+        background: linear-gradient(90deg, var(--promo-red) 0%, #f97316 100%);
+        box-shadow: 0 3px 10px rgba(220, 38, 38, 0.35);
+      }
+      .doc-cat-promo__inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .doc-cat-promo__text h3 {
+        margin: 0 0 12px;
+        font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+        font-weight: 800;
+        color: #1c1917;
+        letter-spacing: -0.03em;
+        line-height: 1.25;
+      }
+      .doc-cat-promo__deal {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 8px 14px;
+        margin-bottom: 10px;
+      }
+      .doc-cat-promo__old {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #991b1b;
+        text-decoration: line-through;
+        text-decoration-color: var(--promo-red);
+        text-decoration-thickness: 3px;
+        text-underline-offset: 2px;
+      }
+      .doc-cat-promo__arrow {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--promo-orange);
+      }
+      .doc-cat-promo__new {
+        font-size: clamp(1.5rem, 3.5vw, 1.85rem);
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        color: var(--promo-green);
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+      }
+      .doc-cat-promo__pill {
+        display: inline-block;
+        margin-left: 4px;
+        padding: 3px 8px;
+        border-radius: 8px;
+        font-size: 0.7rem;
+        font-weight: 800;
+        color: #7c2d12;
+        background: rgba(251, 191, 36, 0.65);
+        border: 1px solid rgba(245, 158, 11, 0.5);
+        vertical-align: middle;
+      }
+      .doc-cat-promo__sub {
+        margin: 0;
+        font-size: 0.875rem;
+        line-height: 1.55;
+        color: #44403c;
+        max-width: 38rem;
+      }
+      .doc-cat-promo__sub strong {
+        color: #1c1917;
+      }
+      .doc-cat-promo__cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 26px;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        font-weight: 800;
+        text-decoration: none;
+        color: #fff;
+        white-space: nowrap;
+        background: linear-gradient(180deg, #1c1917 0%, #000 100%);
+        border: 2px solid rgba(251, 191, 36, 0.5);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      }
+      .doc-cat-promo__cta:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3), 0 0 24px rgba(234, 88, 12, 0.25);
+        filter: brightness(1.05);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .doc-cat-promo__cta:hover {
+          transform: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -853,9 +984,6 @@
             <p id="catalogPricingLine" style="font-size: 0.8125rem; font-weight: 400; color: var(--primary); margin-bottom: 20px; font-family: 'Poppins', system-ui, sans-serif;">
               Pembayaran sekali per dokumen — tanpa langganan. Tier C Rp 99.000; Tier B Rp 149.000; Tier A (kompleks) Rp 199.000. Harga katalog tidak melebihi Rp 199.000 per dokumen. Builder sewa/JV terpisah.
             </p>
-            <p style="font-size: 0.8125rem; margin: -12px 0 20px; font-family: 'Poppins', system-ui, sans-serif;">
-              <a href="#katalog-dokumen" style="font-weight: 600; color: var(--primary); text-decoration: none; border-bottom: 1px solid rgba(15,15,16,0.2);">📚 Jelajahi katalog — cari &amp; filter per tier</a>
-            </p>
 
             <!-- Search Bar -->
             <div class="search-wrapper" style="margin-bottom: 16px; width: 100%;">
@@ -883,7 +1011,7 @@
                   </svg>
                 </div>
                 <p style="font-size: 0.75rem; color: var(--primary); line-height: 1.5; font-family: 'Poppins', system-ui, sans-serif; margin: 0;">
-                  150+ dokumen hukum dalam katalog — disaring per jenis &amp; tier
+                  Pilih dari 150+ template form yang disusun oleh ahli hukum
                 </p>
               </div>
               <div style="display: flex; align-items: flex-start; gap: 8px;">
@@ -952,97 +1080,25 @@
         </div>
       </section>
 
-      <!-- Katalog dokumen -->
-      <section id="katalog-dokumen" class="doc-cat" aria-labelledby="katalog-dokumen-title">
-        <div class="doc-cat__inner">
-          <div class="doc-cat__panel">
-          <header class="doc-cat__panel-head">
-            <h2 id="katalog-dokumen-title" class="doc-cat__title">Katalog dokumen hukum</h2>
-            <p class="doc-cat__lead">
-              Pilih jenis dokumen, saring menurut tingkat kompleksitas (harga), lalu buka halaman produk — semua template katalog dibeli langsung (.docx). Form builder terpisah hanya untuk produk sewa/JV.
-            </p>
-            <div class="doc-cat-checkout-steps" role="navigation" aria-label="Alur pembelian">
-              <span><strong>1</strong> Pilih dokumen → lihat harga di halaman produk</span>
-              <span><strong>2</strong> Beli → pembayaran aman</span>
-              <span><strong>3</strong> Unduh Word (.docx) → sesuaikan &amp; tanda tangani</span>
-            </div>
-          </header>
-          <div class="doc-cat__live" aria-label="Dokumen dengan pengisian online">
-            <div class="doc-cat-live-card">
-              <span class="doc-cat-live-card__label">Tersedia online</span>
-              <p class="doc-cat-live-card__t">Perjanjian Sewa Menyewa Tempat</p>
-              <a class="doc-cat-live-card__a" href="sewa-menyewa/landing.html">Beli sekarang</a>
-            </div>
-            <div class="doc-cat-live-card">
-              <span class="doc-cat-live-card__label">Tersedia online</span>
-              <p class="doc-cat-live-card__t">Perjanjian Kerja Sama Usaha (Joint Venture)</p>
-              <a class="doc-cat-live-card__a" href="kerja-sama/landing.html">Beli sekarang</a>
-            </div>
-            <div class="doc-cat-live-card doc-cat-live-card--outline">
-              <span class="doc-cat-live-card__label doc-cat-live-card__label--demo">Contoh lanjutan</span>
-              <p class="doc-cat-live-card__t">Alur pengisian bertingkat (Paket Bisnis)</p>
-              <a class="doc-cat-live-card__a" href="dynamic/index.html">Lihat contoh</a>
-            </div>
-          </div>
-
-          <div class="doc-cat-layout">
-            <aside class="cat-sidebar" aria-label="Filter subjek">
-              <span class="cat-sidebar__label">Subjek dokumen</span>
-              <nav class="cat-sidebar__nav" role="tablist" id="catalogSubjectNav">
-                <button type="button" class="cat-sidebar__btn is-active" role="tab" aria-selected="true" data-subject="all">Semua template</button>
-                <button type="button" class="cat-sidebar__btn cat-sidebar__btn--featured" role="tab" aria-selected="false" data-subject="bisnis_kontrak">Perjanjian &amp; kontrak bisnis</button>
-                <button type="button" class="cat-sidebar__btn" role="tab" aria-selected="false" data-subject="addendum">Addendum</button>
-                <button type="button" class="cat-sidebar__btn" role="tab" aria-selected="false" data-subject="akta">Akta / notaris</button>
-                <button type="button" class="cat-sidebar__btn" role="tab" aria-selected="false" data-subject="properti">Properti &amp; sewa menyewa</button>
-                <button type="button" class="cat-sidebar__btn" role="tab" aria-selected="false" data-subject="ketenagakerjaan">Ketenagakerjaan</button>
-                <button type="button" class="cat-sidebar__btn" role="tab" aria-selected="false" data-subject="korporasi">Badan hukum &amp; korporasi</button>
-                <button type="button" class="cat-sidebar__btn" role="tab" aria-selected="false" data-subject="kuasa">Surat kuasa</button>
-                <button type="button" class="cat-sidebar__btn" role="tab" aria-selected="false" data-subject="pernyataan">Surat pernyataan</button>
-                <button type="button" class="cat-sidebar__btn" role="tab" aria-selected="false" data-subject="berita">Berita acara</button>
-                <button type="button" class="cat-sidebar__btn" role="tab" aria-selected="false" data-subject="hutang">Hutang, piutang &amp; pembiayaan</button>
-                <button type="button" class="cat-sidebar__btn" role="tab" aria-selected="false" data-subject="rahasia">Kerahasiaan &amp; data</button>
-                <button type="button" class="cat-sidebar__btn" role="tab" aria-selected="false" data-subject="lainnya">Lainnya</button>
-              </nav>
-            </aside>
-            <div class="cat-main">
-              <div class="doc-cat-toolbar" aria-label="Saring katalog">
-                <div class="doc-cat-field doc-cat-field--search">
-                  <label for="catalogMainSearch">Cari judul</label>
-                  <input type="search" id="catalogMainSearch" placeholder="Contoh: sewa, kuasa, RUPS, jual beli…" autocomplete="off" />
-                </div>
-                <div class="doc-cat-toolbar-row2">
-                  <div class="doc-cat-field">
-                    <label for="catalogTierSelect">Paket layanan</label>
-                    <select id="catalogTierSelect">
-                      <option value="">Semua paket</option>
-                      <option value="A">Tier A — kompleks (Rp 199 rb)</option>
-                      <option value="B">Tier B — Paket Bisnis (Rp 149 rb)</option>
-                      <option value="C">Tier C — Paket Dasar (Rp 99 rb)</option>
-                    </select>
-                  </div>
-                  <div class="doc-cat-field">
-                    <label for="catalogSort">Urutkan</label>
-                    <select id="catalogSort">
-                      <option value="title">Judul A–Z</option>
-                      <option value="tier">Tier (A → C)</option>
-                    </select>
-                  </div>
-                  <div class="doc-cat-field">
-                    <label for="catalogPageSize">Per halaman</label>
-                    <select id="catalogPageSize">
-                      <option value="24">24</option>
-                      <option value="48" selected>48</option>
-                      <option value="72">72</option>
-                    </select>
-                  </div>
-                </div>
+      <!-- Katalog: layout tab + grid (seperti versi awal) -->
+      <section id="katalog-dokumen" style="padding: 100px 0; background: #fff; width: 100%;" aria-labelledby="semua-template-title">
+        <div class="container" style="max-width: var(--max-width); margin: 0 auto; padding: 0 24px;">
+          <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
+              <h2 id="semua-template-title" style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; color: var(--primary); line-height: 1.2; font-family: 'Poppins', system-ui, sans-serif; margin: 0;">
+                Semua Template
+              </h2>
+              <div style="display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px;">
+                <button type="button" class="category-tab is-active" data-subject="all" style="padding: 10px 20px; background: var(--primary); border: 1px solid var(--primary); border-radius: 8px; color: #fff; font-weight: 500; font-size: 0.875rem; cursor: pointer; font-family: 'Poppins', system-ui, sans-serif;">Semua</button>
+                <button type="button" class="category-tab" data-subject="tab-kontrak-bisnis" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; font-family: 'Poppins', system-ui, sans-serif;">Kontrak Bisnis</button>
+                <button type="button" class="category-tab" data-subject="tab-kepemilikan-saham" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; font-family: 'Poppins', system-ui, sans-serif;">Kepemilikan &amp; Saham</button>
+                <button type="button" class="category-tab" data-subject="tab-ketenagakerjaan" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; font-family: 'Poppins', system-ui, sans-serif;">Ketenagakerjaan</button>
+                <button type="button" class="category-tab" data-subject="tab-tata-kelola" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; font-family: 'Poppins', system-ui, sans-serif;">Tata Kelola</button>
+                <button type="button" class="category-tab" data-subject="tab-lainnya" style="padding: 10px 20px; background: #fff; border: 1px solid rgba(15, 15, 16, 0.1); border-radius: 8px; color: var(--primary); font-weight: 500; font-size: 0.875rem; cursor: pointer; font-family: 'Poppins', system-ui, sans-serif;">Lainnya</button>
               </div>
-
-              <p id="catalogMainMeta"></p>
-              <div id="catalogMainGrid" class="doc-cat-grid doc-cat-grid--lz" aria-live="polite"></div>
-              <div id="catalogMainPagination"></div>
             </div>
-          </div>
+            <p id="catalogMainMeta" style="font-size: 0.8125rem; color: var(--text-muted); margin: 0 0 20px; font-family: 'Poppins', system-ui, sans-serif;"></p>
+            <div id="templateGrid" class="doc-cat-grid doc-cat-grid--lz" aria-live="polite"></div>
           </div>
         </div>
       </section>
@@ -1070,7 +1126,7 @@
             <h4>Legal Documents</h4>
             <ul>
               <li><a href="index.html">Templates</a></li>
-              <li><a href="index.html#katalog-dokumen">Katalog dokumen</a></li>
+              <li><a href="index.html#katalog-dokumen">Semua template</a></li>
             </ul>
           </div>
           <div class="footer__column" style="display: none;">
@@ -1209,6 +1265,22 @@
             .doc-cat-grid {
                 grid-template-columns: 1fr !important;
             }
+
+            .category-tab {
+                font-size: 0.8125rem !important;
+                padding: 8px 16px !important;
+            }
+        }
+
+        .category-tab.is-active {
+            background: var(--primary) !important;
+            color: #fff !important;
+            border-color: var(--primary) !important;
+        }
+
+        .category-tab:not(.is-active):hover {
+            background: rgba(15, 15, 16, 0.05);
+            border-color: rgba(15, 15, 16, 0.15);
         }
         
         @media (max-width: 480px) {
@@ -1223,10 +1295,16 @@
         var T = P && P.TIER_PRICE_IDR;
         var el = document.getElementById('catalogPricingLine');
         if (el && T && P.formatIdr) {
-          el.textContent = 'Pembayaran sekali per dokumen — tanpa langganan. Tier C mulai ' +
-            P.formatIdr(T.C) + '; Tier B ' +
-            P.formatIdr(T.B) + '; Tier A dari ' +
-            P.formatIdr(T.A) + '.';
+          el.textContent =
+            'Pembayaran sekali per dokumen — tanpa langganan. Tier C ' +
+            P.formatIdr(T.C) +
+            '; Tier B ' +
+            P.formatIdr(T.B) +
+            '; Tier A (kompleks) ' +
+            P.formatIdr(T.A) +
+            '. Harga katalog tidak melebihi ' +
+            P.formatIdr(T.A) +
+            ' per dokumen. Builder sewa/JV terpisah.';
         }
       });
     </script>

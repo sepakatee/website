@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Halaman tidak ditemukan | Sepakatee</title>
+    <link rel="icon" type="image/png" href="asset/Sepakatee%20Logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .error-page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1.25rem;
+        text-align: center;
+      }
+      .error-page__logo {
+        width: 56px;
+        height: 56px;
+        object-fit: contain;
+        margin-bottom: 1.5rem;
+      }
+      .error-page__code {
+        font-size: clamp(3rem, 10vw, 4.5rem);
+        font-weight: 600;
+        color: var(--accent-gray);
+        letter-spacing: -0.04em;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+      }
+      .error-page__title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--primary);
+        margin-bottom: 0.75rem;
+      }
+      .error-page__text {
+        max-width: 28rem;
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+      }
+      .error-page__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+      }
+      .error-page__btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.65rem 1.35rem;
+        border-radius: var(--radius-sm);
+        font-weight: 600;
+        font-size: 0.9rem;
+        background: var(--primary);
+        color: #fff;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+      .error-page__btn:hover {
+        opacity: 0.92;
+        transform: translateY(-1px);
+      }
+      .error-page__link {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.65rem 1rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .error-page__link:hover {
+        color: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="error-page">
+      <img
+        class="error-page__logo"
+        src="asset/Sepakatee%20Logo.png"
+        alt=""
+        width="56"
+        height="56"
+      />
+      <p class="error-page__code" aria-hidden="true">404</p>
+      <h1 class="error-page__title">Halaman tidak ditemukan</h1>
+      <p class="error-page__text">
+        Alamat yang Anda buka tidak ada atau sudah dipindahkan. Periksa ejaan URL, atau kembali ke beranda untuk melanjutkan.
+      </p>
+      <div class="error-page__actions">
+        <a class="error-page__btn" href="index.html">Kembali ke beranda</a>
+        <a class="error-page__link" href="tools/templates/index.html">Lihat template</a>
+      </div>
+    </main>
+  </body>
+</html>

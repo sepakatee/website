@@ -112,7 +112,12 @@
     const href = link.getAttribute('href');
     if (!href || href === '#') return;
     
-    const target = document.querySelector(href);
+    let target = null;
+    try {
+      target = document.querySelector(href);
+    } catch (err) {
+      return;
+    }
     if (!target) return;
     
     e.preventDefault();

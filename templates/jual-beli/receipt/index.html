@@ -195,7 +195,7 @@
       <header class="new-header">
         <div class="new-header__container">
           <div class="new-header__left">
-            <a href="landing.html" class="back-button">
+            <a href="../" class="back-button">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="15 18 9 12 15 6"></polyline>
               </svg>
@@ -261,14 +261,14 @@
           </div>
 
           <div class="thankyou-back">
-            <a href="form.html">Buat dokumen baru</a>
+            <a href="../form/">Buat dokumen baru</a>
           </div>
         </div>
       </main>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="form.js?v=20260413j"></script>
+    <script src="../form.js?v=20260413j"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -368,7 +368,7 @@
           btn.disabled = true;
           btn.textContent = 'Membuat PDF...';
           try {
-            const res = await fetch('invoice.html?v=20260411f');
+            const res = await fetch('../invoice/??v=20260413a');
             if (!res.ok) throw new Error('Template tidak ditemukan');
             let html = await res.text();
             html = html.replace(/\{\{ref\}\}/g, invRef)

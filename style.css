@@ -3776,6 +3776,75 @@ main {
   text-align: justify;
 }
 
+/* Penomoran kontrak di landing preview (selaras dengan form.js / preview.html) */
+.document-page ol.contract-numbered-list {
+  list-style: none;
+  counter-reset: docnum;
+  margin: 12px 0 16px;
+  padding: 0;
+}
+.document-page ol.contract-numbered-list > li {
+  counter-increment: docnum;
+  position: relative;
+  padding-left: 2.35em;
+  margin: 10px 0;
+  text-align: justify;
+}
+.document-page ol.contract-numbered-list > li::before {
+  content: '(' counter(docnum, decimal) ')';
+  position: absolute;
+  left: 0;
+  width: 2.1em;
+  text-align: right;
+  font-weight: 700;
+}
+.document-page ol.contract-letter-list {
+  list-style: none;
+  counter-reset: doclet;
+  margin: 12px 0 16px;
+  padding: 0;
+}
+.document-page ol.contract-letter-list > li {
+  counter-increment: doclet;
+  position: relative;
+  padding-left: 2em;
+  margin: 10px 0;
+  text-align: justify;
+}
+.document-page ol.contract-letter-list > li::before {
+  content: counter(doclet, lower-alpha) '.';
+  position: absolute;
+  left: 0;
+  width: 1.5em;
+  font-weight: 700;
+}
+.document-page ol.contract-numbered-list ol.contract-letter-list {
+  margin: 8px 0 4px;
+}
+
+/* Preamble pihak & recital: 1. 2. 3. (selaras Word) */
+.document-page ol.contract-decimal-list {
+  list-style: none;
+  counter-reset: clause-decimal;
+  margin: 12px 0 16px;
+  padding: 0;
+}
+.document-page ol.contract-decimal-list > li {
+  counter-increment: clause-decimal;
+  position: relative;
+  padding-left: 2em;
+  margin: 10px 0;
+  text-align: justify;
+}
+.document-page ol.contract-decimal-list > li::before {
+  content: counter(clause-decimal, decimal) '.';
+  position: absolute;
+  left: 0;
+  width: 1.85em;
+  text-align: right;
+  font-weight: 700;
+}
+
 .placeholder-field {
   background: var(--bg-light);
   border-bottom: 2px dashed rgba(111, 113, 120, 0.3);

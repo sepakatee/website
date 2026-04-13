@@ -360,12 +360,7 @@ function performSearch(query) {
     const href = link.getAttribute('href');
     if (!href || href === '#') return;
     
-    let target = null;
-    try {
-      target = document.querySelector(href);
-    } catch (err) {
-      return;
-    }
+    const target = document.querySelector(href);
     if (!target) return;
     
     e.preventDefault();
@@ -424,22 +419,4 @@ window.svgIcons = svgIcons;
     apply();
   }
   window.addEventListener('hashchange', apply);
-})();
-
-// Strip legacy top nav links if HTML still contains them (e.g. older /templates/ deploys).
-(function stripLegacyTopNav() {
-  var stripLabels = new Set(['Templates', 'Sewa Menyewa', 'Jual Beli', 'Tentang']);
-  function prune() {
-    document.querySelectorAll('.main-nav > a.nav-link:not(.nav-link--dropdown)').forEach(function (a) {
-      var label = (a.textContent || '').replace(/\s+/g, ' ').trim();
-      if (stripLabels.has(label)) {
-        a.remove();
-      }
-    });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', prune);
-  } else {
-    prune();
-  }
 })();

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terima Kasih | Sepakatee</title>
+    <link rel="icon" type="image/png" href="https://sepakatee.github.io/website/asset/Sepakatee%20Logo.png" />
+    <link rel="apple-touch-icon" href="https://sepakatee.github.io/website/asset/Sepakatee%20Logo.png" />
+    <link rel="stylesheet" href="../../../style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: Poppins, system-ui, sans-serif;
+        margin: 0;
+        padding: 0 0 48px;
+        background: #fafafa;
+        color: var(--primary, #0f0f10);
+      }
+      .doc-rec-header {
+        background: #fff;
+        border-bottom: 1px solid #e5e7eb;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 1rem 0;
+      }
+      .doc-rec-header__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .doc-rec-header__left {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .doc-rec-back {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background: transparent;
+        border: 1px solid #e5e7eb;
+        color: var(--primary);
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+      .doc-rec-back:hover {
+        background: #f3f4f6;
+        border-color: var(--primary);
+      }
+      .doc-rec-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        color: var(--primary);
+        font-weight: 700;
+        font-size: 1.125rem;
+      }
+      .doc-rec-logo img {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+      }
+      .doc-rec-help {
+        padding: 0.5rem 0.875rem;
+        color: var(--primary);
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+      .doc-rec-help:hover {
+        color: #10b981;
+      }
+      .card {
+        max-width: 620px;
+        margin: 48px auto 0;
+        background: #fff;
+        padding: 36px 32px;
+        border-radius: 16px;
+        border: 1px solid rgba(15, 15, 16, 0.08);
+        text-align: center;
+        box-shadow: 0 8px 30px rgba(15, 15, 16, 0.06);
+      }
+      .thankyou-icon {
+        width: 72px;
+        height: 72px;
+        margin: 0 auto 18px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 36px;
+        color: #fff;
+      }
+      .thankyou-title {
+        font-size: 1.5rem;
+        margin: 0 0 10px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--primary);
+      }
+      .thankyou-subtitle {
+        margin: 0 0 26px;
+        color: rgba(15, 15, 16, 0.6);
+        font-size: 0.975rem;
+        line-height: 1.55;
+      }
+      .thankyou-info {
+        text-align: left;
+        padding: 20px 24px;
+        background: rgba(15, 15, 16, 0.03);
+        border-radius: 12px;
+        margin: 0 auto 22px;
+        font-size: 0.875rem;
+        max-width: 520px;
+      }
+      .thankyou-info-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        gap: 16px;
+      }
+      .thankyou-info-row:last-child {
+        margin-bottom: 0;
+      }
+      .thankyou-info-label {
+        color: rgba(15, 15, 16, 0.55);
+        white-space: nowrap;
+      }
+      .thankyou-info-value {
+        font-weight: 600;
+        color: var(--primary);
+        text-align: right;
+        overflow-wrap: anywhere;
+      }
+      .thankyou-download {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+      .btn-download {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 16px 26px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        font-family: Poppins, system-ui, sans-serif;
+        font-weight: 700;
+        background: #10b981;
+        color: #fff;
+        transition: all 0.2s ease;
+      }
+      .btn-download:hover {
+        background: #059669;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+      }
+      .btn-download:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
+      }
+      .btn-invoice {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 15px 22px;
+        border-radius: 12px;
+        border: 1.5px solid #10b981;
+        cursor: pointer;
+        font-family: Poppins, system-ui, sans-serif;
+        font-weight: 700;
+        background: #fff;
+        color: #10b981;
+        transition: all 0.2s ease;
+      }
+      .btn-invoice:hover {
+        background: rgba(16, 185, 129, 0.08);
+      }
+      .btn-invoice:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      .thankyou-disclaimer {
+        text-align: left;
+        padding: 18px 20px;
+        background: rgba(15, 15, 16, 0.03);
+        border-radius: 12px;
+        font-size: 0.8125rem;
+        line-height: 1.7;
+        color: rgba(15, 15, 16, 0.6);
+        max-width: 520px;
+        margin: 0 auto 18px;
+      }
+      .thankyou-disclaimer strong {
+        color: var(--primary);
+        font-weight: 700;
+      }
+      .thankyou-disclaimer a {
+        color: #10b981;
+        text-decoration: none;
+      }
+      .thankyou-disclaimer a:hover {
+        text-decoration: underline;
+      }
+      .thankyou-back {
+        margin-top: 10px;
+      }
+      .thankyou-back a {
+        color: rgba(15, 15, 16, 0.6);
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .thankyou-back a:hover {
+        color: var(--primary);
+      }
+
+      /* Cancelled state */
+      .is-cancelled .thankyou-icon {
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      }
+      .is-cancelled .thankyou-title {
+        color: #dc2626;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="doc-rec-header">
+      <div class="doc-rec-header__inner">
+        <div class="doc-rec-header__left">
+          <a href="../index.html#katalog-dokumen" class="doc-rec-back" aria-label="Kembali ke katalog">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </a>
+          <a href="/" class="doc-rec-logo">
+            <img src="https://sepakatee.github.io/website/asset/Sepakatee%20Logo.png" alt="" />
+            <span>Sepakatee</span>
+          </a>
+        </div>
+        <a href="mailto:sepakatee@outlook.com" class="doc-rec-help">Hubungi Kami</a>
+      </div>
+    </header>
+
+    <div class="card" id="thankyouPage">
+      <div class="thankyou-icon" id="thankyouIcon">✓</div>
+      <h1 class="thankyou-title" id="thankyouTitle">Terima Kasih atas Pembelian Anda!</h1>
+      <p class="thankyou-subtitle" id="thankyouSubtitle">Memuat detail dokumen…</p>
+
+      <div class="thankyou-info">
+        <div class="thankyou-info-row">
+          <span class="thankyou-info-label">ID Pesanan</span>
+          <span class="thankyou-info-value" id="referenceId">-</span>
+        </div>
+        <div class="thankyou-info-row">
+          <span class="thankyou-info-label">Nama</span>
+          <span class="thankyou-info-value" id="buyerName">-</span>
+        </div>
+        <div class="thankyou-info-row">
+          <span class="thankyou-info-label">Email</span>
+          <span class="thankyou-info-value" id="buyerEmail">-</span>
+        </div>
+        <div class="thankyou-info-row">
+          <span class="thankyou-info-label">Tanggal Pembayaran</span>
+          <span class="thankyou-info-value" id="paymentDate">-</span>
+        </div>
+      </div>
+
+      <div class="thankyou-download">
+        <button class="btn-download" id="downloadBtn" type="button" disabled>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download Dokumen
+        </button>
+        <button class="btn-invoice" id="invoiceBtn" type="button" disabled>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+          </svg>
+          Download Invoice
+        </button>
+      </div>
+
+      <div class="thankyou-disclaimer" id="disclaimer">
+        <strong>Perhatian:</strong> Simpan ID pesanan. Jika diperlukan dokumen ulang dalam 2x24 jam, hubungi kami via
+        <a href="mailto:sepakatee@outlook.com">email</a> dengan menyertakan ID pesanan.
+      </div>
+
+      <div class="thankyou-back">
+        <a href="../index.html#katalog-dokumen">Kembali ke katalog</a>
+      </div>
+    </div>
+
+    <script src="../data/perintilan-inventory.bundle.js"></script>
+    <script src="../data/catalog-inventory.bundle.js"></script>
+    <script src="../_shared/pricing.js"></script>
+    <script src="../_shared/paket-commercial.js"></script>
+    <script src="../_shared/catalog-shim.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+      (function () {
+        function getStorageItem(key) {
+          try {
+            return sessionStorage.getItem(key);
+          } catch (e) {}
+          return null;
+        }
+
+        function getLocalStorageItem(key) {
+          try {
+            return localStorage.getItem(key);
+          } catch (e) {}
+          return null;
+        }
+
+        function formatPaymentDate(d) {
+          var dateStr = d.toLocaleDateString('id-ID', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          });
+          var timeStr = d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+          return dateStr + ' pukul ' + timeStr;
+        }
+
+        function encodeRelPath(relPath) {
+          return String(relPath)
+            .split('/')
+            .map(function (seg) {
+              return encodeURIComponent(seg);
+            })
+            .join('/');
+        }
+
+        /** Beberapa server lokal / monorepo punya path berbeda; coba urutan URL sampai satu berhasil. */
+        function collectDocxFetchUrls(relEncoded, customBase) {
+          var urls = [];
+          var custom = String(customBase || '').trim().replace(/\/$/, '');
+          if (custom) {
+            urls.push(custom + '/' + relEncoded);
+            return urls;
+          }
+          var here = window.location.href;
+          var origin = window.location.origin || '';
+          var host = (window.location.hostname || '').toLowerCase();
+          var isLocal =
+            host === '127.0.0.1' ||
+            host === 'localhost' ||
+            host === '0.0.0.0' ||
+            host === '[::1]' ||
+            host === '';
+
+          function push(u) {
+            if (u && urls.indexOf(u) === -1) urls.push(u);
+          }
+
+          push(new URL('../../../' + relEncoded, here).href);
+          if (isLocal) {
+            push(origin + '/website/' + relEncoded);
+          }
+          return urls;
+        }
+
+        async function fetchDocxFirstOk(urls) {
+          var lastStatus = '';
+          var i;
+          for (i = 0; i < urls.length; i++) {
+            var u = urls[i];
+            try {
+              var res = await fetch(u, { method: 'GET', cache: 'no-store', credentials: 'same-origin' });
+              if (res.ok) return { res: res, url: u };
+              lastStatus = res.status + ' ' + u;
+            } catch (err) {
+              lastStatus = (err && err.message) || String(err);
+              console.warn('Unduhan .docx gagal coba URL:', u, err);
+            }
+          }
+          throw new Error(lastStatus || 'no_urls');
+        }
+
+        function titleCaseWords(s) {
+          return String(s || '')
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean)
+            .map(function (w) {
+              return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+            })
+            .join(' ');
+        }
+
+        function resolveCatalogPurchase(referenceId, p) {
+          var id = (p.get('catalog_id') || '').trim();
+          var title = (p.get('catalog_title') || '').trim();
+          if (!id && referenceId && referenceId !== 'N/A') {
+            var payload = getLocalStorageItem('sep_catalog_order_' + referenceId);
+            if (payload) {
+              try {
+                var o = JSON.parse(payload);
+                if (o && o.id) {
+                  id = String(o.id);
+                  if (!title && o.title) title = String(o.title);
+                }
+              } catch (e) {}
+            }
+          }
+          if (!id) {
+            id = (getStorageItem('catalogPurchaseId') || getLocalStorageItem('catalogPurchaseId_backup') || '').trim();
+          }
+          if (!title) {
+            title = (
+              getStorageItem('catalogPurchaseTitle') || getLocalStorageItem('catalogPurchaseTitle_backup') || ''
+            ).trim();
+          }
+          return { catalogPurchaseId: id, catalogPurchaseTitle: title };
+        }
+
+        var p = new URLSearchParams(window.location.search);
+        var referenceId = p.get('ref') || getStorageItem('paymentReferenceId') || 'N/A';
+        var status = p.get('status') || 'berhasil';
+        var buyerName = p.get('name') || getStorageItem('paymentBuyerName') || '-';
+        var buyerEmail = p.get('email') || getStorageItem('paymentBuyerEmail') || '-';
+
+        var purchase = resolveCatalogPurchase(referenceId, p);
+        var catalogPurchaseId = purchase.catalogPurchaseId;
+        var catalogPurchaseTitle = purchase.catalogPurchaseTitle;
+
+        document.getElementById('referenceId').textContent = referenceId;
+        document.getElementById('buyerName').textContent = buyerName;
+        document.getElementById('buyerEmail').textContent = buyerEmail;
+        document.getElementById('paymentDate').textContent = formatPaymentDate(new Date());
+
+        var item = null;
+        try {
+          if (window.__SEPAKATEE_CATALOG__ && Array.isArray(window.__SEPAKATEE_CATALOG__.items) && catalogPurchaseId) {
+            item = window.__SEPAKATEE_CATALOG__.items.find(function (x) {
+              return x.id === catalogPurchaseId;
+            });
+          }
+          if (
+            !item &&
+            window.__SEPAKATEE_PERINTILAN_CATALOG__ &&
+            Array.isArray(window.__SEPAKATEE_PERINTILAN_CATALOG__.items) &&
+            catalogPurchaseId
+          ) {
+            item = window.__SEPAKATEE_PERINTILAN_CATALOG__.items.find(function (x) {
+              return x.id === catalogPurchaseId;
+            });
+          }
+        } catch (e) {}
+
+        var downloadBtn = document.getElementById('downloadBtn');
+        var invoiceBtn = document.getElementById('invoiceBtn');
+        var disclaimer = document.getElementById('disclaimer');
+
+        function setCancelledUI() {
+          document.getElementById('thankyouPage').classList.add('is-cancelled');
+          document.getElementById('thankyouIcon').textContent = '✕';
+          document.getElementById('thankyouTitle').textContent = 'Pembayaran Dibatalkan';
+          document.getElementById('thankyouSubtitle').textContent =
+            'Silakan coba lagi atau hubungi kami jika ada kendala.';
+          downloadBtn.disabled = true;
+          invoiceBtn.disabled = true;
+          disclaimer.style.display = 'none';
+        }
+
+        if (status !== 'berhasil') {
+          setCancelledUI();
+          return;
+        }
+
+        // Enable only when we have the purchased item data
+        if (!item) {
+          downloadBtn.disabled = true;
+          invoiceBtn.disabled = true;
+          document.getElementById('thankyouSubtitle').textContent =
+            'Kami tidak bisa menautkan dokumen ke pesanan ini. Simpan ID pesanan dan hubungi kami jika butuh bantuan.';
+          disclaimer.style.display = 'block';
+          disclaimer.innerHTML =
+            '<strong>Perhatian:</strong> Data dokumen belum ditemukan dari sesi. Muat ulang halaman atau simpan ID pesanan untuk proses bantuan.';
+          return;
+        }
+
+        var rawDocTitle = (catalogPurchaseTitle || item.title || '').trim();
+        document.getElementById('thankyouSubtitle').textContent =
+          'Dokumen yang Anda beli siap diunduh: ' + (rawDocTitle ? titleCaseWords(rawDocTitle) : 'file Word (.docx)') + '.';
+
+        var noisyReturn =
+          p.get('name') ||
+          p.get('email') ||
+          p.get('sid') ||
+          p.get('trx_id') ||
+          p.get('tipe') ||
+          p.get('payment_method') ||
+          p.get('payment_channel');
+        if (noisyReturn && catalogPurchaseId && referenceId !== 'N/A') {
+          var np = new URLSearchParams();
+          np.set('ref', referenceId);
+          np.set('status', status);
+          np.set('catalog_id', catalogPurchaseId);
+          history.replaceState(null, '', window.location.pathname + '?' + np.toString());
+        }
+
+        downloadBtn.disabled = false;
+        invoiceBtn.disabled = false;
+        var downloadBtnHtml = downloadBtn.innerHTML;
+        var invoiceBtnHtml = invoiceBtn.innerHTML;
+
+        downloadBtn.addEventListener('click', async function () {
+          downloadBtn.disabled = true;
+          downloadBtn.innerHTML = 'Menyiapkan dokumen...';
+
+          var tryUrls = [];
+          try {
+            var fileName =
+              String(item.source_rel || '').split('/').pop() ||
+              (catalogPurchaseTitle || 'Dokumen') + '.docx';
+            var rel = encodeRelPath(item.source_rel);
+            var custom = '';
+            try {
+              custom =
+                window.__SEP_DOCX_BASE_URL__ && String(window.__SEP_DOCX_BASE_URL__).trim();
+            } catch (e0) {}
+
+            tryUrls = collectDocxFetchUrls(rel, custom);
+            var got = await fetchDocxFirstOk(tryUrls);
+            var res = got.res;
+
+            var blob = await res.blob();
+            var objUrl = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = objUrl;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(objUrl);
+          } catch (e) {
+            console.error('Unduhan .docx gagal:', e);
+            if (tryUrls.length) console.error('URL yang sudah dicoba:', tryUrls);
+            console.info(
+              'Tip lokal: jalankan server dari folder website, lalu buka receipt lewat URL seperti http://127.0.0.1:8080/tools/templates/dokumen/receipt.html — jangan set document root ke tools/templates saja. Di GitHub Pages folder semua template biasanya tidak ikut; set window.__SEP_DOCX_BASE_URL__ ke URL publik tempat .docx di-host.'
+            );
+            alert(
+              'File .docx tidak ditemukan (404 atau path salah). Cek konsol (F12) untuk URL yang dicoba.\n\n' +
+                'Lokal: di terminal, `cd website` lalu `python3 -m http.server 8080`, lalu buka alamat yang memuat /tools/templates/dokumen/receipt.html.\n\n' +
+                'Produksi: unggah folder semua template ke hosting/CDN atau set window.__SEP_DOCX_BASE_URL__ ke basis URL-nya. Simpan ID pesanan jika perlu bantuan.'
+            );
+          }
+
+          downloadBtn.disabled = false;
+          downloadBtn.innerHTML = downloadBtnHtml;
+        });
+
+        invoiceBtn.addEventListener('click', async function () {
+          var btn = invoiceBtn;
+          var invRef = referenceId;
+          var invName = buyerName;
+          var invEmail = buyerEmail;
+          var invDate = document.getElementById('paymentDate').textContent;
+
+          var tierLetter = item.provisional_tier;
+          var tierMeta = window.SepakateePaket && window.SepakateePaket.meta ? window.SepakateePaket.meta(tierLetter) : { name: 'Paket' };
+          var priceIdr = window.SepakateePricing && window.SepakateePricing.priceForTierLetter ? window.SepakateePricing.priceForTierLetter(tierLetter) : null;
+          var priceStr = priceIdr != null ? window.SepakateePricing.formatIdr(priceIdr) : '-';
+
+          btn.disabled = true;
+          btn.innerHTML = 'Membuat PDF...';
+
+          try {
+            var res = await fetch('invoice.html');
+            if (!res.ok) throw new Error('Template invoice.html tidak ditemukan');
+            var html = await res.text();
+
+            html = html
+              .replace(/\{\{ref\}\}/g, invRef)
+              .replace(/\{\{name\}\}/g, invName)
+              .replace(/\{\{email\}\}/g, invEmail)
+              .replace(/\{\{date\}\}/g, invDate)
+              .replace(/\{\{docTitle\}\}/g, catalogPurchaseTitle || item.title || '-')
+              .replace(/\{\{tierName\}\}/g, tierMeta.name || 'Paket')
+              .replace(/\{\{price\}\}/g, priceStr);
+
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(html, 'text/html');
+            doc.body.querySelectorAll('script').forEach(function (s) {
+              s.remove();
+            });
+
+            var cssRes = await fetch(new URL('../_shared/invoice-pro.css', window.location.href).href);
+            if (!cssRes.ok) throw new Error('Gaya invoice (invoice-pro.css) tidak ditemukan');
+            var invoiceCss = await cssRes.text();
+
+            var linkEl = doc.querySelector('link[href*="fonts"]');
+            var bodyContent = doc.body ? doc.body.innerHTML : '';
+            var linkHtml = linkEl ? linkEl.outerHTML : '';
+
+            var invSource = document.createElement('div');
+            invSource.id = 'invoice-pdf-source';
+            invSource.style.cssText =
+              'position:absolute;left:-9999px;top:0;width:720px;box-sizing:border-box;background:#fff;padding:0;font-family:DM Sans,system-ui,sans-serif;color:#000;';
+            invSource.innerHTML =
+              linkHtml +
+              '<style>' +
+              invoiceCss +
+              '</style>' +
+              '<div class="invoice-pdf-body">' +
+              bodyContent +
+              '</div>';
+
+            document.body.appendChild(invSource);
+            await new Promise(function (r) {
+              return setTimeout(r, 600);
+            });
+
+            if (typeof html2pdf !== 'function') throw new Error('html2pdf tidak tersedia');
+            var targetEl = invSource.querySelector('#invoice-content') || invSource;
+            var safeInvRef = String(invRef || '')
+              .replace(/[\x00-\x1f\\/:*?"<>|#]+/g, '-')
+              .replace(/\s+/g, ' ')
+              .trim() || 'order';
+            await html2pdf()
+              .set({
+                margin: [10, 10, 10, 10],
+                filename: 'Invoice - Sepakatee - ' + safeInvRef + '.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, logging: false },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+              })
+              .from(targetEl)
+              .save();
+            document.body.removeChild(invSource);
+          } catch (e) {
+            console.error('Invoice error:', e);
+            alert('Tidak dapat mengunduh invoice. Muat ulang halaman dan coba lagi.');
+          }
+
+          btn.disabled = false;
+          btn.innerHTML = invoiceBtnHtml;
+        });
+      })();
+    </script>
+  </body>
+</html>

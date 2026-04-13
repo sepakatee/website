@@ -2,26 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.sepakatee.com/</loc>
-    <lastmod>2026-04-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.sepakatee.com/tools/templates/index.html</loc>
-    <lastmod>2026-04-13</lastmod>
+    <loc>https://www.sepakatee.com/about/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sepakatee.com/templates/</loc>
     <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.sepakatee.com/templates/sewa-menyewa/</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.sepakatee.com/tools/templates/sewa-menyewa/landing.html</loc>
-    <lastmod>2026-04-13</lastmod>
+    <loc>https://www.sepakatee.com/templates/jual-beli/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.sepakatee.com/tools/templates/jual-beli-barang-bergerak/landing.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
+    <loc>https://www.sepakatee.com/templates/dokumen/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
   </url>
 </urlset>

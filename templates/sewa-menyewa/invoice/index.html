@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice - {{ref}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../_shared/invoice-pro.css" />
+  </head>
+  <body>
+    <div id="invoice-content" class="invoice-sheet">
+      <header class="invoice-top">
+        <div class="invoice-brand">
+          <img src="../../../asset/Sepakatee%20Logo.png" width="52" height="52" alt="Sepakatee" />
+          <span class="invoice-brand-text">Sepakatee</span>
+        </div>
+        <div class="invoice-title">Invoice</div>
+      </header>
+
+      <div class="invoice-columns">
+        <div>
+          <div class="invoice-billed-label">Ditagih kepada</div>
+          <div class="invoice-billed-body">
+            <strong id="inv-name">{{name}}</strong><br />
+            <span id="inv-email">{{email}}</span>
+          </div>
+        </div>
+        <div class="invoice-meta-right">
+          <div class="row">
+            No. invoice
+            <strong id="inv-ref">{{ref}}</strong>
+          </div>
+          <div class="row">
+            Tanggal
+            <strong id="inv-date">{{date}}</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="invoice-table-wrap">
+        <table class="invoice-table">
+          <colgroup>
+            <col class="inv-col-desc" />
+            <col class="inv-col-qty" />
+            <col class="inv-col-money" />
+            <col class="inv-col-money" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th class="num">Qty</th>
+              <th class="num">Harga satuan</th>
+              <th class="num">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="invoice-item-title">Perjanjian Sewa Menyewa Tempat (Kontraktify)</div>
+                <div class="invoice-item-sub">Template dokumen Word (.docx) — versi legal terbaru (13 pasal)</div>
+              </td>
+              <td class="num">1</td>
+              <td class="num" data-price-display>Rp 350.000</td>
+              <td class="num" data-price-display>Rp 350.000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="invoice-totals">
+        <div class="invoice-totals-row">
+          <span>Subtotal</span>
+          <span data-price-display>Rp 350.000</span>
+        </div>
+        <div class="invoice-totals-row">
+          <span>Pajak (0%)</span>
+          <span>Rp 0</span>
+        </div>
+        <div class="invoice-totals-row grand">
+          <span>Total</span>
+          <span data-price-display>Rp 350.000</span>
+        </div>
+      </div>
+
+      <p class="invoice-thanks">Terima kasih.</p>
+
+      <footer class="invoice-bottom">
+        <div class="invoice-bottom__pay">
+          <div class="invoice-pay-label">Pembayaran</div>
+          <p>
+            Pembayaran diproses melalui <strong>iPaymu</strong> (virtual account, e-wallet, atau kartu sesuai pilihan Anda saat
+            checkout).
+          </p>
+        </div>
+        <div class="invoice-bottom__company">
+          <div class="invoice-company-name">Sepakatee</div>
+          <p class="invoice-company-addr">
+            APL Tower Lantai 2 BRI<br />
+            Jalan Letjen S. Parman Kav. 28<br />
+            Tanjung Duren Selatan, Kec. Grogol Petamburan<br />
+            Jakarta Barat, Provinsi DKI Jakarta 11470
+          </p>
+          <p class="invoice-company-contact">sepakatee@outlook.com</p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      (function () {
+        const p = new URLSearchParams(window.location.search);
+        if (p.get('ref')) {
+          document.getElementById('inv-ref').textContent = p.get('ref');
+          document.getElementById('inv-date').textContent = p.get('date') || '-';
+          document.getElementById('inv-name').textContent = p.get('name') || '-';
+          document.getElementById('inv-email').textContent = p.get('email') || '-';
+        }
+      })();
+    </script>
+    <script src="../../_shared/pricing.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var pr = window.SepakateePricing.getByPath(window.location.pathname);
+        var formatted = window.SepakateePricing.formatIdr(pr.priceIdr);
+        document.querySelectorAll('[data-price-display]').forEach(function (el) {
+          el.textContent = formatted;
+        });
+      });
+    </script>
+  </body>
+</html>

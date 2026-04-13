@@ -1,6 +1,6 @@
 /**
  * Katalog produk Form Builder — struktur sama seperti Kontraktify (kartu + Coming Soon).
- * Sumber dokumen master dikurasi di website/legaldocs; saat ini hanya sewa menyewa yang aktif.
+ * Sumber dokumen master dikurasi di website/legaldocs; sewa menyewa dan jual beli barang bergerak aktif.
  * Untuk meluncurkan produk baru: set available: true dan href ke alur form (mis. folder/landing.html).
  */
 // Template data
@@ -12,9 +12,16 @@ const templates = [
     color: 'green',
     icon: 'lease',
     available: true,
-    href: 'sewa-menyewa/landing.html',
+    href: 'sewa-menyewa/',
   },
-  { name: 'Perjanjian Jual Beli', category: 'Kontrak Bisnis', color: 'blue', icon: 'sale', available: false },
+  {
+    name: 'Perjanjian Jual Beli Barang Bergerak',
+    category: 'Kontrak Bisnis',
+    color: 'blue',
+    icon: 'sale',
+    available: true,
+    href: 'jual-beli/',
+  },
   { name: 'Perjanjian Kerja Sama Usaha (Joint Venture)', category: 'Kontrak Bisnis', color: 'yellow', icon: 'jointventure', available: false },
   { name: 'Perjanjian Keagenan', category: 'Kontrak Bisnis', color: 'purple', icon: 'agency', available: false },
   { name: 'Surat Penawaran Kerja Sama', category: 'Kontrak Bisnis', color: 'orange', icon: 'offerletter', available: false },

@@ -23,6 +23,7 @@
 
   var RECEIPT_SEGMENT = {
     'sewa-menyewa': 'sewa-menyewa',
+    'jual-beli-barang-bergerak': 'jual-beli',
     'kerja-sama': 'kerja-sama',
     'sample-tier-b': 'dynamic',
     'catalog-paket-bisnis': 'dokumen',
@@ -90,7 +91,7 @@
       }
 
       // For catalog purchases, sessionStorage is often cleared on the cross-origin redirect.
-      // Backup the selected catalog doc so `tools/templates/dokumen/receipt.html` can download it.
+      // Backup the selected catalog doc so catalog receipt flows can download it.
       var catalogPurchaseId = global.sessionStorage.getItem('catalogPurchaseId');
       var catalogPurchaseTitle = global.sessionStorage.getItem('catalogPurchaseTitle');
       if (catalogPurchaseId) {
@@ -153,9 +154,9 @@
 
     var receiptBase =
       baseUrl +
-      '/tools/templates/' +
+      '/templates/' +
       seg +
-      '/receipt.html?ref=' +
+      '/receipt/?ref=' +
       encodeURIComponent(referenceId) +
       '&status=berhasil' +
       extraCatalogQuery;
@@ -167,9 +168,9 @@
       encodeURIComponent(buyerEmail);
     var cancelUrl =
       baseUrl +
-      '/tools/templates/' +
+      '/templates/' +
       seg +
-      '/receipt.html?ref=' +
+      '/receipt/?ref=' +
       encodeURIComponent(referenceId) +
       '&status=batal' +
       extraCatalogQuery;

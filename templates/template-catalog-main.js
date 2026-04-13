@@ -8,7 +8,7 @@
 
   var JSON_URL = 'data/catalog-inventory.json';
   var STOCK_POOL_URL = 'data/catalog-stock-pool.json';
-  var PRODUCT_PAGE = 'dokumen/index.html';
+  var PRODUCT_PAGE = 'dokumen/';
 
   var FAMILY_LABELS = {
     perjanjian: 'Perjanjian',

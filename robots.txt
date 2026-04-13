@@ -1,0 +1,5 @@
+# https://www.sepakatee.com/robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://www.sepakatee.com/sitemap.xml

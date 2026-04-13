@@ -74,9 +74,9 @@
     return 'catalog-tier-c';
   }
 
-  /** Slug → URL path to existing wizard landing (relative to /templates/) */
+  /** Slug → URL path to existing wizard landing (relative to tools/templates/) */
   var BUILDER_LANDING_BY_SLUG = {
-    'perjanjian-sewa-menyewa-tempat': 'sewa-menyewa/',
+    'perjanjian-sewa-menyewa-tempat': 'sewa-menyewa/landing.html',
     'perjanjian-kerja-sama-usaha-joint-venture': 'kerja-sama/landing.html',
   };
 

@@ -19,11 +19,6 @@
       priceIdr: 350000,
       productName: 'Perjanjian Sewa Menyewa Tempat',
     },
-    'jual-beli-barang-bergerak': {
-      tier: 'A',
-      priceIdr: 350000,
-      productName: 'Perjanjian Jual Beli Barang Bergerak',
-    },
     'kerja-sama': {
       tier: 'A',
       priceIdr: 350000,
@@ -75,10 +70,8 @@
 
   function flowKeyFromPath(pathname) {
     if (!pathname) return null;
-    var m = pathname.match(/\/(sewa-menyewa|jual-beli|jual-beli-barang-bergerak|kerja-sama)(?:\/|$)/);
-    if (!m) return null;
-    if (m[1] === 'jual-beli') return 'jual-beli-barang-bergerak';
-    return m[1];
+    var m = pathname.match(/\/(sewa-menyewa|kerja-sama)(?:\/|$)/);
+    return m ? m[1] : null;
   }
 
   function resolvePrice(product) {

@@ -1,1 +1,575 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><title>Mengalihkan…</title><link rel="canonical" href="https://www.sepakatee.com/templates/sewa-menyewa/preview/"><meta http-equiv="refresh" content="0;url=https://www.sepakatee.com/templates/sewa-menyewa/preview/"><script>location.replace("https://www.sepakatee.com/templates/sewa-menyewa/preview/" + location.search + location.hash);</script></head><body><p>URL ini telah dipindah. <a href="https://www.sepakatee.com/templates/sewa-menyewa/preview/">Lanjut ke Sepakatee</a></p></body></html>
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Preview Dokumen | Sepakatee</title>
+    <link rel="icon" type="image/png" href="https://sepakatee.github.io/website/asset/Sepakatee%20Logo.png" />
+    <link rel="apple-touch-icon" href="https://sepakatee.github.io/website/asset/Sepakatee%20Logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../style.css?v=14" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <meta
+      name="description"
+      content="Preview dokumen Perjanjian Sewa Menyewa Tempat sebelum pembayaran."
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #ecece8;
+        font-family: 'Poppins', system-ui, sans-serif;
+      }
+
+      .preview-page {
+        min-height: 100vh;
+      }
+
+      .preview-page__layout {
+        display: grid;
+        grid-template-columns: minmax(300px, 400px) 1fr;
+        min-height: 100vh;
+      }
+
+      .preview-sidebar-left {
+        background: linear-gradient(180deg, #fafaf8 0%, #f3f3f0 100%);
+        border-right: 1px solid rgba(15, 15, 16, 0.1);
+        padding: 36px 28px 32px;
+        overflow-y: auto;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        box-sizing: border-box;
+      }
+
+      .preview-sidebar-content {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        gap: 0;
+      }
+
+      .preview-sidebar-title {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgba(15, 15, 16, 0.5);
+        margin: 0 0 6px 0;
+      }
+
+      .preview-sidebar-heading {
+        font-size: 1.625rem;
+        font-weight: 600;
+        color: var(--primary);
+        margin: 0 0 12px 0;
+        line-height: 1.25;
+      }
+
+      .preview-sidebar-description {
+        font-size: 0.875rem;
+        color: rgba(15, 15, 16, 0.72);
+        line-height: 1.65;
+        margin: 0 0 22px 0;
+      }
+
+      /* Formal notes — left rail */
+      .preview-notes {
+        margin: 0 0 22px 0;
+        padding: 16px 16px 16px 18px;
+        background: #fff;
+        border: 1px solid rgba(15, 15, 16, 0.1);
+        border-radius: 10px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        text-align: justify;
+        text-justify: inter-word;
+      }
+
+      .preview-notes__title {
+        margin: 0 0 12px 0;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(15, 15, 16, 0.55);
+      }
+
+      .preview-notes__list {
+        margin: 0;
+        padding-left: 0;
+        list-style: none;
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        color: rgba(15, 15, 16, 0.88);
+      }
+
+      .preview-notes__list li {
+        margin-bottom: 10px;
+        padding-left: 0;
+        text-align: justify;
+        text-justify: inter-word;
+      }
+
+      .preview-notes__list li:last-child {
+        margin-bottom: 0;
+      }
+
+      .preview-notes__list code {
+        font-size: 0.78em;
+        padding: 1px 5px;
+        border-radius: 4px;
+        background: rgba(15, 15, 16, 0.06);
+        font-family: ui-monospace, 'Cascadia Code', 'Consolas', monospace;
+      }
+
+      .preview-package-info {
+        margin-bottom: 22px;
+        padding: 18px 18px 16px;
+        background: #fff;
+        border-radius: 10px;
+        border: 1px solid rgba(15, 15, 16, 0.1);
+      }
+
+      .package-label {
+        font-size: 0.8125rem;
+        color: rgba(15, 15, 16, 0.6);
+        margin: 0 0 10px 0;
+      }
+
+      .package-details {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .package-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.875rem;
+        color: var(--primary);
+        font-weight: 500;
+      }
+
+      .package-item svg {
+        color: #1a1a1a;
+        flex-shrink: 0;
+      }
+
+      .package-price {
+        font-size: 1.375rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-top: 6px;
+      }
+
+      .preview-sidebar-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: auto;
+        margin-bottom: 18px;
+      }
+
+      .btn {
+        padding: 13px 22px;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-decoration: none;
+        font-family: 'Poppins', system-ui, sans-serif;
+      }
+
+      .btn--full {
+        width: 100%;
+      }
+
+      .btn--ghost {
+        background: #fff;
+        border: 1px solid rgba(15, 15, 16, 0.18);
+        color: var(--primary);
+      }
+
+      .btn--ghost:hover {
+        background: rgba(15, 15, 16, 0.04);
+        border-color: rgba(15, 15, 16, 0.28);
+      }
+
+      .btn--primary {
+        background: var(--primary);
+        color: #fff;
+      }
+
+      .btn--primary:hover {
+        background: rgba(15, 15, 16, 0.88);
+      }
+
+      .preview-privacy {
+        font-size: 0.6875rem;
+        color: rgba(15, 15, 16, 0.48);
+        text-align: center;
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      .preview-privacy a {
+        color: rgba(15, 15, 16, 0.65);
+        text-decoration: underline;
+      }
+
+      /* Right: “paper” + Word-like body */
+      .preview-content-right {
+        padding: 28px 24px 48px;
+        overflow-y: auto;
+        height: 100vh;
+        box-sizing: border-box;
+      }
+
+      .preview-document-container {
+        max-width: 210mm;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 2px;
+        padding: 22mm 24mm 26mm;
+        box-shadow:
+          0 1px 1px rgba(0, 0, 0, 0.06),
+          0 12px 40px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        min-height: 260mm;
+        box-sizing: border-box;
+      }
+
+      /* Same typeface as site (style.css body); layout mirrors Word (justify, headings, lists) */
+      .preview-document-full {
+        font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 13px;
+        line-height: 1.6;
+        color: var(--primary);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .preview-document-full h1 {
+        text-align: center;
+        font-weight: 600;
+        font-size: 1rem;
+        margin: 0 0 1.15em;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .preview-document-full h3,
+      .preview-document-full .section-title {
+        text-align: center;
+        font-weight: 600;
+        font-size: 0.9375rem;
+        margin: 1.15em 0 0.65em;
+      }
+
+      .preview-document-full p {
+        text-align: justify;
+        margin: 0 0 0.65em;
+        text-indent: 0;
+        orphans: 2;
+        widows: 2;
+      }
+
+      .preview-document-full ol,
+      .preview-document-full ul {
+        margin: 0.5em 0 0.65em 1.5em;
+        padding-left: 0.25em;
+      }
+
+      .preview-document-full ol ol {
+        list-style-type: lower-alpha;
+        margin-left: 0.5em;
+      }
+
+      .preview-document-full li {
+        margin: 0.35em 0;
+        text-align: justify;
+      }
+
+      .preview-document-full .signature-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2em;
+        font-size: 13px;
+      }
+
+      .preview-document-full .signature-table td {
+        vertical-align: top;
+        padding: 0.5em;
+      }
+
+      /* Penomoran kontrak (sinkron dengan <style> di body template form.js) */
+      .preview-document-full ol.contract-numbered-list {
+        list-style: none;
+        counter-reset: docnum;
+        margin: 12px 0 16px;
+        padding: 0;
+      }
+      .preview-document-full ol.contract-numbered-list > li {
+        counter-increment: docnum;
+        position: relative;
+        padding-left: 2.35em;
+        margin: 10px 0;
+        text-align: justify;
+      }
+      .preview-document-full ol.contract-numbered-list > li::before {
+        content: '(' counter(docnum, decimal) ')';
+        position: absolute;
+        left: 0;
+        width: 2.1em;
+        text-align: right;
+        font-weight: 700;
+      }
+      .preview-document-full ol.contract-letter-list {
+        list-style: none;
+        counter-reset: doclet;
+        margin: 12px 0 16px;
+        padding: 0;
+      }
+      .preview-document-full ol.contract-letter-list > li {
+        counter-increment: doclet;
+        position: relative;
+        padding-left: 2em;
+        margin: 10px 0;
+        text-align: justify;
+      }
+      .preview-document-full ol.contract-letter-list > li::before {
+        content: counter(doclet, lower-alpha) '.';
+        position: absolute;
+        left: 0;
+        width: 1.5em;
+        font-weight: 700;
+      }
+      .preview-document-full ol.contract-numbered-list ol.contract-letter-list {
+        margin: 8px 0 4px;
+      }
+
+      .preview-document-full .filled-field {
+        background: rgba(255, 235, 59, 0.55);
+        color: var(--primary);
+        padding: 0 1px;
+        border-radius: 2px;
+        font-weight: 500;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+      }
+
+      .preview-document-full .placeholder-field {
+        font-family: ui-monospace, 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+        font-size: 0.92em;
+        color: var(--primary);
+        background: rgba(15, 15, 16, 0.05);
+        border-bottom: 1px dotted rgba(15, 15, 16, 0.4);
+        padding: 0 2px;
+        font-style: normal;
+        font-weight: 500;
+      }
+
+      .preview-document-full .blurred-section {
+        filter: blur(3.5px);
+        user-select: none;
+        pointer-events: none;
+        opacity: 0.42;
+        position: relative;
+      }
+
+      .preview-document-full .blurred-section::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      .preview-document-full .blurred-section .filled-field,
+      .preview-document-full .blurred-section .placeholder-field {
+        filter: none !important;
+        opacity: 1 !important;
+        position: relative;
+        z-index: 2;
+      }
+
+      @media (max-width: 1024px) {
+        .preview-page__layout {
+          grid-template-columns: 1fr;
+        }
+
+        .preview-sidebar-left {
+          position: relative;
+          height: auto;
+          max-height: none;
+          border-right: none;
+          border-bottom: 1px solid rgba(15, 15, 16, 0.1);
+        }
+
+        .preview-content-right {
+          height: auto;
+        }
+
+        .preview-document-container {
+          padding: 14mm 16mm 20mm;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="preview-page">
+      <div class="preview-page__layout">
+        <div class="preview-sidebar-left">
+          <div class="preview-sidebar-content">
+            <h3 class="preview-sidebar-title">Perjanjian Sewa Menyewa Tempat</h3>
+            <h2 class="preview-sidebar-heading">Preview</h2>
+            <p class="preview-sidebar-description">
+              Berikut tampilan naskah yang mendekati format berkas akhir. Silakan verifikasi kembali seluruh entri sebelum melanjutkan ke pembayaran.
+            </p>
+
+            <aside class="preview-notes" aria-labelledby="preview-notes-title">
+              <h4 id="preview-notes-title" class="preview-notes__title">Ketentuan berkas unduhan</h4>
+              <ul class="preview-notes__list">
+                <li>
+                  🟡 <strong>Sorotan kuning</strong> di Word = isian Anda (boleh diedit). <strong>Tinjau ulang</strong> sebelum dipakai resmi.
+                </li>
+                <li>
+                  ✏️ <code>{{nama_kolom}}</code> = <strong>belum diisi</strong>—lengkapi di Word sebelum penandatanganan.
+                </li>
+              </ul>
+            </aside>
+
+            <div class="preview-package-info">
+              <p class="package-label">Anda memilih paket:</p>
+              <div class="package-details">
+                <div class="package-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>Template Standar</span>
+                </div>
+                <div class="package-price" id="packagePriceDisplay">Rp 350.000</div>
+              </div>
+            </div>
+
+            <div class="preview-sidebar-actions">
+              <a href="form.html" class="btn btn--ghost btn--full">Kembali ke Form</a>
+              <button type="button" class="btn btn--primary btn--full" id="payAndDownloadBtn">Lanjut ke Pembayaran</button>
+            </div>
+
+            <p class="preview-privacy">
+              Privasi dan data Anda terjaga —
+              <a href="../../../index.html">selengkapnya</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="preview-content-right">
+          <div class="preview-document-container">
+            <div class="preview-document-full" id="fullDocumentPreview"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../_shared/pricing.js"></script>
+    <script src="../_shared/checkout-endpoint.js"></script>
+    <script src="../_shared/ipaymu-checkout.js"></script>
+    <script src="form.js?v=20260411f"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        var pr0 = window.SepakateePricing.getByPath(window.location.pathname);
+        var elPrice = document.getElementById('packagePriceDisplay');
+        if (elPrice) elPrice.textContent = window.SepakateePricing.formatIdr(pr0.priceIdr);
+
+        const previewData = sessionStorage.getItem('previewDocumentData');
+
+        if (!previewData) {
+          alert('Tidak ada data dokumen. Silakan isi form terlebih dahulu.');
+          window.location.href = 'form.html';
+          return;
+        }
+
+        try {
+          const formData = JSON.parse(previewData);
+
+          if (typeof generateFullDocumentPreview === 'function') {
+            generateFullDocumentPreview(formData);
+            applyBlurToPreview();
+          } else {
+            console.error('generateFullDocumentPreview function not found');
+          }
+
+          function applyBlurToPreview() {
+            const fullPreview = document.getElementById('fullDocumentPreview');
+            if (!fullPreview) return;
+
+            const blockElements = fullPreview.querySelectorAll('p, li, ol > li, h3, .section-title');
+            blockElements.forEach((element) => {
+              const hasUserFields = element.querySelector('.filled-field, .placeholder-field');
+              const isTitle =
+                element.classList.contains('section-title') ||
+                element.tagName === 'H3' ||
+                element.tagName === 'H1';
+              if (!hasUserFields && !isTitle && element.textContent.trim().length > 0) {
+                if (!element.closest('.blurred-section')) {
+                  element.classList.add('blurred-section');
+                }
+              }
+            });
+
+            const signatureTable = fullPreview.querySelector('.signature-table');
+            if (signatureTable && !signatureTable.querySelector('.filled-field, .placeholder-field')) {
+              signatureTable.classList.add('blurred-section');
+            }
+          }
+
+          const payBtn = document.getElementById('payAndDownloadBtn');
+          if (payBtn) {
+            payBtn.addEventListener('click', async (e) => {
+              e.preventDefault();
+
+              const buyerName =
+                formData.buyer?.name || formData.nama_penyewa || formData.nama_pemberi_sewa || 'Customer';
+              const buyerEmail = formData.buyer?.email || formData.email || 'customer@example.com';
+              const buyerPhone = formData.buyer?.phone || formData.phone || '08123456789';
+
+              payBtn.disabled = true;
+              payBtn.textContent = 'Memproses...';
+              payBtn.style.opacity = '0.7';
+
+              try {
+                await window.SepakateeIpaymuCheckout.redirectToPayment({
+                  flowKey: 'sewa-menyewa',
+                  buyerName: buyerName,
+                  buyerEmail: buyerEmail,
+                  buyerPhone: buyerPhone,
+                });
+              } catch (error) {
+                console.error('Payment error:', error);
+                alert('Terjadi kesalahan: ' + error.message);
+                payBtn.disabled = false;
+                payBtn.textContent = 'Lanjut ke Pembayaran';
+                payBtn.style.opacity = '1';
+              }
+            });
+          }
+        } catch (error) {
+          console.error('Error loading preview data:', error);
+          alert('Terjadi kesalahan saat memuat preview. Silakan coba lagi.');
+          window.location.href = 'form.html';
+        }
+      });
+    </script>
+  </body>
+</html>

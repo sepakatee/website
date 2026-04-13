@@ -4,7 +4,7 @@ const documentTemplate = `<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perjanjian Jual Beli Barang Bergerak</title>
+    <title>Perjanjian Sewa Menyewa Tempat</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap');
         body { font-family: 'Manrope', sans-serif; max-width: 800px; margin: 0 auto; padding: 40px 20px; line-height: 1.6; color: #000; background: #fff; }
@@ -25,22 +25,17 @@ ol.contract-letter-list { list-style: none; counter-reset: doclet; margin: 12px 
 ol.contract-letter-list > li { counter-increment: doclet; position: relative; padding-left: 2em; margin: 10px 0; text-align: justify; }
 ol.contract-letter-list > li::before { content: counter(doclet, lower-alpha) "."; position: absolute; left: 0; width: 1.5em; font-weight: 700; }
 ol.contract-numbered-list ol.contract-letter-list { margin: 8px 0 4px; }
-ol.contract-decimal-list { list-style: none; counter-reset: clause-decimal; margin: 12px 0 16px; padding: 0; }
-ol.contract-decimal-list > li { counter-increment: clause-decimal; position: relative; padding-left: 2em; margin: 10px 0; text-align: justify; }
-ol.contract-decimal-list > li::before { content: counter(clause-decimal, decimal) '.'; position: absolute; left: 0; width: 1.85em; text-align: right; font-weight: 700; }
 </style>
-    <h1>PERJANJIAN JUAL BELI BARANG BERGERAK</h1>
-    <p>PERJANJIAN JUAL BELI ini dibuat dan ditandatangani di {{tempat_penandatanganan}}, pada hari {{hari}}, tanggal {{tanggal}} bulan {{bulan}} tahun {{tahun}} (“Perjanjian”), oleh dan antara:</p>
-    <ol class="contract-decimal-list">
-    <li>{{nama_penjual}}, lahir di {{ttl_penjual}}, pemilik KTP nomor {{ktp_penjual}}, bertempat tinggal di {{alamat_penjual}}, selanjutnya disebut “Penjual”; dan</li>
-    <li>{{nama_pembeli}}, lahir di {{ttl_pembeli}}, pemilik KTP nomor {{ktp_pembeli}}, bertempat tinggal di {{alamat_pembeli}}, selanjutnya disebut “Pembeli”,</li>
-    </ol>
-    <p>secara bersama-sama disebut “Para Pihak”. Para Pihak dengan ini terlebih dahulu menerangkan hal-hal sebagai berikut:</p>
-    <ol class="contract-decimal-list">
-    <li>Bahwa Penjual adalah perseorangan yang memiliki barang berupa {{barang_jual}}.</li>
-    <li>Bahwa Penjual bermaksud untuk menjual barang tersebut kepada Pembeli dan Pembeli bersedia untuk membelinya dari Penjual.</li>
-    <li>Berdasarkan hal-hal tersebut di atas, Para Pihak sepakat mengikatkan diri dalam Perjanjian ini dengan ketentuan sebagai berikut:</li>
-    </ol>
+    <h1>PERJANJIAN SEWA MENYEWA TEMPAT</h1>
+    <p>PERJANJIAN SEWA MENYEWA TEMPAT</p>
+    <p>Perjanjian sewa menyewa tempat ini (untuk selanjutnya disebut “Perjanjian Sewa”) ditandatangani dan dilangsungkan di {{tempat_penandatanganan}}, pada hari {{hari}}, tanggal {{tanggal}} bulan {{bulan}} tahun {{tahun}}, oleh dan antara:</p>
+    <p>{{nama_pemberi_sewa}}, pemilik KTP dengan nomor {{ktp_pemberi_sewa}} bertempat tinggal permanen di {{alamat_pemberi_sewa}} , untuk selanjutnya disebut “Pemberi Sewa”; dan</p>
+    <p>{{nama_penyewa}}, pemilik KTP dengan nomor {{ktp_penyewa}} bertempat tinggal permanen di {{alamat_penyewa}}, untuk selanjutnya disebut “Penyewa”,</p>
+    <p>secara bersama-sama disebut sebagai PARA PIHAK.</p>
+    <p>Pemberi Sewa dan Penyewa dengan ini terlebih dahulu menerangkan hal-hal sebagai berikut:</p>
+    <p>Bahwa, Pemberi Sewa adalah pemilik yang sah atas suatu tempat yang berdiri di atas tanah hak atas tanah milik dengan Sertifikat Hak Milik (SHM) Nomor: {{nomor_shm}} atas nama {{nama_pemilik_shm}} yang setempat dikenal sebagai {{alamat_lengkap_tempat}} (selanjutnya disebut “Tempat”).</p>
+    <p>Bahwa, Pemberi Sewa bermaksud untuk menyewakan Tempat tersebut kepada Penyewa sebagaimana Penyewa bermaksud untuk menyewa Tempat tersebut dari Pemberi Sewa.</p>
+    <p>Bahwa berdasarkan hal-hal tersebut di atas, Para Pihak menyatakan sepakat dan setuju untuk mengadakan dan menandatangani Perjanjian Sewa yang dilaksanakan dengan ketentuan dan syarat-syarat sebagai berikut:</p>
     <div class="section-title">PASAL 1<br>DEFINISI DAN INTERPRETASI</div>
     <p>Kata-kata dan ungkapan-ungkapan yang digunakan dalam Perjanjian ini memiliki pengertian sebagaimana ditetapkan dalam Lampiran 1, kecuali jika konteksnya menentukan lain.</p>
     <p>Dalam Perjanjian ini, kecuali jika konteksnya menentukan lain:</p>
@@ -59,27 +54,83 @@ ol.contract-decimal-list > li::before { content: counter(clause-decimal, decimal
     <li>referensi pada “Rupiah” atau “Rp” adalah merujuk pada Rupiah Indonesia.</li>
     <li>Lampiran dan Apendiks merupakan bagian yang tidak terpisahkan dari Perjanjian ini.</li>
     </ol>
-    <div class="section-title">PASAL 2<br>KESEPAKATAN</div>
-    <p>Penjual setuju menjual dan mengalihkan hak kepemilikan atas Barang kepada Pembeli, dan Pembeli setuju membeli serta menerima pengalihan tersebut, dengan tunduk pada Perjanjian ini.</p>
-    <div class="section-title">PASAL 3<br>BARANG</div>
-    <p>Objek jual beli adalah barang bergerak berupa {{barang_jual}} (“Barang”).</p>
-    <div class="section-title">PASAL 4<br>PENYERAHAN</div>
-    <p>Penyerahan Barang oleh Penjual kepada Pembeli dilaksanakan selambat-lambatnya dalam jangka waktu {{jumlah_hari}} ({{jumlah_hari_teks}}) Hari Kerja sejak tanggal Perjanjian ini, kecuali disepakati lain secara tertulis.</p>
-    <div class="section-title">PASAL 5<br>HARGA DAN PEMBAYARAN BERTAHAP</div>
-    <p>Total harga barang adalah sebesar Rp {{harga_barang_angka}} ({{harga_barang_huruf}}) (“Harga Barang”). Pembayaran dilakukan secara bertahap:</p>
-    <ol class="contract-letter-list">
-    <li>Pembayaran Tahap 1 sebesar {{persen_tahap1}}% ({{persen_tahap1_terbilang}} persen) dari Harga Barang atau sebesar Rp {{nominal_tahap1}} ({{nominal_tahap1_huruf}} rupiah); dan</li>
-    <li>Pembayaran Tahap 2 sebesar Rp {{nominal_tahap2}} ({{nominal_tahap2_huruf}} rupiah).</li>
+    <div class="section-title">PASAL 2<br>KESEPAKATAN SEWA-MENYEWA</div>
+    <ol class="contract-numbered-list">
+    <li>Pemberi Sewa dengan ini sepakat untuk menyewakan Tempat kepada Penyewa sebagaimana Penyewa dengan ini sepakat untuk menyewa Tempat tersebut dari Pemberi Sewa.</li>
+    <li>Sewa menyewa Tempat sebagaimana dimaksud ayat (1) dilaksanakan dengan ketentuan sebagai berikut:
+        <ol class="contract-letter-list">
+        <li>Harga Sewa sebesar Rp {{harga_sewa_angka}} ({{harga_sewa_huruf}}) (“Harga Sewa”).</li>
+        <li>Jangka Waktu Sewa adalah untuk selama {{durasi_sewa}} bulan/tahun*, yang dimulai pada tanggal {{tanggal_mulai}} dan berakhir pada tanggal {{tanggal_akhir}} (“Masa Sewa”).</li>
+        </ol>
+    </li>
     </ol>
-    <p>Pembayaran dilakukan melalui transfer ke rekening bank atas nama {{nama_pemilik_rekening}} pada {{nama_bank}}, nomor rekening {{nomor_rekening}}, kecuali disepakati lain secara tertulis.</p>
-    <div class="section-title">PASAL 6<br>DENDA KETERLAMBATAN (RINGKASAN)</div>
-    <p>Untuk keterlambatan penyerahan Barang oleh Penjual, denda sebesar {{jumlah_persen}}% per hari keterlambatan dari Harga Barang dapat dikenakan, dengan jumlah keseluruhan denda tidak melebihi {{masukan_jumlah_persen}}% dari Harga Barang, sepanjang diatur lebih lanjut dalam naskah lengkap Perjanjian.</p>
-    <div class="section-title">PASAL 7<br>HUKUM YANG BERLAKU</div>
-    <p>Perjanjian ini diatur oleh hukum Republik Indonesia.</p>
-    <div class="section-title">PASAL 8<br>PERSELISIHAN</div>
-    <p>Perselisihan diselesaikan terlebih dahulu dengan musyawarah dalam waktu {{batas_waktu_penyelesaian}} hari; apabila tidak tercapai mufakat, diselesaikan di Pengadilan Negeri yang berwenang.</p>
-    <div class="section-title">PASAL 9<br>KETENTUAN PENUTUP</div>
-    <p>Perjanjian ini dibuat dalam rangkap yang disepakati Para Pihak. Tanda tangan efektif: {{tanda_tangan_tanggal}}.</p>
+    <div class="section-title">PASAL 3<br>PEMBAYARAN</div>
+    <p>Pembayaran atas Harga Sewa dilakukan oleh Penyewa kepada Pemberi Sewa melalui transfer ke rekening bank atas nama {{nama_pemilik_rekening}} pada {{nama_bank}}, nomor rekening {{nomor_rekening}}, selambat-lambatnya pada saat penandatanganan Perjanjian ini, kecuali disepakati lain secara tertulis oleh Para Pihak.</p>
+    <p>Apabila disepakati pembayaran secara bertahap, maka:</p>
+    <ol class="contract-letter-list">
+    <li>Penyewa wajib membayar deposit awal sebesar Rp {{nominal_deposit}} ({{nominal_deposit_huruf}}) pada saat penandatanganan Perjanjian ini; dan</li>
+    <li>Sisa Harga Sewa dibayarkan dalam {{jumlah_cicilan}} kali cicilan, masing-masing sebesar Rp {{nominal_cicilan}}, paling lambat setiap tanggal {{tanggal_pembayaran}};</li>
+    <li>Seluruh Harga Sewa harus telah dibayar lunas paling lambat pada tanggal {{batas_akhir_pelunasan}}.</li>
+    </ol>
+    <p>Apabila terjadi keterlambatan pembayaran, Penyewa dikenakan denda keterlambatan sebesar {{persentase_denda}}% dari jumlah yang tertunda per hari kalender keterlambatan, kecuali keterlambatan disebabkan oleh force majeure yang dibuktikan secara memadai.</p>
+    <p>Setiap pembayaran yang dilakukan oleh Penyewa wajib disertai dengan bukti transfer yang sah, dan Pemberi Sewa akan memberikan kuitansi atau tanda terima resmi sebagai bukti penerimaan.</p>
+    <div class="section-title">PASAL 4<br>JAMINAN</div>
+    <p>Pemberi Sewa memberikan jaminan sebagai berikut:</p>
+    <p>Tempat yang disewakan berdasarkan Perjanjian ini sepenuhnya merupakan milik sah Pemberi Sewa, tidak sedang dijaminkan, tidak sedang dijual, tidak dalam keadaan disewa kepada pihak lain, dan bebas dari sengketa atau klaim hak dari pihak ketiga mana pun.</p>
+    <p>Penyewa berhak sepenuhnya untuk menggunakan dan menikmati Tempat selama Masa Sewa tanpa gangguan, tuntutan, gugatan, atau klaim dari pihak mana pun sehubungan dengan hak atas penggunaan Tempat tersebut.</p>
+    <p>Apabila di kemudian hari terbukti bahwa jaminan yang diberikan Pemberi Sewa tidak benar dan menimbulkan kerugian bagi Penyewa, maka Pemberi Sewa wajib memberikan ganti rugi penuh atas kerugian yang timbul, termasuk namun tidak terbatas pada pengembalian Harga Sewa, biaya relokasi, dan kompensasi lain yang wajar.</p>
+    <p>Penyewa menjamin bahwa selama Masa Sewa, Tempat akan digunakan dengan itikad baik, sesuai peruntukannya, tidak dialihsewakan tanpa persetujuan tertulis dari Pemberi Sewa, dan tidak digunakan untuk kegiatan yang melanggar hukum, peraturan perundang-undangan, atau ketertiban umum.</p>
+    <div class="section-title">PASAL 5<br>PEMBEBANAN BIAYA DAN PERAWATAN</div>
+    <p>Penyewa berhak menggunakan fasilitas yang telah tersedia pada Tempat, termasuk tetapi tidak terbatas pada aliran listrik, saluran telepon, dan air bersih (misalnya dari PDAM), sepanjang biaya penggunaannya ditanggung oleh Penyewa.</p>
+    <p>Penyewa berkewajiban membayar seluruh tagihan, rekening, dan biaya-biaya lain yang timbul akibat penggunaan fasilitas sebagaimana dimaksud dalam ayat (1), tepat waktu dan sesuai ketentuan dari masing-masing penyedia jasa.</p>
+    <p>Segala kerugian atau kerusakan yang timbul akibat kelalaian atau pelanggaran oleh Penyewa atas kewajiban dalam Perjanjian ini sepenuhnya menjadi tanggung jawab Penyewa.</p>
+    <p>Penyewa wajib menjaga, merawat, dan mempertahankan Tempat dalam kondisi baik dan layak digunakan sebagaimana saat pertama kali diserahterimakan, termasuk memelihara kebersihan dan kelestarian lingkungan serta prasarana umum yang berada dalam penguasaannya.</p>
+    <p>Perawatan struktural, termasuk perbaikan atas kerusakan besar yang bukan disebabkan oleh Penyewa, menjadi tanggung jawab Pemberi Sewa, kecuali disepakati lain secara tertulis oleh Para Pihak.</p>
+    <div class="section-title">PASAL 6<br>HAK DAN KEWAJIBAN</div>
+    <p>Selama masa berlakunya Perjanjian ini, Penyewa tidak diperkenankan untuk melakukan hal-hal berikut tanpa persetujuan tertulis terlebih dahulu dari Pemberi Sewa:</p>
+    <ol class="contract-letter-list">
+    <li>Mengalihkan, memindahtangankan, atau menyerahkan sebagian atau seluruh hak sewa kepada pihak ketiga, baik dalam bentuk sewa ulang (sublease), pengalihan hak, atau bentuk perikatan lainnya;</li>
+    <li>Menggunakan Tempat untuk tujuan lain selain yang secara tegas disepakati dalam Perjanjian ini;</li>
+    <li>Mendirikan bangunan tambahan, melakukan penggalian, atau pembangunan lainnya di dalam atau di sekitar Tempat, termasuk pembuatan sumur bor, tanpa izin tertulis dari Pemberi Sewa; dan/atau</li>
+    <li>Mengubah, memodifikasi, atau membongkar bagian dari struktur dan/atau instalasi tetap yang terdapat dalam Tempat, termasuk tetapi tidak terbatas pada instalasi listrik, saluran air, partisi permanen, atau sistem bangunan lainnya.</li>
+    </ol>
+    <p>Yang dimaksud dengan struktur dalam ketentuan ini mencakup seluruh bagian konstruksi tetap dari Tempat yang berfungsi menopang atau membentuk bangunan, termasuk namun tidak terbatas pada fondasi, balok, kolom, lantai, dinding, dan atap.</p>
+    <div class="section-title">PASAL 7<br>KERUSAKAN DAN BENCANA ALAM</div>
+    <p>Kerusakan pada struktur atau bagian lain dari Tempat yang timbul akibat penggunaan atau kelalaian selama masa sewa sepenuhnya menjadi tanggung jawab Penyewa, termasuk biaya perbaikan dan penggantian.</p>
+    <p>Penyewa dibebaskan dari segala tuntutan, ganti rugi, atau kewajiban kepada Pemberi Sewa atas kerusakan Tempat yang secara langsung disebabkan oleh kejadian Force Majeure, sepanjang Penyewa dapat membuktikan bahwa kerusakan tersebut bukan akibat kelalaian atau pelanggaran terhadap ketentuan Perjanjian ini.</p>
+    <p>Yang dimaksud dengan “Force Majeure” dalam Perjanjian ini mencakup namun tidak terbatas pada:</p>
+    <ol class="contract-letter-list">
+    <li>Bencana alam, seperti banjir, gempa bumi, tanah longsor, petir, angin topan, dan kebakaran yang disebabkan oleh faktor eksternal yang berada di luar kendali Para Pihak;</li>
+    <li>Kerusuhan massal, huru-hara, pemberontakan, aksi terorisme, sabotase, serta perang (baik dinyatakan maupun tidak dinyatakan); dan/atau</li>
+    <li>Tindakan pemerintah, peraturan baru, atau kebijakan otoritas yang secara langsung menghalangi pelaksanaan sebagian atau seluruh kewajiban dalam Perjanjian ini.</li>
+    </ol>
+    <div class="section-title">PASAL 8<br>SYARAT PEMUTUSAN HUBUNGAN OLEH PENYEWA</div>
+    <p>Penyewa hanya dapat mengakhiri Perjanjian ini sebelum berakhirnya Masa Sewa, dengan syarat dan ketentuan sebagai berikut:</p>
+    <p>Penyewa wajib memberitahukan maksud pengakhiran secara tertulis kepada Pemberi Sewa paling lambat {{jumlah_hari_pemberitahuan}} ({{huruf_hari_pemberitahuan}}) sebelum tanggal pengakhiran yang dimaksud.</p>
+    <p>Sebelum tanggal efektif pengakhiran, Penyewa telah:</p>
+    <ol class="contract-letter-list">
+    <li>Membayar seluruh tagihan, rekening, dan biaya lain yang timbul dari penggunaan Tempat; dan</li>
+    <li>Menyerahkan kembali Tempat dalam kondisi sebagaimana disyaratkan dalam Perjanjian ini, kecuali untuk keausan normal (wear and tear).</li>
+    </ol>
+    <p>Dalam hal pemutusan dilakukan oleh Penyewa sebelum berakhirnya Masa Sewa, Penyewa tidak berhak menuntut pengembalian sebagian atau seluruh Harga Sewa atas sisa masa sewa yang belum dijalani, kecuali disepakati lain secara tertulis oleh Para Pihak.</p>
+    <div class="section-title">PASAL 9<br>SYARAT PEMUTUSAN HUBUNGAN OLEH PEMBERI SEWA</div>
+    <p>Pemberi Sewa berhak mengakhiri Perjanjian ini sebelum berakhirnya Masa Sewa, dengan syarat-syarat berikut:</p>
+    <p>Penyewa melanggar atau lalai melaksanakan salah satu ketentuan atau kewajiban dalam Perjanjian ini, dan tidak memperbaiki pelanggaran tersebut dalam jangka waktu {{jumlah_hari_pelanggaran}} ({{huruf_hari_pelanggaran}}) hari kalender sejak tanggal pemberitahuan tertulis dari Pemberi Sewa; atau</p>
+    <p>Penyewa lalai membayar Harga Sewa, biaya perawatan, dan/atau tagihan lain yang menjadi kewajiban Penyewa, selama lebih dari {{jumlah_hari_bulan_keterlambatan}} ({{huruf_keterlambatan}}) hari/bulan* setelah tanggal jatuh tempo pembayaran.</p>
+    <p>Dalam hal Perjanjian ini diakhiri oleh Pemberi Sewa berdasarkan ayat (1), maka:</p>
+    <ol class="contract-letter-list">
+    <li>Penyewa wajib segera menyerahkan kembali Tempat kepada Pemberi Sewa paling lambat {{jumlah_hari_pelanggaran}} ({{huruf_hari_pelanggaran}}) hari setelah tanggal efektif pengakhiran; dan</li>
+    <li>Pemberi Sewa tidak berkewajiban untuk mengembalikan Harga Sewa atas sisa waktu sewa yang belum dijalani, serta berhak menuntut ganti rugi atas kerugian yang timbul akibat pelanggaran tersebut.</li>
+    </ol>
+    <div class="section-title">PASAL 10<br>MASA BERAKHIR KONTRAK</div>
+    <p>Setelah berakhirnya Masa Sewa sesuai dengan ketentuan dalam Perjanjian ini, Penyewa wajib mengosongkan dan menyerahkan kembali Tempat kepada Pemberi Sewa dalam keadaan baik, bersih, dan layak pakai, serta telah memenuhi seluruh kewajiban lainnya berdasarkan Perjanjian ini, kecuali apabila Para Pihak secara tertulis menyepakati perpanjangan masa sewa.</p>
+    <div class="section-title">PASAL 11<br>HUKUM YANG BERLAKU</div>
+    <p>Perjanjian ini dan interpretasinya, penerapan dan seluruh sengketa yang timbul sehubungan dengan Perjanjian ini akan diatur dan ditafsirkan berdasarkan hukum Republik Indonesia.</p>
+    <div class="section-title">PASAL 12<br>PERSELISIHAN DAN PENYELESAIAN PERSELISIHAN</div>
+    <p>Bilamana dalam pelaksanaan Perjanjian Sewa ini terdapat perselisihan antara Para Pihak baik dalam pelaksanaannya ataupun dalam penafsiran salah satu Pasal dalam Perjanjian Sewa ini, maka Para Pihak sepakat untuk sedapat mungkin menyelesaikan perselisihan tersebut dengan cara musyawarah dalam waktu {{batas_waktu_penyelesaian}} hari sejak salah satu pihak yang merasa dirugikan menyatakan maksudnya untuk menyelesaikan perselisihan secara tertulis kepada pihak lainnya. Apabila musyawarah telah dilakukan oleh Para Pihak, namun ternyata tidak berhasil mencapai suatu kemufakatan maka Para Pihak sepakat bahwa segala perselisihan yang timbul dari perjanjian ini akan diselesaikan melalui Pengadilan Negeri.</p>
+    <div class="section-title">PASAL 13<br>KETENTUAN PENUTUP</div>
+    <p>Hal-hal yang belum diatur atau belum cukup diatur dalam Perjanjian Sewa ini apabila dikemudian hari dibutuhkan dan dianggap perlu akan ditetapkan tersendiri secara musyawarah dan selanjutnya akan ditetapkan dalam suatu Addendum yang berlaku mengikat Para Pihak, yang akan direkatkan dan merupakan bagian yang tidak terpisahkan dari Perjanjian Sewa ini.</p>
+    <p>Demikianlah Perjanjian Investasi ini dibuat dalam rangkap 2 (dua), untuk masing-masing pihak, yang ditandatangani di atas kertas bermaterai cukup, yang masing-masing mempunyai kekuatan hukum yang sama dan berlaku sejak ditandatangani.</p>
     <p>PIHAK PERTAMA</p>
     <p>_____________________________________</p>
     <p>Nama:</p>
@@ -96,32 +147,37 @@ const variableMapping = {
   tanggal: 'tanggal',
   bulan: 'bulan',
   tahun: 'tahun',
-  nama_penjual: 'nama_penjual',
-  ttl_penjual: 'ttl_penjual',
-  ktp_penjual: 'ktp_penjual',
-  alamat_penjual: 'alamat_penjual',
-  nama_pembeli: 'nama_pembeli',
-  ttl_pembeli: 'ttl_pembeli',
-  ktp_pembeli: 'ktp_pembeli',
-  alamat_pembeli: 'alamat_pembeli',
-  barang_jual: 'barang_jual',
-  harga_barang_angka: 'harga_barang_angka',
-  harga_barang_huruf: 'harga_barang_huruf',
-  jumlah_hari: 'jumlah_hari',
-  jumlah_hari_teks: 'jumlah_hari_teks',
-  persen_tahap1: 'persen_tahap1',
-  persen_tahap1_terbilang: 'persen_tahap1_terbilang',
-  nominal_tahap1: 'nominal_tahap1',
-  nominal_tahap1_huruf: 'nominal_tahap1_huruf',
-  nominal_tahap2: 'nominal_tahap2',
-  nominal_tahap2_huruf: 'nominal_tahap2_huruf',
-  jumlah_persen: 'jumlah_persen',
-  masukan_jumlah_persen: 'masukan_jumlah_persen',
+  nama_pemberi_sewa: 'nama_pemberi_sewa',
+  ktp_pemberi_sewa: 'ktp_pemberi_sewa',
+  alamat_pemberi_sewa: 'alamat_pemberi_sewa',
+  nama_penyewa: 'nama_penyewa',
+  ktp_penyewa: 'ktp_penyewa',
+  alamat_penyewa: 'alamat_penyewa',
+  nomor_shm: 'nomor_shm',
+  nama_pemilik_shm: 'nama_pemilik_shm',
+  alamat_lengkap_tempat: 'alamat_lengkap_tempat',
+  harga_sewa_angka: 'harga_sewa_angka',
+  harga_sewa_huruf: 'harga_sewa_huruf',
+  durasi_sewa: 'durasi_sewa',
+  tanggal_mulai: 'tanggal_mulai',
+  tanggal_akhir: 'tanggal_akhir',
   nama_pemilik_rekening: 'nama_pemilik_rekening',
   nama_bank: 'nama_bank',
   nomor_rekening: 'nomor_rekening',
-  batas_waktu_penyelesaian: 'batas_waktu_penyelesaian',
-  tanda_tangan_tanggal: 'tanda_tangan_tanggal'
+  nominal_deposit: 'nominal_deposit',
+  nominal_deposit_huruf: 'nominal_deposit_huruf',
+  jumlah_cicilan: 'jumlah_cicilan',
+  nominal_cicilan: 'nominal_cicilan',
+  tanggal_pembayaran: 'tanggal_pembayaran',
+  batas_akhir_pelunasan: 'batas_akhir_pelunasan',
+  persentase_denda: 'persentase_denda',
+  jumlah_hari_pemberitahuan: 'jumlah_hari_pemberitahuan',
+  huruf_hari_pemberitahuan: 'huruf_hari_pemberitahuan',
+  jumlah_hari_pelanggaran: 'jumlah_hari_pelanggaran',
+  huruf_hari_pelanggaran: 'huruf_hari_pelanggaran',
+  jumlah_hari_bulan_keterlambatan: 'jumlah_hari_bulan_keterlambatan',
+  huruf_keterlambatan: 'huruf_keterlambatan',
+  batas_waktu_penyelesaian: 'batas_waktu_penyelesaian'
 };
 
 // Format date to Indonesian
@@ -137,20 +193,40 @@ function replaceVariables(template, data, forPreview = false) {
   let result = template;
   const previewData = { ...data };
   
+  // Handle conditional pembayaran bertahap
+  const conditionalContent = previewData.pembayaran_bertahap ? `
+        <li>Apabila disepakati pembayaran secara bertahap, maka:
+            <ol>
+                <li>Penyewa wajib membayar deposit awal sebesar Rp <strong>${previewData.nominal_deposit || '[nominal deposit]'}</strong> (<strong>${previewData.nominal_deposit_huruf || '[deposit huruf]'}</strong>) pada saat penandatanganan Perjanjian ini; dan</li>
+                <li>Sisa Harga Sewa dibayarkan dalam <strong>${previewData.jumlah_cicilan || '[jumlah cicilan]'}</strong> kali cicilan, masing-masing sebesar Rp <strong>${previewData.nominal_cicilan || '[nominal cicilan]'}</strong>, paling lambat setiap tanggal <strong>${previewData.tanggal_pembayaran || '[tanggal pembayaran]'}</strong>;</li>
+                <li>Seluruh Harga Sewa harus telah dibayar lunas paling lambat pada tanggal <strong>${formatDate(previewData.batas_akhir_pelunasan) || '[batas akhir pelunasan]'}</strong>.</li>
+            </ol>
+        </li>` : '';
+  
+  result = result.replace('{{CONDITIONAL_PEMBAYARAN_BERTAHAP}}', conditionalContent);
+  
+  // Format dates
+  if (previewData.tanggal_mulai) {
+    previewData.tanggal_mulai = formatDate(previewData.tanggal_mulai);
+  }
+  if (previewData.tanggal_akhir) {
+    previewData.tanggal_akhir = formatDate(previewData.tanggal_akhir);
+  }
+
   Object.keys(variableMapping).forEach(key => {
     const value = previewData[key];
     const regex = new RegExp(`{{${key}}}`, 'g');
     const fieldName = key.replace(/_/g, ' ');
     
     if (value && value !== '') {
-      const displayVal = value;
+      const displayVal = key === 'batas_akhir_pelunasan' ? formatDate(value) : value;
       if (forPreview) {
         result = result.replace(
           regex,
           `<span class="filled-field preview-field" data-field="${key}">${displayVal}</span>`
         );
       } else {
-        result = result.replace(regex, displayVal);
+        result = result.replace(regex, key === 'batas_akhir_pelunasan' ? formatDate(value) : value);
       }
     } else {
       if (forPreview) {
@@ -194,6 +270,9 @@ function collectFormData() {
     }
   });
   
+  // Handle checkbox
+  data.pembayaran_bertahap = document.getElementById('pembayaran_bertahap')?.checked || false;
+  
   // Collect email (not in variableMapping but needed for payment)
   const emailElement = form.elements['email'];
   if (emailElement) {
@@ -207,10 +286,10 @@ function collectFormData() {
 function saveProgressToLocalStorage() {
   const formData = collectFormData();
   const timestamp = Date.now();
-  const saveKey = `formjualbelibarangergerak_progress_${timestamp}`;
+  const saveKey = `formsewamenyewa_progress_${timestamp}`;
   
   // Also save to a "latest" key for easy retrieval
-  const latestKey = 'formjualbelibarangergerak_progress_latest';
+  const latestKey = 'formsewamenyewa_progress_latest';
   
   const saveData = {
     data: formData,
@@ -244,7 +323,7 @@ function saveProgressToLocalStorage() {
 
 // Load progress from localStorage
 function loadProgressFromLocalStorage() {
-  const latestKey = 'formjualbelibarangergerak_progress_latest';
+  const latestKey = 'formsewamenyewa_progress_latest';
   
   try {
     const savedData = localStorage.getItem(latestKey);
@@ -264,6 +343,12 @@ function loadProgressFromLocalStorage() {
         }
       }
     });
+    
+    // Trigger change event for checkbox to show/hide conditional fields
+    const pembayaranBertahap = document.getElementById('pembayaran_bertahap');
+    if (pembayaranBertahap) {
+      pembayaranBertahap.dispatchEvent(new Event('change'));
+    }
     
     // Update preview and progress
     generatePreview(formData);
@@ -304,6 +389,14 @@ function updateProgress() {
   let totalCount = 0;
   
   allFields.forEach(field => {
+    // Skip conditional fields if checkbox is not checked
+    const isConditionalField = field.closest('#pembayaran_bertahap_fields');
+    const isCheckboxChecked = document.getElementById('pembayaran_bertahap')?.checked;
+    
+    if (isConditionalField && !isCheckboxChecked) {
+      return; // Skip this field
+    }
+    
     totalCount++;
     if (field.value && field.value.trim() !== '') {
       filledCount++;
@@ -351,11 +444,11 @@ function replaceTxtTemplateVariables(txt, data) {
 
   // Duplicate vars: {{nama}}, {{nomor_ktp}}, {{alamat_tinggal}} — first=pemberi, second=penyewa
   let n = 0;
-  result = result.replace(/\{\{nama\}\}/g, () => (++n === 1 ? (d.nama_penjual || '') : (d.nama_pembeli || '')));
+  result = result.replace(/\{\{nama\}\}/g, () => (++n === 1 ? (d.nama_pemberi_sewa || '') : (d.nama_penyewa || '')));
   n = 0;
-  result = result.replace(/\{\{nomor_ktp\}\}/g, () => (++n === 1 ? (d.ktp_penjual || '') : (d.ktp_pembeli || '')));
+  result = result.replace(/\{\{nomor_ktp\}\}/g, () => (++n === 1 ? (d.ktp_pemberi_sewa || '') : (d.ktp_penyewa || '')));
   n = 0;
-  result = result.replace(/\{\{alamat_tinggal\}\}/g, () => (++n === 1 ? (d.alamat_penjual || '') : (d.alamat_pembeli || '')));
+  result = result.replace(/\{\{alamat_tinggal\}\}/g, () => (++n === 1 ? (d.alamat_pemberi_sewa || '') : (d.alamat_penyewa || '')));
 
   // TXT-specific var names -> form data
   const txtMapping = {
@@ -380,23 +473,48 @@ function replaceTxtTemplateVariables(txt, data) {
     result = result.replace(new RegExp(`\\{\\{${txtKey}\\}\\}`, 'g'), val !== undefined && val !== '' ? val : '');
   });
 
+  // Conditional: remove pembayaran bertahap block if not applicable
+  if (!d.pembayaran_bertahap) {
+    result = result.replace(/Apabila disepakati pembayaran secara bertahap, maka:[\s\S]*?(?=Apabila terjadi keterlambatan)/m,
+      '');
+  }
+
   return result;
 }
 
-const TEMPLATE_CACHE_VERSION = '20260413a';
-const FLOW_BASE_PATH = '/templates/jual-beli';
-
-const SOURCE_DOCX_FILENAME = 'Sepakatee I Perjanjian Jual Beli Barang Bergerak.docx';
-const SOURCE_DOCX_URL = '../../legaldocs/' + encodeURIComponent(SOURCE_DOCX_FILENAME).replace(/%20/g, '%20');
+const TEMPLATE_CACHE_VERSION = '20260411f';
+const SOURCE_DOCX_FILENAME = 'Sepakatee I Perjanjian Sewa Menyewa [Template].docx';
+const SOURCE_DOCX_URL = '../../../legaldocs/' + encodeURIComponent(SOURCE_DOCX_FILENAME).replace(/%20/g, '%20');
 const JSZIP_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
 
 // Generate Word from TXT template (tools/templates/documents/perjanjian_sewa_menyewa_template_variables.txt)
 async function generateWordFromTxtTemplate(formData) {
-  const fullHtml = replaceVariables(documentTemplate, formData);
-  const wordHtml = fullHtml.replace(
-    '<html lang="id">',
-    '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" lang="id">'
-  );
+  const url = '../documents/perjanjian_sewa_menyewa_template_variables.txt?v=' + TEMPLATE_CACHE_VERSION;
+
+  let txtContent;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Template tidak ditemukan');
+    txtContent = await res.text();
+  } catch (e) {
+    console.warn('TXT template fetch failed, using embedded HTML:', e);
+    const fullHtml = replaceVariables(documentTemplate, formData);
+    const wordHtml = fullHtml.replace('<html lang="id">',
+      '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" lang="id">');
+    return downloadWordBlob(wordHtml);
+  }
+
+  const bodyText = replaceTxtTemplateVariables(txtContent, formData);
+  const escaped = bodyText.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const paragraphs = escaped.split(/\n\n+/).filter(p => p.trim()).map(p => `<p style="margin: 0 0 1em 0; text-align: justify;">${p.replace(/\n/g, '<br>')}</p>`).join('');
+  const wordHtml = `<!DOCTYPE html>
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" lang="id">
+<head><meta charset="UTF-8"><title>Perjanjian Sewa Menyewa Tempat</title></head>
+<body style="font-family: 'Times New Roman', serif; max-width: 800px; margin: 0 auto; padding: 40px; line-height: 1.6;">
+${paragraphs}
+</body>
+</html>`;
+
   downloadWordBlob(wordHtml);
 }
 
@@ -405,7 +523,7 @@ function downloadWordBlob(html) {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = 'Perjanjian_Jual_Beli_Barang_Bergerak.doc';
+  link.download = 'Perjanjian_Sewa_Menyewa_Tempat.doc';
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -509,26 +627,55 @@ async function buildFilledSourceDocx(formData) {
   let xml = await docXmlFile.async('string');
   const d = Object.assign({}, formData || {});
 
+  if (d.tanggal_mulai) d.tanggal_mulai = formatDate(d.tanggal_mulai);
+  if (d.tanggal_akhir) d.tanggal_akhir = formatDate(d.tanggal_akhir);
+  if (d.batas_akhir_pelunasan) d.batas_akhir_pelunasan = formatDate(d.batas_akhir_pelunasan);
+
+  // Token di DOCX memakai {{...}} (sering terpecah antar <w:r>); replaceTokenSmart menanganinya.
+  xml = replaceFirstN(xml, '{{NAMA}}', [d.nama_pemberi_sewa, d.nama_penyewa]);
+  xml = replaceFirstN(xml, '{{NOMOR_KTP}}', [d.ktp_pemberi_sewa, d.ktp_penyewa]);
+  xml = replaceFirstN(xml, '{{ALAMAT}}', [d.alamat_pemberi_sewa, d.alamat_penyewa]);
+  xml = replaceFirstN(xml, '{{JUMLAH HARI/BULAN}}', [
+    d.jumlah_hari_pemberitahuan,
+    d.jumlah_hari_bulan_keterlambatan,
+  ]);
+  xml = replaceFirstN(xml, '{{JUMLAH HARI}}', [
+    d.jumlah_hari_pelanggaran,
+    d.jumlah_hari_bulan_keterlambatan,
+    d.jumlah_hari_pelanggaran,
+  ]);
+  xml = replaceFirstN(xml, '{{HURUF}}', [
+    d.huruf_hari_pemberitahuan,
+    d.huruf_hari_pelanggaran,
+    d.huruf_keterlambatan,
+    d.huruf_hari_pelanggaran,
+  ]);
+
   const map = {
-    '{{TEMPAT_PENANDATANGANAN}}': d.tempat_penandatanganan,
-    '{{HARI}}': d.hari,
-    '{{TANGGAL}}': d.tanggal,
-    '{{BULAN}}': d.bulan,
-    '{{TAHUN}}': d.tahun,
-    '{{barang_jual}}': d.barang_jual,
-    '{{jumlah_hari}}': d.jumlah_hari,
-    '{{jumlah_hari_teks}}': d.jumlah_hari_teks,
-    '{{jumlah persen}}': d.jumlah_persen,
-    '{{masukan jumlah persen}}': d.masukan_jumlah_persen,
-    '{{HARGA_BARANG_ANGKA}}': d.harga_barang_angka,
-    '{{HARGA_BARANG_HURUF}}': d.harga_barang_huruf,
-    '{{PERSEN_TAHAP1}}': d.persen_tahap1,
-    '{{PERSEN_TAHAP1_TERBILANG}}': d.persen_tahap1_terbilang,
-    '{{NOMINAL_TAHAP1}}': d.nominal_tahap1,
-    '{{NOMINAL_TAHAP1_HURUF}}': d.nominal_tahap1_huruf,
-    '{{NOMINAL_TAHAP2}}': d.nominal_tahap2,
-    '{{NOMINAL_TAHAP2_HURUF}}': d.nominal_tahap2_huruf,
-    '{{TANDA_TANGAN_TANGGAL}}': d.tanda_tangan_tanggal,
+    '{{NOMOR_SHM}}': d.nomor_shm,
+    '{{NAMA_PEMILIK}}': d.nama_pemilik_shm,
+    '{{ALAMAT_LENGKAP}}': d.alamat_lengkap_tempat,
+    '{{ANGKA_NOMINAL}}': d.harga_sewa_angka,
+    '{{HURUF_RUPIAH}}': d.harga_sewa_huruf,
+    '{{HURUF RUPIAH}}': d.nominal_deposit_huruf,
+    '{{DURASI}}': d.durasi_sewa,
+    '{{TANGGAL_MULAI}}': d.tanggal_mulai,
+    '{{TANGGAL_AKHIR}}': d.tanggal_akhir,
+    '{{NAMA PEMILIK REKENING}}': d.nama_pemilik_rekening,
+    '{{NAMA BANK}}': d.nama_bank,
+    '{{NOMOR REKENING}}': d.nomor_rekening,
+    '{{NOMINAL DEPOSIT}}': d.nominal_deposit,
+    '{{JUMLAH CICILAN}}': d.jumlah_cicilan,
+    '{{NOMINAL CICILAN}}': d.nominal_cicilan,
+    '{{TANGGAL PEMBAYARAN}}': d.tanggal_pembayaran,
+    '{{BATAS AKHIR PELUNASAN}}': d.batas_akhir_pelunasan,
+    '{{PERSENTASE DENDA}}': d.persentase_denda,
+    '{{BATAS WAKTU}}': d.batas_waktu_penyelesaian,
+    '{{TEMPAT_PERJANJIAN}}': d.tempat_penandatanganan,
+    '{{NAMA_HARI}}': d.hari,
+    '{{NOMOR_TANGGAL}}': d.tanggal,
+    '{{NAMA_BULAN}}': d.bulan,
+    '{{NOMOR_TAHUN}}': d.tahun,
   };
 
   Object.keys(map).forEach((k) => {
@@ -614,10 +761,10 @@ function cleanPaymentData(data) {
 // Show payment information on payment page
 function showPaymentInfo(paymentInfo) {
   // Check if we're on payment page
-  if (!window.location.pathname.includes('/payment')) {
+  if (!window.location.pathname.includes('payment.html')) {
     // If not on payment page, redirect to payment page with info
     sessionStorage.setItem('paymentInfo', JSON.stringify(paymentInfo));
-    window.location.href = FLOW_BASE_PATH + '/payment/?payment=success';
+    window.location.href = 'payment.html?payment=success';
     return;
   }
   
@@ -735,7 +882,7 @@ async function initiatePayment_OLD(formData, paymentMethod = null, paymentChanne
     let cleanPath = window.location.pathname;
     if (cleanPath.includes('/Users/') || cleanPath.includes('sepakatee/')) {
       // Extract just the filename or use a simple path
-      cleanPath = cleanPath.split('/').pop() || FLOW_BASE_PATH + '/form/';
+      cleanPath = cleanPath.split('/').pop() || '/tools/templates/forms/formsewamenyewa.html';
     }
     
     // Generate unique reference ID
@@ -762,7 +909,7 @@ async function initiatePayment_OLD(formData, paymentMethod = null, paymentChanne
     const defaultPaymentChannel = paymentChannel || 'qris'; // Default to QRIS
     
     const rawRequestBody = {
-      name: (formData.nama_pembeli || 'Customer').trim(),
+      name: (formData.nama_penyewa || 'Customer').trim(),
       phone: (formData.phone || '081234567890').trim(),
       email: (formData.email || 'customer@example.com').trim(),
       amount: PRICE, // Number, not string
@@ -947,7 +1094,7 @@ function restoreFormDataForReceipt(referenceId) {
 
   if (!raw) {
     try {
-      const latest = localStorage.getItem('formjualbelibarangergerak_progress_latest');
+      const latest = localStorage.getItem('formsewamenyewa_progress_latest');
       if (latest) {
         const parsed = tryParse(latest);
         if (parsed && parsed.data && typeof parsed.data === 'object') return parsed.data;
@@ -970,7 +1117,8 @@ if (typeof window !== 'undefined') {
 function createFallbackFormData(buyerName, buyerEmail) {
   const fallback = {};
   Object.keys(variableMapping).forEach(key => { fallback[key] = ''; });
-  if (buyerName && buyerName !== '-') fallback.nama_pembeli = buyerName;
+  fallback.pembayaran_bertahap = false;
+  if (buyerName && buyerName !== '-') fallback.nama_penyewa = buyerName;
   if (buyerEmail && buyerEmail !== '-') fallback.email = buyerEmail;
   return fallback;
 }
@@ -982,7 +1130,7 @@ function downloadDocument(formData) {
   const effectiveRef = refFromUrl || refFromStorage || '';
 
   // On receipt flow, fill data directly into source DOCX to preserve formatting.
-  if (window.location.pathname.includes('/receipt')) {
+  if (window.location.pathname.includes('receipt.html')) {
     const btn = document.getElementById('downloadBtn');
     if (btn) {
       btn.disabled = true;
@@ -1035,7 +1183,7 @@ function checkPaymentStatus() {
       const formData = parsed.formData;
       
       // Generate preview if on preview page
-      if (window.location.pathname.includes('/preview')) {
+      if (window.location.pathname.includes('preview.html')) {
         generateFullDocumentPreview(formData);
         
         // Enable download button
@@ -1104,6 +1252,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   
   // Handle pembayaran bertahap checkbox
+  const pembayaranBertahapCheckbox = document.getElementById('pembayaran_bertahap');
+  const pembayaranBertahapFields = document.getElementById('pembayaran_bertahap_fields');
+  
+  if (pembayaranBertahapCheckbox && pembayaranBertahapFields) {
+    pembayaranBertahapCheckbox.addEventListener('change', (e) => {
+      pembayaranBertahapFields.style.display = e.target.checked ? 'block' : 'none';
+    });
+  }
+  
   // Update progress on input (with auto-save). Don't call generatePreview here -
   // it replaces entire innerHTML and resets scroll. updateLivePreview handles
   // per-field span updates and scrollToPreview.
@@ -1111,6 +1268,16 @@ document.addEventListener('DOMContentLoaded', () => {
     updateProgress();
     autoSave(); // Auto-save on input
   });
+  
+  // Also update when checkbox changes
+  if (pembayaranBertahapCheckbox) {
+    pembayaranBertahapCheckbox.addEventListener('change', () => {
+      const formData = collectFormData();
+      generatePreview(formData);
+      updateProgress();
+      autoSave(); // Auto-save on checkbox change
+    });
+  }
   
   // Manual save button
   const saveProgressBtn = document.getElementById('saveProgressBtn');
@@ -1156,7 +1323,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Redirect to preview page
         setTimeout(() => {
-          window.location.href = FLOW_BASE_PATH + '/preview/';
+          window.location.href = 'preview.html';
         }, 800);
       }, 1200);
       
@@ -1177,7 +1344,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Preview view buttons removed - now handled in preview.html
   
   // Check payment status on page load (only for preview page)
-  if (window.location.pathname.includes('/preview')) {
+  if (window.location.pathname.includes('preview.html')) {
     checkPaymentStatus();
   }
   
@@ -1232,16 +1399,13 @@ document.addEventListener('DOMContentLoaded', () => {
           pf.textContent = fieldValue || `[${placeholderText}]`;
           pf.classList.toggle('filled', !!fieldValue);
         });
-        if (fieldName === 'harga_barang_angka') {
-          const terbilangField = document.querySelector('.preview-field[data-field="harga_barang_huruf"]');
-          const hurufInput = document.getElementById('harga_barang_huruf');
+        if (fieldName === 'harga_sewa_angka') {
+          const terbilangField = document.querySelector('.preview-field[data-field="harga_sewa_huruf"]');
           if (terbilangField && fieldValue) {
-            const angka = parseInt(fieldValue.replace(/\D/g, ''), 10);
+            const angka = parseInt(fieldValue.replace(/\D/g, ''));
             if (!isNaN(angka)) {
-              const w = numberToWords(angka) + ' Rupiah';
-              terbilangField.textContent = w;
+              terbilangField.textContent = numberToWords(angka) + ' Rupiah';
               terbilangField.classList.add('filled');
-              if (hurufInput && !hurufInput.value.trim()) hurufInput.value = w;
             }
           }
         }
@@ -1295,8 +1459,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const stepGroups = {
     1: ['informasi-umum'],
     2: ['pemberi-sewa', 'penyewa'],
-    3: ['informasi-tempat', 'ketentuan-sewa'],
-    4: ['informasi-pembayaran', 'ketentuan-lainnya']
+    3: ['informasi-tempat'],
+    4: ['ketentuan-sewa', 'informasi-pembayaran', 'ketentuan-lainnya']
   };
   
   function updateWizardStep() {

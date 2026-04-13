@@ -213,7 +213,7 @@
     if (typeof K.builderLandingRel !== 'function') {
       K.builderLandingRel = function (slug) {
         var M = {
-          'perjanjian-sewa-menyewa-tempat': 'sewa-menyewa/',
+          'perjanjian-sewa-menyewa-tempat': 'sewa-menyewa/landing.html',
           'perjanjian-kerja-sama-usaha-joint-venture': 'kerja-sama/landing.html',
         };
         if (!slug) return null;

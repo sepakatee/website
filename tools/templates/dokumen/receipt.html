@@ -253,7 +253,7 @@
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </a>
-          <a href="/" class="doc-rec-logo">
+          <a href="../../../index.html" class="doc-rec-logo">
             <img src="https://sepakatee.github.io/website/asset/Sepakatee%20Logo.png" alt="" />
             <span>Sepakatee</span>
           </a>
@@ -566,11 +566,11 @@
             console.error('Unduhan .docx gagal:', e);
             if (tryUrls.length) console.error('URL yang sudah dicoba:', tryUrls);
             console.info(
-              'Tip lokal: jalankan server dari folder website, lalu buka receipt lewat URL seperti http://127.0.0.1:8080/templates/dokumen/receipt/ — jangan set document root ke tools/templates saja. Di GitHub Pages folder semua template biasanya tidak ikut; set window.__SEP_DOCX_BASE_URL__ ke URL publik tempat .docx di-host.'
+              'Tip lokal: jalankan server dari folder website, lalu buka receipt lewat URL seperti http://127.0.0.1:8080/tools/templates/dokumen/receipt.html — jangan set document root ke tools/templates saja. Di GitHub Pages folder semua template biasanya tidak ikut; set window.__SEP_DOCX_BASE_URL__ ke URL publik tempat .docx di-host.'
             );
             alert(
               'File .docx tidak ditemukan (404 atau path salah). Cek konsol (F12) untuk URL yang dicoba.\n\n' +
-                'Lokal: di terminal, `cd website` lalu `python3 -m http.server 8080`, lalu buka alamat yang memuat /templates/dokumen/receipt/.\n\n' +
+                'Lokal: di terminal, `cd website` lalu `python3 -m http.server 8080`, lalu buka alamat yang memuat /tools/templates/dokumen/receipt.html.\n\n' +
                 'Produksi: unggah folder semua template ke hosting/CDN atau set window.__SEP_DOCX_BASE_URL__ ke basis URL-nya. Simpan ID pesanan jika perlu bantuan.'
             );
           }

@@ -25,6 +25,7 @@
     'sewa-menyewa': 'sewa-menyewa',
     'jual-beli-barang-bergerak': 'jual-beli-barang-bergerak',
     'kerja-sama': 'kerja-sama',
+    'perjanjian-kerahasiaan': 'perjanjian-kerahasiaan',
     'sample-tier-b': 'dynamic',
     'catalog-paket-bisnis': 'dokumen',
     'catalog-paket-dasar': 'dokumen',
@@ -33,6 +34,12 @@
     'catalog-tier-c': 'dokumen',
     'perintilan-single': 'dokumen',
     'perintilan-bundle': 'dokumen',
+  };
+
+  // Backward compatibility for older payment backends that have not added
+  // newer flow keys yet.
+  var SERVER_FLOW_FALLBACK = {
+    'perjanjian-kerahasiaan': 'catalog-tier-b',
   };
 
   function cleanForIpaymu(str) {
@@ -180,30 +187,50 @@
       String(global.__SEP_CREATE_PAYMENT_URL__).trim();
 
     if (fnUrl) {
-      var res = await fetch(fnUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          flow_key: flowKey,
-          buyerName: buyerName,
-          buyerEmail: buyerEmail,
-          buyerPhone: buyerPhone,
-          returnUrl: returnUrl,
-          cancelUrl: cancelUrl,
-          referenceId: referenceId,
-        }),
-      });
-      var data = await res.json().catch(function () {
-        return {};
-      });
-      if (!res.ok) {
-        throw new Error(data.error || 'Payment function error ' + res.status);
+      var requestPaymentUrl = async function (serverFlowKey) {
+        var res = await fetch(fnUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            flow_key: serverFlowKey,
+            buyerName: buyerName,
+            buyerEmail: buyerEmail,
+            buyerPhone: buyerPhone,
+            returnUrl: returnUrl,
+            cancelUrl: cancelUrl,
+            referenceId: referenceId,
+          }),
+        });
+        var data = await res.json().catch(function () {
+          return {};
+        });
+        return { res: res, data: data };
+      };
+
+      var first = await requestPaymentUrl(flowKey);
+      if (first.res.ok && first.data && first.data.paymentUrl) {
+        global.location.href = first.data.paymentUrl;
+        return;
       }
-      if (!data.paymentUrl) {
-        throw new Error(data.error || 'No paymentUrl from server');
+
+      var serverError = String((first.data && first.data.error) || '');
+      var fallbackFlowKey = SERVER_FLOW_FALLBACK[flowKey];
+      if (
+        fallbackFlowKey &&
+        /invalid flow_key/i.test(serverError)
+      ) {
+        var second = await requestPaymentUrl(fallbackFlowKey);
+        if (second.res.ok && second.data && second.data.paymentUrl) {
+          global.location.href = second.data.paymentUrl;
+          return;
+        }
+        throw new Error((second.data && second.data.error) || 'Payment function error ' + second.res.status);
       }
-      global.location.href = data.paymentUrl;
-      return;
+
+      if (!first.res.ok) {
+        throw new Error(serverError || 'Payment function error ' + first.res.status);
+      }
+      throw new Error((first.data && first.data.error) || 'No paymentUrl from server');
     }
 
     if (typeof global.CryptoJS === 'undefined') {

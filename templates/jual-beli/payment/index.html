@@ -405,11 +405,44 @@
     </div>
     
     <script src="../../_shared/pricing.js"></script>
-    <script src="payment.js"></script>
+    <script src="../../_shared/checkout-endpoint.js"></script>
+    <script src="../../_shared/ipaymu-checkout.js"></script>
     <script>
       let selectedMethod = null;
       let selectedChannel = null;
       let formData = null;
+
+      function renderPaymentInfo(paymentInfo) {
+        const paymentInfoCard = document.getElementById('paymentInfoCard');
+        const paymentInfoContent = document.getElementById('paymentInfoContent');
+
+        if (!paymentInfoCard || !paymentInfoContent || !paymentInfo) {
+          return;
+        }
+
+        paymentInfoCard.style.display = 'block';
+        paymentInfoContent.innerHTML = `
+          <p><strong>Metode:</strong> ${paymentInfo.method || '-'}</p>
+          <p><strong>Kanal:</strong> ${paymentInfo.channel || '-'}</p>
+          <p><strong>Nomor Pembayaran:</strong> ${paymentInfo.paymentNo || '-'}</p>
+          <p><strong>Jumlah:</strong> ${paymentInfo.amount || '-'}</p>
+          <p><strong>Kedaluwarsa:</strong> ${paymentInfo.expired || '-'}</p>
+          <p><strong>Referensi:</strong> ${paymentInfo.referenceId || '-'}</p>
+        `;
+      }
+
+      async function initiatePaymentFromPage() {
+        if (!window.SepakateeIpaymuCheckout || typeof window.SepakateeIpaymuCheckout.redirectToPayment !== 'function') {
+          throw new Error('Modul pembayaran tidak termuat. Periksa konfigurasi checkout endpoint.');
+        }
+
+        await window.SepakateeIpaymuCheckout.redirectToPayment({
+          flowKey: 'jual-beli-barang-bergerak',
+          buyerName: formData.nama_pembeli || formData.nama_penjual || 'Customer',
+          buyerEmail: formData.email || 'customer@example.com',
+          buyerPhone: formData.phone || '08123456789'
+        });
+      }
       
       // Load form data from sessionStorage
       document.addEventListener('DOMContentLoaded', () => {
@@ -417,6 +450,15 @@
         document.querySelectorAll('[data-price-display]').forEach(function (el) {
           el.textContent = window.SepakateePricing.formatIdr(prp.priceIdr);
         });
+
+        const storedPaymentInfo = sessionStorage.getItem('paymentInfo');
+        if (storedPaymentInfo) {
+          try {
+            renderPaymentInfo(JSON.parse(storedPaymentInfo));
+          } catch (error) {
+            console.error('Error loading payment info:', error);
+          }
+        }
 
         // Check if user cancelled payment (from URL param)
         const urlParams = new URLSearchParams(window.location.search);
@@ -450,7 +492,7 @@
           }
         }
         
-        const previewData = sessionStorage.getItem('previewDocumentData');
+        const previewData = sessionStorage.getItem('previewDocumentData') || sessionStorage.getItem('pendingDocument');
         
         if (!previewData) {
           alert('Tidak ada data dokumen. Silakan isi form terlebih dahulu.');
@@ -459,8 +501,8 @@
         }
         
         try {
-          formData = JSON.parse(previewData);
-          console.log('Form data loaded:', formData);
+          const parsed = JSON.parse(previewData);
+          formData = parsed.formData || parsed;
         } catch (error) {
           console.error('Error loading form data:', error);
           alert('Terjadi kesalahan saat memuat data. Silakan coba lagi.');
@@ -478,12 +520,7 @@
             }
             
             try {
-              // Call initiatePayment - user will choose payment method on iPaymu page
-              if (typeof initiatePayment === 'function') {
-                await initiatePayment(formData);
-              } else {
-                throw new Error('initiatePayment function not found');
-              }
+              await initiatePaymentFromPage();
             } catch (error) {
               console.error('Payment error:', error);
               alert('Terjadi kesalahan saat memproses pembayaran: ' + error.message);

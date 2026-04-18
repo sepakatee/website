@@ -1,5 +1,5 @@
 /**
- * Unified iPaymu checkout: optional Supabase Edge Function, else browser sandbox signing.
+ * Unified iPaymu checkout via server-side payment session creation.
  *
  * Set before load (e.g. inline in preview.html):
  *   window.__SEP_CREATE_PAYMENT_URL__ = 'https://YOUR_REF.supabase.co/functions/v1/create-ipaymu-session';
@@ -14,18 +14,15 @@
 (function (global) {
   'use strict';
 
-  var SANDBOX = {
-    va: '0000005776604685',
-    apiKey: 'SANDBOX98A25EA0-9F38-49BC-82C1-9DD6EB48AFBC',
-    url: 'https://sandbox.ipaymu.com/api/v2/payment',
-    notifyUrl: 'https://jblbjdvipspzrcjeipei.supabase.co/functions/v1/ipaymu-webhook',
-  };
-
   var RECEIPT_SEGMENT = {
     'sewa-menyewa': 'sewa-menyewa',
     'jual-beli-barang-bergerak': 'jual-beli-barang-bergerak',
     'kerja-sama': 'kerja-sama',
     'perjanjian-kerahasiaan': 'perjanjian-kerahasiaan',
+    'syarat-ketentuan-platform': 'syarat-ketentuan-platform',
+    'kebijakan-privasi': 'kebijakan-privasi',
+    'perjanjian-pendiri': 'perjanjian-pendiri',
+    'perjanjian-waralaba': 'perjanjian-waralaba',
     'sample-tier-b': 'dynamic',
     'catalog-paket-bisnis': 'dokumen',
     'catalog-paket-dasar': 'dokumen',
@@ -233,59 +230,9 @@
       throw new Error((first.data && first.data.error) || 'No paymentUrl from server');
     }
 
-    if (typeof global.CryptoJS === 'undefined') {
-      throw new Error('CryptoJS required for client-side iPaymu');
-    }
-
-    var pr = global.SepakateePricing.getByFlowKey(flowKey);
-    var amountStr = global.SepakateePricing.amountString(pr.priceIdr);
-    var productLabel = pr.productName;
-
-    var body = {
-      product: [productLabel],
-      qty: ['1'],
-      price: [amountStr],
-      amount: amountStr,
-      returnUrl: returnUrl,
-      cancelUrl: cancelUrl,
-      notifyUrl: SANDBOX.notifyUrl,
-      referenceId: referenceId,
-      buyerName: buyerName,
-      buyerPhone: buyerPhone,
-      buyerEmail: buyerEmail,
-    };
-
-    var bodyEncrypt = global.CryptoJS.SHA256(JSON.stringify(body));
-    var stringtosign =
-      'POST:' + SANDBOX.va + ':' + bodyEncrypt + ':' + SANDBOX.apiKey;
-    var signature = global.CryptoJS.enc.Hex.stringify(
-      global.CryptoJS.HmacSHA256(stringtosign, SANDBOX.apiKey)
+    throw new Error(
+      'Pembayaran belum dikonfigurasi di situs ini. Muat checkout-endpoint.js dan set window.__SEP_CREATE_PAYMENT_URL__ ke endpoint server create-ipaymu-session.'
     );
-
-    var response = await fetch(SANDBOX.url, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        va: SANDBOX.va,
-        signature: signature,
-        timestamp: '20150201121045',
-      },
-      body: JSON.stringify(body),
-    });
-
-    var result = await response.json();
-    var d = result && result.Data;
-    var paymentUrl =
-      (d && d.Url) || (d && d.PaymentUrl) || null;
-    if (!paymentUrl) {
-      var errMsg =
-        (result && result.Message) ||
-        (result && result.message) ||
-        'Gagal mendapatkan URL pembayaran dari iPaymu';
-      throw new Error(errMsg);
-    }
-    global.location.href = paymentUrl;
   }
 
   global.SepakateeIpaymuCheckout = {

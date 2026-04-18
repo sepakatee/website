@@ -207,6 +207,7 @@ function collectFormData() {
 function saveProgressToLocalStorage() {
   const formData = collectFormData();
   const timestamp = Date.now();
+  const keyPrefix = 'formjualbelibarangergerak_progress_';
   const saveKey = `formjualbelibarangergerak_progress_${timestamp}`;
   
   // Also save to a "latest" key for easy retrieval
@@ -221,6 +222,12 @@ function saveProgressToLocalStorage() {
   try {
     localStorage.setItem(saveKey, JSON.stringify(saveData));
     localStorage.setItem(latestKey, JSON.stringify(saveData));
+
+    const historicalKeys = Object.keys(localStorage)
+      .filter((key) => key.startsWith(keyPrefix) && key !== latestKey)
+      .sort()
+      .reverse();
+    historicalKeys.slice(5).forEach((key) => localStorage.removeItem(key));
     
     // Show save indicator
     const indicator = document.getElementById('saveProgressIndicator');
@@ -612,10 +619,10 @@ function cleanPaymentData(data) {
 // Show payment information on payment page
 function showPaymentInfo(paymentInfo) {
   // Check if we're on payment page
-  if (!window.location.pathname.includes('payment.html')) {
+  if (!window.location.pathname.includes('/payment/')) {
     // If not on payment page, redirect to payment page with info
     sessionStorage.setItem('paymentInfo', JSON.stringify(paymentInfo));
-    window.location.href = 'payment.html?payment=success';
+    window.location.href = 'payment/?payment=success';
     return;
   }
   
@@ -689,17 +696,6 @@ async function generateIpaymuSignature(va, apiKey, bodyString, timestamp) {
     // Step 3: Generate HMAC-SHA256 signature
     const signature = await hmacSha256(stringToSign, apiKey);
     
-    // Debug log - remove in production
-    console.log('=== iPaymu Signature Debug (v2) ===');
-    console.log('VA:', va);
-    console.log('API Key (first 10):', apiKey.substring(0, 10) + '...');
-    console.log('Body (JSON):', bodyString);
-    console.log('RequestBody (SHA256 of body):', requestBody);
-    console.log('String to sign:', stringToSign);
-    console.log('Signature (HMAC-SHA256):', signature);
-    console.log('Timestamp:', timestamp);
-    console.log('===================================');
-    
     return signature;
   } catch (error) {
     console.error('Error generating signature:', error);
@@ -711,15 +707,7 @@ async function generateIpaymuSignature(va, apiKey, bodyString, timestamp) {
 // This function is now handled by Supabase Edge Function
 // Keeping this comment for reference - do not use this old implementation
 /*
-// OLD IMPLEMENTATION - REMOVED
-// Initiate payment with iPaymu
-async function initiatePayment_OLD(formData, paymentMethod = null, paymentChannel = null) {
-  try {
-    // Use direct values to avoid conflict with payment.js
-    // These match the credentials from iPaymu dashboard
-    const IPAYMU_VA = '0000005776604685';
-    const IPAYMU_API_KEY = 'SANDBOX98A25EA0-9F38-49BC-82C1-9DD6EB48AFBC';
-    const PRICE = 350000;
+// OLD IMPLEMENTATION - REMOVED (credential block removed for security)
     
     // Get proper base URL (handle file:// protocol for local testing)
     let baseUrl = window.location.origin;
@@ -815,21 +803,8 @@ async function initiatePayment_OLD(formData, paymentMethod = null, paymentChanne
     
     const result = await response.json();
     
-    // Debug: Log full response
-    console.log('iPaymu API Response:', result);
-    console.log('Response Data:', result.Data);
-    console.log('Data type:', typeof result.Data);
-    console.log('Data keys:', result.Data ? Object.keys(result.Data) : 'No Data');
-    console.log('ReferenceId used:', referenceId);
-    
     // Check for success response
     if (result.Status === 200 && result.Success === true) {
-      // Log all Data properties for debugging
-      if (result.Data) {
-        console.log('All Data properties:', Object.keys(result.Data));
-        Object.keys(result.Data).forEach(key => {
-          console.log(`  ${key}:`, result.Data[key], typeof result.Data[key]);
-        });
       }
       
       // Check for payment URL in different possible locations
@@ -846,16 +821,9 @@ async function initiatePayment_OLD(formData, paymentMethod = null, paymentChanne
       
       if (paymentUrl) {
         // Redirect to iPaymu payment page
-        console.log('✅ Payment successful! Redirecting to:', paymentUrl);
         window.location.href = paymentUrl;
         return; // Exit function successfully
       } else {
-        // If no URL but success, log the full response structure for debugging
-        console.warn('⚠️ Payment successful but no URL found.');
-        console.warn('Full response:', JSON.stringify(result, null, 2));
-        console.warn('Data keys:', result.Data ? Object.keys(result.Data) : 'No Data object');
-        console.warn('ReferenceId used:', referenceId);
-        
         // iPaymu doesn't return payment URL for Virtual Account (VA) payments
         // Instead, it returns Virtual Account number that user needs to pay
         const paymentData = result.Data;
@@ -864,10 +832,7 @@ async function initiatePayment_OLD(formData, paymentMethod = null, paymentChanne
         const expired = paymentData?.Expired || paymentData?.expired;
         const channel = paymentData?.Channel || paymentData?.channel || 'BCA';
         const via = paymentData?.Via || paymentData?.via || 'VA';
-        
-        console.log('⚠️ No payment URL in response (VA payment)');
-        console.log('Payment Data:', paymentData);
-        
+
         // Show payment information on payment page
         showPaymentInfo({
           method: via === 'VA' ? 'Virtual Account' : via,
@@ -877,8 +842,7 @@ async function initiatePayment_OLD(formData, paymentMethod = null, paymentChanne
           expired: expired,
           referenceId: referenceId
         });
-        
-        console.log('Payment created successfully. User needs to pay to VA number:', paymentNo);
+
         return;
       }
     } else {
@@ -1281,9 +1245,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // Initialize live preview
-  console.log('🔄 About to initialize live preview...');
   updateLivePreview();
-  console.log('✅ Live preview initialization complete!');
   
   // ===== WIZARD NAVIGATION LOGIC =====
   let currentWizardStep = 1;
